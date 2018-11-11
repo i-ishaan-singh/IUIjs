@@ -1,0 +1,118 @@
+html, body{
+	font-size: 16px;
+}
+.i-ui-widget, .i-ui-container{
+	font-size: 1rem;
+	display: inline-block;
+	box-sizing: border-box;
+    vertical-align: top;
+	position: relative;
+}
+.i-ui-widget *{
+	font-size: 1em;
+}
+.i-ui-container{
+	box-sizing: border-box;
+}
+
+.i-ui-widget-icon, .i-ui-dropdown .i-ui-input{
+	pointer-events: none;
+}
+
+.i-ui-input{
+    line-height: 1.43em;
+	padding: 0.25em;
+    width: 100%;
+	height: 100%;
+    font-family: inherit;
+}
+
+.i-ui-inputbox,.i-ui-numericinputbox, .i-ui-button, .i-ui-radio, .i-ui-dropdown ,.i-ui-combobox{
+	width: 13em;
+    height: 2em;
+}
+
+.i-ui-numericinputbox, .i-ui-dropdown ,.i-ui-combobox{
+	padding-right: 3em;
+}
+
+.i-ui-spinner-container ,.i-ui-dropbutton-container{
+    width: 3em;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    line-height: 1;
+    text-align: center;
+}
+
+.i-ui-spinner {
+    line-height: 1em;
+	height: 50%;
+    box-sizing: content-box;
+	cursor: pointer;
+}
+
+.i-ui-formlabel, .i-ui-button {
+    line-height: 1.5em;
+    padding: 0.25em;
+	height: 2em;
+}
+
+.i-ui-button{
+	text-align: center;
+}
+.i-ui-radio-button {
+    height: 100%;
+    width: 1em;
+    margin: 0 0.3em;	
+}
+.i-ui-dropbutton {
+    height: 100%;
+    line-height: 2em;
+    box-sizing: border-box;
+}
+.i-ui-vertical-radiogroup .i-ui-radio {
+    width: 100%;
+}
+.i-ui-horizontal-radiogroup .i-ui-radio {
+    width: unset;
+}
+
+.i-ui-noselect{
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+
+.i-ui-disabled{
+	pointer-events: none;
+	opacity: 0.5;
+}
+.i-ui-overlay {
+    box-shadow: 1px 1px 2px #e9e9e9;
+	position: fixed;
+	box-sizing: border-box;
+	overflow:auto;
+    z-index: 100;
+}
+
+.i-ui-overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.i-ui-hidden{
+	display:none!important;
+}
+.i-ui-list-item {
+    box-sizing: border-box;
+    height: 2em;
+    line-height: 1.45em;
+    padding: 0.25em;
+}
+/********************************************/

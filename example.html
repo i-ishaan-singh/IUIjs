@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title>IUI Test</title>
+		<link rel="stylesheet" type="text/css" href="css/IUI.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/IUI.baseTheme.css"></link>
+		<link rel="stylesheet" type="text/css" href="font/css/font.css"></link>
+		<style>
+		body{
+			height: 100%;
+			width: 100%;
+			margin: 0;
+		}
+		.form-container {
+			padding: 1rem 2rem;
+		}
+		.form-item .i-ui-formlabel {
+			width: 13em;
+		}
+		.form-item {
+			margin: 0.5em 0;
+		}
+		.form-buttons {
+			margin: 1em;
+			text-align: center;
+		}
+		</style>
+	</head>
+	<body>	
+		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form"></FormLabel>
+		
+		<div class="form-container">
+			<form id="ui-form">
+				<div class="form-item">
+					<FormLabel text="Name "></FormLabel>
+					<InputBox id="name-input" formAttribute="name"></InputBox>
+				</div>
+				<div class="form-item">
+					<FormLabel text="Age"></FormLabel>
+					<NumericInputBox formAttribute="age" id="age-input"></NumericInputBox>
+				</div>
+				<div class="form-item">
+					<FormLabel text="Height"></FormLabel>
+					<NumericInputBox formAttribute="height" id="height-input" decimal="true" step="0.2"></NumericInputBox>
+				</div>
+				<div class="form-item">
+					<FormLabel text="Gender"></FormLabel>
+					<RadioGroup group="gender-radio" formAttribute="gender" orientation="horizontal">
+						<radio value="male" text="male"></radio>
+						<radio value="female" text="female"></radio>
+					</RadioGroup>
+				</div>
+				<div class="form-item">
+					<FormLabel text="Favrouite Weather"></FormLabel>
+					<DropDown formAttribute="weather">
+						<option>Summner</option>
+						<option>Winter</option>
+						<option>Autunm</option>
+						<option>Moonsoon</option>
+					</DropDown>
+				</div>
+				<div class="form-item">
+					<FormLabel text="Food Preference"></FormLabel>
+					<ComboBox formAttribute="food">
+						<option>North Indian</option>
+						<option>South Indian</option>
+						<option>Punjabi</option>
+						<option>Chinese</option>
+					</ComboBox>
+				</div>
+				<div class="form-item">
+					<FormLabel text="Do you want to recieve promotional Offers?"></FormLabel>
+					<RadioGroup group="promotional-radio" formAttribute="promotional" >
+						<radio value="yes" text="yes"></radio>
+						<radio value="no" text="no"></radio>
+					</RadioGroup>
+				</div>
+				<div class="form-item">
+					<ToggleButton id="anime-button" formAttribute="animeLover">Toggle for Anime</ToggleButton>
+					<ToggleButton id="pubg-button" formAttribute="pubgLover">Toggle for PUBG </ToggleButton>
+				</div>
+				<div class="form-buttons">
+					<Button id="get-details-button" eventGroup="form-events">Get Result Me</Button>
+				</div>
+			<form>
+		</div>
+		
+		<script src="jquery.js"></script>
+		 <script data-main="main" src="require.js"></script>
+	</body>
+</html>
