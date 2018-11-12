@@ -25,7 +25,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 			this.containers=[];			
 			IUI.Class.prototype.initialize.apply(this,arguments);			
 			var _elem=$(this.options.element || document.createElement('div'));
-			if(_elem.length===1){
+			if(_elem.length===1 && !Array.isArray(this.options.element)){
 				this.element=_elem[0];
 				this.$element=_elem;
 			}else{

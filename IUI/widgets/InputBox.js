@@ -5,11 +5,12 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 		template: '<input class="i-ui-input"></input>',
 		classList: IUI.Widget.prototype.classList.concat(['i-ui-inputbox']),
 		events:IUI.Widget.prototype.events.concat(['change']),
-		initialize: function(){
-			IUI.Widget.prototype.initialize.apply(this,arguments);			
-			this.input=$(this.element.children[0]);
+		onInitialize: function(){
 			this._attachEvents();
 			this.value(this.options.value);
+		},
+		onTemplateAttach:function(wrapper){
+			this.input=$(wrapper.children[0]);
 		},
 		_attachEvents: function(){
 			var that=this;

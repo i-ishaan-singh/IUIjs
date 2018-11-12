@@ -8,7 +8,6 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 			template: '<input class="i-ui-input"></input><div class="i-ui-dropbutton-container"><div class="i-ui-dropbutton"><i class="i-ui-widget-icon fa fa-caret-down" aria-hidden="true"></i></div></div>',
 			
 			classList: IUI.Widget.prototype.classList.concat(['i-ui-dropdown']),
-			events: InputBox.prototype.events.concat(['change']),
 			initialize: function(options){
 				var textAttribute=this.options.textAttribute, idAttribute=this.options.idAttribute;
 				if(options.element){
@@ -23,8 +22,6 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 				}
 				InputBox.prototype.initialize.apply(this,arguments);		
 			},
-			
-			events: InputBox.prototype.events.concat(['spin']),
 			_createPopup:function(){
 					var textAttribute=this.options.textAttribute, idAttribute=this.options.idAttribute;
 					this.popup=IUI.createOverlay({
