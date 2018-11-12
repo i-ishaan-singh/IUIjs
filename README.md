@@ -251,4 +251,5 @@ The basic *options** which can be passed to InputBox are:
 
 ## Container
 
-Containers are IUI Components which contains other Containers or Widgets.
+Containers are IUI Components which contains other Containers or Widgets. Containers are also rendered like widgets in which the attributes are passed as options to the Container, but unline Widgets the Container is not turned into div elements.
+Every Container contains his own Widgets, therefore if There is nesting of Containers the parent Container will contain the Child container but not the widgets of the Child Container.
