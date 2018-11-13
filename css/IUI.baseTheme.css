@@ -63,3 +63,9 @@
 .i-ui-dropdown .i-ui-dropbutton-container:hover{
 	border-color: #d0d0d0;
 }
+.i-ui-invalid.i-ui-dropdown,
+.i-ui-invalid.i-ui-inputbox,
+.i-ui-invalid.i-ui-numericinputbox,
+.i-ui-invalid.i-ui-combobox{
+	outline: 1px solid red;
+}

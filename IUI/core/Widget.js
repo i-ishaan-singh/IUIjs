@@ -1,4 +1,4 @@
-define(['../IUI-core.js','../core/WidgetBuilder.js'],function(IUI){
+define(['../IUI-core.js','../core/WidgetBuilder.js','../core/Validator.js'],function(IUI){
 
 	/* ------ IUI.Widgets.js ----------------- */
 
@@ -8,16 +8,18 @@ define(['../IUI-core.js','../core/WidgetBuilder.js'],function(IUI){
 	var Widget=IUI.Class.extend({
 		name: 'Widget',		
 		template: '',
-		classType:'Widget',
-		classList:['i-ui-widget'],
+		classType: 'Widget',
+		classList: ['i-ui-widget'],
+		events:IUI.Class.prototype.events.concat(['validate']),
+		validationList: [],
 		initialize: function(options){
 			IUI.Class.prototype.initialize.apply(this,arguments);			
 			this.$element=$(this.options.element)
 			this.element=this.$element[0];
 			this.makeUI();	
-			this.onInitialize();			
+			this.onInitialize();	
 		},
-		onInitialize:function(){
+		onInitialize: function(){
 			
 		},
 		_preprocessElement: function(wrapper){
@@ -27,11 +29,6 @@ define(['../IUI-core.js','../core/WidgetBuilder.js'],function(IUI){
 			
 		},
 		_processOptions: function(wrapper){
-			/*for(var attr in this.options){
-				if(wrapper.style.hasOwnProperty(attr)){
-					wrapper.style[attr]=this.options[attr];
-				}
-			}*/		
 			IUI.behaviors.extractStyleFromObject(wrapper,this.options);			
 			if(this.options.class){
 				wrapper.classList.add.apply(wrapper.classList,this.options.class.split(' '));	
@@ -42,6 +39,14 @@ define(['../IUI-core.js','../core/WidgetBuilder.js'],function(IUI){
 			if(this.options.disabled && this.options.disabled !== 'false'){
 				this.options.enable=false;
 				wrapper.classList.add('i-ui-disabled');
+			}
+			if(this.options.validations){
+				if(typeof this.options.validations === "string"){
+					this.validationList=this.validationList.concat(this.options.validations.split(',').map(function(elem){return elem.trim()}));
+				}else if(Array.isArray(this.options.validations)){
+					this.validationList.concat(this.options.validations);
+				}
+				
 			}
 			
 		},
@@ -68,6 +73,32 @@ define(['../IUI-core.js','../core/WidgetBuilder.js'],function(IUI){
 		},
 		onRender:function(){
 			
+		},
+		_onValidate: function(result){
+			var that=this;
+			if(!result.valid){
+				this.element.classList.add('i-ui-invalid');
+				setTimeout(function(){
+					that.element.classList.remove('i-ui-invalid');
+				},200);
+			}
+		},
+		validate: function(value){
+			var valid=true,
+				rules=[],
+				length=this.validationList.length;
+			for(var i=0;i<length;i++){
+				var rule=this.validationList[i];
+					_valid=IUI.Validator.validate(rule,value);
+				if(!_valid){
+					rules.push(rule);
+				}
+				valid=valid && _valid;
+			}
+			var validObject={valid: valid,rules:rules};
+			this._onValidate(validObject);
+			this.trigger('validate',validObject);
+			return validObject;			
 		},
 		enable: function(val){
 			if(typeof val !== 'undefined'){

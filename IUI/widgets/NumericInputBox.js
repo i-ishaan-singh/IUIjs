@@ -10,6 +10,8 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 			
 			classList: IUI.Widget.prototype.classList.concat(['i-ui-numericinputbox']),
 			
+			validationList: ['numeric'],
+			
 			initialize: function(){
 				this._handleSpinStart=this._handleSpinStart.bind(this);	
 				this._handleSpinEnd=this._handleSpinEnd.bind(this);		
@@ -55,6 +57,7 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 				if(this._interval){
 					clearInterval(this._interval);
 					this.trigger('change',{value:Number(this.input.val())});
+					this._value=this.input.val();
 					this.element.classList.remove('i-ui-active');
 					delete this._interval;
 				}				
