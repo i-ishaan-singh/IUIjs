@@ -8,6 +8,9 @@ html, body{
     vertical-align: top;
 	position: relative;
 }
+.i-ui-form .i-ui-formlabel{
+    width: 13em;
+}
 .i-ui-widget *{
 	font-size: 1em;
 }
@@ -18,7 +21,12 @@ html, body{
 .i-ui-widget-icon, .i-ui-dropdown .i-ui-input{
 	pointer-events: none;
 }
-
+.i-ui-vertical-radiogroup {
+    width: 13em;
+}
+.i-ui-radio .i-ui-formlabel{
+	width: 11em;
+}
 .i-ui-input{
     line-height: 1.43em;
 	padding: 0.25em;
@@ -54,19 +62,22 @@ html, body{
 	cursor: pointer;
 }
 
-.i-ui-formlabel, .i-ui-button {
+.i-ui-button {
     line-height: 1.5em;
     padding: 0.25em;
 	height: 2em;
 }
-
+.i-ui-formlabel {
+    line-height: 2em;
+    padding: 0 0.25em;
+}
 .i-ui-button{
 	text-align: center;
 }
 .i-ui-radio-button {
     height: 100%;
     width: 1em;
-    margin: 0 0.3em;	
+    margin: 0 0.5em;	
 }
 .i-ui-dropbutton {
     height: 100%;

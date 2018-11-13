@@ -1,4 +1,4 @@
-define(['../IUI-core.js','../core/WidgetBuilder.js','../core/Validator.js'],function(IUI){
+define(['../IUI-core.js','../core/WidgetBuilder.js','../core/DataMart.js','../core/Validator.js'],function(IUI){
 
 	/* ------ IUI.Widgets.js ----------------- */
 
@@ -17,16 +17,35 @@ define(['../IUI-core.js','../core/WidgetBuilder.js','../core/Validator.js'],func
 			this.$element=$(this.options.element)
 			this.element=this.$element[0];
 			this.makeUI();	
+			if(this.options.datamart){
+				IUI.DataMart.bindWidget(this.options.datamart,this);
+			}
 			this.onInitialize();	
 		},
 		onInitialize: function(){
 			
 		},
+		onDataFetch:function(data){
+			
+		},
+		dataBinding:function(data){
+			
+		},		
+		dataBound:function(data){
+			
+		},
+		_bindDataMart: function(dataMart){
+			this.dataMart=dataMart;
+			dataMart._bind({
+				fetch:this.onDataFetch.bind(this),
+				binding:this.dataBinding.bind(this),
+				dataBound:this.dataBound.bind(this)
+			});			
+		},
 		_preprocessElement: function(wrapper){
 			Array.prototype.slice.call(this.element.style).forEach(function(elem){
 					wrapper.style[elem]=this.element.style[elem];
-			},this);	
-			
+			},this);			
 		},
 		_processOptions: function(wrapper){
 			IUI.behaviors.extractStyleFromObject(wrapper,this.options);			

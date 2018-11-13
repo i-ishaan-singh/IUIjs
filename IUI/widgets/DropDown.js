@@ -22,26 +22,39 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 				}
 				InputBox.prototype.initialize.apply(this,arguments);		
 			},
-			_createPopup:function(){
+			_createPopup:function(data){
 					var textAttribute=this.options.textAttribute, idAttribute=this.options.idAttribute;
-					this.popup=IUI.createOverlay({
-						anchor: this.element,
-						contents: this.options.data.map(function(_data,idx){
-							var elem=document.createElement('div');
-							elem.classList.add('i-ui-list-item');
-							if(_data[idAttribute]){
-								elem.id=_data[idAttribute];
-							}
-							elem.innerHTML=_data[textAttribute];
-							elem._uiDataIndex=idx;
-							return elem;
-						}),
-						button: this.element.children[1],
-						height: (2*this.options.data.length)+'em'
-					});
+					
+					var dataMapper=function(_data,idx){
+						var elem=document.createElement('div');
+						elem.classList.add('i-ui-list-item');
+						if(_data[idAttribute]){
+							elem.id=_data[idAttribute];
+						}
+						elem.innerHTML=_data[textAttribute];
+						elem._uiDataIndex=idx;
+						return elem;
+					}
+					
+					if(this.popup){
+						this.popup.setContents(data.map(dataMapper))
+						this.popup.options.animateObjectOpen.height=2*data.length+'em'
+					}else{
+						this.popup=IUI.createOverlay({
+							anchor: this.element,
+							contents: data.map(dataMapper),
+							button: this.element.children[1],
+							height: (2*this.options.data.length)+'em'
+						});
+					}
+			},
+			onDataFetch: function(e){
+				var data=e.data;
+				this._createPopup(data);
+				this.options.data=data;
 			},
 			onRender: function(){
-				this._createPopup();
+				this._createPopup(this.options.data);
 			},
 			options: {
 				data:[],				

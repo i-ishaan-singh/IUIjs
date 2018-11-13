@@ -125,6 +125,10 @@ define(['../IUI-core.js'],function(IUI){
 		},
 		setContents: function(contents){
 			this.contents=contents;
+			var _element=$(this.contents).detach();
+			this.element.innerHTML=''
+			_element.appendTo(this.element);
+			
 		},
 		_attachEvents:function(){
 			this.bindButton(this.options.button,this.options.buttonBehavior);

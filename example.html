@@ -13,9 +13,6 @@
 		.form-container {
 			padding: 1rem 2rem;
 		}
-		.form-item .i-ui-formlabel {
-			width: 13em;
-		}
 		.form-item {
 			margin: 0.5em 0;
 		}
@@ -36,7 +33,7 @@
 						<InputBox id="name-input"  validateOnInput="false" formAttribute="firstName"></InputBox>
 					</div>
 					<div class="form-item">
-						<FormLabel text="Last Name "></FormLabel>
+						<FormLabel text="Last Name"></FormLabel>
 						<InputBox id="name-input"  validations="noScript" formAttribute="lastName"></InputBox>
 					</div>
 				</Iform>
@@ -61,16 +58,11 @@
 				</div>
 				<div class="form-item">
 					<FormLabel text="Favrouite Weather"></FormLabel>
-					<DropDown formAttribute="weather">
-						<option id="my-summer">Summner</option>
-						<option>Winter</option>
-						<option>Autunm</option>
-						<option>Moonsoon</option>
-					</DropDown>
+					<DropDown formAttribute="weather" dataMart="season-mart">	</DropDown>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Food Preference"></FormLabel>
-					<ComboBox formAttribute="food">
+					<ComboBox formAttribute="food" >
 						<option>North Indian</option>
 						<option>South Indian</option>
 						<option>Punjabi</option>
