@@ -7,8 +7,8 @@ define(['../IUI-core.js','../widgets/Button.js'],function(IUI){
 		options:{
 			text: 'ToggleButton',
 		},
-		toggle: function(){
-			this.element.classList.toggle('i-ui-active');
+		toggle: function(value){
+			this.element.classList.toggle('i-ui-active',value);
 			this.trigger('toggle',{value:this.value()});
 		},
 		_attachEvents: function(){

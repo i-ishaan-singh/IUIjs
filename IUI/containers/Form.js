@@ -1,12 +1,12 @@
 define(['../IUI-core.js','../containers/Container.js'],function(IUI){
 
 	var Form=IUI.uiContainers.Container.extend({
-		name:'Form',
+		name:'IForm',
 		classList: IUI.uiContainers.Container.prototype.classList.concat(['i-ui-form']),
-		_beforeRender:function(){			
+		_beforeRender:function(){	
 			this._widgetAttributeValueMap={};
 		},
-		_onCreate: function(widget){
+		_onCreateWidget: function(widget){
 			if(widget.options.formattribute && typeof widget.value === "function" ){
 				this._widgetAttributeValueMap[widget.options.formattribute]=widget.value.bind(widget);
 			}
