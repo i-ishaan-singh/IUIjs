@@ -1,7 +1,7 @@
 # IUI.js
 ##### version 1.0.0
 
-IUI is a simple UI Widgets creation JavaScript library for creating UI faster. It aims at minimising the use of JavaScript in UI Creation and manupulation, giving more responsibility on HTML. IUI provides custom HTML tags which can be directly embeded anywhere in the template. IUI requires *JQuery* to function.
+IUI is a simple Widget creation JavaScript library for creating User Interface faster. It aims at minimising the use of JavaScript in UI Creation and manupulation, giving more responsibility on HTML. IUI provides custom HTML tags which can be directly embeded anywhere in the template. IUI requires *JQuery* to function.
 
 
 
@@ -59,7 +59,7 @@ Where **Object** can be:
 	
 	
 	
-## UI Components
+## IUI Components
 Components are the objects which can be created using IUI. 
 Components can bind to and trigger events. The events can be bounded with the Component during component creation or can be created and bind separately using EventGroup.
 
@@ -125,7 +125,7 @@ It is used to create a basic input box, which can be used to take input from use
 
 The basic **options** which can be passed to InputBox are:
 * **value** *{String}* - initial value for InputBox
-* **formAttribute** *{String}* - JSON attribute for value of Form
+* **formAttribute** *{String}* - JSON attribute for value of IForm
 
 The basic **APIs** Provided by InputBox are:
 * **value( *{ undefined | value }* )** - If the value is passed, this API sets the value to the InputBox. If nothing is passed it returns the current Value.
@@ -218,7 +218,6 @@ The basic **options** which can be passed to Button are:
 ```
 
 
-
 ### ToggleButton
 
 It renderes a Togglable button widget.
@@ -257,7 +256,7 @@ The basic **options** which can be passed to SubmitButton are:
 
 ### Radio
 
-It is used to create a Radio button With a form label attached to it. It is generally used along with RadioGroup.
+It is used to create a Radio button With a FormLabel attached to it. It is generally used along with RadioGroup.
 
 The basic *options** which can be passed to Radio are:
 * **text** *{String}* - Text to be displayed as label or HTML String.
@@ -281,8 +280,184 @@ Containers are IUI Components which contains other Containers or Widgets. Contai
 
 Every Container contains his own Widgets, therefore if There is nesting of Containers the parent Container will contain the Child container but not the widgets of the Child Container.
 
+#### Containers Object:
+
+Whenever IUI.makeUI API is called, it returns the object of Container. Following attributes of Container are useful:
+
+* **element** (*Element*) - **element** contains the element attached to the Container.
+* **$element** (*JQuery*) - **$element** contains the JQuery Object of the element attached to the Container.
+* **containers** (*Array*) - **containers** holds the Containers present in the element passed to the Container.
+* **widgets** (*Array*) - **widgets** holds the Widgets present in the element passed to the Container.
+
+If any Widget or Container has id attribute, it's named reference also gets attached to the Array. It can be accessed by container.widgets['*id-attribute*'] and container.containers['*id-attribute*'] respectively where *id-attribute* is the id of IUI Component.
+
 #### Types Of Containers:
 * **Container**
 * **Frame**
 * **RadioGroup**
-* **Form**
+* **IForm**
+
+
+### Container
+
+This is a generally used to structure the User Interface and separate IUI Components.    
+
+
+##### HTML:
+```HTML
+<container id="widget-container">
+	<InputBox value="initialValue"></InputBox>
+	<NumericInputBox id="favrouite-number"></NumericInputBox>
+	<container id="buttons-container">
+		<SubmitButton>Submit Me</SubmitButton>
+		<Button text="Click Me"></Button>
+	</container>
+</container>
+```
+
+##### Output HTML:
+```HTML
+<container id="widget-container" class="i-ui-container">
+	<div class="i-ui-widget i-ui-inputbox"><input class="i-ui-input"></div>
+	<div class="i-ui-widget i-ui-numericinputbox" id="favrouite-number"> . . . </div>
+	<container id="buttons-container" class="i-ui-container">
+		<div class="i-ui-widget i-ui-button"> . . . </div>
+		<div class="i-ui-widget i-ui-button"> . . . </div>
+	</container>
+</container>
+```
+
+##### Sample basic attributes of returned Container Object:
+```JavaScript
+element: container#widget-container.i-ui-container
+$element: jQuery.fn.init [container#widget-container.i-ui-container]
+widgets: Array(2)
+	0: IUIClass {options: {…}, $element: jQuery.fn.init(1), …}
+	1: IUIClass {options: {…}  …}
+	favrouite-number: IUIClass {options: {…} …}
+	length: 2
+containers: Array(1)
+	0: IUIClass {widgets: Array(2), containers: Array(0), options: {…} …}
+	buttons-container: IUIClass {widgets: Array(2), containers: Array(0), options: {…} …}
+	length: 1
+```
+
+
+### Frame:
+
+Frame extension to Container. It just takes 100% parent Height and width and can be placed inside another div whose height is known. It is used to contain big Widgets which can span accross screens.
+
+
+##### HTML:
+```HTML
+<Frame id="interest-radio" group='interest' formAttribute="interested" >
+	<div class="i-ui-widget i-ui-inputbox"><input class="i-ui-input"></div>
+	<div class="i-ui-widget i-ui-numericinputbox" id="favrouite-number"> . . . 
+</Frame>
+```
+
+### RadioGroup:
+
+RadioGroup is used to handle **Radio** which contains the same group. It can be attached to the IForm with the formAttribute like any other Widget.
+
+##### HTML:
+```HTML
+<body>
+	<RadioGroup id="interest-radio" group='interest' formAttribute="interested" >
+		<radio value="yes" text="yes" checked="checked"></radio>
+		<radio value="no" text="no"></radio>
+	</RadioGroup>
+</body>
+```
+
+##### Javascript:
+```JavaScript
+container=IUI.makeUI()
+console.log(container.containers['interest-radio'].value());
+```
+
+##### Output:
+```JavaScript
+yes
+```
+
+### IForm:
+
+IForm is used to contain all the Widgets in a common Form. Widgets in the IForm can be linked with the form using the formAttribute attribute option.
+
+IForms can be nested and linked with each other using formAttribute to create nested JSON structure.
+
+The **value()** API  provided by IForm can be used to get JSON containing all the Widgets linked to the form with the formAttribute. 
+
+An Object containing values can also be passed to **value()** API of IForm to fill the values in the form directly. The Object must be of the structure of the created UI.
+
+##### HTML:
+```HTML
+<Iform id="ui-form">
+	<Iform formAttribute="name">
+			<FormLabel text="First Name "></FormLabel>
+			<InputBox formAttribute="firstName" value="Ishaan"></InputBox>
+			<FormLabel text="Last Name"></FormLabel>
+			<InputBox value="Singh"></InputBox>
+	</Iform> 
+	<br>
+	<FormLabel text="Age"></FormLabel>
+	<NumericInputBox formAttribute="age" id="age-input" value="23"></NumericInputBox>
+	<br>
+	<FormLabel text="Gender"></FormLabel>
+	<RadioGroup group="gender-radio" formAttribute="gender" orientation="horizontal">
+			<radio value="male" text="male" checked="checked"></radio>
+			<radio value="female" text="female"></radio>
+	</RadioGroup>
+</Iform>
+```
+
+##### Javascript:
+```JavaScript
+container=IUI.makeUI()
+console.log(container.containers['ui-form'].value());
+```
+
+##### Output:
+```JavaScript
+{
+age: 23,
+gender: 'male',
+name: {
+	firstName: "Ishaan",
+	lastName: "Singh",
+	}
+}
+```
+
+## EventGroup
+
+Events can be bound to IUI Components using IUI.EventGroup. EventGroups are mapped by name. If new EventGroup with existing name is created, it will override the previous one.
+
+Events names with their handlers are passed as key value pair in object to IUI.EventGroup while creation. The name of the EventGroup is also passed along with the events.
+ 
+Components can be attached to EventGroup by using the **eventgroup** attribute option. IUI will automatically find the respective EventGroup and bind the component to it.
+
+EventGroups can be created before or after makeUI() API call.
+
+##### HTML:
+```HTML
+<ToggleButton eventGroup="toggle-group"></ToggleButton>
+</Iform>
+```
+
+
+##### Creation:
+```JavaScript
+var eventGroup=new IUI.EventGroup({
+	name: 'toggle-group',
+	click : function(){
+		// Click Handler
+	},
+	toggle: function(){
+		// Toggle Handler
+	},
+	persist: true 	// Default:false, It specifies weather the EventGroup should be available in memory after binding with an Component. If true multiple Components can get bound to the same EventGroup
+});
+```
+
