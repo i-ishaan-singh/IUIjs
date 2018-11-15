@@ -30,7 +30,7 @@ define(['./IUI-core.js',,
 	
 	IUI.Validator.addRule('noScript',function(value){
 		var scriptExp = /(<|>)/g;
-		return scriptExp.test(value);
+		return !scriptExp.test(value);
 	});	
 		
 	IUI.makeUI=function makeUI(elem){

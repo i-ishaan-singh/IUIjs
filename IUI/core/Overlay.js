@@ -3,7 +3,7 @@ define(['../IUI-core.js'],function(IUI){
 	var overlayContainer,overlayUid=1;
 		overlayContainer=document.createElement('DIV');
 		overlayContainer.classList.add('i-ui-overlay-container');
-		document.body.append(overlayContainer);
+		document.body.appendChild(overlayContainer);
 		
 		
 	var Overlay=IUI.Class.extend({

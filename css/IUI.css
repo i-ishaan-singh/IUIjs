@@ -26,6 +26,7 @@ html, body{
 }
 .i-ui-radio .i-ui-formlabel{
 	width: 11em;
+    margin: 0;
 }
 .i-ui-input{
     line-height: 1.43em;
@@ -127,3 +128,6 @@ html, body{
     padding: 0.25em;
 }
 /********************************************/
+br {
+    line-height: 2em;
+}
