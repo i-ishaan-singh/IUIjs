@@ -150,8 +150,8 @@ The basic **options** which can be passed to NumericInputBox are:
 ##### HTML:
 ```HTML
 <NumericInputBox value="3.14159" precision="5" step="0.00001" 
-		 change="function(e){ console.log(e.value) }" 
-		 spin="console.log(e.value)">
+		 change="function(e){ console.log(. . .) }" 
+		 spin="console.log(.  . .)">
 </NumericInputBox>
 ```
 
@@ -443,7 +443,6 @@ EventGroups can be created before or after makeUI() API call.
 ##### HTML:
 ```HTML
 <ToggleButton eventGroup="toggle-group"></ToggleButton>
-</Iform>
 ```
 
 
@@ -461,3 +460,36 @@ var eventGroup=new IUI.EventGroup({
 });
 ```
 
+
+## DataMart
+ 
+Data can also be bound to IUI Components like EventGroup using IUI.DataMart. Like EventGroups DataMart are also mapped by name. DataMart works similar to EventGroup. DataMart can also bind to EventGroup by passing **eventgroup** attributer to its constructor.
+ 
+Components can be attached to DataMart by using the **datamart** attribute option.
+
+**Events** : binding, load, bound
+* binding - This event is triggered before loading the data to the Component. This is used to manupulate the incoming data.
+* load - This event is used to bind and render the data to the IUI Component.
+* bound - This event triggered after load event and is used to manupulate the DOM Elements.
+
+DataMarts can also be created before or after makeUI() API call. DataMart will start the data fetching process after the **fetch()** API. If **autofetch:true** is passed while creation, the **fetch()** API is executed as soon as it is created.
+
+##### HTML:
+```HTML
+<DropDown datamart="seasons-list" idAttribute="id" textAttribute="season"></DropDown>
+```
+
+
+##### Creation:
+```JavaScript
+var dataMart=new IUI.DataMart({
+	name: 'seasons-list',
+	eventgroup: 'season-events',
+	data: [{id:'1',season:'Winter'},{id:'2',season:'Summer'},{id:'3',season:'Moonsoon'},{id:'4',season:'Spring'}],	//The data to be passed to the IUI Component
+	persist: true 	// Default:false, It specifies weather the DataMart should be available in memory after binding with an Component. If true multiple Components can get bound to the same DataMart
+});
+dataMart.fetch();	//This will start the data fetching process.
+```
+
+
+## Validator
