@@ -135,7 +135,7 @@ The basic **APIs** Provided by InputBox are:
 <InputBox value="initialValue" change="function(e){ console.log(e.value) }"></InputBox>
 ```
 
-# Output:
+##### Output
 ![alt text](https://raw.githubusercontent.com/ishaananuraag/IUIjs/master/Screenshots/docs/InputBox_doc.jpg)
 
 ### NumericInputBox
@@ -157,7 +157,7 @@ The basic **options** which can be passed to NumericInputBox are:
 </NumericInputBox>
 ```
 
-# Output:
+##### Output
 ![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/numericTextBox_doc.jpg?raw=true)
 
 ### DropDown
@@ -182,6 +182,9 @@ The basic **options** which can be passed to DropDown are:
 ```
 
 
+##### Output
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/dropdown_docs.jpg?raw=true)
+
 
 ### ComboBox
 
@@ -204,6 +207,9 @@ The basic **options** which can be passed to ComboBox are:
 </ComboBox>
 ```
 
+##### Output
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/combobox_docs.jpg?raw=true)
+
 
 
 ### Button
@@ -221,6 +227,8 @@ The basic **options** which can be passed to Button are:
 <Button click="clickHandler">Click Me</Button>
 ```
 
+##### Output
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/button_docs.jpg?raw=true)
 
 ### ToggleButton
 
@@ -242,6 +250,10 @@ The basic **APIs** Provided by ToggleButton are:
 ```
 
 
+##### Output
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/togglebutton_docs.jpg?raw=true)
+
+
 ### SubmitButton
 
 It renderes a Clickable button widget. This button will submit the form in which it is contained.
@@ -256,6 +268,9 @@ The basic **options** which can be passed to SubmitButton are:
 <SubmitButton text="Submit Me" click="console.log('button Clicked')"></SubmitButton>
 <SubmitButton click="clickHandler">Submit Me</SubmitButton>
 ```
+
+##### Output
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/submitbutton_docs.jpg?raw=true)
 
 
 ### Radio
@@ -277,6 +292,10 @@ The basic **APIs** Provided by Radio are:
 <Radio group="gender" value="1" text="male"></Radio>
 <Radio group="gender" value="2" text="female" checked="checked"></Radio>
 ```
+
+##### Output
+![alt text](
+https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/radio_docs.jpg?raw=true)
 
 ## Container
 
@@ -319,7 +338,7 @@ This is a generally used to structure the User Interface and separate IUI Compon
 </container>
 ```
 
-# Output:
+##### Output
 ![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/container_doc.jpg?raw=true)
 
 ##### Output HTML:
@@ -363,6 +382,10 @@ Frame extension to Container. It just takes 100% parent Height and width and can
 </Frame>
 ```
 
+##### Output
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/frame_Docs.jpg?raw=true)
+
+
 ### RadioGroup:
 
 RadioGroup is used to handle **Radio** which contains the same group. It can be attached to the IForm with the formAttribute like any other Widget.
@@ -380,6 +403,9 @@ The basic **options** which can be passed to RadioGroup are:
 	</RadioGroup>
 </body>
 ```
+
+##### Output
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/Radiogroup_docs.jpg?raw=true)
 
 ##### Javascript:
 ```JavaScript
@@ -422,6 +448,9 @@ An Object containing values can also be passed to **value()** API of IForm to fi
 	</RadioGroup>
 </Iform>
 ```
+
+##### Output
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/IForm_docs.jpg?raw=true)
 
 ##### Javascript:
 ```JavaScript
