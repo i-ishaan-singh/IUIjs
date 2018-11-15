@@ -135,6 +135,8 @@ The basic **APIs** Provided by InputBox are:
 <InputBox value="initialValue" change="function(e){ console.log(e.value) }"></InputBox>
 ```
 
+# Output:
+![alt text](https://raw.githubusercontent.com/ishaananuraag/IUIjs/master/Screenshots/docs/InputBox_doc.jpg)
 
 ### NumericInputBox
 
@@ -149,12 +151,14 @@ The basic **options** which can be passed to NumericInputBox are:
 
 ##### HTML:
 ```HTML
-<NumericInputBox value="3.14159" precision="5" step="0.00001" 
+<NumericInputBox value="3.14159" precision="5" step="0.00001" decimal="true"
 		 change="function(e){ console.log(. . .) }" 
 		 spin="console.log(.  . .)">
 </NumericInputBox>
 ```
 
+# Output:
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/numericTextBox_doc.jpg?raw=true)
 
 ### DropDown
 
@@ -315,6 +319,9 @@ This is a generally used to structure the User Interface and separate IUI Compon
 </container>
 ```
 
+# Output:
+![alt text](https://github.com/ishaananuraag/IUIjs/blob/master/Screenshots/docs/container_doc.jpg?raw=true)
+
 ##### Output HTML:
 ```HTML
 <container id="widget-container" class="i-ui-container">
@@ -351,14 +358,18 @@ Frame extension to Container. It just takes 100% parent Height and width and can
 ##### HTML:
 ```HTML
 <Frame id="interest-radio" group='interest' formAttribute="interested" >
-	<div class="i-ui-widget i-ui-inputbox"><input class="i-ui-input"></div>
-	<div class="i-ui-widget i-ui-numericinputbox" id="favrouite-number"> . . . 
+	<InputBox value="initialValue"></InputBox>
+	<NumericInputBox id="favrouite-number"></NumericInputBox>
 </Frame>
 ```
 
 ### RadioGroup:
 
 RadioGroup is used to handle **Radio** which contains the same group. It can be attached to the IForm with the formAttribute like any other Widget.
+
+The basic **options** which can be passed to RadioGroup are:
+* group - The group of the radio buttons which it contains
+* orientation {*'vertical'|'horizontal'*} - (default:'vertical') Specifies the orientation of RadioGroup
 
 ##### HTML:
 ```HTML
