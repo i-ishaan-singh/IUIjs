@@ -26,7 +26,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 			var that=this;
 			if(this.options.validateoninput){
 				$(this.input).on('input',function(e){
-					if(!that.validate(e.target.value).valid){
+					if(!that._validate(e.target.value).valid){
 						e.target.value=that._value;
 						e.stopImmediatePropagation();
 						e.preventDefault();
@@ -38,7 +38,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 			}
 			if(this.options.validateonblur){
 				$(this.input).on('change',function(e){
-					if(!that.validate(e.target.value).valid){
+					if(!that._validate(e.target.value).valid){
 						e.target.value=that._value;
 						e.stopImmediatePropagation();
 						e.preventDefault();
@@ -51,7 +51,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 			$(this.input).on('change',IUI.behaviors.delegateDOMEvent.bind(this));
 		},
 		value: function(val){
-			if(typeof val !== 'undefined' && this.validate(val).valid){
+			if(typeof val !== 'undefined' && this._validate(val).valid){
 				this._value=val;
 				return this.input.val(val);
 			}
