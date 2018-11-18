@@ -533,3 +533,29 @@ dataMart.fetch();	//This will start the data fetching process.
 
 
 ## Validator
+
+Validations can be applied to any Widget using the **validations** attribute of Widget Tag. A comma separated list of all the validations can be passed to the widget with the **validations** attribute.
+
+IUI Provide some basic validations which can be applied to the Widgets:
+* numeric
+* email
+* noScript
+
+IUI.Validator is a global validator which provides API as:
+* **addRule( {*String*,*handler*} ) - This API adds a new rule String to the IUI global Validator. The handler should return true if the validation suceeds else return false.
+* **validateByRule( {*String*,*Object*} ) -  This API tests the rule String with the provided object. If the rule String is not present in the Validator, it returns true. 
+
+### Local Validator
+
+Local validator can be created by calling **new IUI.Validator()**. The newly created validator will have it's own rule list and can be used to validate widgets in certail scenerios.
+
+### Widget Validate API
+
+The **validate( {*Validator*} )** API of the widget validates the rules assigned to Widget with the given Validator. If Validator is not give, IUI Global Validator is used. This API Returns a validObbject with **value *(Boolean)* ** attribute and **rules *(Array)* **. If **value** is false rules Array contains the list of all failed rule cases.
+
+```JavaScript
+> widget.validate();
+> { valid:false,
+	rules: ['noScript','numeric']
+  }
+```
