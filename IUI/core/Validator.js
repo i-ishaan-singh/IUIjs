@@ -3,10 +3,8 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 	var validator;
 	
 	Validator=function Validator(){
-		return validator;
+		this._validationRules={}
 	}
-	
-	Validator.prototype._validationRules={}
 	
 	Validator.prototype.addRule=function addRule(rule,handler){
 		if(typeof this._validationRules[rule] === 'undefined'){
@@ -16,19 +14,22 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 	}
 	
 	Validator.prototype.validate=function validateByRule(rule,object){
+		var length, valid=true;
 		if(typeof this._validationRules[rule] !== 'undefined'){
-			var length=this._validationRules[rule].length, valid=true;
+			length=this._validationRules[rule].length;
 			for(var i=0;i<length;++i){
 				valid = valid && this._validationRules[rule][i](object);
 			}
-			return valid;
 		}
+		return valid;
 	}
 	
 	
 	validator=new Validator();
+	Validator._validationRules=validator._validationRules;
+	Validator.addRule=validator.addRule;
+	Validator.validate=validator.validate;
 	
-	
-	IUI.Validator=validator;
+	IUI.Validator=Validator;
 	
 });

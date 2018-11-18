@@ -102,13 +102,14 @@ define(['../IUI-core.js','../core/WidgetBuilder.js','../core/DataMart.js','../co
 				},200);
 			}
 		},
-		validate: function(value){
+		validate: function(value,validator){
 			var valid=true,
 				rules=[],
+				_validator=validator || IUI.Validator,
 				length=this.validationList.length;
 			for(var i=0;i<length;i++){
 				var rule=this.validationList[i];
-					_valid=IUI.Validator.validate(rule,value);
+					_valid=_validator.validate(rule,value);
 				if(!_valid){
 					rules.push(rule);
 				}
