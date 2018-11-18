@@ -4,7 +4,6 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 		name:'Radio',
 		template: '<input type="radio" class="i-ui-radio-button"></input>',
 		classList: IUI.Widget.prototype.classList.concat(['i-ui-radio']),
-		events:	Array.prototype.slice(IUI.Widget.prototype.events),
 		options:{
 			value: 'radio',
 			checked:false

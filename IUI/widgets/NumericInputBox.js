@@ -10,6 +10,8 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 			
 			classList: IUI.Widget.prototype.classList.concat(['i-ui-numericinputbox']),
 			
+			validationList: ['numeric'],
+			
 			initialize: function(){
 				this._handleSpinStart=this._handleSpinStart.bind(this);	
 				this._handleSpinEnd=this._handleSpinEnd.bind(this);		
@@ -28,10 +30,10 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 			_handleSpinStart: function(e){
 				var that=this, step=this.step;
 				
-				if(e.currentTarget.classList.contains('i-ui-spinner-down')){
+				if($(e.currentTarget).hasClass('i-ui-spinner-down')){
 					step=-step;
 				}				
-				this.element.classList.add('i-ui-active');
+				$(this.element).addClass('i-ui-active');
 				if(this._interval){
 					clearInterval(this._interval);
 					delete this._interval;
@@ -55,7 +57,8 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 				if(this._interval){
 					clearInterval(this._interval);
 					this.trigger('change',{value:Number(this.input.val())});
-					this.element.classList.remove('i-ui-active');
+					this._value=this.input.val();
+					this.$element.removeClass('i-ui-active');
 					delete this._interval;
 				}				
 			},

@@ -2,8 +2,8 @@ define(['../IUI-core.js'],function(IUI){
 
 	var overlayContainer,overlayUid=1;
 		overlayContainer=document.createElement('DIV');
-		overlayContainer.classList.add('i-ui-overlay-container');
-		document.body.append(overlayContainer);
+		$(overlayContainer).addClass('i-ui-overlay-container');
+		document.body.appendChild(overlayContainer);
 		
 		
 	var Overlay=IUI.Class.extend({
@@ -108,10 +108,10 @@ define(['../IUI-core.js'],function(IUI){
 			}.bind(this));
 		},
 		show: function(){
-			this.element.classList.remove('i-ui-hidden');
+			$(this.element).removeClass('i-ui-hidden');
 		},
 		hide: function(){
-			this.element.classList.add('i-ui-hidden');
+			$(this.element).addClass('i-ui-hidden');
 		},
 		close: function(){
 			if(!this._popupOpen){
@@ -125,6 +125,10 @@ define(['../IUI-core.js'],function(IUI){
 		},
 		setContents: function(contents){
 			this.contents=contents;
+			var _element=$(this.contents).detach();
+			this.element.innerHTML=''
+			_element.appendTo(this.element);
+			
 		},
 		_attachEvents:function(){
 			this.bindButton(this.options.button,this.options.buttonBehavior);
@@ -136,7 +140,7 @@ define(['../IUI-core.js'],function(IUI){
 				var _element=$(this.contents).detach();
 				_element.appendTo(this.element);
 			}
-			this.element.classList.add.apply(this.element.classList,this.classList.concat(this.options.classlist));
+			$(this.element).addClass(this.classList.concat(this.options.classlist));
 			this.element.uiOverlay=this;
 			this.height=this.options.height;
 			if(!this.options.lazy){

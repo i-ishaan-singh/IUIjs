@@ -13,9 +13,6 @@
 		.form-container {
 			padding: 1rem 2rem;
 		}
-		.form-item .i-ui-formlabel {
-			width: 13em;
-		}
 		.form-item {
 			margin: 0.5em 0;
 		}
@@ -29,10 +26,20 @@
 		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form"></FormLabel>
 		
 		<div class="form-container">
-			<form id="ui-form">
+			<Iform id="ui-form">
+				<Iform formAttribute="name">
+					<div class="form-item">
+						<FormLabel text="First Name "></FormLabel>
+						<InputBox id="name-input"  validateOnInput="false" formAttribute="firstName"></InputBox>
+					</div>
+					<div class="form-item">
+						<FormLabel text="Last Name"></FormLabel>
+						<InputBox id="name-input"  validations="noScript,noI" formAttribute="lastName"></InputBox>
+					</div>
+				</Iform>
 				<div class="form-item">
-					<FormLabel text="Name "></FormLabel>
-					<InputBox id="name-input" formAttribute="name"></InputBox>
+					<FormLabel text="Email Id "></FormLabel>
+					<InputBox id="email-input" validations="email" validateOnInput="false" formAttribute="email"></InputBox>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Age"></FormLabel>
@@ -51,16 +58,11 @@
 				</div>
 				<div class="form-item">
 					<FormLabel text="Favrouite Weather"></FormLabel>
-					<DropDown formAttribute="weather">
-						<option>Summner</option>
-						<option>Winter</option>
-						<option>Autunm</option>
-						<option>Moonsoon</option>
-					</DropDown>
+					<DropDown formAttribute="weather" dataMart="season-mart">	</DropDown>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Food Preference"></FormLabel>
-					<ComboBox formAttribute="food">
+					<ComboBox formAttribute="food" >
 						<option>North Indian</option>
 						<option>South Indian</option>
 						<option>Punjabi</option>
@@ -81,10 +83,9 @@
 				<div class="form-buttons">
 					<Button id="get-details-button" eventGroup="form-events">Get Result Me</Button>
 				</div>
-			<form>
+			</Iform>
 		</div>
-		
-		<script src="jquery.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
 		 <script data-main="main" src="require.js"></script>
 	</body>
 </html>

@@ -8,7 +8,6 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 			template: '<input class="i-ui-input"></input><div class="i-ui-dropbutton-container"><div class="i-ui-dropbutton"><i class="i-ui-widget-icon fa fa-caret-down" aria-hidden="true"></i></div></div>',
 			
 			classList: IUI.Widget.prototype.classList.concat(['i-ui-dropdown']),
-			events: InputBox.prototype.events.concat(['change']),
 			initialize: function(options){
 				var textAttribute=this.options.textAttribute, idAttribute=this.options.idAttribute;
 				if(options.element){
@@ -23,28 +22,39 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 				}
 				InputBox.prototype.initialize.apply(this,arguments);		
 			},
-			
-			events: InputBox.prototype.events.concat(['spin']),
-			_createPopup:function(){
+			_createPopup:function(data){
 					var textAttribute=this.options.textAttribute, idAttribute=this.options.idAttribute;
-					this.popup=IUI.createOverlay({
-						anchor: this.element,
-						contents: this.options.data.map(function(_data,idx){
-							var elem=document.createElement('div');
-							elem.classList.add('i-ui-list-item');
-							if(_data[idAttribute]){
-								elem.id=_data[idAttribute];
-							}
-							elem.innerHTML=_data[textAttribute];
-							elem._uiDataIndex=idx;
-							return elem;
-						}),
-						button: this.element.children[1],
-						height: (2*this.options.data.length)+'em'
-					});
+					
+					var dataMapper=function(_data,idx){
+						var elem=document.createElement('div');
+						$(elem).addClass('i-ui-list-item');
+						if(_data[idAttribute]){
+							elem.id=_data[idAttribute];
+						}
+						elem.innerHTML=_data[textAttribute];
+						elem._uiDataIndex=idx;
+						return elem;
+					}
+					
+					if(this.popup){
+						this.popup.setContents(data.map(dataMapper))
+						this.popup.options.animateObjectOpen.height=2*data.length+'em'
+					}else{
+						this.popup=IUI.createOverlay({
+							anchor: this.element,
+							contents: data.map(dataMapper),
+							button: this.element.children[1],
+							height: (2*this.options.data.length)+'em'
+						});
+					}
+			},
+			onDataFetch: function(e){
+				var data=e.data;
+				this._createPopup(data);
+				this.options.data=data;
 			},
 			onRender: function(){
-				this._createPopup();
+				this._createPopup(this.options.data);
 			},
 			options: {
 				data:[],				

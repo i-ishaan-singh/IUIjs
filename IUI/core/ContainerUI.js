@@ -25,7 +25,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 			this.containers=[];			
 			IUI.Class.prototype.initialize.apply(this,arguments);			
 			var _elem=$(this.options.element || document.createElement('div'));
-			if(_elem.length===1){
+			if(_elem.length===1 && !Array.isArray(this.options.element)){
 				this.element=_elem[0];
 				this.$element=_elem;
 			}else{
@@ -34,7 +34,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 				this.$element.append(_elem);
 			}
 		},
-		_onCreate: function(widget){
+		_onCreateWidget: function(widget){
 			//Override this API to process the newly created Widgets/Containers;
 		},
 		_create: function(elements){
@@ -50,7 +50,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 						this.containers[container.options.id]=container;
 					}
 					this.containers.push(container);
-					this._onCreate(container);
+					this._onCreateWidget(container);
 				}else if(typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined"){
 					
 					var widget=IUI.WidgetBuilder.widgetList[elem.tagName](elem,this.element);
@@ -59,7 +59,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 					}
 					this.widgets.push(widget);
 					this.trigger('create',{widget: widget});
-					this._onCreate(widget);
+					this._onCreateWidget(widget);
 				}else{
 					(elem.children) && (this._create(elem.children));
 				}
@@ -68,7 +68,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 		makeUI: function(){
 			var tagName=this.element.tagName;
 				this._create(this.element.children);
-				this.element.classList.add.apply(this.$element[0].classList,this.classList);
+				this.$element.addClass(this.classList);
 				this.element.uiContainer=this;
 		},
 		_findAndMakeWidgets:function(){

@@ -115,8 +115,12 @@ define(function(){
 	}
 
 	
+	IUIClass.prototype.load=function(){
+		
+	}
 	
 	IUIClass.prototype.initialize=function(options){
+		this.load(options);
 		this.options=_extendObject((this.options) || ({}),options);	
 		
 		this._handlers={};		
@@ -132,10 +136,9 @@ define(function(){
 				}
 			}
 		}
-		this.trigger('load');
 	}
 
-	IUIClass.prototype.events=['load'];
+	IUIClass.prototype.events=[];
 	
 	/**
 	* Basic IUI Bind function, It iterates over all the events in the Events array and bind the respective handlers from the options. 
