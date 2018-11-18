@@ -8,7 +8,7 @@ define(['../IUI-core.js','../widgets/Button.js'],function(IUI){
 			text: 'ToggleButton',
 		},
 		toggle: function(value){
-			this.element.classList.toggle('i-ui-active',value);
+			this.$element.toggleClass('i-ui-active',value);
 			this.trigger('toggle',{value:this.value()});
 		},
 		_attachEvents: function(){
@@ -24,9 +24,9 @@ define(['../IUI-core.js','../widgets/Button.js'],function(IUI){
 		value: function(val){
 			if(typeof val !== 'undefined'){
 				val=JSON.parse(val);
-				this.element.classList.toggle('i-ui-active',val);
+				this.$element.toggleClass('i-ui-active',val);
 			}else{
-				return this.element.classList.contains('i-ui-active');
+				return this.$element.hasClass('i-ui-active');
 			}
 		}
 	});

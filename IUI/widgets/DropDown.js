@@ -27,7 +27,7 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 					
 					var dataMapper=function(_data,idx){
 						var elem=document.createElement('div');
-						elem.classList.add('i-ui-list-item');
+						$(elem).addClass('i-ui-list-item');
 						if(_data[idAttribute]){
 							elem.id=_data[idAttribute];
 						}

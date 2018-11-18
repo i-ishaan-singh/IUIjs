@@ -68,7 +68,7 @@ define(['../IUI-core.js','../core/Widget.js'],function(IUI){
 		makeUI: function(){
 			var tagName=this.element.tagName;
 				this._create(this.element.children);
-				this.element.classList.add.apply(this.$element[0].classList,this.classList);
+				this.$element.addClass(this.classList);
 				this.element.uiContainer=this;
 		},
 		_findAndMakeWidgets:function(){

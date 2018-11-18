@@ -30,10 +30,10 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 			_handleSpinStart: function(e){
 				var that=this, step=this.step;
 				
-				if(e.currentTarget.classList.contains('i-ui-spinner-down')){
+				if($(e.currentTarget).hasClass('i-ui-spinner-down')){
 					step=-step;
 				}				
-				this.element.classList.add('i-ui-active');
+				$(this.element).addClass('i-ui-active');
 				if(this._interval){
 					clearInterval(this._interval);
 					delete this._interval;
@@ -58,7 +58,7 @@ define(['../IUI-core.js','./InputBox.js'],function(IUI){
 					clearInterval(this._interval);
 					this.trigger('change',{value:Number(this.input.val())});
 					this._value=this.input.val();
-					this.element.classList.remove('i-ui-active');
+					this.$element.removeClass('i-ui-active');
 					delete this._interval;
 				}				
 			},

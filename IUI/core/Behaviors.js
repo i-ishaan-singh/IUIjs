@@ -13,7 +13,7 @@ define(['../IUI-core.js'],function(IUI){
 	
 	behaviors.extractStyleFromObject=function(element,object){
 		for(var attr in object){
-			if(element.style.hasOwnProperty(attr)){
+			if(attr in element.style){					//Need to make efficient
 				element.style[attr]=object[attr];
 			}
 		}	
@@ -22,7 +22,7 @@ define(['../IUI-core.js'],function(IUI){
 	behaviors.filterStyleFromObject=function(object){
 		var _obj={};
 		for(var attr in object){
-			if(document.body.style.hasOwnProperty(attr)){
+			if(attr in document.body.style){
 				_obj[attr]=object[attr];
 			}
 		}

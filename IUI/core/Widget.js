@@ -50,14 +50,14 @@ define(['../IUI-core.js','../core/WidgetBuilder.js','../core/DataMart.js','../co
 		_processOptions: function(wrapper){
 			IUI.behaviors.extractStyleFromObject(wrapper,this.options);			
 			if(this.options.class){
-				wrapper.classList.add.apply(wrapper.classList,this.options.class.split(' '));	
+				$(wrapper).addClass(this.options.class.split(' '));	
 			}
 			if(this.options.id){
 				wrapper.id=this.options.id;
 			}
 			if(this.options.disabled && this.options.disabled !== 'false'){
 				this.options.enable=false;
-				wrapper.classList.add('i-ui-disabled');
+				$(wrapper).addClass('i-ui-disabled');
 			}
 			if(this.options.validations){
 				if(typeof this.options.validations === "string"){
@@ -75,7 +75,7 @@ define(['../IUI-core.js','../core/WidgetBuilder.js','../core/DataMart.js','../co
 		makeUI: function(){
 			var wrapper=document.createElement("DIV");
 			
-			wrapper.classList.add.apply(wrapper.classList,this.classList);
+			$(wrapper).addClass(this.classList);
 			wrapper.innerHTML=this.template;
 			this.onTemplateAttach(wrapper);
 			this._processOptions(wrapper);
@@ -96,9 +96,9 @@ define(['../IUI-core.js','../core/WidgetBuilder.js','../core/DataMart.js','../co
 		_onValidate: function(result){
 			var that=this;
 			if(!result.valid){
-				this.element.classList.add('i-ui-invalid');
+				this.$element.addClass('i-ui-invalid');
 				setTimeout(function(){
-					that.element.classList.remove('i-ui-invalid');
+					that.$element.removeClass('i-ui-invalid');
 				},200);
 			}
 		},
@@ -122,9 +122,9 @@ define(['../IUI-core.js','../core/WidgetBuilder.js','../core/DataMart.js','../co
 		enable: function(val){
 			if(typeof val !== 'undefined'){
 				val=JSON.parse(val);
-				this.element.classList.toggle('i-ui-disabled',!val);
+				this.$element.toggleClass('i-ui-disabled',!val);
 			}else{
-				return !this.element.classList.contains('i-ui-disabled');
+				return !this.$element.hasClass('i-ui-disabled');
 			}
 			
 		},
