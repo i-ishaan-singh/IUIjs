@@ -4,6 +4,22 @@
 IUI is a simple Widget creation JavaScript library for creating User Interface faster. It aims at minimising the use of JavaScript in UI Creation and manupulation, giving more responsibility on HTML. IUI provides custom HTML tags which can be directly embeded anywhere in the template. IUI requires *JQuery* to function.
 
 
+### Require IUI.js:
+
+You can use the following requirejs configuration to code using IUI Framework.
+
+```javascript
+require.config({
+	paths:{
+		'IUI':'http://cdn.jsdelivr.net/gh/ishaananuraag/IUIjs/versions/IUI.all'
+	}
+});
+require(['IUI'],function(IUI){
+	... 
+		//Your main Code here
+	...
+});
+```
 
 ## Basic Usage
 	
