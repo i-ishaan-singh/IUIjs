@@ -1,4 +1,13 @@
-define(function(){
+/*!
+ * IUI JavaScript Web Framework Library v1.0.0
+ *
+ * Copyright (c) 2018 Ishaan Singh
+ * Released under the MIT license
+ * https://github.com/ishaananuraag/IUIjs/blob/master/LICENSE
+ *
+ * Date: 2018-01-20T17:24Z
+ */
+ define(function(){
 
 /* ------ IUI.js ----------------- */
 	
@@ -110,8 +119,8 @@ define(function(){
     };
 	
 
-	function IUIClass(options){	
-		this.initialize(options);
+	function IUIClass(){	
+		this.initialize.apply(this,arguments);
 	}
 
 	
@@ -214,8 +223,8 @@ define(function(){
 	*/
 	IUIClass.extend=function(newProperties){
 		
-		var IUIClass=function(options){
-			this.initialize(options);
+		var IUIClass=function(){
+			this.initialize.apply(this,arguments);
 		};
 		
 		_getKeys(this.prototype).forEach(function(key){
@@ -247,6 +256,8 @@ define(function(){
 	}
 
 	IUI.Class=IUIClass;
+	
+	IUI._observableRegex=/^::\S+::$/g;
 	
 	return IUI;
 });

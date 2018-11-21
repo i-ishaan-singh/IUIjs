@@ -26,43 +26,43 @@
 		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form"></FormLabel>
 		
 		<div class="form-container">
-			<Iform id="ui-form">
-				<Iform formAttribute="name">
+			<Iform id="ui-form" isattached=":: Match ::" >
+				<Iform formattribute="name">
 					<div class="form-item">
 						<FormLabel text="First Name "></FormLabel>
-						<InputBox id="name-input"  validateOnInput="false" formAttribute="firstName"></InputBox>
+						<InputBox id="name-input"  validateoninput="false" formattribute="firstName"></InputBox>
 					</div>
 					<div class="form-item">
 						<FormLabel text="Last Name"></FormLabel>
-						<InputBox id="name-input"  validations="noScript,noI" formAttribute="lastName"></InputBox>
+						<InputBox id="name-input"  validations="noScript,noI" formattribute="lastName"></InputBox>
 					</div>
 				</Iform>
 				<div class="form-item">
 					<FormLabel text="Email Id "></FormLabel>
-					<InputBox id="email-input" validations="email" validateOnInput="false" formAttribute="email"></InputBox>
+					<InputBox id="email-input" validations="email" validateOnInput="false" formattribute="email"></InputBox>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Age"></FormLabel>
-					<NumericInputBox formAttribute="age" id="age-input"></NumericInputBox>
+					<NumericInputBox formattribute="age" id="age-input"></NumericInputBox>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Height"></FormLabel>
-					<NumericInputBox formAttribute="height" id="height-input" decimal="true" step="0.2"></NumericInputBox>
+					<NumericInputBox formattribute="height" id="height-input" decimal="true" step="0.2"></NumericInputBox>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Gender"></FormLabel>
-					<RadioGroup group="gender-radio" formAttribute="gender" orientation="horizontal">
+					<RadioGroup group="gender-radio" formattribute="gender" orientation="horizontal">
 						<radio value="male" text="male"></radio>
 						<radio value="female" text="female"></radio>
 					</RadioGroup>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Favrouite Weather"></FormLabel>
-					<DropDown formAttribute="weather" dataMart="season-mart">	</DropDown>
+					<DropDown formattribute="weather" datamart="season-mart">	</DropDown>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Food Preference"></FormLabel>
-					<ComboBox formAttribute="food" >
+					<ComboBox formattribute="food" >
 						<option>North Indian</option>
 						<option>South Indian</option>
 						<option>Punjabi</option>
@@ -71,17 +71,17 @@
 				</div>
 				<div class="form-item">
 					<FormLabel text="Do you want to recieve promotional Offers?"></FormLabel>
-					<RadioGroup group="promotional-radio" formAttribute="promotional" >
+					<RadioGroup group="promotional-radio" formattribute="promotional" >
 						<radio value="yes" text="yes"></radio>
 						<radio value="no" text="no"></radio>
 					</RadioGroup>
 				</div>
 				<div class="form-item">
-					<ToggleButton id="anime-button" formAttribute="animeLover">Toggle for Anime</ToggleButton>
-					<ToggleButton id="pubg-button" formAttribute="pubgLover">Toggle for PUBG </ToggleButton>
+					<ToggleButton id="anime-button" formattribute="animeLover">Toggle for Anime</ToggleButton>
+					<ToggleButton id="pubg-button" formattribute="pubgLover">Toggle for PUBG </ToggleButton>
 				</div>
 				<div class="form-buttons">
-					<Button id="get-details-button" eventGroup="form-events">Get Result Me</Button>
+					<Button id="get-details-button" eventgroup="form-events">Get Result Me</Button>
 				</div>
 			</Iform>
 		</div>
