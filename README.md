@@ -63,10 +63,11 @@ This API renderes the given Object and returns an Container Object.
 **Usage:** 
 ```javascript
 ...
-	IUI.makeUI(Object);
+	IUI.makeUI([Object ][[,] Model]);
 ...
 ```
-Where **Object** can be:
+
+Where **Model** is the object being being to the UI created and **Object** can be:
 * **Element | JQuery** - Javascript Element or JQuery Object of the parent Element containing the IUI custom tags. The given will be converted to Container Object which is returned. If JQuery Object contains more than one element, then the elements are wrapped in a *div* which is returned as Container Object.
 
 * **TemplateString** -  Template String containing the IUI custom tags which needs to be rendered. Passing single widget in the TemplateString will not render the widget as it will be considered as Container.
@@ -79,16 +80,23 @@ Where **Object** can be:
 Components are the objects which can be created using IUI. 
 Components can bind to and trigger events. The events can be bounded with the Component during component creation or can be created and bind separately using EventGroup.
 
-There are Three basic types of Components which can be created using IUI:
+The basic types of Components which can be created using IUI:
 1. **Widget**
 2. **Container**
 3. **Overlay**
+3. **ObservbleModel**
+3. **Template**
 	
 ## Widget
 
 Widgets are IUI Component which are first rendered in javascript and then attached to the DOM to reduce reflow and allow faster UI Creation. The name of the Widget is same as it's TagName. Widgets can be extended to create new Widgets with properties of old Widget and extended properties.
 
 Widgets can be indentified bu class *i-ui-widget* and can be accessed by uiWidget attribute of it's Elemenet Object.
+
+The basic *options** which can be passed to FormLabel are:
+* **enabled** *{Boolean}* - The enable state of the widget.
+* **isattached** *{Boolean}* - Wether the widget is attached to the DOM or not.
+
 
 The basic **APIs** Provided by Widget are:
 * **enable( *{Boolean}* )** - enabled or disables the Widget. 
@@ -106,6 +114,18 @@ Handler to Events can be provided as attribute to Widget with same name as the e
   ...
 ```
 
+#### Binding Widgets with Observables:
+
+Widgets can be bound with Observable Models using IUI Template. An IUI Template is enclosed in double colons (**::**) and can be a variable name or an executable statement which evaluates to a value. The template will be evaluated using the model given to IUI.makeUI() API. If model attribute is directly given as mapping, two way binding takes place. All the variables provided in template should exist in the given model.
+
+##### EXAMPLE TEMPLATE BINDING:
+```HTML
+  ...
+	<Widget value="::modelAttriute::"></Widget>
+	<Widget value="::(modelAttriute?'Value1':'Value2')::"></Widget>
+  ...
+```
+
 
 #### Types Of Widgets:
 * **FormLabel**
@@ -117,6 +137,8 @@ Handler to Events can be provided as attribute to Widget with same name as the e
 * **ToggleButton**
 * **SubmitButton**
 * **Radio**
+
+
 
 ### FormLabel
 
@@ -575,3 +597,4 @@ The **validate( {*Validator*} )** API of the widget validates the rules assigned
 	rules: ['noScript','numeric']
   }
 ```
+
