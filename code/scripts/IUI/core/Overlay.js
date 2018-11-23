@@ -113,8 +113,10 @@ define(['IUI-core'],function(IUI){
 		hide: function(){
 			$(this.element).addClass('i-ui-hidden');
 		},
-		close: function(){
-			if(!this._popupOpen){
+		close: function(e){
+			if(!this._popupOpen || (e && $(e.target).is(this.element))){
+				$('html').off('mouseup.'+this._uid);
+				$('html').one('mouseup.'+this._uid,this.close);
 				return;
 			}
 			var that=this;

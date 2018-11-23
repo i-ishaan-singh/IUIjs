@@ -1,0 +1,44 @@
+---------Version 1.0.1
+* Added attach/detach API to Widgets.
+* Added ObservableModel, 
+	-usage new ObservableModel(Object,ChangeHandler,List)
+	-or new ObservableModel(Object,List)
+* Selective Observation in object enabled through passing list
+* Widgets Options can now be turned into ObservableModel
+* _itterateCommandToAllComponents() API added to ContainerUI
+* added async attribute to Container, which will build the container in async manner
+* added IUI.makeUIAsync() API
+* Added - ContainerModel
+* Added - OptionsModel
+* Implemented - Two way dataBinding between OptionsModel and Container Model
+* FIX - Popup Closes on scroll
+* FIX - Dropdown Max Height issue
+* FIX - deep extend on class initialize
+
+---------Version 1.0.0
+* Created IUI.Class and it's functionalities
+* Implemented Extend in IUI Class
+* Added Core IUI Widget Framework:
+	- Widget
+	- Container UI
+	- Widget Builder
+	- Overlay
+	- DataMart
+	- EventGroup
+	- Validator
+	- Behaviors
+* Added basic Widgets:
+	- FormLabel
+	- InputBox
+	- NumericInputBox
+	- ComboBox
+	- DropDown
+	- Button
+	- SubmitButton
+	- ToggleButton
+	- Radio
+* Added basic Container:
+	- Container
+	- Frame
+	- Form
+	- RadioGroup

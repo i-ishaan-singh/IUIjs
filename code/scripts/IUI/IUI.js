@@ -3,6 +3,8 @@ define(['IUI-core',
 		'WidgetBuilder',		
 		'Validator',
 		'ObservableModel',
+		'OptionModel',
+		'ContainerModel',
 		'Widget',
 		'ContainerUI',
 		'Overlay',
@@ -33,16 +35,43 @@ define(['IUI-core',
 		return !scriptExp.test(value);
 	});	
 		
-	IUI.makeUI=function makeUI(elem){
-		
+	IUI.makeUI=function makeUI(elem,model){
+		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
+			model=elem;
+			elem=null;
+		}
+		if(model && model.classType!=="ObservableModel"){
+			model=new IUI.ContainerModel(model);			
+		}
 		(elem) || (elem='body')
 		var uiContainer= new IUI.ContainerUI({
-			element: elem
+			element: elem,
+			model: model
 		});		
 		uiContainer.makeUI();
 		return uiContainer;
 	}
-	//window.IUI=IUI;
+	
+	IUI.makeUIAsync=function makeUI(elem,model){
+		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
+			model=elem;
+			elem=null;
+		}
+		if(model && model.classType!=="ObservableModel"){
+			model=new IUI.ContainerModel(model);			
+		}
+		(elem) || (elem='body')
+		
+		var uiContainer= new IUI.ContainerUI({
+			element: elem,
+			model: model,
+			async: true
+		});		
+		uiContainer.makeUI();
+		return uiContainer;
+	}
+	
+	
 	return IUI;
 
 });

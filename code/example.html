@@ -23,20 +23,23 @@
 		</style>
 	</head>
 	<body>	
-		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form"></FormLabel>
+		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form" ></FormLabel>
 		
 		<div class="form-container">
-			<Iform id="ui-form" isattached=":: Match ::" >
+			<Iform id="ui-form" async="true">
 				<Iform formattribute="name">
 					<div class="form-item">
-						<FormLabel text="First Name "></FormLabel>
-						<InputBox id="name-input"  validateoninput="false" formattribute="firstName"></InputBox>
+						<FormLabel text="First Name"></FormLabel>
+						<InputBox id="name-input"  validateoninput="false" formattribute="firstName" value="::firstName::"></InputBox>
 					</div>
 					<div class="form-item">
 						<FormLabel text="Last Name"></FormLabel>
-						<InputBox id="name-input"  validations="noScript,noI" formattribute="lastName"></InputBox>
+						<InputBox id="name-input"  validations="noScript,noI" formattribute="lastName" value="::lastName::"></InputBox>
 					</div>
 				</Iform>
+				<div class="form-item">
+					<FormLabel  isattached="::(firstName.trim() || lastName.trim())::" text="Welcome ::(firstName+' '+lastName):: "></FormLabel>
+				</div>
 				<div class="form-item">
 					<FormLabel text="Email Id "></FormLabel>
 					<InputBox id="email-input" validations="email" validateOnInput="false" formattribute="email"></InputBox>
@@ -45,6 +48,7 @@
 					<FormLabel text="Age"></FormLabel>
 					<NumericInputBox formattribute="age" id="age-input"></NumericInputBox>
 				</div>
+				
 				<div class="form-item">
 					<FormLabel text="Height"></FormLabel>
 					<NumericInputBox formattribute="height" id="height-input" decimal="true" step="0.2"></NumericInputBox>
@@ -60,13 +64,10 @@
 					<FormLabel text="Favrouite Weather"></FormLabel>
 					<DropDown formattribute="weather" datamart="season-mart">	</DropDown>
 				</div>
+				<container async="false">
 				<div class="form-item">
 					<FormLabel text="Food Preference"></FormLabel>
-					<ComboBox formattribute="food" >
-						<option>North Indian</option>
-						<option>South Indian</option>
-						<option>Punjabi</option>
-						<option>Chinese</option>
+					<ComboBox formattribute="food" datamart="food-mart">
 					</ComboBox>
 				</div>
 				<div class="form-item">
@@ -83,6 +84,7 @@
 				<div class="form-buttons">
 					<Button id="get-details-button" eventgroup="form-events">Get Result Me</Button>
 				</div>
+				</container>
 			</Iform>
 		</div>
 		<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>

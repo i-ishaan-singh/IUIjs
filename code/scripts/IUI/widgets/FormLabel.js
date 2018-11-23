@@ -4,13 +4,17 @@ define(['IUI-core','Widget'],function(IUI){
 		name:'FormLabel',
 		classList: IUI.Widget.prototype.classList.concat(['i-ui-formlabel']),
 		_processOptions: function(wrapper){
+			this.options.value=(this.element && this.element.innerHTML) || this.options.text;
+			wrapper.innerHTML=this.options.value;
+			delete this.options.text;
 			IUI.Widget.prototype._processOptions.apply(this,arguments);		
-			this.options.text=(this.element && this.element.innerHTML) || this.options.text;
-			wrapper.innerHTML=this.options.text;
 		},
 		options:{
 			text: ''
-		}
+		},
+		_handlevalueChange: function(value){
+			this.value(value);
+		},
 	});
 	
 	IUI.WidgetBuilder.plugin(FormLabel);

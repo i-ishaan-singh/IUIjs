@@ -1,4 +1,4 @@
-define(['IUI-core'],function(IUI){
+define(['IUI-core','Template'],function(IUI){
 
 	var behaviors={};
 	
@@ -20,6 +20,22 @@ define(['IUI-core'],function(IUI){
 				delete object[attr];
 			}
 		}	
+	}
+	
+	behaviors.getObservableMapping=function(object){
+		var _matchedObservers=[],templateObject;
+		for(var attr in object){
+			if(typeof object[attr] === "string"){	
+					var templateObject=IUI.Template.extractTemplateObject(object[attr]);
+					if(templateObject.mappings){
+						templateObject.optionAttribute=attr;
+						//console.log(templateObject)
+						_matchedObservers.push(templateObject);
+					}
+				}
+			}
+		
+		return _matchedObservers;	
 	}
 	
 	behaviors.filterStyleFromObject=function(object){

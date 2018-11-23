@@ -10,7 +10,7 @@ define(['IUI-core','InputBox'],function(IUI){
 			classList: IUI.Widget.prototype.classList.concat(['i-ui-dropdown']),
 			initialize: function(options){
 				var textAttribute=this.options.textAttribute, idAttribute=this.options.idAttribute;
-				if(options.element){
+				if(options.element && !options.data){
 					var _data=[];
 					$(options.element).find('option').each(function(idx,elem){
 						var obj={}
@@ -44,6 +44,7 @@ define(['IUI-core','InputBox'],function(IUI){
 							anchor: this.element,
 							contents: data.map(dataMapper),
 							button: this.element.children[1],
+							maxHeight: '15em',
 							height: (2*this.options.data.length)+'em'
 						});
 					}
@@ -56,8 +57,7 @@ define(['IUI-core','InputBox'],function(IUI){
 			onRender: function(){
 				this._createPopup(this.options.data);
 			},
-			options: {
-				data:[],				
+			options: {			
 				textAttribute: 'text',
 				idAttribute: 'id'
 			},
