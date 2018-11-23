@@ -26,8 +26,8 @@
 		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form" ></FormLabel>
 		
 		<div class="form-container">
-			<Iform id="ui-form" async="true">
-				<Iform formattribute="name">
+			<Iform id="ui-form">
+				<Iform formattribute="name"  >
 					<div class="form-item">
 						<FormLabel text="First Name"></FormLabel>
 						<InputBox id="name-input"  validateoninput="false" formattribute="firstName" value="::firstName::"></InputBox>
@@ -60,11 +60,11 @@
 						<radio value="female" text="female"></radio>
 					</RadioGroup>
 				</div>
+				<Iform async="false" isattached="::firstName::" formattribute="preference">
 				<div class="form-item">
 					<FormLabel text="Favrouite Weather"></FormLabel>
 					<DropDown formattribute="weather" datamart="season-mart">	</DropDown>
 				</div>
-				<container async="false">
 				<div class="form-item">
 					<FormLabel text="Food Preference"></FormLabel>
 					<ComboBox formattribute="food" datamart="food-mart">
@@ -81,10 +81,10 @@
 					<ToggleButton id="anime-button" formattribute="animeLover">Toggle for Anime</ToggleButton>
 					<ToggleButton id="pubg-button" formattribute="pubgLover">Toggle for PUBG </ToggleButton>
 				</div>
+				</Iform>
 				<div class="form-buttons">
 					<Button id="get-details-button" eventgroup="form-events">Get Result Me</Button>
 				</div>
-				</container>
 			</Iform>
 		</div>
 		<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>

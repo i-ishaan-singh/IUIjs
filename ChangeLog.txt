@@ -14,6 +14,8 @@
 * FIX - Popup Closes on scroll
 * FIX - Dropdown Max Height issue
 * FIX - deep extend on class initialize
+* Added IUI.setDOMAccessibility() API
+* Models can be bound to any IUI Component
 
 ---------Version 1.0.0
 * Created IUI.Class and it's functionalities

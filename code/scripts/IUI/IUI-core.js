@@ -258,13 +258,49 @@
 		
 		return IUIClass;
 	}
-
+	
+	IUIClass.prototype._optionModelMapping= [];
+	
+	IUIClass.prototype._observedOptions=['enable','isattached'];
+	
+	IUIClass.prototype.bindModels=function(){
+		this.__processOptionMapping();
+		this.optionsModel=new IUI.OptionsModel(this.options,this._handleOptionChange.bind(this),this._observedOptions);
+		if(this.options.model){
+				IUI.ObservableModel.bindModels(this.optionsModel,this.options.model,this._optionModelMapping);
+		}
+	}
+	
+	IUIClass.prototype.__processOptionMapping=function(){
+		var _mappings=IUI.behaviors.getObservableMapping(this.options),
+			length=_mappings.length;
+		if(length){
+			for(var i=0;i<length;++i){
+				this._optionModelMapping.push(_mappings[i]);
+				if(this._observedOptions.indexOf(_mappings[i].optionAttribute)===-1){
+					this._observedOptions.push(_mappings[i].optionAttribute);
+				}
+			}
+		}
+	}
+	
+	
+	IUIClass.prototype._handleOptionChange= function(key, value){
+		(this['_handle'+key+'Change']) && (this['_handle'+key+'Change'](value));
+	}
+	
+	
 	IUI.Class=IUIClass;
 	
 	IUI.getUID=function(){
 		return 'uid_'+_uid++;
 	}
 	/**************************************************/
+	IUI.domAccessibility=true;
+	
+	IUI.setDOMAccessibility=function(value){
+		IUI.domAccessibility=value;		
+	}
 	
 	IUI.deepExtend=_extendObject;
 	

@@ -43,13 +43,22 @@ define(['IUI-core',
 		if(model && model.classType!=="ObservableModel"){
 			model=new IUI.ContainerModel(model);			
 		}
-		(elem) || (elem='body')
-		var uiContainer= new IUI.ContainerUI({
-			element: elem,
+		(elem) || (elem='body');
+		var element=$(elem)[0];
+		var options=Array.prototype.slice.call(element.attributes).reduce(_extractAttribute,{
+			element: element,
 			model: model
-		});		
+		})
+		
+		var uiContainer= new IUI.ContainerUI(options);
+	
 		uiContainer.makeUI();
 		return uiContainer;
+	}
+	
+	var _extractAttribute=function(object,attribute){
+		object[attribute.name]=attribute.value;
+		return object;
 	}
 	
 	IUI.makeUIAsync=function makeUI(elem,model){
@@ -60,13 +69,15 @@ define(['IUI-core',
 		if(model && model.classType!=="ObservableModel"){
 			model=new IUI.ContainerModel(model);			
 		}
-		(elem) || (elem='body')
-		
-		var uiContainer= new IUI.ContainerUI({
-			element: elem,
+		(elem) || (elem='body');
+		var element=$(elem)[0];
+		var options=Array.prototype.slice.call(element.attributes).reduce(_extractAttribute,{
+			element: element,
 			model: model,
 			async: true
-		});		
+		})
+		
+		var uiContainer= new IUI.ContainerUI(options);		
 		uiContainer.makeUI();
 		return uiContainer;
 	}

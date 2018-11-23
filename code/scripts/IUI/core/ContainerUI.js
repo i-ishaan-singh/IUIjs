@@ -1,6 +1,7 @@
 define(['IUI-core','Widget'],function(IUI){
 
-
+	
+	
 	var _isWidgets=function(elem){
 		return typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined";
 	};
@@ -42,9 +43,17 @@ define(['IUI-core','Widget'],function(IUI){
 				this.$element=$(this.element);
 				this.$element.append(_elem);
 			}
+			this.bindModels()
 		},
 		_onCreateWidget: function(widget){
 			//Override this API to process the newly created Widgets/Containers;
+		},
+		_handleisattachedChange: function(value){
+			if(value){
+				this.attach();
+			}else{
+				this.detach();
+			}
 		},
 		detach:function(){
 			(this._detachedSpan) || (this._detachedSpan=$('<span>'));
@@ -126,9 +135,11 @@ define(['IUI-core','Widget'],function(IUI){
 		},
 		makeUI: function(){
 			var tagName=this.element.tagName;
-				this._create(this.element.children);
-				this.$element.addClass(this.classList);
+			this._create(this.element.children);
+			this.$element.addClass(this.classList);				
+			if(IUI.domAccessibility){
 				this.element.uiContainer=this;
+			}
 		},
 		_findAndMakeWidgets:function(){
 			this.widgets=[];

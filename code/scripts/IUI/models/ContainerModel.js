@@ -1,6 +1,7 @@
 define(['IUI-core','ObservableModel','Template'],function(IUI){
 
 	var ContainerModel=IUI.ObservableModel.extend({
+		ModelType: 'ContainerModel',
 		_handleChange: function(key,value,sender){
 			IUI.ObservableModel.prototype._handleChange.apply(this,arguments);
 			var boundModels=this.boundModels,length;
