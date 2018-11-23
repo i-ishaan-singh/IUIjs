@@ -13,6 +13,8 @@
 	
 	var IUI={};
 	
+	var _uid=1;
+	
 	IUI.Event=function IUIEvent(name){
 		
 		this.type=name;
@@ -142,6 +144,8 @@
 			if(typeof attribute === "object" && attribute!=="options"){
 				if(Array.isArray(attribute)){
 					this[attr]=Array.prototype.slice.call(attribute);
+				}else{
+					this[attr]=_extendObject(this[attr]);
 				}
 			}
 		}
@@ -257,7 +261,14 @@
 
 	IUI.Class=IUIClass;
 	
-	IUI._observableRegex=/^::\S+::$/g;
+	IUI.getUID=function(){
+		return 'uid_'+_uid++;
+	}
+	/**************************************************/
+	
+	IUI.deepExtend=_extendObject;
+	
+	IUI._observableRegex=/::.+::/g;
 	
 	return IUI;
 });
