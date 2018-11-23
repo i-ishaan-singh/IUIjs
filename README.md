@@ -116,16 +116,37 @@ Handler to Events can be provided as attribute to Widget with same name as the e
 
 #### Binding Widgets with Observables:
 
-Widgets can be bound with Observable Models using IUI Template. An IUI Template is enclosed in double colons (**::**) and can be a variable name or an executable statement which evaluates to a value. The template will be evaluated using the model given to IUI.makeUI() API. If model attribute is directly given as mapping, two way binding takes place. All the variables provided in template should exist in the given model.
+IUI Components can be bound with Observable Models using IUI Template. An IUI Template is enclosed in double colons (**::**) and can be a variable name or an executable statement which evaluates to a value. The template will be evaluated using the model given to IUI.makeUI() API. If model attribute is directly given as mapping, two way binding takes place. All the variables provided in template should exist in the given model. 
 
-##### EXAMPLE TEMPLATE BINDING:
+Any change in the given model will directly change the options of the IUI Components which can be handled by implement the **_handler*(option name)*Change()** API. Basic change handlers are implemented by the Widgets and Containers.
+
+##### HTML:
 ```HTML
   ...
-	<Widget value="::modelAttriute::"></Widget>
-	<Widget value="::(modelAttriute?'Value1':'Value2')::"></Widget>
+	<FormLabel text="::nameNLS::"></FormLabel>
+	<FormLabel text="::ageNLS::"></FormLabel>
   ...
 ```
 
+##### JAVASCRIPT:
+```javascript
+  ...
+	var nlsObject={
+		nameNLS: 'name',
+		ageNLS: 'age'
+	}
+	IUI.makeUI(nlsObject);
+  ...
+```
+
+
+##### OUTPUT HTML:
+```HTML
+  ...
+	<div class="i-ui-widget i-ui-formlabel">Name</div>
+	<div class="i-ui-widget i-ui-formlabel">Age</div>
+  ...
+```
 
 #### Types Of Widgets:
 * **FormLabel**
@@ -598,3 +619,6 @@ The **validate( {*Validator*} )** API of the widget validates the rules assigned
   }
 ```
 
+## Extending IUI Classes and Components
+
+//TO DO
