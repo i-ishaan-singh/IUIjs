@@ -1,11 +1,14 @@
 define(['IUI-core','Template'],function(IUI){
 
+	var validator= function(){
+		return {valid:true};
+	}
 	var ObservableModel=IUI.Class.extend({
 		classType: 'ObservableModel',
-		initialize: function(options,handler,list){
+		initialize: function(model,handler,list,options){
 			this._uid=IUI.getUID();
 			//IUI.Class.prototype.initialize.call(this,options);
-			
+			options=((options) || ({}));
 			if(typeof handler === "object"){
 				list=handler;
 				delete handler;
@@ -13,10 +16,15 @@ define(['IUI-core','Template'],function(IUI){
 			
 			var _data={},
 				_handleChange=this._handleChange.bind(this);
+			if((options.shouldValidate===false || !options.validator)){
+				validator = validator;
+			}
 			this._data=_data;
 			this.handler=handler;
-			this.model=options || {};
-			for(var key in options){
+			
+			
+			this.model=model || {};
+			for(var key in model){
 				if(list && (list.indexOf(key)===-1)){
 					continue;
 				}
@@ -29,7 +37,8 @@ define(['IUI-core','Template'],function(IUI){
 				Object.defineProperty(this.model,key,{	
 					set: (function(key){
 						return function(value){
-							if(_data[key]!==value){
+							var valid=validator(value);
+							if(_data[key]!==value && valid.valid){
 								_data[key]=value;
 								_handleChange(key,value);
 							}
@@ -42,8 +51,8 @@ define(['IUI-core','Template'],function(IUI){
 					})(key)
 				});
 			}
-		}
-		,
+		},
+		
 		_handleChange: function(key,value,sender){
 			(this.handler) && (this.handler(key,value,sender));
 		}

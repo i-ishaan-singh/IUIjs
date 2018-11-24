@@ -3,6 +3,7 @@ define(['IUI-core','ObservableModel','Template'],function(IUI){
 	var OptionsModel=IUI.ObservableModel.extend({
 		ModelType: 'OptionsModel',
 		_handleChange: function(key,value,sender){
+			//console.log('in Options Model'+ this._uid);
 			IUI.ObservableModel.prototype._handleChange.apply(this,arguments);
 			var boundModels=this.boundModels[key],length;
 			if(boundModels){

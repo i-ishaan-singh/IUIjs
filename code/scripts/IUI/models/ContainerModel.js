@@ -3,6 +3,7 @@ define(['IUI-core','ObservableModel','Template'],function(IUI){
 	var ContainerModel=IUI.ObservableModel.extend({
 		ModelType: 'ContainerModel',
 		_handleChange: function(key,value,sender){
+			//console.log('in Container Model'+ this._uid);
 			IUI.ObservableModel.prototype._handleChange.apply(this,arguments);
 			var boundModels=this.boundModels,length;
 			if(boundModels.length){

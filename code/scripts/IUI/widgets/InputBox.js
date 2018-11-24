@@ -14,8 +14,14 @@ define(['IUI-core','Widget'],function(IUI){
 			this.value(value);
 		},
 		load: function(options){
+			IUI.Widget.prototype.load.apply(this,arguments);
 			(options.validateoninput) && (options.validateoninput=JSON.parse(options.validateoninput));
 			(options.validateonblur) && (options.validateonblur=JSON.parse(options.validateonblur));
+			if(typeof options.validateoninput === "undefined"){
+				this.boundModelOptions.shouldValidate=this.options.validateoninput;
+			}else{
+				this.boundModelOptions.shouldValidate=options.validateoninput;
+			}
 		},
 		onInitialize: function(){		
 			this._attachEvents();
@@ -37,20 +43,10 @@ define(['IUI-core','Widget'],function(IUI){
 						that.options.value=e.target.value;
 					}
 				});
-				$(this.input).on('change',function(e){
-					if(that.options.validateonblur && !that._validate(e.target.value).valid){
-						e.target.value=that.options.value;
-						e.stopImmediatePropagation();
-						e.preventDefault();
-						return false;
-					}else{
-						that.options.value=e.target.value;
-					}
-				});
 			$(this.input).on('change',IUI.behaviors.delegateDOMEvent.bind(this));
 		},
 		value: function(val){
-			if(typeof val !== 'undefined' && this._validate(val).valid){
+			if(typeof val !== 'undefined'){	// && this._validate(val).valid
 				this.options.value=val;
 				return this.input.val(val);
 			}

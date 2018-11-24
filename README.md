@@ -120,6 +120,8 @@ IUI Components can be bound with Observable Models using IUI Template. An IUI Te
 
 Any change in the given model will directly change the options of the IUI Components which can be handled by implement the **_handler*(option name)*Change()** API. Basic change handlers are implemented by the Widgets and Containers.
 
+Styles passed as attributes to the IUI custom Tags can aso be bound to the Widget.
+
 ##### HTML:
 ```HTML
   ...

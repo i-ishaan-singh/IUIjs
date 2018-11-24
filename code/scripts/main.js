@@ -53,18 +53,27 @@ require(['IUI'],function(IUI){
 		console.time('UI creation');
 		window.obj={
 			firstName:'Ishaan',
-			lastName:'Singh'
+			lastName:'Singh',
+			mycolor: 'red'
 		};
+		new IUI.EventGroup({
+			name :"form-events",
+			click: function(e){
+				alert(JSON.stringify(form.value()));
+			}
+		});
+		//IUI.setDOMAccessibility(false);
 		var containerUI=IUI.makeUI(window.obj);
 		console.timeEnd('UI creation');
 		console.log(containerUI);
 		var form=containerUI.containers['ui-form'];
 		
 		new IUI.EventGroup({
-			name :"form-events",
-			click: function(e){
-				alert(JSON.stringify(form.value()));
-			}
+			name :"change-validation-events",
+			change: function(e){
+				this.validate();
+			},
+			persist: true
 		});
 		
 		foodDataMart.fetch();

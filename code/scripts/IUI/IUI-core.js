@@ -59,7 +59,10 @@
 	EventGroup.bindEvent=function(eventGroup){
 		var name=eventGroup.name;
 		if(EventGroup._classBindings[name]){
-			EventGroup._classBindings[name](eventGroup.events);
+			var _bindings=EventGroup._classBindings[name];
+			for(var a in _bindings){
+				_bindings[a](eventGroup.events);
+			}
 			if(eventGroup.persist){
 				EventGroup._eventBindings[name]=eventGroup;
 			}
@@ -76,7 +79,11 @@
 				delete EventGroup._eventBindings[name];
 			}
 		}else{
-			EventGroup._classBindings[name]=iuiClass._bind.bind(iuiClass);		
+			if(EventGroup._classBindings[name]){
+				EventGroup._classBindings[name].push(iuiClass._bind.bind(iuiClass));		
+			}else{
+				EventGroup._classBindings[name]=[iuiClass._bind.bind(iuiClass)];
+			}
 		}
 	}
 	
@@ -263,9 +270,9 @@
 	
 	IUIClass.prototype._observedOptions=['enable','isattached'];
 	
-	IUIClass.prototype.bindModels=function(){
+	IUIClass.prototype.bindModels=function(boundOptions){
 		this.__processOptionMapping();
-		this.optionsModel=new IUI.OptionsModel(this.options,this._handleOptionChange.bind(this),this._observedOptions);
+		this.optionsModel=new IUI.OptionsModel(this.options,this._handleOptionChange.bind(this),this._observedOptions,boundOptions);
 		if(this.options.model){
 				IUI.ObservableModel.bindModels(this.optionsModel,this.options.model,this._optionModelMapping);
 		}
@@ -286,7 +293,9 @@
 	
 	
 	IUIClass.prototype._handleOptionChange= function(key, value){
-		(this['_handle'+key+'Change']) && (this['_handle'+key+'Change'](value));
+		if(this['_handle'+key+'Change']){
+			this['_handle'+key+'Change'](value);
+		}
 	}
 	
 	

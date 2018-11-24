@@ -16,6 +16,10 @@
 * FIX - deep extend on class initialize
 * Added IUI.setDOMAccessibility() API
 * Models can be bound to any IUI Component
+* Added - Styles can now be bound with IUI Templates
+* Validations are now Handled by ObservableModel
+* Validate API will not cause red border to disappear automatically untill typed or API called
+* FIX - EventsGroup not binding to multiple Widgets
 
 ---------Version 1.0.0
 * Created IUI.Class and it's functionalities

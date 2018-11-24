@@ -30,11 +30,11 @@
 				<Iform formattribute="name"  >
 					<div class="form-item">
 						<FormLabel text="First Name"></FormLabel>
-						<InputBox id="name-input"  validateoninput="false" formattribute="firstName" value="::firstName::"></InputBox>
+						<InputBox id="name-input"  validations="noScript" validateOnInput="false" eventGroup="change-validation-events"  form-attribute="firstName" value="::firstName::"></InputBox>
 					</div>
 					<div class="form-item">
-						<FormLabel text="Last Name"></FormLabel>
-						<InputBox id="name-input"  validations="noScript,noI" formattribute="lastName" value="::lastName::"></InputBox>
+						<FormLabel text="Last Name" color="::mycolor::"></FormLabel>
+						<InputBox id="last-name-input"  validations="noScript" formattribute="lastName" value="::lastName::"></InputBox>
 					</div>
 				</Iform>
 				<div class="form-item">
@@ -42,7 +42,7 @@
 				</div>
 				<div class="form-item">
 					<FormLabel text="Email Id "></FormLabel>
-					<InputBox id="email-input" validations="email" validateOnInput="false" formattribute="email"></InputBox>
+					<InputBox id="email-input" validations="email" validateOnInput="false" eventGroup="change-validation-events" formattribute="email"></InputBox>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Age"></FormLabel>

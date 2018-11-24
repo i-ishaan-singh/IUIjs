@@ -5,7 +5,7 @@ define(['IUI-core','InputBox'],function(IUI){
 			
 			name:'DropDown',
 			
-			template: '<input class="i-ui-input"></input><div class="i-ui-dropbutton-container"><div class="i-ui-dropbutton"><i class="i-ui-widget-icon fa fa-caret-down" aria-hidden="true"></i></div></div>',
+			template: '<input tabindex="-1" class="i-ui-input"></input><div class="i-ui-dropbutton-container"><div class="i-ui-dropbutton"><i class="i-ui-widget-icon fa fa-caret-down" aria-hidden="true"></i></div></div>',
 			
 			classList: IUI.Widget.prototype.classList.concat(['i-ui-dropdown']),
 			initialize: function(options){

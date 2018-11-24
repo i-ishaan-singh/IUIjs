@@ -16,6 +16,9 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 			if(typeof options.validations === "string"){
 				options.validations=options.validations.split(',').map(function(elem){return elem.trim()})
 			}
+			this.boundModelOptions={
+				validator: this._validate.bind(this)
+			}
 		},
 		initialize: function(options){
 			IUI.Class.prototype.initialize.apply(this,arguments);	
@@ -26,8 +29,16 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 			if(this.options.datamart){
 				IUI.DataMart.bindWidget(this.options.datamart,this);
 			}
-			this.bindModels();
+			this.bindModels(this.boundModelOptions);
 			this.onInitialize();	
+		},
+		_handleOptionChange:function(key,value){
+			if(key in this.element.style){
+				this.element.style[key]=value;
+			}else{
+				IUI.Class.prototype._handleOptionChange.apply(this,arguments);
+			}
+			
 		},
 		_handleenableChange: function(value){
 			this.enable(value);
@@ -85,11 +96,8 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 				$(wrapper).addClass('i-ui-disabled');
 			}
 			if(this.options.validations){
-				this.validationList.concat(this.options.validations);			
-			}
-			this.__processOptionMapping();
-			
-			
+				this.validationList=this.validationList.concat(this.options.validations);			
+			}			
 		},
 		onTemplateAttach:function(wrapper){
 			//Override it to extract children to variables or to process children of templare before processing options or element;
@@ -120,14 +128,19 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 		_onValidate: function(result){
 			var that=this;
 			if(!result.valid){
+				clearTimeout(this.invalidTimeout);
 				this.$element.addClass('i-ui-invalid');
-				setTimeout(function(){
+				this.invalidTimeout=setTimeout(function(){
 					that.$element.removeClass('i-ui-invalid');
 				},200);
+			}else{
+				this.$element.removeClass('i-ui-invalid');
 			}
 		},
 		validate: function(validator){
-			return this._validate(this.value(),validator);
+			var validObject=this._validate(this.value(),validator);
+			clearTimeout(this.invalidTimeout);
+			return validObject;
 		},
 		_validate: function(value,validator){
 			var valid=true,
