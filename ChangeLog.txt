@@ -22,7 +22,11 @@
 * FIX - EventsGroup not binding to multiple Widgets
 * Fixed- NumericInput reset on validation 
 * Dropdown value is displayed using div rather than input
-* Containers are now turned into divs.
+* ADDED - Containers are now turned into divs
+* ADDED iiAttributes:
+	- the non removed tags, ii-attibutes can be allplied to Widgets and Containers
+	- iiTags can be bound to ObservableModels using IUI Template
+* FIX - JSON returned in Form doesnot contain radio form attribute if nothins is selected
 
 ---------Version 1.0.0
 * Created IUI.Class and it's functionalities

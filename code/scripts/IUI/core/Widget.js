@@ -35,6 +35,8 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 		_handleOptionChange:function(key,value){
 			if(key in this.element.style){
 				this.element.style[key]=value;
+			}else if(key.match(IUI.iiTagRegex)){
+				this.$element.attr(key,value);
 			}else{
 				IUI.Class.prototype._handleOptionChange.apply(this,arguments);
 			}
@@ -84,7 +86,7 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 			(this._detachedSpan && this._detachedSpan.parent().length) && (this._detachedSpan.replaceWith(this.$element));
 		},
 		_processOptions: function(wrapper){
-			IUI.behaviors.extractStyleFromObject(wrapper,this.options);			
+			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
 			if(this.options.class){
 				$(wrapper).addClass(this.options.class.split(' '));	
 			}

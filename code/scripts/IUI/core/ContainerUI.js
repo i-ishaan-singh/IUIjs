@@ -48,6 +48,15 @@ define(['IUI-core','Widget'],function(IUI){
 		_onCreateWidget: function(widget){
 			//Override this API to process the newly created Widgets/Containers;
 		},
+		_handleOptionChange:function(key,value){
+			if(key in this.element.style){
+				this.element.style[key]=value;
+			}else if(key.match(IUI.iiTagRegex)){
+				this.$element.attr(key,value);
+			}else{
+				IUI.Class.prototype._handleOptionChange.apply(this,arguments);
+			}			
+		},
 		_handleisattachedChange: function(value){
 			if(value){
 				this.attach();
@@ -134,7 +143,7 @@ define(['IUI-core','Widget'],function(IUI){
 			this._itterateCommandToAllComponents('enable',val);
 		},
 		_processOptions: function(wrapper){
-			IUI.behaviors.extractStyleFromObject(wrapper,this.options);			
+			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
 			if(this.options.class){
 				$(wrapper).addClass(this.options.class.split(' '));	
 			}
@@ -148,17 +157,18 @@ define(['IUI-core','Widget'],function(IUI){
 			if(this.options.validations){
 				this.validationList=this.validationList.concat(this.options.validations);			
 			}			
+			
 		},
 		makeUI: function(){
 			var tagName=this.element.tagName;
-			/*if(tagName!=='BODY' && tagName!=='DIV'){
+			if(tagName!=='BODY' && tagName!=='DIV'){
 				var elem=document.createElement('div');
 				$($(this.element).children()).appendTo(elem);
 				$(this.element).replaceWith($(elem));
 				this.element=elem;
 				this.$element=$(elem);
-			}*/
-			//this._processOptions(this.element);
+			}
+			this._processOptions(this.element);
 			this._create(this.element.children);
 			this.$element.addClass(this.classList);				
 			if(IUI.domAccessibility){

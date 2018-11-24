@@ -26,11 +26,11 @@
 		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form" ></FormLabel>
 		
 		<div class="form-container">
-			<Iform id="ui-form">
+			<Iform id="ui-form" ii-ishaan="::firstName::">
 				<Iform formattribute="name"  >
 					<div class="form-item">
 						<FormLabel text="First Name"></FormLabel>
-						<InputBox id="name-input"  validations="noScript" validateOnInput="false" eventGroup="change-validation-events"  form-attribute="firstName" value="::firstName::"></InputBox>
+						<InputBox id="name-input"  ii-class="::mycolor::" validations="noScript" validateOnInput="false" eventGroup="change-validation-events"  form-attribute="firstName" value="::firstName::"></InputBox>
 					</div>
 					<div class="form-item">
 						<FormLabel text="Last Name" color="::mycolor::"></FormLabel>

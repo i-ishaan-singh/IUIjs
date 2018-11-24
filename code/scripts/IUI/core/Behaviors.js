@@ -12,12 +12,34 @@ define(['IUI-core','Template'],function(IUI){
 	}
 	
 	behaviors.extractStyleFromObject=function(element,object){
-		//object.style={}
 		for(var attr in object){
 			if(attr in element.style){					//Need to make efficient
 				element.style[attr]=object[attr];
-				//object.style[attr]=object[attr];
-				//delete object[attr];
+			}
+		}	
+	}
+	
+	var extractionMap={
+		
+		style: function(element,attr,value){
+			if(attr in element.style){					//Need to make efficient
+					element.style[attr]=value;
+			}
+		},
+		'ii-attibute': function(element,attr,value){
+			if(attr.match(IUI.iiTagRegex)){
+				$(element).attr(attr,value);
+			}
+		}
+		
+		
+	}
+	
+	
+	behaviors.extractFromObject=function(element,object,list){
+		for(var attr in object){
+			for(var item in list){
+				extractionMap[list[item]](element,attr,object[attr]);
 			}
 		}	
 	}

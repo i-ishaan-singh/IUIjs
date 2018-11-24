@@ -41,6 +41,8 @@ define(['IUI-core','Container'],function(IUI){
 				selectedRadio=this.element.querySelector(':checked');
 				if(selectedRadio){
 					return selectedRadio.value;
+				}else{
+					return null;
 				}
 			}
 		}
