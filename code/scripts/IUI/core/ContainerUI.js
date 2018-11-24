@@ -133,8 +133,32 @@ define(['IUI-core','Widget'],function(IUI){
 		enable: function(val){
 			this._itterateCommandToAllComponents('enable',val);
 		},
+		_processOptions: function(wrapper){
+			IUI.behaviors.extractStyleFromObject(wrapper,this.options);			
+			if(this.options.class){
+				$(wrapper).addClass(this.options.class.split(' '));	
+			}
+			if(this.options.id){
+				wrapper.id=this.options.id;
+			}
+			if(this.options.disabled && this.options.disabled !== 'false'){
+				this.options.enable=false;
+				$(wrapper).addClass('i-ui-disabled');
+			}
+			if(this.options.validations){
+				this.validationList=this.validationList.concat(this.options.validations);			
+			}			
+		},
 		makeUI: function(){
 			var tagName=this.element.tagName;
+			/*if(tagName!=='BODY' && tagName!=='DIV'){
+				var elem=document.createElement('div');
+				$($(this.element).children()).appendTo(elem);
+				$(this.element).replaceWith($(elem));
+				this.element=elem;
+				this.$element=$(elem);
+			}*/
+			//this._processOptions(this.element);
 			this._create(this.element.children);
 			this.$element.addClass(this.classList);				
 			if(IUI.domAccessibility){

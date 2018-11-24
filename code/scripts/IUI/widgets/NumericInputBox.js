@@ -57,7 +57,7 @@ define(['IUI-core','InputBox'],function(IUI){
 				if(this._interval){
 					clearInterval(this._interval);
 					this.trigger('change',{value:Number(this.input.val())});
-					this._value=this.input.val();
+					this.options.value=this.input.val();
 					this.$element.removeClass('i-ui-active');
 					delete this._interval;
 				}				

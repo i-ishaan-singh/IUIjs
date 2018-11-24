@@ -12,9 +12,12 @@ define(['IUI-core','Template'],function(IUI){
 	}
 	
 	behaviors.extractStyleFromObject=function(element,object){
+		//object.style={}
 		for(var attr in object){
 			if(attr in element.style){					//Need to make efficient
 				element.style[attr]=object[attr];
+				//object.style[attr]=object[attr];
+				//delete object[attr];
 			}
 		}	
 	}

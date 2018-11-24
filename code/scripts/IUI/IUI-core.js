@@ -8,7 +8,6 @@
  * Date: 2018-01-20T17:24Z
  */
  define(function(){
-
 /* ------ IUI.js ----------------- */
 	
 	var IUI={};
@@ -226,7 +225,7 @@
 			}
 		}		
 	}
-	
+	var _extend;
 	/**
 	*
 	* This API clones the prototype of the Given Class to__proto__ of new Class, and adds new properties to the new Class .
@@ -251,7 +250,7 @@
 		},this);
 				
 		
-		IUIClass.extend=arguments.callee;		
+		IUIClass.extend=_extend;		
 				
 		for(var property in newProperties){
 			var type = typeof newProperties[property];
@@ -265,6 +264,8 @@
 		
 		return IUIClass;
 	}
+	
+	_extend=IUIClass.extend;
 	
 	IUIClass.prototype._optionModelMapping= [];
 	

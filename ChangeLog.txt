@@ -20,6 +20,9 @@
 * Validations are now Handled by ObservableModel
 * Validate API will not cause red border to disappear automatically untill typed or API called
 * FIX - EventsGroup not binding to multiple Widgets
+* Fixed- NumericInput reset on validation 
+* Dropdown value is displayed using div rather than input
+* Containers are now turned into divs.
 
 ---------Version 1.0.0
 * Created IUI.Class and it's functionalities
