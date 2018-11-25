@@ -32,10 +32,10 @@ define(['IUI-core','Template'],function(IUI){
 			}
 		},
 		'subconatiner-attribute': function(element,attr,value,object){
+			(object.subcontainerOptions) || (object.subcontainerOptions={});
 			if(attr.match(IUI.subcontainerRegex)){
-				(object.subcontainerOptions) || (object.subcontainerOptions={});
 				object.subcontainerOptions[attr.slice(13)]=value;
-				delete object[attr];
+				//delete object[attr];
 			}
 		},
 		

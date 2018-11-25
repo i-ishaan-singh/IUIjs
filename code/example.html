@@ -29,7 +29,7 @@
 		<FormLabel isattached="::(firstName.trim() || lastName.trim())::" id="user-name" position="absolute" right="2rem" font-size="1rem"     bottom="0.5rem"  vertical-align="baseline" line-height="1rem" text=" Hi ::(firstName+' '+lastName)::" ></FormLabel>
 		</Navbar>
 		<Exhibit class="form-container">
-			<sidebar  id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
+			<sidebar subcontainer-background="::formColor::" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
 			<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Theme" ></FormLabel>
 			<RadioGroup group="s-radio" padding-top="1rem" width="100%" value="::theme::" formattribute="promotional" >
 						<radio value="darkgrey lightgrey" height="4rem" text="darkgrey <br> lightgrey"></radio>
@@ -38,7 +38,7 @@
 			</sidebar>
 			<Exhibit>
 			<Iform id="ui-form" padding-top="1rem" ii-ishaan="::firstName::" class="i-ui-exhibit">
-				<Navbar  id="form-header" height="4rem">
+				<Navbar  id="form-header" height="4rem" >
 					<FormLabel font-size="3rem" line-height="4rem" text="Kindly fill your details" ></FormLabel>
 				</Navbar>
 				
@@ -84,11 +84,8 @@
 					</ComboBox>
 				</div>
 				<div class="form-item">
-					<FormLabel text="Do you want to recieve promotional Offers?"></FormLabel>
-					<RadioGroup group="promotional-radio" formattribute="promotional" >
-						<radio value="yes" text="yes"></radio>
-						<radio value="no" text="no"></radio>
-					</RadioGroup>
+					<FormLabel   width="21em" text="Do you want to recieve promotional Offers?"></FormLabel>
+					<switch formattribute="promotional" ></switch>					
 				</div>
 				<div class="form-item">
 					<ToggleButton id="anime-button" formattribute="animeLover">Toggle for Anime</ToggleButton>

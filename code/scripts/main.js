@@ -20,6 +20,7 @@ require.config({
 		'Footer':'./containers/Layout/Footer',
 		'DataMart':'./core/DataMart',
 		'InputBox':'./widgets/InputBox',
+		'Switch':'./widgets/Switch',
 		'Button':'./widgets/Button',
 		'ToggleButton':'./widgets/ToggleButton',
 		'SubmitButton':'./widgets/SubmitButton',
@@ -61,7 +62,8 @@ require(['IUI'],function(IUI){
 			firstName:'Ishaan',
 			lastName:'Singh',
 			mycolor: 'red',
-			theme: 'darkgrey lightgrey'
+			theme: 'darkgrey lightgrey',
+			formColor: 'lightblue'
 		};
 		new IUI.EventGroup({
 			name :"form-events",

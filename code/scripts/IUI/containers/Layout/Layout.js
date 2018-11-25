@@ -1,4 +1,4 @@
-define(['IUI-core','Container'],function(IUI){
+define(['IUI-core','Container','ContainerUI'],function(IUI){
 
 	var Layout=IUI.ContainerUI.extend({
 		name:'Layout',
@@ -13,8 +13,13 @@ define(['IUI-core','Container'],function(IUI){
 		makeUI: function(){
 			var tagName=this.element.tagName;
 			if(tagName!=='BODY' && tagName!=='DIV'){
-				var layout=document.createElement('div');
-				var subcontainer=document.createElement('div');
+				var layout=document.createElement('div'),
+				subcontainer=document.createElement('div');
+				IUI.behaviors.extractFromObject(subcontainer,this.options,['subconatiner-attribute']);	
+				this.options.subcontainerOptions.element=subcontainer;
+				this.options.subcontainerOptions.model=this.options.model;
+				this.subcontainer=new IUI.ContainerUI(this.options.subcontainerOptions);
+				this.subcontainer.makeUI();
 				$($(this.element).siblings()).appendTo(subcontainer);
 				$($(this.element).children()).appendTo(layout);
 				

@@ -177,3 +177,21 @@ br {
 .i-ui-sidebar,  .i-ui-sidebar-subcontainer{
     height: 100%;
 }
+.i-ui-switch {
+    height: 2em;
+    width: 4.5em;
+    border-radius: 1em;
+}
+.i-ui-switch-button {
+	transition: 0.3s;
+    height: 1.5em;
+    width: 1.5em;
+    position: absolute;
+    top: 0.2em;
+	left: 0.25em;
+    border-radius: 1em;
+    cursor: pointer;
+}
+.i-ui-switch-active .i-ui-switch-button{	
+    left: calc(100% - 1.75em);
+}

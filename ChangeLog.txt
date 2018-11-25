@@ -36,7 +36,10 @@
 	- Sidebar
 * Sidebar can be positioned with position attribute
 * ADDED Subcontainer attributes to Layouts
-* ADDED getContainerById() API to containers;
+* ADDED getContainerById() API to containers
+* properties to subcontainer can be set via subcontainer-attribute attribute in IUI Layout Cusyom Tags.
+* subcontainer-attribute Can be rendered through IUI template
+* ADDED - Switch Widget
 
 ---------Version 1.0.0
 * Created IUI.Class and it's functionalities

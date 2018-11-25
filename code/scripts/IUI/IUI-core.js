@@ -325,7 +325,7 @@
 	
 	IUI._observableRegex=/::.+::/g;
 	
-	IUI.subcontainerRegex=/subconatiner-\S+/g;
+	IUI.subcontainerRegex=/subcontainer-\S+/g;
 	
 	IUI.iiAttributeRegex=/ii-\S+/g;
 	
