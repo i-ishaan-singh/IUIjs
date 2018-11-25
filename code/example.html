@@ -10,9 +10,6 @@
 			width: 100%;
 			margin: 0;
 		}
-		.form-container {
-			padding: 1rem 2rem;
-		}
 		.form-item {
 			margin: 0.5em 0;
 		}
@@ -20,13 +17,31 @@
 			margin: 1em;
 			text-align: center;
 		}
+		#form-header-subcontainer {
+			padding: 1rem 3rem;
+		}
 		</style>
 	</head>
 	<body>	
-		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form" ></FormLabel>
-		
-		<div class="form-container">
-			<Iform id="ui-form" ii-ishaan="::firstName::">
+	<Exhibit>
+	<Navbar height="4rem" background="::theme.split(' ')[0]::" color="white">
+		<FormLabel id="form-header" font-size="3rem" line-height="4rem" text="Welcome to IUI Basic Layout" ></FormLabel>
+		<FormLabel isattached="::(firstName.trim() || lastName.trim())::" id="user-name" position="absolute" right="2rem" font-size="1rem"     bottom="0.5rem"  vertical-align="baseline" line-height="1rem" text=" Hi ::(firstName+' '+lastName)::" ></FormLabel>
+		</Navbar>
+		<Exhibit class="form-container">
+			<sidebar  id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
+			<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Theme" ></FormLabel>
+			<RadioGroup group="s-radio" padding-top="1rem" width="100%" value="::theme::" formattribute="promotional" >
+						<radio value="darkgrey lightgrey" height="4rem" text="darkgrey <br> lightgrey"></radio>
+						<radio value="#7c9a70 wheat"  height="4rem" text="green <br> wheat"></radio>
+			</RadioGroup>
+			</sidebar>
+			<Exhibit>
+			<Iform id="ui-form" padding-top="1rem" ii-ishaan="::firstName::" class="i-ui-exhibit">
+				<Navbar  id="form-header" height="4rem">
+					<FormLabel font-size="3rem" line-height="4rem" text="Kindly fill your details" ></FormLabel>
+				</Navbar>
+				
 				<Iform formattribute="name"  >
 					<div class="form-item">
 						<FormLabel text="First Name"></FormLabel>
@@ -38,12 +53,10 @@
 					</div>
 				</Iform>
 				<div class="form-item">
-					<FormLabel  isattached="::(firstName.trim() || lastName.trim())::" text="Welcome ::(firstName+' '+lastName):: "></FormLabel>
-				</div>
-				<div class="form-item">
 					<FormLabel text="Email Id "></FormLabel>
 					<InputBox id="email-input" validations="email" validateOnInput="false" eventGroup="change-validation-events" formattribute="email"></InputBox>
 				</div>
+				
 				<div class="form-item">
 					<FormLabel text="Age"></FormLabel>
 					<NumericInputBox formattribute="age" id="age-input"></NumericInputBox>
@@ -55,7 +68,7 @@
 				</div>
 				<div class="form-item">
 					<FormLabel text="Gender"></FormLabel>
-					<RadioGroup group="gender-radio" formattribute="gender" orientation="horizontal">
+					<RadioGroup group="gender-radio" formattribute="gender"  orientation="horizontal">
 						<radio value="male" text="male"></radio>
 						<radio value="female" text="female"></radio>
 					</RadioGroup>
@@ -85,8 +98,21 @@
 				<div class="form-buttons">
 					<Button id="get-details-button" eventgroup="form-events">Get Result Me</Button>
 				</div>
+
 			</Iform>
-		</div>
+				<sidebar  position="right" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
+				<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Add Banner" ></FormLabel>
+				<RadioGroup group="s-radio" padding-top="1rem" width="100%" value="::theme::" formattribute="promotional" >
+						
+				</RadioGroup>
+				</sidebar>
+			</Exhibit>
+		
+			
+		</Exhibit><Footer height="2rem">
+					<FormLabel width="100%" background="::theme.split(' ')[0]::" color="white" text-align="center" id="copyright" font-size="1rem" line-height="2rem" text="Created By Ishaan Singh" ></FormLabel>
+			</Footer>
+		</Exhibit>
 		<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
 		 <script data-main="./scripts/main" src="./scripts/require.js"></script>
 	</body>

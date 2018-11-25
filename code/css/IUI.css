@@ -17,7 +17,8 @@ html, body{
 }
 
 .i-ui-container{
-	box-sizing: border-box;
+	box-sizing: border-box; 
+	position: relative;
 }
 
 .i-ui-widget-icon{
@@ -77,7 +78,20 @@ html, body{
 .i-ui-button{
 	text-align: center;
 }
+.i-ui-radio {
+    padding-left: 2rem;
+    position: relative;
+}
+.i-ui-radio .i-ui-radio-button {
+position: absolute;
+	left: 0;
+	top: 0;
+}
+.i-ui-radio .i-ui-formlabel{
+	width: 100%;
+}
 .i-ui-radio-button {
+	
     height: 100%;
     width: 1em;
     margin: 0 0.5em;	
@@ -95,7 +109,7 @@ html, body{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-}
+
 .i-ui-vertical-radiogroup .i-ui-radio {
     width: 100%;
 }
@@ -144,4 +158,22 @@ html, body{
 /********************************************/
 br {
     line-height: 2em;
+}
+.i-ui-exhibit{
+	height: 100%;
+	width: 100%;
+}
+
+/******************************************/
+
+.i-ui-subcontainer{
+	box-sizing: border-box;
+	display: inline-block;
+}
+.i-ui-navbar, .i-ui-navbar-subcontainer,
+.i-ui-footer, .i-ui-footer-subcontainer {
+    width: 100%;
+}
+.i-ui-sidebar,  .i-ui-sidebar-subcontainer{
+    height: 100%;
 }

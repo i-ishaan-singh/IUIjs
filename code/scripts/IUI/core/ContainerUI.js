@@ -48,14 +48,26 @@ define(['IUI-core','Widget'],function(IUI){
 		_onCreateWidget: function(widget){
 			//Override this API to process the newly created Widgets/Containers;
 		},
+		getContainerById: function(id){
+			if(typeof this.containers[id] !== "undefined"){
+				return this.containers[id];
+			}
+			var length=this.containers.length;
+			for(var i=0;i<length;++i){
+				var container=this.containers[i].getContainerById(id)
+				if(container){
+					return container;
+				}
+			}
+		},
 		_handleOptionChange:function(key,value){
 			if(key in this.element.style){
 				this.element.style[key]=value;
-			}else if(key.match(IUI.iiTagRegex)){
+			}else if(key.match(IUI.iiAttributeRegex)){
 				this.$element.attr(key,value);
-			}else{
-				IUI.Class.prototype._handleOptionChange.apply(this,arguments);
-			}			
+			}
+			IUI.Class.prototype._handleOptionChange.apply(this,arguments);
+						
 		},
 		_handleisattachedChange: function(value){
 			if(value){
@@ -74,7 +86,7 @@ define(['IUI-core','Widget'],function(IUI){
 		},
 		_create: function(elements){
 			var length=elements.length;
-			for(var i=0;i<length;++i){
+			for(var i=0;i<elements.length;++i){
 				var elem=elements[i];
 				if(elem.tagName === "STOP") return;
 					if(typeof IUI.WidgetBuilder.containerList[elem.tagName] !== "undefined"){		
@@ -101,7 +113,7 @@ define(['IUI-core','Widget'],function(IUI){
 		},
 		_createAsync: function(elements){
 			var length=elements.length;
-			for(var i=0;i<length;++i){
+			for(var i=0;i<elements.length;++i){
 				var elem=elements[i];
 				if(elem.tagName === "STOP") return;
 				setTimeout((function(elem){return function(){

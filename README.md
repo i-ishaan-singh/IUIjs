@@ -377,7 +377,7 @@ If any Widget or Container has id attribute, it's named reference also gets atta
 
 #### Types Of Containers:
 * **Container**
-* **Frame**
+* **IFrame**
 * **RadioGroup**
 * **IForm**
 
@@ -430,17 +430,17 @@ containers: Array(1)
 ```
 
 
-### Frame:
+### Layout:
 
-Frame extension to Container. It just takes 100% parent Height and width and can be placed inside another div whose height is known. It is used to contain big Widgets which can span accross screens.
+Layout extension to Container. It just takes 100% parent Height and width and can be placed inside another div whose height is known. It is used to contain big Widgets which can span accross screens.
 
 
 ##### HTML:
 ```HTML
-<Frame id="interest-radio" group='interest' formAttribute="interested" >
+<Layout id="interest-radio" group='interest' formAttribute="interested" >
 	<InputBox value="initialValue"></InputBox>
 	<NumericInputBox id="favrouite-number"></NumericInputBox>
-</Frame>
+</Layout>
 ```
 
 ##### Output

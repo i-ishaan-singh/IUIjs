@@ -183,6 +183,15 @@
 	
 	}
 	
+	IUIClass.prototype.on=function on(event,handler){
+		var _events=event.split(IUI.spaceRegex), obj={};
+		
+		for(var e in _events){
+			obj[_events[e]]=handler;
+		}
+		this._bind(obj);
+	}
+	
 	/**
 	* This function takes the handler attached with the event and processes it to get the handler of the function
 	* @param {String|Function} _handler - it can be a function, statement, or a function String.
@@ -316,5 +325,10 @@
 	
 	IUI._observableRegex=/::.+::/g;
 	
+	IUI.subcontainerRegex=/subconatiner-\S+/g;
+	
+	IUI.iiAttributeRegex=/ii-\S+/g;
+	
+	IUI.spaceRegex=/(\ )+/g;
 	return IUI;
 });

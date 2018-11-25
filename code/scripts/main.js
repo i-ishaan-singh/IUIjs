@@ -14,6 +14,10 @@ require.config({
 		'ContainerUI':'./core/ContainerUI',
 		'Overlay':'./core/Overlay',
 		'Container':'./containers/Container',
+		'Layout':'./containers/Layout/Layout',
+		'Sidebar':'./containers/Layout/Sidebar',
+		'Navbar':'./containers/Layout/Navbar',
+		'Footer':'./containers/Layout/Footer',
 		'DataMart':'./core/DataMart',
 		'InputBox':'./widgets/InputBox',
 		'Button':'./widgets/Button',
@@ -24,19 +28,21 @@ require.config({
 		'NumericInputBox':'./widgets/NumericInputBox',
 		'DropDown':'./widgets/DropDown',
 		'ComboBox':'./widgets/ComboBox',
+		'Exhibit':'./containers/Exhibit',
 		'Form':'./containers/Form',
 		'RadioGroup':'./containers/RadioGroup'
 	}
 });
 console.time('ishaan');
 require(['IUI'],function(IUI){
+	
 		window.IUI=IUI;
-		var _a=[{text:'Summner'},{text:'Winter'},{text:'Autunm'},{text:'Moonsoon'}],season=[];
+		var _a=[{text:'Summner North Indian North Indian North Indian'},{text:'Winter'},{text:'Autunm'},{text:'Moonsoon'}],season=[];
 		
 		for(var i=0;i<100;++i){
 			season.push(_a[i%4]);
 		}
-		var _b=[{text:'North Indian'},{text:'South Indian'},{text:'Punjabi'},{text:'Chinese'}], food=[];
+		var _b=[{text:'North Indian North Indian'},{text:'South Indian'},{text:'Punjabi'},{text:'Chinese'}], food=[];
 		
 		for(var i=0;i<100;++i){
 			food.push(_b[i%4]);
@@ -54,7 +60,8 @@ require(['IUI'],function(IUI){
 		window.obj={
 			firstName:'Ishaan',
 			lastName:'Singh',
-			mycolor: 'red'
+			mycolor: 'red',
+			theme: 'darkgrey lightgrey'
 		};
 		new IUI.EventGroup({
 			name :"form-events",
@@ -66,7 +73,7 @@ require(['IUI'],function(IUI){
 		var containerUI=IUI.makeUI(window.obj);
 		console.timeEnd('UI creation');
 		console.log(containerUI);
-		var form=containerUI.containers['ui-form'];
+		var form=containerUI.getContainerById('ui-form');
 		
 		new IUI.EventGroup({
 			name :"change-validation-events",

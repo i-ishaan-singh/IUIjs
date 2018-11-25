@@ -27,10 +27,17 @@ define(['IUI-core','Template'],function(IUI){
 			}
 		},
 		'ii-attibute': function(element,attr,value){
-			if(attr.match(IUI.iiTagRegex)){
+			if(attr.match(IUI.iiAttributeRegex)){
 				$(element).attr(attr,value);
 			}
-		}
+		},
+		'subconatiner-attribute': function(element,attr,value,object){
+			if(attr.match(IUI.subcontainerRegex)){
+				(object.subcontainerOptions) || (object.subcontainerOptions={});
+				object.subcontainerOptions[attr.slice(13)]=value;
+				delete object[attr];
+			}
+		},
 		
 		
 	}
@@ -39,7 +46,7 @@ define(['IUI-core','Template'],function(IUI){
 	behaviors.extractFromObject=function(element,object,list){
 		for(var attr in object){
 			for(var item in list){
-				extractionMap[list[item]](element,attr,object[attr]);
+				extractionMap[list[item]](element,attr,object[attr],object);
 			}
 		}	
 	}

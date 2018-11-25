@@ -35,11 +35,11 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 		_handleOptionChange:function(key,value){
 			if(key in this.element.style){
 				this.element.style[key]=value;
-			}else if(key.match(IUI.iiTagRegex)){
+			}else if(key.match(IUI.iiAttributeRegex)){
 				this.$element.attr(key,value);
-			}else{
-				IUI.Class.prototype._handleOptionChange.apply(this,arguments);
 			}
+			IUI.Class.prototype._handleOptionChange.apply(this,arguments);
+			
 			
 		},
 		_handleenableChange: function(value){
@@ -173,9 +173,9 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 		},
 		value: function(val){
 			if(typeof val !== 'undefined'){
-				return this.element.innerText=val;
+				return this.element.innerHTML=val;
 			}
-			return this.element.innerText;
+			return this.element.innerHTML;
 		},
 		options:{
 			enable: true,
