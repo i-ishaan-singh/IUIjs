@@ -77,12 +77,18 @@ define(['IUI-core','Widget'],function(IUI){
 			}
 		},
 		detach:function(){
+			if(this.$element.parent().length){
 			(this._detachedSpan) || (this._detachedSpan=$('<span>'));
-			(this.$element.parent().length) && (this.$element.replaceWith(this._detachedSpan));
+				this.$element.after(this._detachedSpan);
+				this.$element.detach();
 			return this;
+			}
 		},
 		attach: function(){
-			(this._detachedSpan && this._detachedSpan.parent().length) && (this._detachedSpan.replaceWith(this.$element));
+			if(this._detachedSpan && this._detachedSpan.parent().length){
+				this._detachedSpan.after(this.$element);
+				this._detachedSpan.detach();
+			}
 		},
 		_create: function(elements){
 			var length=elements.length;

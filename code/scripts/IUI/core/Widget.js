@@ -78,12 +78,18 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 			},this);			
 		},
 		detach:function(){
+			if(this.$element.parent().length){
 			(this._detachedSpan) || (this._detachedSpan=$('<span>'));
-			(this.$element.parent().length) && (this.$element.replaceWith(this._detachedSpan));
-			return this;
+				this.$element.after(this._detachedSpan);
+				this.$element.detach();
+				return this;
+			}
 		},
 		attach: function(){
-			(this._detachedSpan && this._detachedSpan.parent().length) && (this._detachedSpan.replaceWith(this.$element));
+			if(this._detachedSpan && this._detachedSpan.parent().length){
+				this._detachedSpan.after(this.$element);
+				this._detachedSpan.detach();
+			}
 		},
 		_processOptions: function(wrapper){
 			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			

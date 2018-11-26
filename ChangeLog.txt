@@ -40,6 +40,7 @@
 * properties to subcontainer can be set via subcontainer-attribute attribute in IUI Layout Cusyom Tags.
 * subcontainer-attribute Can be rendered through IUI template
 * ADDED - Switch Widget
+* FIXED - Events got removed after detach/attach
 
 ---------Version 1.0.0
 * Created IUI.Class and it's functionalities
