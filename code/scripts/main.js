@@ -20,6 +20,7 @@ require.config({
 		'Footer':'./containers/Layout/Footer',
 		'DataMart':'./core/DataMart',
 		'InputBox':'./widgets/InputBox',
+		'Slider':'./widgets/Slider',
 		'Switch':'./widgets/Switch',
 		'Button':'./widgets/Button',
 		'ToggleButton':'./widgets/ToggleButton',
@@ -63,7 +64,8 @@ require(['IUI'],function(IUI){
 			lastName:'Singh',
 			mycolor: 'red',
 			theme: 'darkgrey lightgrey',
-			formColor: 'lightblue'
+			formColor: 'lightblue',
+			sliderValue: 0
 		};
 		new IUI.EventGroup({
 			name :"form-events",

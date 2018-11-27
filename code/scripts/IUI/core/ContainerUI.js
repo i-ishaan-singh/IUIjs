@@ -43,7 +43,7 @@ define(['IUI-core','Widget'],function(IUI){
 				this.$element=$(this.element);
 				this.$element.append(_elem);
 			}
-			this.bindModels()
+			
 		},
 		_onCreateWidget: function(widget){
 			//Override this API to process the newly created Widgets/Containers;
@@ -66,8 +66,7 @@ define(['IUI-core','Widget'],function(IUI){
 			}else if(key.match(IUI.iiAttributeRegex)){
 				this.$element.attr(key,value);
 			}
-			IUI.Class.prototype._handleOptionChange.apply(this,arguments);
-						
+			IUI.Class.prototype._handleOptionChange.apply(this,arguments);						
 		},
 		_handleisattachedChange: function(value){
 			if(value){
@@ -162,7 +161,7 @@ define(['IUI-core','Widget'],function(IUI){
 		},
 		_processOptions: function(wrapper){
 			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
-			if(this.options.class){
+			if(typeof this.options.class === "string"){
 				$(wrapper).addClass(this.options.class.split(' '));	
 			}
 			if(this.options.id){

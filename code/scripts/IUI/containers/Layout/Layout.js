@@ -6,6 +6,7 @@ define(['IUI-core','Container','ContainerUI'],function(IUI){
 			IUI.ContainerUI.prototype.initialize.apply(this,arguments);	
 			this._beforeRender();
 			this.makeUI();		
+			this.bindModels();
 			this._afterRender();
 		},
 		classList: IUI.uiContainers.Container.prototype.classList.concat(['i-ui-layout']),
@@ -20,6 +21,7 @@ define(['IUI-core','Container','ContainerUI'],function(IUI){
 				this.options.subcontainerOptions.model=this.options.model;
 				this.subcontainer=new IUI.ContainerUI(this.options.subcontainerOptions);
 				this.subcontainer.makeUI();
+				this.subcontainer.bindModels();
 				$($(this.element).siblings()).appendTo(subcontainer);
 				$($(this.element).children()).appendTo(layout);
 				

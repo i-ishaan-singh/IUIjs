@@ -93,7 +93,7 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 		},
 		_processOptions: function(wrapper){
 			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
-			if(this.options.class){
+			if(typeof this.options.class === "string"){
 				$(wrapper).addClass(this.options.class.split(' '));	
 			}
 			if(this.options.id){

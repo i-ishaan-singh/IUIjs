@@ -29,7 +29,7 @@
 		<FormLabel isattached="::(firstName.trim() || lastName.trim())::" id="user-name" position="absolute" right="2rem" font-size="1rem"     bottom="0.5rem"  vertical-align="baseline" line-height="1rem" text=" Hi ::(firstName+' '+lastName)::" ></FormLabel>
 		</Navbar>
 		<Exhibit class="form-container">
-			<sidebar subcontainer-background="::formColor::" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
+			<sidebar subcontainer-background="hsl(::sliderValue::, 100%, 79%)" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
 			<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Theme" ></FormLabel>
 			<RadioGroup group="s-radio" padding-top="1rem" width="100%" value="::theme::" formattribute="promotional" >
 						<radio value="darkgrey lightgrey" height="4rem" text="darkgrey <br> lightgrey"></radio>
@@ -84,6 +84,10 @@
 					</ComboBox>
 				</div>
 				<div class="form-item">
+					<FormLabel text="Form Color : "></FormLabel>
+					<Slider max="360" value="::sliderValue::"></slider>
+				</div>
+				<div class="form-item">
 					<FormLabel   width="21em" text="Do you want to recieve promotional Offers?"></FormLabel>
 					<switch formattribute="promotional" ></switch>					
 				</div>
@@ -95,7 +99,6 @@
 				<div class="form-buttons">
 					<Button id="get-details-button" eventgroup="form-events">Get Result Me</Button>
 				</div>
-
 			</Iform>
 				<sidebar  position="right" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
 				<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Add Banner" ></FormLabel>

@@ -117,7 +117,7 @@ position: absolute;
     width: unset;
 }
 
-.i-ui-noselect{
+.i-ui-noselect, .i-ui-switch-button, .i-ui-slider-button{
 	-webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -182,16 +182,40 @@ br {
     width: 4.5em;
     border-radius: 1em;
 }
-.i-ui-switch-button {
-	transition: 0.3s;
+.i-ui-switch-button, .i-ui-slider-button {
+	
     height: 1.5em;
     width: 1.5em;
     position: absolute;
-    top: 0.2em;
-	left: 0.25em;
     border-radius: 1em;
     cursor: pointer;
 }
+.i-ui-switch-button{
+	transition: 0.3s;
+}
+.i-ui-switch-button{
+	top: 0.2em;
+	left: 0.25em;
+}
 .i-ui-switch-active .i-ui-switch-button{	
     left: calc(100% - 1.75em);
+}
+/******************************************/
+
+.i-ui-widget.i-ui-slider {
+    padding: 0.75em;
+    width: 13em;
+    height: 2em;
+    border-color: transparent;
+    box-sizing: border-box;
+}
+.i-ui-slider-bar {
+    height: 0.5em;
+    background-color: white;
+    width: 100%;
+    border-radius: 0.5em;
+    box-sizing: border-box;
+}
+.i-ui-slider-button {
+    top: 0.25em;
 }

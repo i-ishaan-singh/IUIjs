@@ -4,6 +4,7 @@ define(['IUI-core','ContainerUI'],function(IUI){
 		name:'Container',
 		initialize: function(){
 			IUI.ContainerUI.prototype.initialize.apply(this,arguments);	
+			this.bindModels();
 			this._beforeRender();
 			this.makeUI();		
 			this._afterRender();
