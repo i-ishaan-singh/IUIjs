@@ -43,6 +43,7 @@
 * ADDED - Slider Widget.
 * FIXED - Events got removed after detach/attach
 * FIXED - IUI Templates not binding to subcontainer-attributes
+* ADDED - Added - Layouts.html (example)
 
 ---------Version 1.0.0
 * Created IUI.Class and it's functionalities
