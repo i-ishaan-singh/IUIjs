@@ -1,4 +1,11 @@
-define(['IUI-core','Container'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','Container'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var RadioGroup=IUI.uiContainers.Container.extend({
 		name:'RadioGroup',
@@ -6,6 +13,11 @@ define(['IUI-core','Container'],function(IUI){
 		options:{
 			group: 'group',
 			orientation: 'vertical'
+		},
+		events:['change'],
+		_handlevalueChange:function(value){
+			if(this.value()!==value)
+				this.value(value);
 		},
 		_beforeRender:function(){
 			var radios=this.element.querySelectorAll('Radio');
@@ -21,9 +33,10 @@ define(['IUI-core','Container'],function(IUI){
 			}
 		},
 		_afterRender: function(){
-			this.element.removeAttribute('group');
-			this.element.removeAttribute('orientation');
-			this.element.removeAttribute('formAttribute');
+			if(this.options.value){
+				this.value(this.options.value);
+			}
+			this._attachEvents();
 		},
 		_onCreate: function(widget){
 			if(widget.options.formattribute && typeof widget.value === "function" ){
@@ -36,13 +49,23 @@ define(['IUI-core','Container'],function(IUI){
 				selectedRadio=this.element.querySelector('input[value="'+val+'"]');
 				if(selectedRadio){
 					selectedRadio.checked=true;
+					this.options.value=val;
 				}
 			}else{
 				selectedRadio=this.element.querySelector(':checked');
 				if(selectedRadio){
 					return selectedRadio.value;
+				}else{
+					return null;
 				}
 			}
+		},
+		_attachEvents: function(){
+			var that=this;
+			this.$element.on('change','input',function(e){
+				that.options.value=e.target.value;
+				IUI.behaviors.delegateDOMEvent.call(that,e);
+			});
 		}
 	});
 	

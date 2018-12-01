@@ -13,12 +13,15 @@ html, body{
 }
 .i-ui-widget *{
 	font-size: 1em;
-}
-.i-ui-container{
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.i-ui-widget-icon, .i-ui-dropdown .i-ui-input{
+.i-ui-container{
+	box-sizing: border-box; 
+	position: relative;
+}
+
+.i-ui-widget-icon{
 	pointer-events: none;
 }
 .i-ui-vertical-radiogroup {
@@ -75,7 +78,20 @@ html, body{
 .i-ui-button{
 	text-align: center;
 }
+.i-ui-radio {
+    padding-left: 2rem;
+    position: relative;
+}
+.i-ui-radio .i-ui-radio-button {
+position: absolute;
+	left: 0;
+	top: 0;
+}
+.i-ui-radio .i-ui-formlabel{
+	width: 100%;
+}
 .i-ui-radio-button {
+	
     height: 100%;
     width: 1em;
     margin: 0 0.5em;	
@@ -85,6 +101,15 @@ html, body{
     line-height: 2em;
     box-sizing: border-box;
 }
+.i-ui-dropdown .i-ui-display {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .i-ui-vertical-radiogroup .i-ui-radio {
     width: 100%;
 }
@@ -92,7 +117,7 @@ html, body{
     width: unset;
 }
 
-.i-ui-noselect{
+.i-ui-noselect, .i-ui-switch-button, .i-ui-slider-button{
 	-webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -126,8 +151,71 @@ html, body{
     height: 2em;
     line-height: 1.45em;
     padding: 0.25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 /********************************************/
 br {
     line-height: 2em;
+}
+.i-ui-exhibit{
+	height: 100%;
+	width: 100%;
+}
+
+/******************************************/
+
+.i-ui-subcontainer{
+	box-sizing: border-box;
+	display: inline-block;
+}
+.i-ui-navbar, .i-ui-navbar-subcontainer,
+.i-ui-footer, .i-ui-footer-subcontainer {
+    width: 100%;
+}
+.i-ui-sidebar,  .i-ui-sidebar-subcontainer{
+    height: 100%;
+}
+.i-ui-switch {
+    height: 2em;
+    width: 4.5em;
+    border-radius: 1em;
+}
+.i-ui-switch-button, .i-ui-slider-button {
+	
+    height: 1.5em;
+    width: 1.5em;
+    position: absolute;
+    border-radius: 1em;
+    cursor: pointer;
+}
+.i-ui-switch-button{
+	transition: 0.3s;
+}
+.i-ui-switch-button{
+	top: 0.2em;
+	left: 0.25em;
+}
+.i-ui-switch-active .i-ui-switch-button{	
+    left: calc(100% - 1.75em);
+}
+/******************************************/
+
+.i-ui-widget.i-ui-slider {
+    padding: 0.75em;
+    width: 13em;
+    height: 2em;
+    border-color: transparent;
+    box-sizing: border-box;
+}
+.i-ui-slider-bar {
+    height: 0.5em;
+    background-color: white;
+    width: 100%;
+    border-radius: 0.5em;
+    box-sizing: border-box;
+}
+.i-ui-slider-button {
+    top: 0.25em;
 }

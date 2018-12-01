@@ -1,8 +1,24 @@
-define(function(){
-
+/*!
+ * IUI JavaScript Web Framework Library v1.0.1
+ *
+ * Copyright (c) 2018 Ishaan Singh
+ * Released under the MIT license
+ * https://github.com/ishaananuraag/IUIjs/blob/master/LICENSE
+ *
+ * Date: 2018-12-01T12:03Z
+ */
+ (function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(factory);
+  } else {
+    window.IUI=factory();
+  }
+})(function(){
 /* ------ IUI.js ----------------- */
 	
 	var IUI={};
+	
+	var _uid=1;
 	
 	IUI.Event=function IUIEvent(name){
 		
@@ -48,7 +64,10 @@ define(function(){
 	EventGroup.bindEvent=function(eventGroup){
 		var name=eventGroup.name;
 		if(EventGroup._classBindings[name]){
-			EventGroup._classBindings[name](eventGroup.events);
+			var _bindings=EventGroup._classBindings[name];
+			for(var a in _bindings){
+				_bindings[a](eventGroup.events);
+			}
 			if(eventGroup.persist){
 				EventGroup._eventBindings[name]=eventGroup;
 			}
@@ -65,7 +84,11 @@ define(function(){
 				delete EventGroup._eventBindings[name];
 			}
 		}else{
-			EventGroup._classBindings[name]=iuiClass._bind.bind(iuiClass);		
+			if(EventGroup._classBindings[name]){
+				EventGroup._classBindings[name].push(iuiClass._bind.bind(iuiClass));		
+			}else{
+				EventGroup._classBindings[name]=[iuiClass._bind.bind(iuiClass)];
+			}
 		}
 	}
 	
@@ -110,8 +133,8 @@ define(function(){
     };
 	
 
-	function IUIClass(options){	
-		this.initialize(options);
+	function IUIClass(){	
+		this.initialize.apply(this,arguments);
 	}
 
 	
@@ -133,6 +156,8 @@ define(function(){
 			if(typeof attribute === "object" && attribute!=="options"){
 				if(Array.isArray(attribute)){
 					this[attr]=Array.prototype.slice.call(attribute);
+				}else{
+					this[attr]=_extendObject(this[attr]);
 				}
 			}
 		}
@@ -162,6 +187,15 @@ define(function(){
 			}
 		}
 	
+	}
+	
+	IUIClass.prototype.on=function on(event,handler){
+		var _events=event.split(IUI.spaceRegex), obj={};
+		
+		for(var e in _events){
+			obj[_events[e]]=handler;
+		}
+		this._bind(obj);
 	}
 	
 	/**
@@ -206,7 +240,7 @@ define(function(){
 			}
 		}		
 	}
-	
+	var _extend;
 	/**
 	*
 	* This API clones the prototype of the Given Class to__proto__ of new Class, and adds new properties to the new Class .
@@ -214,8 +248,8 @@ define(function(){
 	*/
 	IUIClass.extend=function(newProperties){
 		
-		var IUIClass=function(options){
-			this.initialize(options);
+		var IUIClass=function(){
+			this.initialize.apply(this,arguments);
 		};
 		
 		_getKeys(this.prototype).forEach(function(key){
@@ -231,7 +265,7 @@ define(function(){
 		},this);
 				
 		
-		IUIClass.extend=arguments.callee;		
+		IUIClass.extend=_extend;		
 				
 		for(var property in newProperties){
 			var type = typeof newProperties[property];
@@ -245,8 +279,62 @@ define(function(){
 		
 		return IUIClass;
 	}
-
+	
+	_extend=IUIClass.extend;
+	
+	IUIClass.prototype._optionModelMapping= [];
+	
+	IUIClass.prototype._observedOptions=['enable','isattached'];
+	
+	IUIClass.prototype.bindModels=function(boundOptions){
+		this.__processOptionMapping();
+		this.optionsModel=new IUI.OptionsModel(this.options,this._handleOptionChange.bind(this),this._observedOptions,boundOptions);
+		if(this.options.model){
+				IUI.ObservableModel.bindModels(this.optionsModel,this.options.model,this._optionModelMapping);
+		}
+	}
+	
+	IUIClass.prototype.__processOptionMapping=function(){
+		var _mappings=IUI.behaviors.getObservableMapping(this.options),
+			length=_mappings.length;
+		if(length){
+			for(var i=0;i<length;++i){
+				this._optionModelMapping.push(_mappings[i]);
+				if(this._observedOptions.indexOf(_mappings[i].optionAttribute)===-1){
+					this._observedOptions.push(_mappings[i].optionAttribute);
+				}
+			}
+		}
+	}
+	
+	
+	IUIClass.prototype._handleOptionChange= function(key, value){
+		if(this['_handle'+key+'Change']){
+			this['_handle'+key+'Change'](value);
+		}
+	}
+	
+	
 	IUI.Class=IUIClass;
 	
+	IUI.getUID=function(){
+		return 'uid_'+_uid++;
+	}
+	/**************************************************/
+	IUI.domAccessibility=true;
+	
+	IUI.setDOMAccessibility=function(value){
+		IUI.domAccessibility=value;		
+	}
+	
+	IUI.deepExtend=_extendObject;
+	
+	IUI._observableRegex=/::.+::/g;
+	
+	IUI.subcontainerRegex=/subcontainer-\S+/g;
+	
+	IUI.iiAttributeRegex=/ii-\S+/g;
+	
+	IUI.spaceRegex=/(\ )+/g;
 	return IUI;
 });

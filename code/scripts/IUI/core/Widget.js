@@ -1,7 +1,12 @@
-define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(IUI){
-
-	/* ------ IUI.Widgets.js ----------------- */
-
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
+	
 	/**
 	*	The base Framework Class for all the Widgets which are created by WidgetBuilder.
 	*/
@@ -12,15 +17,47 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 		classList: ['i-ui-widget'],
 		events:IUI.Class.prototype.events.concat(['validate']),
 		validationList: [],
+		_observedOptions:['enable','isattached'],
+		_optionModelMapping:[],
+		load: function(options){
+			if(typeof options.validations === "string"){
+				options.validations=options.validations.split(',').map(function(elem){return elem.trim()})
+			}
+			this.boundModelOptions={
+				validator: this._validate.bind(this)
+			}
+		},
 		initialize: function(options){
-			IUI.Class.prototype.initialize.apply(this,arguments);			
+			IUI.Class.prototype.initialize.apply(this,arguments);	
+			
 			this.$element=$(this.options.element)
 			this.element=this.$element[0];
 			this.makeUI();	
 			if(this.options.datamart){
 				IUI.DataMart.bindWidget(this.options.datamart,this);
 			}
+			this.bindModels(this.boundModelOptions);
 			this.onInitialize();	
+		},
+		_handleOptionChange:function(key,value){
+			if(key in this.element.style){
+				this.element.style[key]=value;
+			}else if(key.match(IUI.iiAttributeRegex)){
+				this.$element.attr(key,value);
+			}
+			IUI.Class.prototype._handleOptionChange.apply(this,arguments);
+			
+			
+		},
+		_handleenableChange: function(value){
+			this.enable(value);
+		},
+		_handleisattachedChange: function(value){
+			if(value){
+				this.attach();
+			}else{
+				this.detach();
+			}
 		},
 		onInitialize: function(){
 			
@@ -39,7 +76,7 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 			dataMart._bind({
 				fetch:this.onDataFetch.bind(this),
 				binding:this.dataBinding.bind(this),
-				dataBound:this.dataBound.bind(this)
+				databound:this.dataBound.bind(this)
 			});			
 		},
 		_preprocessElement: function(wrapper){
@@ -47,9 +84,23 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 					wrapper.style[elem]=this.element.style[elem];
 			},this);			
 		},
+		detach:function(){
+			if(this.$element.parent().length){
+			(this._detachedSpan) || (this._detachedSpan=$('<span>'));
+				this.$element.after(this._detachedSpan);
+				this.$element.detach();
+				return this;
+			}
+		},
+		attach: function(){
+			if(this._detachedSpan && this._detachedSpan.parent().length){
+				this._detachedSpan.after(this.$element);
+				this._detachedSpan.detach();
+			}
+		},
 		_processOptions: function(wrapper){
-			IUI.behaviors.extractStyleFromObject(wrapper,this.options);			
-			if(this.options.class){
+			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
+			if(typeof this.options.class === "string"){
 				$(wrapper).addClass(this.options.class.split(' '));	
 			}
 			if(this.options.id){
@@ -60,14 +111,8 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 				$(wrapper).addClass('i-ui-disabled');
 			}
 			if(this.options.validations){
-				if(typeof this.options.validations === "string"){
-					this.validationList=this.validationList.concat(this.options.validations.split(',').map(function(elem){return elem.trim()}));
-				}else if(Array.isArray(this.options.validations)){
-					this.validationList.concat(this.options.validations);
-				}
-				
-			}
-			
+				this.validationList=this.validationList.concat(this.options.validations);			
+			}			
 		},
 		onTemplateAttach:function(wrapper){
 			//Override it to extract children to variables or to process children of templare before processing options or element;
@@ -86,7 +131,9 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 				$(this.element).replaceWith($(wrapper));
 			}
 			this.element=wrapper;
-			this.element.iuiWidget=this;
+			if(IUI.domAccessibility){
+				this.element.iuiWidget=this;
+			}
 			this.$element=$(wrapper);
 			this.onRender();
 		},
@@ -96,14 +143,19 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 		_onValidate: function(result){
 			var that=this;
 			if(!result.valid){
+				clearTimeout(this.invalidTimeout);
 				this.$element.addClass('i-ui-invalid');
-				setTimeout(function(){
+				this.invalidTimeout=setTimeout(function(){
 					that.$element.removeClass('i-ui-invalid');
 				},200);
+			}else{
+				this.$element.removeClass('i-ui-invalid');
 			}
 		},
 		validate: function(validator){
-			return this._validate(this.value(),validator);
+			var validObject=this._validate(this.value(),validator);
+			clearTimeout(this.invalidTimeout);
+			return validObject;
 		},
 		_validate: function(value,validator){
 			var valid=true,
@@ -134,12 +186,13 @@ define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(
 		},
 		value: function(val){
 			if(typeof val !== 'undefined'){
-				return this.element.innerText=val;
+				return this.element.innerHTML=val;
 			}
-			return this.element.innerText;
+			return this.element.innerHTML;
 		},
 		options:{
-			enable: true			
+			enable: true,
+			isattached: true,			
 		}
 		
 	});

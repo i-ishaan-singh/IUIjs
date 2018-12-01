@@ -1,21 +1,39 @@
-define(['IUI-core',
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core',
 		'Behaviors',
 		'WidgetBuilder',		
 		'Validator',
+		'ObservableModel',
+		'OptionModel',
+		'ContainerModel',
+		'Container',
+		'Layout',
+		'Sidebar',
+		'Navbar',
+		'Footer',
 		'Widget',
 		'ContainerUI',
 		'Overlay',
 		'InputBox',
 		'Button',
+		'Switch',
+		'Slider',
 		'ToggleButton',
 		'SubmitButton',
 		'FormLabel',
 		'Radio',
 		'NumericInputBox',
-		'DropDown',
 		'ComboBox',
+		'DropDown',
+		'Exhibit',
 		'Form',
-		'RadioGroup'],function(IUI){
+		'RadioGroup'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	
 	IUI.Validator.addRule('numeric',function(value){
@@ -32,16 +50,54 @@ define(['IUI-core',
 		return !scriptExp.test(value);
 	});	
 		
-	IUI.makeUI=function makeUI(elem){
+	IUI.makeUI=function makeUI(elem,model){
+		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
+			model=elem;
+			elem=null;
+		}
+		if(model && model.classType!=="ObservableModel"){
+			model=new IUI.ContainerModel(model);			
+		}
+		(elem) || (elem='body');
+		var element=$(elem)[0];
+		var options=Array.prototype.slice.call(element.attributes).reduce(_extractAttribute,{
+			element: element,
+			model: model
+		})
 		
-		(elem) || (elem='body')
-		var uiContainer= new IUI.ContainerUI({
-			element: elem
-		});		
+		var uiContainer= new IUI.ContainerUI(options);
+	
 		uiContainer.makeUI();
 		return uiContainer;
 	}
-	//window.IUI=IUI;
+	
+	var _extractAttribute=function(object,attribute){
+		object[attribute.name]=attribute.value;
+		return object;
+	}
+	
+	IUI.makeUIAsync=function makeUI(elem,model){
+		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
+			model=elem;
+			elem=null;
+		}
+		if(model && model.classType!=="ObservableModel"){
+			model=new IUI.ContainerModel(model);			
+		}
+		(elem) || (elem='body');
+		var element=$(elem)[0];
+		var options=Array.prototype.slice.call(element.attributes).reduce(_extractAttribute,{
+			element: element,
+			model: model,
+			async: true
+		})
+		
+		var uiContainer= new IUI.ContainerUI(options);		
+		uiContainer.makeUI();
+		return uiContainer;
+	}
+	
+	
 	return IUI;
 
 });

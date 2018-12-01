@@ -1,0 +1,76 @@
+---------Version 1.0.1
+* Added attach/detach API to Widgets.
+* Added ObservableModel, 
+	-usage new ObservableModel(Object,ChangeHandler,List)
+	-or new ObservableModel(Object,List)
+* Selective Observation in object enabled through passing list
+* Widgets Options can now be turned into ObservableModel
+* _itterateCommandToAllComponents() API added to ContainerUI
+* added async attribute to Container, which will build the container in async manner
+* added IUI.makeUIAsync() API
+* Added - ContainerModel
+* Added - OptionsModel
+* Implemented - Two way dataBinding between OptionsModel and Container Model
+* FIX - Popup Closes on scroll
+* FIX - Dropdown Max Height issue
+* FIX - deep extend on class initialize
+* Added IUI.setDOMAccessibility() API
+* Models can be bound to any IUI Component
+* Added - Styles can now be bound with IUI Templates
+* Validations are now Handled by ObservableModel
+* Validate API will not cause red border to disappear automatically untill typed or API called
+* FIX - EventsGroup not binding to multiple Widgets
+* Fixed- NumericInput reset on validation 
+* Dropdown value is displayed using div rather than input
+* ADDED - Containers are now turned into divs
+* ADDED iiAttributes:
+	- the non removed tags, ii-attibutes can be allplied to Widgets and Containers
+	- iiTags can be bound to ObservableModels using IUI Template
+* FIX - JSON returned in Form doesnot contain radio form attribute if nothins is selected
+* ADDED - on() API in IUI Class
+* ADDED Value option handling in radioGroup.
+* CHANGED FRAME name to EXHIBIT
+* ADDED Layouts
+	- Footer
+	- Header
+	- Sidebar
+* Sidebar can be positioned with position attribute
+* ADDED Subcontainer attributes to Layouts
+* ADDED getContainerById() API to containers
+* properties to subcontainer can be set via subcontainer-attribute attribute in IUI Layout Cusyom Tags.
+* subcontainer-attribute Can be rendered through IUI template
+* ADDED - Switch Widget
+* ADDED - Slider Widget.
+* FIXED - Events got removed after detach/attach
+* FIXED - IUI Templates not binding to subcontainer-attributes
+* ADDED - Added - Layouts.html (example)
+* ADDED - Updated Modules and build for AMD and commonJS support.
+
+---------Version 1.0.0
+* Created IUI.Class and it's functionalities
+* Implemented Extend in IUI Class
+* Added Event Binding on IUIClass
+* Added IUI Core Framework:
+	- Widget
+	- Container UI
+	- Widget Builder
+	- Overlay
+	- DataMart
+	- EventGroup
+	- Validator
+	- Behaviors
+* Added basic Widgets:
+	- FormLabel
+	- InputBox
+	- NumericInputBox
+	- ComboBox
+	- DropDown
+	- Button
+	- SubmitButton
+	- ToggleButton
+	- Radio
+* Added basic Container:
+	- Container
+	- Frame
+	- Form
+	- RadioGroup

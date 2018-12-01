@@ -1,6 +1,14 @@
-define(['IUI-core','Widget'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','Widget'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
-
+	
+	
 	var _isWidgets=function(elem){
 		return typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined";
 	};
@@ -20,10 +28,19 @@ define(['IUI-core','Widget'],function(IUI){
 		classType:'ContainerUI',
 		classList:['i-ui-container'],
 		events:IUI.Widget.prototype.events.concat(['create']),
+		options:{
+			async: false
+		},
+		load: function(options){
+			(options.async) && (options.async=JSON.parse(options.async));
+		},
 		initialize: function(options){
 			this.widgets=[];
 			this.containers=[];			
-			IUI.Class.prototype.initialize.apply(this,arguments);			
+			IUI.Class.prototype.initialize.apply(this,arguments);
+			if(this.options.async){
+				this._create=this._createAsync;
+			}			
 			var _elem=$(this.options.element || document.createElement('div'));
 			if(_elem.length===1 && !Array.isArray(this.options.element)){
 				this.element=_elem[0];
@@ -33,43 +50,154 @@ define(['IUI-core','Widget'],function(IUI){
 				this.$element=$(this.element);
 				this.$element.append(_elem);
 			}
+			
 		},
 		_onCreateWidget: function(widget){
 			//Override this API to process the newly created Widgets/Containers;
 		},
+		getContainerById: function(id){
+			if(typeof this.containers[id] !== "undefined"){
+				return this.containers[id];
+			}
+			var length=this.containers.length;
+			for(var i=0;i<length;++i){
+				var container=this.containers[i].getContainerById(id)
+				if(container){
+					return container;
+				}
+			}
+		},
+		_handleOptionChange:function(key,value){
+			if(key in this.element.style){
+				this.element.style[key]=value;
+			}else if(key.match(IUI.iiAttributeRegex)){
+				this.$element.attr(key,value);
+			}
+			IUI.Class.prototype._handleOptionChange.apply(this,arguments);						
+		},
+		_handleisattachedChange: function(value){
+			if(value){
+				this.attach();
+			}else{
+				this.detach();
+			}
+		},
+		detach:function(){
+			if(this.$element.parent().length){
+			(this._detachedSpan) || (this._detachedSpan=$('<span>'));
+				this.$element.after(this._detachedSpan);
+				this.$element.detach();
+			return this;
+			}
+		},
+		attach: function(){
+			if(this._detachedSpan && this._detachedSpan.parent().length){
+				this._detachedSpan.after(this.$element);
+				this._detachedSpan.detach();
+			}
+		},
 		_create: function(elements){
 			var length=elements.length;
-			for(var i=0;i<length;++i){
+			for(var i=0;i<elements.length;++i){
 				var elem=elements[i];
 				if(elem.tagName === "STOP") return;
-				
-				if(typeof IUI.WidgetBuilder.containerList[elem.tagName] !== "undefined"){		
-				
-					var container=IUI.WidgetBuilder.containerList[elem.tagName](elem,this.element);
-					if(container.options.id){
-						this.containers[container.options.id]=container;
-					}
-					this.containers.push(container);
-					this._onCreateWidget(container);
-				}else if(typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined"){
+					if(typeof IUI.WidgetBuilder.containerList[elem.tagName] !== "undefined"){		
 					
-					var widget=IUI.WidgetBuilder.widgetList[elem.tagName](elem,this.element);
-					if(widget.options.id){
-						this.widgets[widget.options.id]=widget;
+						var container=IUI.WidgetBuilder.containerList[elem.tagName](elem,this.element,this.options.model);
+						if(container.options.id){
+							this.containers[container.options.id]=container;
+						}
+						this.containers.push(container);
+						this._onCreateWidget(container);
+					}else if(typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined"){
+						
+						var widget=IUI.WidgetBuilder.widgetList[elem.tagName](elem,this.element,this.options.model);
+						if(widget.options.id){
+							this.widgets[widget.options.id]=widget;
+						}
+						this.widgets.push(widget);
+						this.trigger('create',{widget: widget});
+						this._onCreateWidget(widget);
+					}else{
+						(elem.children) && (this._create(elem.children));
 					}
-					this.widgets.push(widget);
-					this.trigger('create',{widget: widget});
-					this._onCreateWidget(widget);
-				}else{
-					(elem.children) && (this._create(elem.children));
-				}
 			}			
+		},
+		_createAsync: function(elements){
+			var length=elements.length;
+			for(var i=0;i<elements.length;++i){
+				var elem=elements[i];
+				if(elem.tagName === "STOP") return;
+				setTimeout((function(elem){return function(){
+					if(typeof IUI.WidgetBuilder.containerList[elem.tagName] !== "undefined"){		
+					
+						var container=IUI.WidgetBuilder.containerList[elem.tagName](elem,this.element,this.options.model);
+						if(container.options.id){
+							this.containers[container.options.id]=container;
+						}
+						this.containers.push(container);
+						this._onCreateWidget(container);
+					}else if(typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined"){
+						
+						var widget=IUI.WidgetBuilder.widgetList[elem.tagName](elem,this.element,this.options.model);
+						if(widget.options.id){
+							this.widgets[widget.options.id]=widget;
+						}
+						this.widgets.push(widget);
+						this.trigger('create',{widget: widget});
+						this._onCreateWidget(widget);
+					}else{
+						(elem.children) && (this._create(elem.children));
+					}
+				}})(elem).bind(this));
+			}			
+		},
+		_itterateCommandToAllComponents: function(command){
+			var args=Array.prototype.slice.call(arguments,1);
+			for(var c in this.containers){
+				var container=this.containers[c];
+				container[command].apply(container,args);
+			}
+			for(var w in this.widgets){
+				var widget=this.widgets[w];
+				widget[command].apply(widget,args);
+			}
+		},
+		enable: function(val){
+			this._itterateCommandToAllComponents('enable',val);
+		},
+		_processOptions: function(wrapper){
+			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
+			if(typeof this.options.class === "string"){
+				$(wrapper).addClass(this.options.class.split(' '));	
+			}
+			if(this.options.id){
+				wrapper.id=this.options.id;
+			}
+			if(this.options.disabled && this.options.disabled !== 'false'){
+				this.options.enable=false;
+				$(wrapper).addClass('i-ui-disabled');
+			}
+			if(this.options.validations){
+				this.validationList=this.validationList.concat(this.options.validations);			
+			}			
+			
 		},
 		makeUI: function(){
 			var tagName=this.element.tagName;
-				this._create(this.element.children);
-				this.$element.addClass(this.classList);
+			if(tagName!=='BODY' && tagName!=='DIV'){
+				var elem=document.createElement('div');
+				$($(this.element).children()).appendTo(elem);
+				$(this.element).replaceWith($(elem));
+				this.element=elem;
+				this.$element=$(elem);
+			}
+			this._processOptions(this.element);
+			this._create(this.element.children);
+			this.$element.addClass(this.classList);				
+			if(IUI.domAccessibility){
 				this.element.uiContainer=this;
+			}
 		},
 		_findAndMakeWidgets:function(){
 			this.widgets=[];

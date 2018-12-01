@@ -1,7 +1,16 @@
 # IUI.js
-##### version 1.0.0
+####Power in HTML
 
-IUI is a simple Widget creation JavaScript library for creating User Interface faster. It aims at minimising the use of JavaScript in UI Creation and manupulation, giving more responsibility on HTML. IUI provides custom HTML tags which can be directly embeded anywhere in the template. IUI requires *JQuery* to function.
+##### version 1.0.1
+IUI is a simple JavaScript Web Framework, used to  create Widgets for your User Interface quickly. It aims at minimising the use of JavaScript in UI Creation and manupulation, giving more responsibility on HTML. IUI provides custom HTML tags which can be directly embeded anywhere in the template. IUI requires *JQuery* to function.
+
+### Directly Importing IUI:
+
+You can provide the CDN url include IUI in your website as a object on window for faster coding.
+
+```HTML
+	<script src="http://cdn.jsdelivr.net/gh/ishaananuraag/IUIjs/versions/IUI.all.js"></script>
+```
 
 
 ### Require IUI.js:
@@ -63,10 +72,11 @@ This API renderes the given Object and returns an Container Object.
 **Usage:** 
 ```javascript
 ...
-	IUI.makeUI(Object);
+	IUI.makeUI([Object ][[,] Model]);
 ...
 ```
-Where **Object** can be:
+
+Where **Model** is the object being being to the UI created and **Object** can be:
 * **Element | JQuery** - Javascript Element or JQuery Object of the parent Element containing the IUI custom tags. The given will be converted to Container Object which is returned. If JQuery Object contains more than one element, then the elements are wrapped in a *div* which is returned as Container Object.
 
 * **TemplateString** -  Template String containing the IUI custom tags which needs to be rendered. Passing single widget in the TemplateString will not render the widget as it will be considered as Container.
@@ -79,16 +89,23 @@ Where **Object** can be:
 Components are the objects which can be created using IUI. 
 Components can bind to and trigger events. The events can be bounded with the Component during component creation or can be created and bind separately using EventGroup.
 
-There are Three basic types of Components which can be created using IUI:
+The basic types of Components which can be created using IUI:
 1. **Widget**
 2. **Container**
 3. **Overlay**
+3. **ObservbleModel**
+3. **Template**
 	
 ## Widget
 
 Widgets are IUI Component which are first rendered in javascript and then attached to the DOM to reduce reflow and allow faster UI Creation. The name of the Widget is same as it's TagName. Widgets can be extended to create new Widgets with properties of old Widget and extended properties.
 
 Widgets can be indentified bu class *i-ui-widget* and can be accessed by uiWidget attribute of it's Elemenet Object.
+
+The basic *options** which can be passed to FormLabel are:
+* **enabled** *{Boolean}* - The enable state of the widget.
+* **isattached** *{Boolean}* - Wether the widget is attached to the DOM or not.
+
 
 The basic **APIs** Provided by Widget are:
 * **enable( *{Boolean}* )** - enabled or disables the Widget. 
@@ -106,6 +123,41 @@ Handler to Events can be provided as attribute to Widget with same name as the e
   ...
 ```
 
+#### Binding Widgets with Observables:
+
+IUI Components can be bound with Observable Models using IUI Template. An IUI Template is enclosed in double colons (**::**) and can be a variable name or an executable statement which evaluates to a value. The template will be evaluated using the model given to IUI.makeUI() API. If model attribute is directly given as mapping, two way binding takes place. All the variables provided in template should exist in the given model. 
+
+Any change in the given model will directly change the options of the IUI Components which can be handled by implement the **_handler*(option name)*Change()** API. Basic change handlers are implemented by the Widgets and Containers.
+
+Styles passed as attributes to the IUI custom Tags can aso be bound to the Widget.
+
+##### HTML:
+```HTML
+  ...
+	<FormLabel text="::nameNLS::"></FormLabel>
+	<FormLabel text="::ageNLS::"></FormLabel>
+  ...
+```
+
+##### JAVASCRIPT:
+```javascript
+  ...
+	var nlsObject={
+		nameNLS: 'name',
+		ageNLS: 'age'
+	}
+	IUI.makeUI(nlsObject);
+  ...
+```
+
+
+##### OUTPUT HTML:
+```HTML
+  ...
+	<div class="i-ui-widget i-ui-formlabel">Name</div>
+	<div class="i-ui-widget i-ui-formlabel">Age</div>
+  ...
+```
 
 #### Types Of Widgets:
 * **FormLabel**
@@ -117,6 +169,8 @@ Handler to Events can be provided as attribute to Widget with same name as the e
 * **ToggleButton**
 * **SubmitButton**
 * **Radio**
+
+
 
 ### FormLabel
 
@@ -332,7 +386,7 @@ If any Widget or Container has id attribute, it's named reference also gets atta
 
 #### Types Of Containers:
 * **Container**
-* **Frame**
+* **IFrame**
 * **RadioGroup**
 * **IForm**
 
@@ -385,17 +439,17 @@ containers: Array(1)
 ```
 
 
-### Frame:
+### Layout:
 
-Frame extension to Container. It just takes 100% parent Height and width and can be placed inside another div whose height is known. It is used to contain big Widgets which can span accross screens.
+Layout extension to Container. It just takes 100% parent Height and width and can be placed inside another div whose height is known. It is used to contain big Widgets which can span accross screens.
 
 
 ##### HTML:
 ```HTML
-<Frame id="interest-radio" group='interest' formAttribute="interested" >
+<Layout id="interest-radio" group='interest' formAttribute="interested" >
 	<InputBox value="initialValue"></InputBox>
 	<NumericInputBox id="favrouite-number"></NumericInputBox>
-</Frame>
+</Layout>
 ```
 
 ##### Output
@@ -575,3 +629,7 @@ The **validate( {*Validator*} )** API of the widget validates the rules assigned
 	rules: ['noScript','numeric']
   }
 ```
+
+## Extending IUI Classes and Components
+
+//TO DO

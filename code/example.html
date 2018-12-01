@@ -10,9 +10,6 @@
 			width: 100%;
 			margin: 0;
 		}
-		.form-container {
-			padding: 1rem 2rem;
-		}
 		.form-item {
 			margin: 0.5em 0;
 		}
@@ -20,71 +17,102 @@
 			margin: 1em;
 			text-align: center;
 		}
+		#form-header-subcontainer {
+			padding: 1rem 3rem;
+		}
 		</style>
 	</head>
 	<body>	
-		<FormLabel id="form-header" display='block' font-size="3rem" text="Basic Form"></FormLabel>
-		
-		<div class="form-container">
-			<Iform id="ui-form">
-				<Iform formAttribute="name">
+	<Exhibit>
+	<Navbar height="4rem" background="::theme.split(' ')[0]::" color="white">
+		<FormLabel id="form-header" font-size="3rem" line-height="4rem" text="Welcome to IUI Basic Layout" ></FormLabel>
+		<FormLabel isattached="::(firstName.trim() || lastName.trim())::" id="user-name" position="absolute" right="2rem" font-size="1rem"     bottom="0.5rem"  vertical-align="baseline" line-height="1rem" text=" Hi ::(firstName+' '+lastName)::" ></FormLabel>
+		</Navbar>
+		<Exhibit class="form-container">
+			<sidebar subcontainer-background="hsl(::sliderValue::, 100%, 79%)" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
+			<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Theme" ></FormLabel>
+			<RadioGroup group="s-radio" padding-top="1rem" width="100%" value="::theme::" formattribute="promotional" >
+						<radio value="darkgrey lightgrey" height="4rem" text="darkgrey <br> lightgrey"></radio>
+						<radio value="#7c9a70 wheat"  height="4rem" text="green <br> wheat"></radio>
+			</RadioGroup>
+			</sidebar>
+			<Exhibit>
+			<Iform id="ui-form" padding-top="1rem" ii-ishaan="::firstName::" class="i-ui-exhibit">
+				<Navbar  id="form-header" height="4rem" >
+					<FormLabel font-size="3rem" line-height="4rem" text="Kindly fill your details" ></FormLabel>
+				</Navbar>
+				
+				<Iform formattribute="name"  >
 					<div class="form-item">
-						<FormLabel text="First Name "></FormLabel>
-						<InputBox id="name-input"  validateOnInput="false" formAttribute="firstName"></InputBox>
+						<FormLabel text="First Name"></FormLabel>
+						<InputBox id="name-input"  ii-class="::mycolor::" validations="noScript" validateOnInput="false" eventGroup="change-validation-events"  form-attribute="firstName" value="::firstName::"></InputBox>
 					</div>
 					<div class="form-item">
-						<FormLabel text="Last Name"></FormLabel>
-						<InputBox id="name-input"  validations="noScript,noI" formAttribute="lastName"></InputBox>
+						<FormLabel text="Last Name" color="::mycolor::"></FormLabel>
+						<InputBox id="last-name-input"  validations="noScript" formattribute="lastName" value="::lastName::"></InputBox>
 					</div>
 				</Iform>
 				<div class="form-item">
 					<FormLabel text="Email Id "></FormLabel>
-					<InputBox id="email-input" validations="email" validateOnInput="false" formAttribute="email"></InputBox>
+					<InputBox id="email-input" validations="email" validateOnInput="false" eventGroup="change-validation-events" formattribute="email"></InputBox>
 				</div>
+				
 				<div class="form-item">
 					<FormLabel text="Age"></FormLabel>
-					<NumericInputBox formAttribute="age" id="age-input"></NumericInputBox>
+					<NumericInputBox formattribute="age" id="age-input"></NumericInputBox>
 				</div>
+				
 				<div class="form-item">
 					<FormLabel text="Height"></FormLabel>
-					<NumericInputBox formAttribute="height" id="height-input" decimal="true" step="0.2"></NumericInputBox>
+					<NumericInputBox formattribute="height" id="height-input" decimal="true" step="0.2"></NumericInputBox>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Gender"></FormLabel>
-					<RadioGroup group="gender-radio" formAttribute="gender" orientation="horizontal">
+					<RadioGroup group="gender-radio" formattribute="gender"  orientation="horizontal">
 						<radio value="male" text="male"></radio>
 						<radio value="female" text="female"></radio>
 					</RadioGroup>
 				</div>
+				<Iform async="false" isattached="::firstName::" formattribute="preference">
 				<div class="form-item">
 					<FormLabel text="Favrouite Weather"></FormLabel>
-					<DropDown formAttribute="weather" dataMart="season-mart">	</DropDown>
+					<DropDown formattribute="weather" datamart="season-mart">	</DropDown>
 				</div>
 				<div class="form-item">
 					<FormLabel text="Food Preference"></FormLabel>
-					<ComboBox formAttribute="food" >
-						<option>North Indian</option>
-						<option>South Indian</option>
-						<option>Punjabi</option>
-						<option>Chinese</option>
+					<ComboBox formattribute="food" datamart="food-mart">
 					</ComboBox>
 				</div>
 				<div class="form-item">
-					<FormLabel text="Do you want to recieve promotional Offers?"></FormLabel>
-					<RadioGroup group="promotional-radio" formAttribute="promotional" >
-						<radio value="yes" text="yes"></radio>
-						<radio value="no" text="no"></radio>
-					</RadioGroup>
+					<FormLabel text="Form Color : "></FormLabel>
+					<Slider max="360" value="::sliderValue::"></slider>
 				</div>
 				<div class="form-item">
-					<ToggleButton id="anime-button" formAttribute="animeLover">Toggle for Anime</ToggleButton>
-					<ToggleButton id="pubg-button" formAttribute="pubgLover">Toggle for PUBG </ToggleButton>
+					<FormLabel   width="21em" text="Do you want to recieve promotional Offers?"></FormLabel>
+					<switch formattribute="promotional" ></switch>					
 				</div>
+				<div class="form-item">
+					<ToggleButton id="anime-button" eventgroup="toggle-events" formattribute="animeLover">Toggle for Anime</ToggleButton>
+					<ToggleButton id="pubg-button"eventgroup="toggle-events" formattribute="pubgLover">Toggle for PUBG </ToggleButton>
+				</div>
+				</Iform>
 				<div class="form-buttons">
-					<Button id="get-details-button" eventGroup="form-events">Get Result Me</Button>
+					<Button id="get-details-button" eventgroup="form-events">Get Result Me</Button>
 				</div>
 			</Iform>
-		</div>
+				<sidebar  position="right" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
+				<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Add Banner" ></FormLabel>
+				<RadioGroup group="s-radio" padding-top="1rem" width="100%" value="::theme::" formattribute="promotional" >
+						
+				</RadioGroup>
+				</sidebar>
+			</Exhibit>
+		
+			
+		</Exhibit><Footer height="2rem">
+					<FormLabel width="100%" background="::theme.split(' ')[0]::" color="white" text-align="center" id="copyright" font-size="1rem" line-height="2rem" text="Created By Ishaan Singh" ></FormLabel>
+			</Footer>
+		</Exhibit>
 		<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
 		 <script data-main="./scripts/main" src="./scripts/require.js"></script>
 	</body>

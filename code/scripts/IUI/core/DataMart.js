@@ -1,4 +1,11 @@
-define(['IUI-core','WidgetBuilder','Validator'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','WidgetBuilder','Validator'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var bindDataMart=function(dataMart){
 		var name=dataMart.name;
@@ -27,7 +34,8 @@ define(['IUI-core','WidgetBuilder','Validator'],function(IUI){
 		classType: 'DataMart',
 		events:IUI.Class.prototype.events.concat(['fetch','binding','bound']),
 		options:{
-			autofetch: false
+			autofetch: false,
+			data:[]
 		},
 		state:{
 			fetched:false
@@ -42,9 +50,7 @@ define(['IUI-core','WidgetBuilder','Validator'],function(IUI){
 			bindDataMart(this);
 		},		
 		fetch: function(){
-			if(this.options.data){
-				this.data=this.options.data;				
-			}
+			this.data=this.options.data;				
 			this.trigger('fetch',{data:this.data});
 			this.state.fetched=true;
 		}

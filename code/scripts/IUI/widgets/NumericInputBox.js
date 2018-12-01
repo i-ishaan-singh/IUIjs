@@ -1,4 +1,11 @@
-define(['IUI-core','InputBox'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','InputBox'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var InputBox=IUI.uiWidgets.InputBox,
 		SPINNERS_SELECTOR=".i-ui-spinner",		
@@ -57,7 +64,7 @@ define(['IUI-core','InputBox'],function(IUI){
 				if(this._interval){
 					clearInterval(this._interval);
 					this.trigger('change',{value:Number(this.input.val())});
-					this._value=this.input.val();
+					this.options.value=this.input.val();
 					this.$element.removeClass('i-ui-active');
 					delete this._interval;
 				}				

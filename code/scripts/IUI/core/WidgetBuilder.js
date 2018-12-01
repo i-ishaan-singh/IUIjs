@@ -1,4 +1,11 @@
-define(['IUI-core'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 /* ------ IUI.WidgetBuilder.js ----------------- */
 
@@ -24,10 +31,15 @@ define(['IUI-core'],function(IUI){
 	* @param {Element} element - The DOM Element from where the options are extracted while creation of the UI.
 	* @param {Element} container - the container in which the widget is contained.
 	*/
-	var _buildWidget=function(element,container){
+	var _buildWidget=function(element,container,model){
+		if( container && container.classType==='ObservableModel'){
+			model=container;
+			container=undefined;
+		}
 		var options=Array.prototype.slice.call(element.attributes).reduce(_extractAttribute,{});
 		options.element=element;	
-		options.container=container || document.body;			
+		options.container=container;
+		options.model=model;		
 		return new this(options);
 	}
 	

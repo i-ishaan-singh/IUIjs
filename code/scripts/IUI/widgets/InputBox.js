@@ -1,21 +1,36 @@
-define(['IUI-core','Widget'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','Widget'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var InputBox=IUI.Widget.extend({
 		name:'InputBox',
 		template: '<input class="i-ui-input"></input>',
 		classList: IUI.Widget.prototype.classList.concat(['i-ui-inputbox']),
 		events:IUI.Widget.prototype.events.concat(['change']),
-		_value:'',
 		options:{
 			validateoninput: true,
-			validateonblur: true
+			validateonblur: true,
+			value:''
+		},
+		_handlevalueChange: function(value){
+			this.value(value);
 		},
 		load: function(options){
+			IUI.Widget.prototype.load.apply(this,arguments);
 			(options.validateoninput) && (options.validateoninput=JSON.parse(options.validateoninput));
 			(options.validateonblur) && (options.validateonblur=JSON.parse(options.validateonblur));
+			if(typeof options.validateoninput === "undefined"){
+				this.boundModelOptions.shouldValidate=this.options.validateoninput;
+			}else{
+				this.boundModelOptions.shouldValidate=options.validateoninput;
+			}
 		},
-		onInitialize: function(){
-			
+		onInitialize: function(){		
 			this._attachEvents();
 			this.value(this.options.value);
 		},
@@ -24,35 +39,22 @@ define(['IUI-core','Widget'],function(IUI){
 		},
 		_attachEvents: function(){
 			var that=this;
-			if(this.options.validateoninput){
+			
 				$(this.input).on('input',function(e){
-					if(!that._validate(e.target.value).valid){
-						e.target.value=that._value;
+					if(that.options.validateoninput && !that._validate(e.target.value).valid){
+						e.target.value=that.options.value;
 						e.stopImmediatePropagation();
 						e.preventDefault();
 						return false;
 					}else{
-						that._value=e.target.value;
+						that.options.value=e.target.value;
 					}
 				});
-			}
-			if(this.options.validateonblur){
-				$(this.input).on('change',function(e){
-					if(!that._validate(e.target.value).valid){
-						e.target.value=that._value;
-						e.stopImmediatePropagation();
-						e.preventDefault();
-						return false;
-					}else{
-						that._value=e.target.value;
-					}
-				});
-			}
 			$(this.input).on('change',IUI.behaviors.delegateDOMEvent.bind(this));
 		},
 		value: function(val){
-			if(typeof val !== 'undefined' && this._validate(val).valid){
-				this._value=val;
+			if(typeof val !== 'undefined'){	// && this._validate(val).valid
+				this.options.value=val;
 				return this.input.val(val);
 			}
 			return this.input.val();
