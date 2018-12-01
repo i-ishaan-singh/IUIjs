@@ -1,0 +1,221 @@
+html, body{
+	font-size: 16px;
+}
+.i-ui-widget, .i-ui-container{
+	font-size: 1rem;
+	display: inline-block;
+	box-sizing: border-box;
+    vertical-align: top;
+	position: relative;
+}
+.i-ui-form .i-ui-formlabel{
+    width: 13em;
+}
+.i-ui-widget *{
+	font-size: 1em;
+    box-sizing: border-box;
+}
+
+.i-ui-container{
+	box-sizing: border-box; 
+	position: relative;
+}
+
+.i-ui-widget-icon{
+	pointer-events: none;
+}
+.i-ui-vertical-radiogroup {
+    width: 13em;
+}
+.i-ui-radio .i-ui-formlabel{
+	width: 11em;
+    margin: 0;
+}
+.i-ui-input{
+    line-height: 1.43em;
+	padding: 0.25em;
+    width: 100%;
+	height: 100%;
+    font-family: inherit;
+}
+
+.i-ui-inputbox,.i-ui-numericinputbox, .i-ui-button, .i-ui-radio, .i-ui-dropdown ,.i-ui-combobox{
+	width: 13em;
+    height: 2em;
+}
+
+.i-ui-numericinputbox, .i-ui-dropdown ,.i-ui-combobox{
+	padding-right: 3em;
+}
+
+.i-ui-spinner-container ,.i-ui-dropbutton-container{
+    width: 3em;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    line-height: 1;
+    text-align: center;
+}
+
+.i-ui-spinner {
+    line-height: 1em;
+	height: 50%;
+    box-sizing: content-box;
+	cursor: pointer;
+}
+
+.i-ui-button {
+    line-height: 1.5em;
+    padding: 0.25em;
+	height: 2em;
+}
+.i-ui-formlabel {
+    line-height: 2em;
+    padding: 0 0.25em;
+}
+.i-ui-button{
+	text-align: center;
+}
+.i-ui-radio {
+    padding-left: 2rem;
+    position: relative;
+}
+.i-ui-radio .i-ui-radio-button {
+position: absolute;
+	left: 0;
+	top: 0;
+}
+.i-ui-radio .i-ui-formlabel{
+	width: 100%;
+}
+.i-ui-radio-button {
+	
+    height: 100%;
+    width: 1em;
+    margin: 0 0.5em;	
+}
+.i-ui-dropbutton {
+    height: 100%;
+    line-height: 2em;
+    box-sizing: border-box;
+}
+.i-ui-dropdown .i-ui-display {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.i-ui-vertical-radiogroup .i-ui-radio {
+    width: 100%;
+}
+.i-ui-horizontal-radiogroup .i-ui-radio {
+    width: unset;
+}
+
+.i-ui-noselect, .i-ui-switch-button, .i-ui-slider-button{
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+
+.i-ui-disabled{
+	pointer-events: none;
+	opacity: 0.5;
+}
+.i-ui-overlay {
+    box-shadow: 1px 1px 2px #e9e9e9;
+	position: fixed;
+	box-sizing: border-box;
+	overflow:auto;
+    z-index: 100;
+}
+
+.i-ui-overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.i-ui-hidden{
+	display:none!important;
+}
+.i-ui-list-item {
+    box-sizing: border-box;
+    height: 2em;
+    line-height: 1.45em;
+    padding: 0.25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/********************************************/
+br {
+    line-height: 2em;
+}
+.i-ui-exhibit{
+	height: 100%;
+	width: 100%;
+}
+
+/******************************************/
+
+.i-ui-subcontainer{
+	box-sizing: border-box;
+	display: inline-block;
+}
+.i-ui-navbar, .i-ui-navbar-subcontainer,
+.i-ui-footer, .i-ui-footer-subcontainer {
+    width: 100%;
+}
+.i-ui-sidebar,  .i-ui-sidebar-subcontainer{
+    height: 100%;
+}
+.i-ui-switch {
+    height: 2em;
+    width: 4.5em;
+    border-radius: 1em;
+}
+.i-ui-switch-button, .i-ui-slider-button {
+	
+    height: 1.5em;
+    width: 1.5em;
+    position: absolute;
+    border-radius: 1em;
+    cursor: pointer;
+}
+.i-ui-switch-button{
+	transition: 0.3s;
+}
+.i-ui-switch-button{
+	top: 0.2em;
+	left: 0.25em;
+}
+.i-ui-switch-active .i-ui-switch-button{	
+    left: calc(100% - 1.75em);
+}
+/******************************************/
+
+.i-ui-widget.i-ui-slider {
+    padding: 0.75em;
+    width: 13em;
+    height: 2em;
+    border-color: transparent;
+    box-sizing: border-box;
+}
+.i-ui-slider-bar {
+    height: 0.5em;
+    background-color: white;
+    width: 100%;
+    border-radius: 0.5em;
+    box-sizing: border-box;
+}
+.i-ui-slider-button {
+    top: 0.25em;
+}
