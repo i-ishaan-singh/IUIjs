@@ -1,4 +1,11 @@
-define(['IUI-core','WidgetBuilder','Validator'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','WidgetBuilder','Validator'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var bindDataMart=function(dataMart){
 		var name=dataMart.name;

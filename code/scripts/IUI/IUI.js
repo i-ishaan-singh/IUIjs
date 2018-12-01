@@ -1,4 +1,6 @@
-define(['IUI-core',
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core',
 		'Behaviors',
 		'WidgetBuilder',		
 		'Validator',
@@ -22,11 +24,16 @@ define(['IUI-core',
 		'FormLabel',
 		'Radio',
 		'NumericInputBox',
-		'DropDown',
 		'ComboBox',
+		'DropDown',
 		'Exhibit',
 		'Form',
-		'RadioGroup'],function(IUI){
+		'RadioGroup'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	
 	IUI.Validator.addRule('numeric',function(value){

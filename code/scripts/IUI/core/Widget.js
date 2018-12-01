@@ -1,4 +1,11 @@
-define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 	
 	/**
 	*	The base Framework Class for all the Widgets which are created by WidgetBuilder.

@@ -1,13 +1,19 @@
 /*!
- * IUI JavaScript Web Framework Library v1.0.0
+ * IUI JavaScript Web Framework Library v1.0.1
  *
  * Copyright (c) 2018 Ishaan Singh
  * Released under the MIT license
  * https://github.com/ishaananuraag/IUIjs/blob/master/LICENSE
  *
- * Date: 2018-01-20T17:24Z
+ * Date: 2018-12-01T12:03Z
  */
- define(function(){
+ (function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(factory);
+  } else {
+    window.IUI=factory();
+  }
+})(function(){
 /* ------ IUI.js ----------------- */
 	
 	var IUI={};

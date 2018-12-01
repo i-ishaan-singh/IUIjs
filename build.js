@@ -35,7 +35,7 @@
 		'RadioGroup':'./containers/RadioGroup'
 	},	
 	shim:{
-		"IUI-core": {
+		"IUI": {
 			exports: "IUI" 
 		}
 	},

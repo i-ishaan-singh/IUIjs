@@ -1,4 +1,11 @@
-define(['IUI-core','Widget'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','Widget'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	
 	

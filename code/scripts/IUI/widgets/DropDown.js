@@ -1,4 +1,11 @@
-define(['IUI-core','DropDown'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','ComboBox'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var Combobox=IUI.uiWidgets.Combobox,		
 		DropDown=Combobox.extend({

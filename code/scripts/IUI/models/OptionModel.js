@@ -1,4 +1,11 @@
-define(['IUI-core','ObservableModel','Template'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','ObservableModel','Template'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var OptionsModel=IUI.ObservableModel.extend({
 		ModelType: 'OptionsModel',

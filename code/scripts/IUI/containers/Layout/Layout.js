@@ -1,4 +1,11 @@
-define(['IUI-core','Container','ContainerUI'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','Container','ContainerUI'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var Layout=IUI.ContainerUI.extend({
 		name:'Layout',

@@ -74,10 +74,23 @@ require(['IUI'],function(IUI){
 			}
 		});
 		//IUI.setDOMAccessibility(false);
+		
+		
 		var containerUI=IUI.makeUI(window.obj);
+		
+		
 		console.timeEnd('UI creation');
 		console.log(containerUI);
 		var form=containerUI.getContainerById('ui-form');
+		
+		new IUI.EventGroup({
+			name :"toggle-events",
+			toggle: function(e){
+				alert('toggled');
+			},
+			persist: true
+		});
+		
 		
 		new IUI.EventGroup({
 			name :"change-validation-events",

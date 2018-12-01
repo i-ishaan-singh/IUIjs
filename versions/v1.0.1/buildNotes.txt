@@ -45,32 +45,3 @@
 * FIXED - IUI Templates not binding to subcontainer-attributes
 * ADDED - Added - Layouts.html (example)
 * ADDED - Updated Modules and build for AMD and commonJS support.
-
----------Version 1.0.0
-* Created IUI.Class and it's functionalities
-* Implemented Extend in IUI Class
-* Added Event Binding on IUIClass
-* Added IUI Core Framework:
-	- Widget
-	- Container UI
-	- Widget Builder
-	- Overlay
-	- DataMart
-	- EventGroup
-	- Validator
-	- Behaviors
-* Added basic Widgets:
-	- FormLabel
-	- InputBox
-	- NumericInputBox
-	- ComboBox
-	- DropDown
-	- Button
-	- SubmitButton
-	- ToggleButton
-	- Radio
-* Added basic Container:
-	- Container
-	- Frame
-	- Form
-	- RadioGroup

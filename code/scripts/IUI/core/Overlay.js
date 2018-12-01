@@ -1,4 +1,11 @@
-define(['IUI-core'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var overlayContainer,overlayUid=1;
 		overlayContainer=document.createElement('DIV');

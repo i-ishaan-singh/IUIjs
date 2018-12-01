@@ -1,4 +1,11 @@
-define(['IUI-core','InputBox'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','InputBox'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var InputBox=IUI.uiWidgets.InputBox,		
 		Combobox=InputBox.extend({

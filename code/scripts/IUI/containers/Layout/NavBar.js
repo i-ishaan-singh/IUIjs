@@ -1,4 +1,11 @@
-define(['IUI-core','Container','Layout'],function(IUI){
+(function (factory) {
+   if(typeof define === "function" && define.amd) {    
+	define(['IUI-core','Container','Layout'],factory);
+	
+  } else {
+    factory(window.IUI);
+  }
+})(function(IUI){
 
 	var Navbar=IUI.uiContainers.Layout.extend({
 		name:'Navbar',
