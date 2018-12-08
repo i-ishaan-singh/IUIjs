@@ -329,7 +329,7 @@
 	
 	IUI.deepExtend=_extendObject;
 	
-	IUI._observableRegex=/::.+::/g;
+	IUI._observableRegex=/::.*?::/g;
 	
 	IUI.subcontainerRegex=/subcontainer-\S+/g;
 	
