@@ -219,3 +219,25 @@ br {
 .i-ui-slider-button {
     top: 0.25em;
 }
+
+.i-ui-verticalscroller {
+	width: 100%;
+    overflow: hidden;
+}
+.i-ui-scroller-wrapper {
+    display: inline-block;
+    position: relative;
+}
+.i-ui-scroller-up-arrow{
+	top: -1em;
+}
+.i-ui-scroller-down-arrow{
+	bottom: -1em;
+}
+.i-ui-scroller-up-arrow, .i-ui-scroller-down-arrow {
+	z-index: 10000;
+	width: 100%;
+    text-align: center;
+    line-height: 1em;
+    height: 1em;
+}

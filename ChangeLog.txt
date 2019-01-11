@@ -1,5 +1,8 @@
 ---------Version 1.0.2
 * FIXED - Template RegExp
+* Added IUI-rounded theme file,
+* Moved themes to /css/themes folder
+* Convention to create theme IUI-<themename>-.theme.cee
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

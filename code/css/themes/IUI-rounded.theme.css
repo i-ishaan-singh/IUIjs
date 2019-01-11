@@ -1,0 +1,32 @@
+.i-ui-widget, .i-ui-input, input, .i-ui-spinner-container, .i-ui-dropbutton-container{
+	border-radius: 1em;
+}
+
+.i-ui-spinner-container {
+    overflow: hidden;
+    width: 2em;
+    height: 2em;
+    font-size: 0.9em;
+    top: 0.05em;
+    right: 0.1em;
+}
+
+.i-ui-dropbutton-container {
+    width: 2em;
+    height: 2em;
+    font-size: 0.9em;
+    top: 0.05em;
+    right: 0.1em;
+}
+.i-ui-numericinputbox, .i-ui-dropdown, .i-ui-combobox {
+    padding-right: 2em;
+}
+
+
+.i-ui-input {
+    padding-left: 0.6em;
+}
+
+.i-ui-input:focus {
+	outline: none;
+}
