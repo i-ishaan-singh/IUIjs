@@ -3,6 +3,7 @@
 * Added IUI-rounded theme file,
 * Moved themes to /css/themes folder
 * Convention to create theme IUI-<themename>-.theme.cee
+* [ADDED] Added VerticalScrollable
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

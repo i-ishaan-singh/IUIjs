@@ -14,6 +14,7 @@ require.config({
 		'ContainerUI':'./core/ContainerUI',
 		'Overlay':'./core/Overlay',
 		'Container':'./containers/Container',
+		'VerticalScroller':'./containers/VerticalScroller',
 		'Layout':'./containers/Layout/Layout',
 		'Sidebar':'./containers/Layout/Sidebar',
 		'Navbar':'./containers/Layout/Navbar',
@@ -36,8 +37,8 @@ require.config({
 	}
 });
 console.time('ishaan');
-require(['IUI'],function(IUI){
-	
+require(['jquery'],function(){
+	require(['IUI'],function(IUI){
 		window.IUI=IUI;
 		var _a=[{text:'Summner North Indian North Indian North Indian'},{text:'Winter'},{text:'Autunm'},{text:'Moonsoon'}],season=[];
 		
@@ -103,4 +104,5 @@ require(['IUI'],function(IUI){
 		foodDataMart.fetch();
 		console.timeEnd('ishaan');
 
+});
 });
