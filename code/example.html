@@ -2,7 +2,8 @@
 	<head>
 		<title>IUI Test</title>
 		<link rel="stylesheet" type="text/css" href="css/IUI.css"></link>
-		<link rel="stylesheet" type="text/css" href="css/IUI.baseTheme.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/themes/IUI-base.theme.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/themes/IUI-rounded.theme.css"></link>
 		<link rel="stylesheet" type="text/css" href="font/css/font.css"></link>
 		<style>
 		body{
@@ -20,23 +21,37 @@
 		#form-header-subcontainer {
 			padding: 1rem 3rem;
 		}
+		Exhibit{
+			display: none;
+		}
+		.i-ui-scroller-wrapper {
+			margin: 2rem;
+			width: 15rem;
+		
+		}
 		</style>
 	</head>
 	<body>	
+	<script>
+		console.time('DOMATTACH');
+		console.time('DOMRENDER');
+	</script>
 	<Exhibit>
 	<Navbar height="4rem" background="::theme.split(' ')[0]::" color="white">
 		<FormLabel id="form-header" font-size="3rem" line-height="4rem" text="Welcome to IUI Basic Layout" ></FormLabel>
 		<FormLabel isattached="::(firstName.trim() || lastName.trim())::" id="user-name" position="absolute" right="2rem" font-size="1rem"     bottom="0.5rem"  vertical-align="baseline" line-height="1rem" text=" Hi ::(firstName+' '+lastName)::" ></FormLabel>
 		</Navbar>
 		<Exhibit class="form-container">
-			<sidebar subcontainer-background="hsl(::sliderValue::, 100%, 79%)" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
+			<sidebar subcontainer-background="hsl(::sliderValue::, 60%, 93%)" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
 			<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Theme" ></FormLabel>
 			<RadioGroup group="s-radio" padding-top="1rem" width="100%" value="::theme::" formattribute="promotional" >
 						<radio value="darkgrey lightgrey" height="4rem" text="darkgrey <br> lightgrey"></radio>
 						<radio value="#7c9a70 wheat"  height="4rem" text="green <br> wheat"></radio>
 			</RadioGroup>
 			</sidebar>
-			<Exhibit>
+			<Exhibit >
+			
+			<Exhibit width="50%" >
 			<Iform id="ui-form" padding-top="1rem" ii-ishaan="::firstName::" class="i-ui-exhibit">
 				<Navbar  id="form-header" height="4rem" >
 					<FormLabel font-size="3rem" line-height="4rem" text="Kindly fill your details" ></FormLabel>
@@ -100,20 +115,102 @@
 					<Button id="get-details-button" eventgroup="form-events">Get Result Me</Button>
 				</div>
 			</Iform>
+			</Exhibit >
+			<Exhibit width="50%">
+				<VerticalScroller>
+					<div style="background: white;">
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+					</div>
+				</VerticalScroller>
+		
+				<VerticalScroller autohide="false">
+				<div style="background: white;">
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+					</div>
+	
+				</VerticalScroller>
+
+				<VerticalScroller scrollinside="true">
+					<div style="background: white;">
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+					</div>
+					
+				</VerticalScroller>
+				
+				
+				<VerticalScroller nativescrollbar="true">
+					<div style="background: white;">
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+						<FormLabel  text=" * ::(firstName+' '+lastName)::" ></FormLabel> <br>
+					</div>
+				</VerticalScroller>
+
+
+		</Exhibit >
 				<sidebar  position="right" id="form-sidebar" padding-top="2rem" background="::theme.split(' ')[1]::">
 				<FormLabel id="form-header" font-size="2rem" line-height="2rem" text="Add Banner" ></FormLabel>
 				<RadioGroup group="s-radio" padding-top="1rem" width="100%" value="::theme::" formattribute="promotional" >
 						
 				</RadioGroup>
 				</sidebar>
-			</Exhibit>
-		
+				
+				
+
 			
-		</Exhibit><Footer height="2rem">
-					<FormLabel width="100%" background="::theme.split(' ')[0]::" color="white" text-align="center" id="copyright" font-size="1rem" line-height="2rem" text="Created By Ishaan Singh" ></FormLabel>
+			</Exhibit>
+			
+			
+		</Exhibit><Footer height="2rem" background="::theme.split(' ')[0]::">
+					<FormLabel width="100%"  color="white" text-align="center" id="copyright" font-size="1rem" line-height="2rem" text="Created By Ishaan Singh" ></FormLabel>
 			</Footer>
 		</Exhibit>
-		<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
-		 <script data-main="./scripts/main" src="./scripts/require.js"></script>
+		
+	<script>
+		console.timeEnd('DOMATTACH');
+	</script>
+		<script data-main="./scripts/main" src="./scripts/require.js"></script>
 	</body>
 </html>

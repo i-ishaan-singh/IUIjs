@@ -1,6 +1,7 @@
 require.config({
 	baseUrl: "./scripts/IUI",
 	paths:{
+		'jquery': '../jquery',
 		'IUI-core':'./IUI-core',
 		'IUI':'./IUI',
 		'Behaviors':'./core/Behaviors',
@@ -38,8 +39,11 @@ require.config({
 });
 console.time('ishaan');
 require(['jquery'],function(){
+	console.timeEnd('DOMRENDER');
 	require(['IUI'],function(IUI){
+		window.$=$;
 		window.IUI=IUI;
+		console.log('Number of elements before render : '+$('body *').length)
 		var _a=[{text:'Summner North Indian North Indian North Indian'},{text:'Winter'},{text:'Autunm'},{text:'Moonsoon'}],season=[];
 		
 		for(var i=0;i<100;++i){
@@ -64,7 +68,7 @@ require(['jquery'],function(){
 			firstName:'Ishaan',
 			lastName:'Singh',
 			mycolor: 'red',
-			theme: 'darkgrey lightgrey',
+			theme: '#7c9a70 wheat',
 			formColor: 'lightblue',
 			sliderValue: 0
 		};
@@ -102,6 +106,7 @@ require(['jquery'],function(){
 		});
 		
 		foodDataMart.fetch();
+		console.log('Number of elements before render : '+$('body *').length)
 		console.timeEnd('ishaan');
 
 });

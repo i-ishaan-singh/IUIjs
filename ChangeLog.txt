@@ -4,6 +4,8 @@
 * Moved themes to /css/themes folder
 * Convention to create theme IUI-<themename>-.theme.cee
 * [ADDED] Added VerticalScrollable
+* Brightened Up Example.js
+* Renamed jquery library
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
