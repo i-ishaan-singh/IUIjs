@@ -6,6 +6,15 @@
 * [ADDED] Added VerticalScrollable
 * Brightened Up Example.js
 * Renamed jquery library
+* FIXED - options getting re-extended
+* ADDED - Basic Popover
+* ADDED - ContextMenu
+* ADDED - Base Theme
+* ADDED - Rounded Theme
+* ADDED - closeImmediate API to overlay
+* ADDED - functionality to set ClientBounds to Overlay
+* ADDED - ['opening','open','close','closing'] events for Overlays
+
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

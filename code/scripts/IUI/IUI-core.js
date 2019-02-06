@@ -153,7 +153,7 @@
 		}
 		for(var attr in this){
 			var attribute=this[attr];
-			if(typeof attribute === "object" && attribute!=="options"){
+			if(typeof attribute === "object" && attr!=="options"){
 				if(Array.isArray(attribute)){
 					this[attr]=Array.prototype.slice.call(attribute);
 				}else{

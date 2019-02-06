@@ -126,6 +126,7 @@
 			
 			
 			if(this.options.scrollinside){
+				this.wrapper.addClass('i-ui-inset-scrollable');
 				this.downArrowOffset=0;
 				this.upArrowOffset=0;
 			}else{

@@ -30,3 +30,8 @@
 .i-ui-input:focus {
 	outline: none;
 }
+
+.i-ui-combobox.i-ui-active, .i-ui-dropdown.i-ui-active{
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}

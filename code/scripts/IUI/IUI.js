@@ -9,6 +9,8 @@
 		'ContainerModel',
 		'Container',
 		'VerticalScroller',
+		'Popover',
+		'ContextMenu',
 		'Layout',
 		'Sidebar',
 		'Navbar',

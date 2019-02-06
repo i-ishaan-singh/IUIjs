@@ -31,9 +31,12 @@
 			if(typeof this._initialPopupStyle.width === "undefined" ){
 					this._anchorWidth=true;
 			}
+			this.clientRectSet=!!this.options.clientrectangle;
+			
 			this.createOverlay();	
 			this._attachEvents();			
 		},
+		events: ['opening','open','close','closing'],
 		options:{
 			lazy: false,
 			anchor:'body',
@@ -45,14 +48,29 @@
 			buttonBehavior: 'click',
 			animateObjectClose:{},
 			animateObjectOpen:{},
-			autohide: true
+			autoclose: true,
+			clientrectangle: null
+		},
+		setClientRectangle: function(clientrectangle){
+			this.options.clientrectangle=clientrectangle
+			this.clientRectSet=!!clientrectangle;
+			
 		},
 		_processInitialPopupStyle:function(){
-			var $anchor=$(this.options.anchor);
 			
-			if($anchor.length===0) return;
+			if(this.clientRectSet){
+				_rect=this.options.clientrectangle;
+			}else{
+				var $anchor=$(this.options.anchor);
 			
-			var _anchor=$anchor[0], _rect=_anchor.getClientRects(),direction=this.options.direction;
+				if($anchor.length===0) $anchor=$('body');
+			
+				var _anchor=$anchor[0], _rect=_anchor.getClientRects();
+				
+			}
+			
+			var direction=this.options.direction;
+			
 			if(_rect.length){
 				var rect=_rect[0];
 				var placements=this.options.placement.split(' ');
@@ -107,8 +125,10 @@
 			}
 			this.show();
 			this._popupOpen=true;
+			this.trigger('opening');
 			$(this.element).animate(this.options.animateObjectOpen,300,function(){
-				if(this.options.autohide){
+				this.trigger('open');
+				if(this.options.autoclose){
 					$('html').off('mouseup.'+this._uid);
 					$('html').one('mouseup.'+this._uid,this.close);
 				}
@@ -120,6 +140,18 @@
 		hide: function(){
 			$(this.element).addClass('i-ui-hidden');
 		},
+		closeImmediate: function(e){
+			if(!this._popupOpen || (e && $(e.target).is(this.element))){
+				$('html').off('mouseup.'+this._uid);
+				$('html').one('mouseup.'+this._uid,this.close);
+				return;
+			}
+			this.trigger('closing');
+			$(this.element).css(this.options.animateObjectClose);
+			this.trigger('close');
+			this.hide();
+			this._popupOpen=false;
+		},
 		close: function(e){
 			if(!this._popupOpen || (e && $(e.target).is(this.element))){
 				$('html').off('mouseup.'+this._uid);
@@ -127,7 +159,9 @@
 				return;
 			}
 			var that=this;
+			this.trigger('closing');
 			$(this.element).animate(this.options.animateObjectClose,300,function(){
+				that.trigger('close');
 				that.hide();
 				that._popupOpen=false;
 			});

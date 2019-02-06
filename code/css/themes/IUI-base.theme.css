@@ -78,6 +78,16 @@
 .i-ui-dropdown {
     background-color: #f0f0f0;
 }
+
+.i-ui-inset-scrollable .i-ui-scroller-down-arrow {
+    background: linear-gradient(0deg, white, transparent);
+	border-bottom: 1px solid #f0f0f0;
+}
+.i-ui-inset-scrollable .i-ui-scroller-up-arrow {
+    background: linear-gradient(180deg, white, transparent);
+	border-top: 1px solid #f0f0f0;
+}
+
 .i-ui-invalid.i-ui-dropdown,
 .i-ui-invalid.i-ui-inputbox,
 .i-ui-invalid.i-ui-numericinputbox,
@@ -103,4 +113,8 @@
 .i-ui-switch-active .i-ui-switch-button{	
     left: calc(100% - 1.75em);
 	 background-color: #c0c0c0;	
+}
+
+.i-ui-input:focus {
+    box-shadow: 2px -1px 2px -1px #c0c0c0 inset;
 }

@@ -2,6 +2,7 @@ require.config({
 	baseUrl: "./scripts/IUI",
 	paths:{
 		'jquery': '../jquery',
+		'text': '../text',
 		'IUI-core':'./IUI-core',
 		'IUI':'./IUI',
 		'Behaviors':'./core/Behaviors',
@@ -16,6 +17,8 @@ require.config({
 		'Overlay':'./core/Overlay',
 		'Container':'./containers/Container',
 		'VerticalScroller':'./containers/VerticalScroller',
+		'Popover':'./containers/Overlays/Popover',
+		'ContextMenu':'./containers/Overlays/ContextMenu',
 		'Layout':'./containers/Layout/Layout',
 		'Sidebar':'./containers/Layout/Sidebar',
 		'Navbar':'./containers/Layout/Navbar',

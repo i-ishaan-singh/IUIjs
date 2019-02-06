@@ -31,7 +31,9 @@
 				InputBox.prototype.initialize.apply(this,arguments);		
 			},
 			_createPopup:function(data){
-					var textAttribute=this.options.textAttribute, idAttribute=this.options.idAttribute;
+					var textAttribute=this.options.textAttribute, 
+						idAttribute=this.options.idAttribute,
+						_elem=this.$element;
 					
 					var dataMapper=function(_data,idx){
 						var elem=document.createElement('div');
@@ -53,7 +55,14 @@
 							contents: data.map(dataMapper),
 							button: this.element.querySelector('.i-ui-dropbutton-container'),
 							maxHeight: '15em',
-							height: (2*this.options.data.length)+'em'
+							height: (2*this.options.data.length)+'em',
+							opening: function(){
+								_elem.addClass('i-ui-active');
+							},
+							close: function(){
+								_elem.removeClass('i-ui-active');
+							}
+							
 						});
 					}
 			},
