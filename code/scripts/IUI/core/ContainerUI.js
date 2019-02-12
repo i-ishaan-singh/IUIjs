@@ -96,60 +96,48 @@
 				this._detachedSpan.detach();
 			}
 		},
+		_render: function(elem){
+				if($(elem).hasClass('i-ui-widget') || $(elem).hasClass('i-ui-container')){
+					return; 
+				}
+				
+				if(typeof IUI.WidgetBuilder.containerList[elem.tagName] !== "undefined"){		
+				
+					var container=IUI.WidgetBuilder.containerList[elem.tagName](elem,this.element,this.options.model);
+					if(container.options.id){
+						this.containers[container.options.id]=container;
+					}
+					this.containers.push(container);
+					this._onCreateWidget(container);
+				}else if(typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined"){
+					
+					var widget=IUI.WidgetBuilder.widgetList[elem.tagName](elem,this.element,this.options.model);
+					if(widget.options.id){
+						this.widgets[widget.options.id]=widget;
+					}
+					this.widgets.push(widget);
+					this.trigger('create',{widget: widget});
+					this._onCreateWidget(widget);
+				}else{
+					(elem.children) && (this._create(elem.children));
+				}
+		},
 		_create: function(elements){
 			var length=elements.length;
 			for(var i=0;i<elements.length;++i){
 				var elem=elements[i];
 				if(elem.tagName === "STOP") return;
-					if(typeof IUI.WidgetBuilder.containerList[elem.tagName] !== "undefined"){		
-					
-						var container=IUI.WidgetBuilder.containerList[elem.tagName](elem,this.element,this.options.model);
-						if(container.options.id){
-							this.containers[container.options.id]=container;
-						}
-						this.containers.push(container);
-						this._onCreateWidget(container);
-					}else if(typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined"){
-						
-						var widget=IUI.WidgetBuilder.widgetList[elem.tagName](elem,this.element,this.options.model);
-						if(widget.options.id){
-							this.widgets[widget.options.id]=widget;
-						}
-						this.widgets.push(widget);
-						this.trigger('create',{widget: widget});
-						this._onCreateWidget(widget);
-					}else{
-						(elem.children) && (this._create(elem.children));
-					}
+				this._render(elem);
 			}			
 		},
 		_createAsync: function(elements){
-			var length=elements.length;
+			var length=elements.length, _render=this._render;
 			for(var i=0;i<elements.length;++i){
 				var elem=elements[i];
 				if(elem.tagName === "STOP") return;
-				setTimeout((function(elem){return function(){
-					if(typeof IUI.WidgetBuilder.containerList[elem.tagName] !== "undefined"){		
-					
-						var container=IUI.WidgetBuilder.containerList[elem.tagName](elem,this.element,this.options.model);
-						if(container.options.id){
-							this.containers[container.options.id]=container;
-						}
-						this.containers.push(container);
-						this._onCreateWidget(container);
-					}else if(typeof IUI.WidgetBuilder.widgetList[elem.tagName] !== "undefined"){
-						
-						var widget=IUI.WidgetBuilder.widgetList[elem.tagName](elem,this.element,this.options.model);
-						if(widget.options.id){
-							this.widgets[widget.options.id]=widget;
-						}
-						this.widgets.push(widget);
-						this.trigger('create',{widget: widget});
-						this._onCreateWidget(widget);
-					}else{
-						(elem.children) && (this._create(elem.children));
-					}
-				}})(elem).bind(this));
+				setTimeout((function(elem){
+					_render(elem)
+				})(elem));
 			}			
 		},
 		_itterateCommandToAllComponents: function(command){

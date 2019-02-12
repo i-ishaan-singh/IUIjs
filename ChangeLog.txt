@@ -14,7 +14,8 @@
 * ADDED - closeImmediate API to overlay
 * ADDED - functionality to set ClientBounds to Overlay
 * ADDED - ['opening','open','close','closing'] events for Overlays
-
+* CHANGED - moved rendering logic of containerUI to _render API
+* ADDED - DOM traversal stops if element is already a widgett or container
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
