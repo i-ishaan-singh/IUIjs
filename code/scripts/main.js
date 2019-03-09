@@ -23,6 +23,7 @@ require.config({
 		'Sidebar':'./containers/Layout/Sidebar',
 		'Navbar':'./containers/Layout/Navbar',
 		'Footer':'./containers/Layout/Footer',
+		'DataItem':'./core/DataItem',
 		'DataMart':'./core/DataMart',
 		'InputBox':'./widgets/InputBox',
 		'Slider':'./widgets/Slider',
