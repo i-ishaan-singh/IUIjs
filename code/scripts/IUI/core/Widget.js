@@ -14,6 +14,7 @@
 		name: 'Widget',		
 		template: '',
 		classType: 'Widget',
+		tagName: 'DIV',
 		classList: ['i-ui-widget'],
 		events:IUI.Class.prototype.events.concat(['validate']),
 		validationList: [],
@@ -62,21 +63,18 @@
 		onInitialize: function(){
 			
 		},
-		onDataFetch:function(data){
+		onDataFetch:function(dataObject){
 			
 		},
-		dataBinding:function(data){
+		onDataChange: function(dataObject){
 			
-		},		
-		dataBound:function(data){
 			
 		},
 		_bindDataMart: function(dataMart){
 			this.dataMart=dataMart;
 			dataMart._bind({
 				fetch:this.onDataFetch.bind(this),
-				binding:this.dataBinding.bind(this),
-				databound:this.dataBound.bind(this)
+				change:this.onDataChange.bind(this)
 			});			
 		},
 		_preprocessElement: function(wrapper){
@@ -118,7 +116,7 @@
 			//Override it to extract children to variables or to process children of templare before processing options or element;
 		},
 		makeUI: function(){
-			var wrapper=document.createElement("DIV");
+			var wrapper=document.createElement(this.tagName);
 			
 			$(wrapper).addClass(this.classList);
 			wrapper.innerHTML=this.template;

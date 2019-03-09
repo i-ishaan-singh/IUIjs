@@ -180,6 +180,7 @@
 		createOverlay: function(){
 			this.element=document.createElement('DIV');
 			if(this.contents){
+				$(this.contents).before($('<span class="ghost-span">'));
 				var _element=$(this.contents).detach();
 				_element.appendTo(this.element);
 			}

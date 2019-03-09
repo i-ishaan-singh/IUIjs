@@ -20,6 +20,10 @@
 * ADDED- IUI.DataMart now supports array of raw dataType(string, int).
 * IUI.DataMart converts rawData to IUI.DataItem.
 * ADDED - 'Add' API to IUI.DataMart
+* [FIXED] - Overlay not rendering elements after it.
+* IUI.Widget extension allows setting tagname of element.
+* CHANGED - IUI.DataMart now triggers only fetch and change event.
+* CHANGED - Event handling of IUI.DataMart in IUI.Widget
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
