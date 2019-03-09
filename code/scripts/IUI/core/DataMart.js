@@ -1,6 +1,6 @@
 (function (factory) {
    if(typeof define === "function" && define.amd) {    
-	define(['IUI-core','WidgetBuilder','Validator'],factory);
+	define(['IUI-core','DataItem','Validator'],factory);
 	
   } else {
     factory(window.IUI);
@@ -27,18 +27,32 @@
 			DataMart._dataBindings[name]=dataMart;
 		}
 	}
-
 	
 	
 	var DataMart=IUI.Class.extend({
 		classType: 'DataMart',
-		events:IUI.Class.prototype.events.concat(['fetch','binding','bound']),
+		events:IUI.Class.prototype.events.concat(['fetch','change']),
 		options:{
 			autofetch: false,
-			data:[]
+			data:[],
+			schema:{
+				idField: 'id',
+				textField: 'text'
+			}
 		},
 		state:{
 			fetched:false
+		},
+		add: function(dataItem){
+			if(dataItem.constructor !== IUI.DataItem){
+				dataItem=this._processData([dataItem])[0];
+			}
+			if(this.state.fetched){
+				this._data.push()
+				this.trigger('change',{data:this.data, type:'add', change:'dataItem'});
+			}else{
+				this.options.data.add(dataItem);
+			}
 		},
 		initialize: function(options){
 			IUI.Class.prototype.initialize.apply(this,arguments);		
@@ -48,9 +62,42 @@
 				this.fetch();
 			}
 			bindDataMart(this);
-		},		
+		},
+		_handleDataItemChange: function(e){
+			
+		},
+		_makeObjectFromRawData: function(rawData){
+			var _temp={};
+			_temp[this.options.schema.idField]=rawData;
+			_temp[this.options.schema.textField]=rawData;
+			return _temp;
+		},
+		_processData: function(data){
+			var _data=[],
+				_dataLength=data.length;
+			for(var i=0;i<_dataLength;++i){
+				
+				//If the object is preprocessed, leave the object.
+				if(data[i].constructor === IUI.DataItem){
+					_data.push(data[i]);
+					continue;
+				}
+				//If raw string array is passed, data first needs to be converted to object for use by widget.
+				if(typeof data[i] !== 'object'){
+					data[i]=this._makeObjectFromRawData(data[i]);
+				}
+				
+				
+				_data.push(new IUI.DataItem({
+					data: data[i],
+					change: this._handleDataItemChange
+				}));
+			}
+			debugger;
+			return _data;
+		},
 		fetch: function(){
-			this.data=this.options.data;				
+			this.data=this._processData(this.options.data);				
 			this.trigger('fetch',{data:this.data});
 			this.state.fetched=true;
 		}

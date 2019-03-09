@@ -17,6 +17,9 @@
 * CHANGED - moved rendering logic of containerUI to _render API
 * ADDED - DOM traversal stops if element is already a widgett or container
 * ADDED- IUI.DataItem
+* ADDED- IUI.DataMart now supports array of raw dataType(string, int).
+* IUI.DataMart converts rawData to IUI.DataItem.
+* ADDED - 'Add' API to IUI.DataMart
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
