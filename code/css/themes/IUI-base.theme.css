@@ -92,7 +92,7 @@
 .i-ui-invalid.i-ui-inputbox,
 .i-ui-invalid.i-ui-numericinputbox,
 .i-ui-invalid.i-ui-combobox{
-	outline: 1px solid red;
+	box-shadow: 0 0 1px 1px red;
 	color: red;
 }
 
@@ -117,4 +117,14 @@
 
 .i-ui-input:focus {
     box-shadow: 2px -1px 2px -1px #c0c0c0 inset;
+}
+
+/*********************** Grid Styling *************************/
+
+.i-ui-cell {
+    display: table-cell;
+}
+
+table.i-ui-grid {
+    border-collapse: collapse;
 }

@@ -9,6 +9,7 @@ require.config({
 		'WidgetBuilder':'./core/WidgetBuilder',
 		'Template':'./core/Template',
 		'ObservableModel':'./core/ObservableModel',
+		'DataBoundContainer':'./core/DataBoundContainer',
 		'OptionModel':'./models/OptionModel',
 		'ContainerModel':'./models/ContainerModel',
 		'Widget':'./core/Widget',
@@ -17,18 +18,21 @@ require.config({
 		'Overlay':'./core/Overlay',
 		'Container':'./containers/Container',
 		'VerticalScroller':'./containers/VerticalScroller',
+		'Row':'./containers/Row',
 		'Popover':'./containers/Overlays/Popover',
 		'ContextMenu':'./containers/Overlays/ContextMenu',
 		'Layout':'./containers/Layout/Layout',
 		'Sidebar':'./containers/Layout/Sidebar',
 		'Navbar':'./containers/Layout/Navbar',
 		'Footer':'./containers/Layout/Footer',
+		'Grid':'./containers/DataBoundContainers/Grid',
 		'DataItem':'./core/DataItem',
 		'DataMart':'./core/DataMart',
 		'InputBox':'./widgets/InputBox',
 		'Slider':'./widgets/Slider',
 		'Switch':'./widgets/Switch',
 		'Button':'./widgets/Button',
+		'Cell':'./widgets/Cell',
 		'ToggleButton':'./widgets/ToggleButton',
 		'SubmitButton':'./widgets/SubmitButton',
 		'FormLabel':'./widgets/FormLabel',
@@ -45,6 +49,7 @@ console.time('ishaan');
 require(['jquery'],function(){
 	console.timeEnd('DOMRENDER');
 	require(['IUI'],function(IUI){
+		var form;
 		window.$=$;
 		window.IUI=IUI;
 		console.log('Number of elements before render : '+$('body *').length)
@@ -90,7 +95,7 @@ require(['jquery'],function(){
 		
 		console.timeEnd('UI creation');
 		console.log(containerUI);
-		var form=containerUI.getContainerById('ui-form');
+		form=containerUI.getContainerById('ui-form');
 		
 		new IUI.EventGroup({
 			name :"toggle-events",

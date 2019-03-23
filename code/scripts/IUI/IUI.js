@@ -7,12 +7,15 @@
 		'ObservableModel',
 		'OptionModel',
 		'ContainerModel',
+		'DataBoundContainer',
 		'Container',
 		'VerticalScroller',
+		'Row',
 		'Popover',
 		'ContextMenu',
 		'Layout',
 		'Sidebar',
+		'Grid',
 		'Navbar',
 		'Footer',
 		'Widget',
@@ -20,6 +23,7 @@
 		'Overlay',
 		'InputBox',
 		'Button',
+		'Cell',
 		'Switch',
 		'Slider',
 		'ToggleButton',
@@ -54,6 +58,8 @@
 	});	
 		
 	IUI.makeUI=function makeUI(elem,model){
+		var uiContainer;
+		
 		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
 			model=elem;
 			elem=null;
@@ -67,10 +73,12 @@
 			element: element,
 			model: model
 		})
-		
-		var uiContainer= new IUI.ContainerUI(options);
-	
-		uiContainer.makeUI();
+		if(typeof IUI.WidgetBuilder.containerList[element.tagName] !== "undefined"){		
+			uiContainer=IUI.WidgetBuilder.containerList[element.tagName](element,null,options.model);
+		}else{
+			uiContainer= new IUI.ContainerUI(options);
+			uiContainer.makeUI();	
+		}
 		return uiContainer;
 	}
 	

@@ -27,6 +27,7 @@
 	var ContainerUI=IUI.Class.extend({
 		classType:'ContainerUI',
 		classList:['i-ui-container'],
+		tagName: 'DIV',
 		events:IUI.Widget.prototype.events.concat(['create']),
 		options:{
 			async: false
@@ -41,12 +42,12 @@
 			if(this.options.async){
 				this._create=this._createAsync;
 			}			
-			var _elem=$(this.options.element || document.createElement('div'));
+			var _elem=$(this.options.element || document.createElement(this.tagName));
 			if(_elem.length===1 && !Array.isArray(this.options.element)){
 				this.element=_elem[0];
 				this.$element=_elem;
 			}else{
-				this.element=document.createElement('div');
+				this.element=document.createElement(this.tagName);
 				this.$element=$(this.element);
 				this.$element.append(_elem);
 			}
@@ -173,8 +174,8 @@
 		},
 		makeUI: function(){
 			var tagName=this.element.tagName;
-			if(tagName!=='BODY' && tagName!=='DIV'){
-				var elem=document.createElement('div');
+			if(tagName!=='BODY' && tagName!==this.tagName){
+				var elem=document.createElement(this.tagName);
 				$($(this.element).children()).appendTo(elem);
 				$(this.element).replaceWith($(elem));
 				this.element=elem;

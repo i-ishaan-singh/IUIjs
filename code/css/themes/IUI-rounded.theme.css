@@ -1,4 +1,4 @@
-.i-ui-widget, .i-ui-input, input, .i-ui-spinner-container, .i-ui-dropbutton-container{
+div.i-ui-widget, .i-ui-input, input, .i-ui-spinner-container, .i-ui-dropbutton-container{
 	border-radius: 1em;
 }
 

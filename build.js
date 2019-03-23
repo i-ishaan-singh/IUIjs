@@ -37,6 +37,7 @@
 		'Form':'./containers/Form',
 		'RadioGroup':'./containers/RadioGroup'
 	},	
+	optimize: 'none',
 	shim:{
 		"IUI": {
 			exports: "IUI" 

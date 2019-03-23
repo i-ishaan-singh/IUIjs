@@ -24,6 +24,16 @@
 * IUI.Widget extension allows setting tagname of element.
 * CHANGED - IUI.DataMart now triggers only fetch and change event.
 * CHANGED - Event handling of IUI.DataMart in IUI.Widget
+* CHANGED - TagNames of created containers are modifiable
+* ADDED -  Widget: Cell
+* ADDED -  Container: Row
+* ADDED -  Core : DataBoundContainer
+* ADDED -  DataBoundContainer : Grid
+* FIXED - Element passed to IUI.makeUI can now be IUI Container Itsef.
+* FIXED - Invalid elements outline is not curved in round theme.
+* FIXED - SubContainers are now instance of IUI Container.
+* FIXED - Widgets cannot be found inside subcaontainers
+
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
