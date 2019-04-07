@@ -57,7 +57,7 @@
 		get: function(id){
 			var _field=this.options.schema.idField;
 			if(typeof id === 'object'){
-				id = object[_field];
+				id = id[_field];
 			}
 			return this.data.filter(function(elem){
 				return elem[_field]===id;
