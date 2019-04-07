@@ -33,6 +33,7 @@ require.config({
 		'Switch':'./widgets/Switch',
 		'Button':'./widgets/Button',
 		'Cell':'./widgets/Cell',
+		'ListView':'./widgets/ListView',
 		'ToggleButton':'./widgets/ToggleButton',
 		'SubmitButton':'./widgets/SubmitButton',
 		'FormLabel':'./widgets/FormLabel',
@@ -53,7 +54,7 @@ require(['jquery'],function(){
 		window.$=$;
 		window.IUI=IUI;
 		console.log('Number of elements before render : '+$('body *').length)
-		var _a=[{text:'Summner North Indian North Indian North Indian'},{text:'Winter'},{text:'Autunm'},{text:'Moonsoon'}],season=[];
+		var _a=[{text:'Summner '},{text:'Winter'},{text:'Autunm'},{text:'Moonsoon'}],season=[];
 		
 		for(var i=0;i<100;++i){
 			season.push(_a[i%4]);

@@ -35,7 +35,7 @@
 * FIXED - Widgets cannot be found inside subcaontainers
 * PERFORMANCE - Removed functions from observation in Observable Model
 * FIXED - Exception while rendering double quotes through template
-
+* ADDED - Widget - ListView 
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

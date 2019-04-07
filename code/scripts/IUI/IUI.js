@@ -24,6 +24,7 @@
 		'InputBox',
 		'Button',
 		'Cell',
+		'ListView',
 		'Switch',
 		'Slider',
 		'ToggleButton',
