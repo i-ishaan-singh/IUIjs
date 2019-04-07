@@ -37,6 +37,7 @@
 * FIXED - Exception while rendering double quotes through template
 * ADDED - Widget - ListView 
 * CHANGED - Class of dropdown/combobox list option to i-ui-option-item from i-ui-list-item
+* ADDED - add/remove/addAt/get API to DataMart
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

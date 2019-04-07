@@ -43,13 +43,55 @@
 		state:{
 			fetched:false
 		},
+		addAt: function(index, dataItem){
+			if(dataItem.constructor !== IUI.DataItem){
+				dataItem=this._processData([dataItem])[0];
+			}
+			if(this.state.fetched){
+				this.data.splice(index,0,dataItem);
+				this.trigger('change',{data:this.data, item:dataItem, index: index, type:'add'});
+			}else{
+				this.options.data.splice(index,0,dataItem);
+			}
+		},
+		get: function(id){
+			var _field=this.options.schema.idField;
+			if(typeof id === 'object'){
+				id = object[_field];
+			}
+			return this.data.filter(function(elem){
+				return elem[_field]===id;
+			});
+		},
+		_remove: function(dataItem){
+			var index=this.data.indexOf(dataItem);
+			if( index!==-1){
+				var _item=this.data.splice(index,1)[0];
+				this.trigger('change',{data:this.data, item:_item, index: index, type:'remove'})
+			}
+		},
+		remove: function(dataItem){
+			if(dataItem.constructor !== IUI.DataItem){
+				dataItem = this.get(dataItem);
+			}
+			
+			if(dataItem.constructor === Array){
+				var _length=dataItem.length;
+				for(var i=0;i<_length;++i){
+					this._remove(dataItem[i]);
+				}
+			}else{
+				this._remove(dataItem);
+			}
+			
+		},
 		add: function(dataItem){
 			if(dataItem.constructor !== IUI.DataItem){
 				dataItem=this._processData([dataItem])[0];
 			}
 			if(this.state.fetched){
-				this._data.push()
-				this.trigger('change',{data:this.data, type:'add', change:'dataItem'});
+				this.data.push(dataItem)
+				this.trigger('change',{data:this.data, item:dataItem, type:'add'});
 			}else{
 				this.options.data.add(dataItem);
 			}
