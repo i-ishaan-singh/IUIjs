@@ -33,6 +33,7 @@
 * FIXED - Invalid elements outline is not curved in round theme.
 * FIXED - SubContainers are now instance of IUI Container.
 * FIXED - Widgets cannot be found inside subcaontainers
+* PERFORMANCE - Removed functions from observation in Observable Model
 
 
 ---------Version 1.0.1

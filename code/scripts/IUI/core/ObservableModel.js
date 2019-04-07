@@ -34,6 +34,8 @@
 			for(var key in model){
 				if(list && (list.indexOf(key)===-1)){
 					continue;
+				}else if(typeof this.model[key] === 'function'){
+					continue;
 				}
 				
 				Object.defineProperty(this._data,key,{
