@@ -34,6 +34,7 @@
 * FIXED - SubContainers are now instance of IUI Container.
 * FIXED - Widgets cannot be found inside subcaontainers
 * PERFORMANCE - Removed functions from observation in Observable Model
+* FIXED - Exception while rendering double quotes through template
 
 
 ---------Version 1.0.1

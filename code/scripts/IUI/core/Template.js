@@ -41,7 +41,7 @@
 //.replace(/'/g,'\\\'').replace(/"/g,'\\"')
 					lastMatch=_matches[_matches.length-1],
 					firstMatch=_matches[0];
-					_template=((string.indexOf(firstMatch)===0)?'':'"')+_template+((string.lastIndexOf(lastMatch)+lastMatch.length===string.length)?'':'"');
+					_template=((string.indexOf(firstMatch)===0)?'':'"')+_template.replace(/"/g,'\\"')+((string.lastIndexOf(lastMatch)+lastMatch.length===string.length)?'':'"');
 					exclusive=_matches[0].length==string.length;
 					return { template:_template,mappings:_matches.map(function(elem){ return elem.slice(2,-2).trim(); }), isExclusive:exclusive };
 		}
