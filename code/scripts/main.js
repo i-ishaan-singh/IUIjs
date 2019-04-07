@@ -66,7 +66,10 @@ require(['jquery'],function(){
 		}
 		var seasonsDataMart=new IUI.DataMart({
 			name: 'season-mart',
-			data: season
+			data: season,
+			schema:{
+				idField: 'text'
+			}
 		});
 		var foodDataMart=new IUI.DataMart({
 			name: 'food-mart',

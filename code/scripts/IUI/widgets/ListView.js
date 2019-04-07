@@ -9,8 +9,8 @@
 	debugger;
 	var ListView=IUI.Widget.extend({
 		name:'ListView',
-		tagName: 'TD',
 		classList: IUI.Widget.prototype.classList.concat(['i-ui-listview']),
+		ignoredAttributes: ['template'],
 		onDataFetch:function(dataObject){
 			var _length=dataObject.data.length;
 				items=[];
@@ -22,9 +22,21 @@
 			
 			this.items=items;
 		},
+		
 		onDataChange: function(dataObject){
-			
-			
+			debugger;
+			if(dataObject.type==="add"){
+				var _item=IUI.makeUI(this.options.template,dataObject.item);
+				if(typeof dataObject.index ==='undefined'){
+					this.$element.append(_item.$element);
+					this.items.push(_item);
+				}else{
+					this.$element.children().eq(dataObject.index).after(_item.$element);
+					this.items.splice(dataObject.index,0,_item);	
+				}
+			}else if(dataObject.type==="remove"){
+				this.$element.children().eq(dataObject.index).remove();				
+			}
 		},
 		_processOptions: function(wrapper){
 			if(!this.options.template){

@@ -283,6 +283,7 @@
 	_extend=IUIClass.extend;
 	
 	IUIClass.prototype._optionModelMapping= [];
+	IUIClass.prototype.ignoredAttributes= [];
 	
 	IUIClass.prototype._observedOptions=['enable','isattached'];
 	
@@ -299,6 +300,9 @@
 			length=_mappings.length;
 		if(length){
 			for(var i=0;i<length;++i){
+				if(this.ignoredAttributes.indexOf(_mappings[i].optionAttribute) !== -1){
+					continue;
+				}
 				this._optionModelMapping.push(_mappings[i]);
 				if(this._observedOptions.indexOf(_mappings[i].optionAttribute)===-1){
 					this._observedOptions.push(_mappings[i].optionAttribute);

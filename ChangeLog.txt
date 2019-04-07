@@ -38,6 +38,9 @@
 * ADDED - Widget - ListView 
 * CHANGED - Class of dropdown/combobox list option to i-ui-option-item from i-ui-list-item
 * ADDED - add/remove/addAt/get API to DataMart
+* ADDED - attributes can now be ignored for model mapping
+* ADDED - listView updates on DataMart add/remove actions
+
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
