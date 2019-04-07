@@ -37,7 +37,7 @@
 					
 					var dataMapper=function(_data,idx){
 						var elem=document.createElement('div');
-						$(elem).addClass('i-ui-list-item');
+						$(elem).addClass('i-ui-option-item');
 						if(_data[idAttribute]){
 							elem.id=_data[idAttribute];
 						}
@@ -81,7 +81,7 @@
 			_attachEvents: function(){
 				var that=this;
 				InputBox.prototype._attachEvents.apply(this,arguments);
-				$(this.popup.element).on('click','.i-ui-list-item',function(e){
+				$(this.popup.element).on('click','.i-ui-option-item',function(e){
 					var index=e.currentTarget._uiDataIndex;
 					if(typeof index !== "undefined"){
 						that.value(that.options.data[index][that.options.textAttribute]);

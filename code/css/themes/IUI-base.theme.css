@@ -57,11 +57,11 @@
     outline: 1px solid #d0d0d0;
 	background-color: white;
 }
-.i-ui-list-item:hover {
+.i-ui-option-item:hover {
     background-color: #e0e0e0;
 }
 
-.i-ui-list-item:active {
+.i-ui-option-item:active {
     background-color: #c0c0c0;
 }
 .i-ui-dropdown .i-ui-display {

@@ -146,7 +146,7 @@ position: absolute;
 .i-ui-hidden{
 	display:none!important;
 }
-.i-ui-list-item {
+.i-ui-option-item {
     box-sizing: border-box;
     height: 2em;
     line-height: 1.45em;
