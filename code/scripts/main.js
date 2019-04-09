@@ -74,6 +74,16 @@ require(['jquery'],function(){
 				idField: 'text'
 			}
 		});
+		
+		var gridDataMart=new IUI.DataMart({
+			name: 'gridMart',
+			data: [{key: 'ishaan',value:'singh'},{key: 'shivani',value:'bhagwat'},{key: 'shubham',value:'bhagwat'}],
+			schema:{
+				idField: 'key'
+			}
+		});
+		
+		gridDataMart.fetch();
 		var foodDataMart=new IUI.DataMart({
 			name: 'food-mart',
 			data: food

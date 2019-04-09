@@ -44,6 +44,7 @@
 * ADDED - Widget - ContainerCell
 * ADDED - Widget - Division
 * ADDED - Widget - HeaderCell
+* FEATURE - Grid can now be bound to dataMart (dataFetch)
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
