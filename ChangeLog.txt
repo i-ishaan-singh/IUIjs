@@ -45,6 +45,7 @@
 * ADDED - Widget - Division
 * ADDED - Widget - HeaderCell
 * FEATURE - Grid can now be bound to dataMart (dataFetch)
+* CHANGED - Form Label values will not be parsed if HTML.
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
