@@ -5,8 +5,8 @@
   } else {
     factory(window.IUI);
   }
-})(function(IUI){
-	debugger;
+})(function(IUI){	
+	
 	var Cell=IUI.Widget.extend({
 		name:'Cell',
 		tagName: 'TD',

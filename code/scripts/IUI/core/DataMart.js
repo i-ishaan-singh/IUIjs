@@ -135,7 +135,7 @@
 					change: this._handleDataItemChange
 				}));
 			}
-			debugger;
+			
 			return _data;
 		},
 		fetch: function(){

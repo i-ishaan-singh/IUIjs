@@ -6,7 +6,7 @@
     factory(window.IUI);
   }
 })(function(IUI){
-	debugger;
+
 	var ListView=IUI.Widget.extend({
 		name:'ListView',
 		classList: IUI.Widget.prototype.classList.concat(['i-ui-listview']),
