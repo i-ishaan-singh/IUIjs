@@ -106,15 +106,21 @@
 		return keys;
 	};
 
+	var _isObject = function(_obj){
+		return _obj && typeof _obj === "object" && _obj.constructor===Object
+	}
+	
 	var _extendObject=function(obj) {
 		var length = arguments.length;
 		if ( obj == null) return obj;
+		
 		var keys=_getKeys(obj), l=keys.length, newObj={};
+		
 		for (var i = 0; i < l; i++) {
 			var _obj=obj[keys[i]];
 			if(typeof _obj === "object" && Array.isArray(_obj)){
 				_obj=Array.prototype.slice.call(_obj);
-			}else if(_obj && typeof _obj === "object" && _obj.constructor===Object){
+			}else if(_isObject(_obj)){
 				_obj=_extendObject(_obj);
 			}
 			newObj[keys[i]] =_obj ;
@@ -126,7 +132,11 @@
 				l = keys.length;
 			for (var i = 0; i < l; i++) {
 				var key = keys[i];
-				newObj[key] = source[key];
+				if(newObj[key] && (_isObject(source[key]) && _isObject(newObj[key]))){
+					newObj[key]=_extendObject(newObj[key],source[key]);
+				}else{
+					newObj[key] = source[key];
+				}
 			}
 		}
 		return newObj;

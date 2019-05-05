@@ -121,6 +121,7 @@
 
 /*********************** Grid Styling *************************/
 
+
 .i-ui-cell {
     display: table-cell;
 }
@@ -128,3 +129,43 @@
 table.i-ui-grid {
     border-collapse: collapse;
 }
+.i-ui-row {
+    border-bottom: 1px solid #c9c9c9;
+}
+
+
+.i-ui-cell {
+    padding: 0.25rem 0.5rem; 
+	border-right: 1px solid #c9c9c9;
+}
+.i-ui-header-cell {
+    height: 100%;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    background: #c9c9c9;
+	border-right: 1px solid #e5e5e5;
+}
+
+.i-ui-listview{
+	border: none;
+}
+
+/********** List View Styles ******************/
+
+	/**Item List**/
+.style-item-list .i-ui-list-item{
+    display: block;
+    padding: 0.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.style-item-list .i-ui-list-item:hover {
+    background: #e5e5e5;
+}
+.style-item-list .i-ui-list-item.i-ui-selected {
+    background: #c9c9c9;
+	font-weight: bold;
+    box-shadow: 0px 1px 3px -2px;
+}
+
+/********** END:List View Styles ******************/

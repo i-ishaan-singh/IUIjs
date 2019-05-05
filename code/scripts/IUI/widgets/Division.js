@@ -9,7 +9,7 @@
 
 	var Division=IUI.Widget.extend({
 		name:'Division',
-		classList: IUI.Widget.prototype.classList.concat(['i-ui-div']),
+		classList: ['i-ui-div'],
 		_processOptions: function(wrapper){
 			this.options.value=(this.element && this.element.innerHTML);
 			wrapper.innerHTML=this.options.value;

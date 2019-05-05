@@ -36,6 +36,9 @@
 				}
 			}else if(dataObject.type==="remove"){
 				this.$element.children().eq(dataObject.index).remove();				
+			}else{
+				this.$element.children().remove();
+				this.onDataFetch(dataObject);
 			}
 		},
 		_processOptions: function(wrapper){

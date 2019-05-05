@@ -10,7 +10,7 @@
 	var Cell=IUI.Widget.extend({
 		name:'Cell',
 		tagName: 'TD',
-		classList: IUI.Widget.prototype.classList.concat(['i-ui-cell']),
+		classList: ['i-ui-cell'],
 		_processOptions: function(wrapper){
 			debugger;
 			this.options.value=(this.element && this.element.innerHTML) || this.options.template || (this.options.field?'::'+this.options.field+'::':(new Error('No Field Value to bind with')));

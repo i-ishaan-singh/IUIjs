@@ -10,7 +10,7 @@
 	var ContainerCell=IUI.uiContainers.Container.extend({
 		name:'ContainerCell',
 		tagName: 'TD',
-		classList: IUI.Widget.prototype.classList.concat(['i-ui-cell'])
+		classList: ['i-ui-cell']
 	});
 	
 	IUI.WidgetBuilder.plugin(ContainerCell);
