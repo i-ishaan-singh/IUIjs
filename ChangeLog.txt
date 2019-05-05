@@ -49,6 +49,11 @@
 * REMOVED - Widget css class from grid cell and division widget
 * FIXED - Deep extend does not retain extended widget object properties.
 * FIXED - DataMart change event does nothing if type undefined.
+* ADDED - added DataChange event handler for DataMart in Grid
+* ADDED - model attribute to schema of options of DataMart
+* ADDED - IUI Util module. 
+* ADDED - QuickSort util
+* ADDED - Sort API to DataMart
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

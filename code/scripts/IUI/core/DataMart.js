@@ -37,11 +37,29 @@
 			data:[],
 			schema:{
 				idField: 'id',
-				textField: 'text'
+				textField: 'text',
+				model:{	}
 			}
 		},
 		state:{
 			fetched:false
+		},
+		initialize: function(options){
+			IUI.Class.prototype.initialize.apply(this,arguments);		
+			this.persist=this.options.persist;
+			this.name=this.options.name;
+			this._validateSchema();
+			if(this.options.autofetch){
+				this.fetch();
+			}
+			bindDataMart(this);
+		},
+		
+		_validateSchema: function(){
+			if(Object.keys(this.options.schema.model)){
+				this.options.schema.model[this.options.schema.idField] = {dataType: 'string'};
+				this.options.schema.model[this.options.schema.textField] = {dataType: 'string'};
+			}
 		},
 		addAt: function(index, dataItem){
 			if(dataItem.constructor !== IUI.DataItem){
@@ -96,17 +114,20 @@
 				this.options.data.add(dataItem);
 			}
 		},
-		initialize: function(options){
-			IUI.Class.prototype.initialize.apply(this,arguments);		
-			this.preserve=this.options.preserve;
-			this.name=this.options.name;
-			if(this.options.autofetch){
-				this.fetch();
-			}
-			bindDataMart(this);
-		},
 		_handleDataItemChange: function(e){
 			
+		},
+		sort: function(sortOptions){
+			if(!this.state.fetched){
+				this.options.sort = sortOptions;
+			}
+			
+			if(typeof sortOptions === 'undefined'){
+				sortOptions={field:  this.options.schema.idField, dataType: this.options.schema.model[this.options.schema.idField].dataType};
+			}
+			
+			this.data=IUI.utils.quickSort(this.data, sortOptions);		
+			this.trigger('change',{data:this.data});
 		},
 		_makeObjectFromRawData: function(rawData){
 			var _temp={};
@@ -138,10 +159,10 @@
 			
 			return _data;
 		},
-		fetch: function(){
-			this.data=this._processData(this.options.data);				
-			this.trigger('fetch',{data:this.data});
+		fetch: function(data){
+			this.data=this._processData(data || this.data || this.options.data);				
 			this.state.fetched=true;
+			this.trigger('fetch',{data:this.data});
 		}
 		
 		
@@ -153,6 +174,7 @@
 			widget._bindDataMart(DataMart._dataBindings[name]);
 			if(DataMart._dataBindings[name].state.fetched)
 				DataMart._dataBindings[name].trigger('fetch',{data:DataMart._dataBindings[name].data});
+			debugger;
 			if(!DataMart._dataBindings[name].persist){
 				delete DataMart._dataBindings[name];
 			}
