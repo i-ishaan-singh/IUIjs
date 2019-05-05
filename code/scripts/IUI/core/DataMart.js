@@ -125,6 +125,13 @@
 			if(typeof sortOptions === 'undefined'){
 				sortOptions={field:  this.options.schema.idField, dataType: this.options.schema.model[this.options.schema.idField].dataType};
 			}
+			if(Array.isArray(sortOptions)){
+				for(var i=0;i<sortOptions.length;++i){
+					(sortOptions[i].dataType) || (sortOptions[i].dataType=this.options.schema.model[sortOptions[i].field]?this.options.schema.model[sortOptions[i].field].dataType:'string');
+				}
+			}else{
+				(sortOptions.dataType) || (sortOptions.dataType=this.options.schema.model[sortOptions.field]?this.options.schema.model[sortOptions.field].dataType:'string');
+			}
 			
 			this.data=IUI.utils.quickSort(this.data, sortOptions);		
 			this.trigger('change',{data:this.data});

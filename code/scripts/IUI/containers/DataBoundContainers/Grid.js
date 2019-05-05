@@ -11,15 +11,36 @@
 		name:'Grid',
 		tagName: 'table',		
 		classList: ['i-ui-grid'],
+		options:{
+			sortable: false
+		},
+		_getHeaderTemplate: function(elem){
+			var headerPrefix='',
+				headerSufix='',
+				headerTag='HeaderCell',
+				classList=['i-ui-grid-header'];
+				debugger;
+			if((elem.attributes.sortable?(elem.attributes.sortable.value !== 'false'):this.options.sortable)){
+				headerTag='ContainerHeaderCell';
+				headerSufix='</division><div class="i-ui-sort-icon-container"><i class="sort-arrow-desc fa fa-arrow-up"></i><i class="sort-arrow-asc fa fa-arrow-down"></div></i>'
+				headerPrefix='<division>'
+				classList.push('i-ui-sortable');
+			}
+			return '<'+headerTag+' '+(elem.attributes.field?('field=\''+elem.attributes.field.value+'\''):'')+' class=\''+classList.join(' ')+'\'>'+headerPrefix+(elem.attributes.title?elem.attributes.title.value:'')+headerSufix+'</'+headerTag+'>';
+		},
 		_extractRowTemplate: function(){
 			var columns=this.element.getElementsByTagName('column'),
 				headerTemplate = '<row class="i-ui-grid-thead">',
-				rowTemplate = '<row class="i-ui-grid-tbody">';
-						
+				rowTemplate = '<row class="i-ui-grid-tbody">',
+				that=this;
+
 			Array.prototype.slice.call(columns).forEach(function(elem){
-				headerTemplate = headerTemplate+'<HeaderCell class=\'i-ui-grid-header\'>'+(elem.attributes.title?elem.attributes.title.value:'')+'</HeaderCell>';
-				
-				rowTemplate = rowTemplate+elem.outerHTML.replace(/title="(.*?)"/g,'').replace(/column/g,'ContainerCell');
+				headerTemplate = headerTemplate+that._getHeaderTemplate(elem);
+				if(elem.innerHTML.indexOf('<')!==0){
+					rowTemplate = rowTemplate+elem.outerHTML.replace(/title="(.*?)"/g,'').replace(/column/g,'Cell');
+				}else{
+					rowTemplate = rowTemplate+elem.outerHTML.replace(/title="(.*?)"/g,'').replace(/column/g,'ContainerCell');
+				}
 				elem.outerHTML='';
 			});
 			this.headerTemplate = headerTemplate + '</row>'
@@ -60,6 +81,35 @@
 			this._extractRowTemplate();
 			IUI.uiContainers.DataBoundContainer.prototype.makeUI.apply(this,arguments);
 		},
+		sort: function(sortObject){
+			if(this.dataMart){
+				this.dataMart.sort(sortObject);
+				this._sortObject=sortObject;
+			}
+		},
+		_handleSortClick: function(e){
+			debugger;
+			var sortDesc;
+			
+			if($(e.target).hasClass('sort-arrow-desc')){
+				sortDesc=true;
+			}else if($(e.target).hasClass('sort-arrow-asc')){
+				sortDesc=false;
+			}
+			
+			var _field=$(e.currentTarget).closest('th').data('field');
+			e.currentTarget.sortDesc=sortDesc;
+
+			this.sort({field:_field, desc:sortDesc});			
+			
+			
+		},
+		_attachEvents: function(){
+			IUI.uiContainers.DataBoundContainer.prototype._attachEvents.apply(this,arguments);
+			if(this.options.sortable){
+				this.$element.on('click','.i-ui-sort-icon-container',this._handleSortClick.bind(this))
+			}
+		}
 		
 	});
 	

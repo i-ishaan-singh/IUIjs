@@ -28,6 +28,7 @@ require.config({
 		'Navbar':'./containers/Layout/Navbar',
 		'Footer':'./containers/Layout/Footer',
 		'ContainerCell':'./containers/ContainerCell',
+		'ContainerHeaderCell':'./containers/ContainerHeaderCell',
 		'Grid':'./containers/DataBoundContainers/Grid',
 		'DataItem':'./core/DataItem',
 		'DataMart':'./core/DataMart',

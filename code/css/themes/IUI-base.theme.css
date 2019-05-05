@@ -140,16 +140,50 @@ table.i-ui-grid {
 }
 .i-ui-header-cell {
     height: 100%;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     font-size: 1.25rem;
     background: #c9c9c9;
 	border-right: 1px solid #e5e5e5;
+	position: relative;
 }
 
 .i-ui-listview{
 	border: none;
 }
+.i-ui-sortable.i-ui-header-cell {
+    padding-right: 3rem;
+}
 
+.i-ui-header-cell i.sort-arrow-desc {
+    font-size: 0.8rem;
+    font-weight: normal;
+    position: absolute;
+    right: 1rem;
+    top: calc(50% - 0.75rem);
+}
+
+.i-ui-header-cell i.sort-arrow-asc {
+    font-size: 0.8rem;
+    font-weight: normal;
+    position: absolute;
+    right: 0.6rem;
+    top: calc(50% - 0.1rem);
+}
+
+.i-ui-sort-icon-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 2rem;
+}
+.i-ui-sort-icon-container:hover .fa{
+	opacity: 0.5;
+}
+
+.i-ui-sort-icon-container .fa:hover{
+	opacity: 1;
+}
 /********** List View Styles ******************/
 
 	/**Item List**/

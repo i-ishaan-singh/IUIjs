@@ -56,6 +56,7 @@
 * ADDED - Sort API to DataMart
 * ADDED - Container - ContainerHeaderCell
 * FIXED - DataMart sorting considers type from schema model
+* ADDED - Grid Now supports Sortable option
  
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
