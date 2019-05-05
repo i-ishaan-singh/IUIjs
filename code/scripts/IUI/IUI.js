@@ -29,6 +29,7 @@
 		'Division',
 		'HeaderCell',
 		'ContainerCell',
+		'ContainerHeaderCell',
 		'ListView',
 		'Switch',
 		'Slider',

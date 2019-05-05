@@ -16,7 +16,7 @@
 			}
 			if(dataMart.state.fetched)
 				dataMart.trigger('fetch',{data:dataMart.data});
-			
+			debugger;
 			if(dataMart.persist){
 				DataMart._dataBindings[name]=dataMart;
 				DataMart._widgetBindings[name]=[];

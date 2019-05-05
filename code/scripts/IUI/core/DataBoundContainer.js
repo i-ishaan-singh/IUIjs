@@ -14,6 +14,7 @@
 				IUI.DataMart.bindWidget(this.options.datamart,this);
 			}
 			IUI.uiContainers.Container.prototype.makeUI.apply(this,arguments);
+			this._attachEvents();
 		},
 		_bindDataMart: function(dataMart){
 			this.dataMart=dataMart;
@@ -29,6 +30,9 @@
 			
 			
 		},
+		_attachEvents: function(){
+			
+		}
 	});
 	
 	IUI.WidgetBuilder.plugin(DataBoundContainer);
