@@ -7,10 +7,12 @@ require.config({
 		'IUI':'./IUI',
 		'Behaviors':'./core/Behaviors',
 		'WidgetBuilder':'./core/WidgetBuilder',
+		'View':'./core/View',
 		'Template':'./core/Template',
 		'ObservableModel':'./core/ObservableModel',
 		'DataBoundContainer':'./core/DataBoundContainer',
 		'OptionModel':'./models/OptionModel',
+		'ViewModel':'./models/ViewModel',
 		'ContainerModel':'./models/ContainerModel',
 		'Widget':'./core/Widget',
 		'Utils':'./core/Utils',
@@ -19,6 +21,7 @@ require.config({
 		'Overlay':'./core/Overlay',
 		'QuickSort':'./utils/QuickSort',
 		'Container':'./containers/Container',
+		'Viewport':'./containers/Viewport',
 		'VerticalScroller':'./containers/VerticalScroller',
 		'Row':'./containers/Row',
 		'Popover':'./containers/Overlays/Popover',
@@ -70,17 +73,30 @@ require(['jquery'],function(){
 		for(var i=0;i<100;++i){
 			food.push(_b[i%4]);
 		}
+
 		var seasonsDataMart=new IUI.DataMart({
 			name: 'season-mart',
 			data: season,
 			schema:{
-				idField: 'text'
-			}
+				idField: 'text',
+			},
+			persist: true
 		});
+		
+		var name=['ishaan','ravi','priya','nikita','abira','rahul','saurabh','yogeshwar','tanay','adil'];
+		var surname=['singh','more','bharti','ikhar','rouchoudhry','padalkar','shak','karad','narkhade','ustad'];
+		
+		var arr=[];
+		
+		for(var l=0;l<200;++l){
+			arr.push({key: name[Math.floor(Math.random()*name.length)],value:surname[Math.floor(Math.random()*surname.length)]});
+		}
+		
+		
 		
 		var gridDataMart=new IUI.DataMart({
 			name: 'gridMart',
-			data: [{key: 'ishaan',value:'singh'},{key: 'shivani',value:'bhagwat'},{key: 'shubham',value:'bhagwat'}],
+			data: arr,
 			schema:{
 				idField: 'key'
 			}
@@ -109,14 +125,18 @@ require(['jquery'],function(){
 		});
 		//IUI.setDOMAccessibility(false);
 		
+	
 		
-		var containerUI=IUI.makeUI(window.obj);
-		
-		
+		var containerUI=IUI.makeUI({
+			a:'ishaan-model'
+		});
+			new IUI.ViewModel({
+			name: 'ishaan-model',
+			model: window.obj
+		});
 		console.timeEnd('UI creation');
-		console.log(containerUI);
-		form=containerUI.getContainerById('ui-form');
-		
+		//console.log(containerUI);
+		//form=containerUI.getContainerById('ui-form');
 		new IUI.EventGroup({
 			name :"toggle-events",
 			toggle: function(e){
