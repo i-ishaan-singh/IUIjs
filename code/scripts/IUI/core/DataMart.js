@@ -16,7 +16,7 @@
 			}
 			if(dataMart.state.fetched)
 				dataMart.trigger('fetch',{data:dataMart.data});
-			debugger;
+			
 			if(dataMart.persist){
 				DataMart._dataBindings[name]=dataMart;
 				DataMart._widgetBindings[name]=[];
@@ -181,7 +181,7 @@
 			widget._bindDataMart(DataMart._dataBindings[name]);
 			if(DataMart._dataBindings[name].state.fetched)
 				DataMart._dataBindings[name].trigger('fetch',{data:DataMart._dataBindings[name].data});
-			debugger;
+			
 			if(!DataMart._dataBindings[name].persist){
 				delete DataMart._dataBindings[name];
 			}

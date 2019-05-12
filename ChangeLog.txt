@@ -57,7 +57,12 @@
 * ADDED - Container - ContainerHeaderCell
 * FIXED - DataMart sorting considers type from schema model
 * ADDED - Grid Now supports Sortable option
- 
+* OPTIMIZED - Rerendering logic of grid rows
+* ADDED - Multi-group sorting in IUI Grid
+* OPTIMIZED - Quick Sort Logic
+
+
+
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
 * Added ObservableModel, 

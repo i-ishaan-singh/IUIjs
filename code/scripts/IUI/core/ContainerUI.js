@@ -69,7 +69,7 @@
 			}
 		},
 		_handleOptionChange:function(key,value){
-			if(key in this.element.style){
+			if(this.element && key in this.element.style){
 				this.element.style[key]=value;
 			}else if(key.match(IUI.iiAttributeRegex)){
 				this.$element.attr(key,value);
@@ -103,7 +103,6 @@
 				}
 				
 				if(typeof IUI.WidgetBuilder.containerList[elem.tagName] !== "undefined"){		
-				
 					var container=IUI.WidgetBuilder.containerList[elem.tagName](elem,this.element,this.options.model);
 					if(container.options.id){
 						this.containers[container.options.id]=container;

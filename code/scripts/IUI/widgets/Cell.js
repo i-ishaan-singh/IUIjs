@@ -12,7 +12,6 @@
 		tagName: 'TD',
 		classList: ['i-ui-cell'],
 		_processOptions: function(wrapper){
-			debugger;
 			this.options.value=(this.element && this.element.innerHTML) || this.options.template || (this.options.field?'::'+this.options.field+'::':(new Error('No Field Value to bind with')));
 			wrapper.innerHTML=this.options.value;
 			delete this.options.text;

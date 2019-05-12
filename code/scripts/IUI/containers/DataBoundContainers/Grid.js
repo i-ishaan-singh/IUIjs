@@ -14,13 +14,16 @@
 		options:{
 			sortable: false
 		},
+		load: function(options){
+			options.sortable=options.sortable === 'true';
+		},
 		_getHeaderTemplate: function(elem){
 			var headerPrefix='',
 				headerSufix='',
 				headerTag='HeaderCell',
 				classList=['i-ui-grid-header'];
-				debugger;
-			if((elem.attributes.sortable?(elem.attributes.sortable.value !== 'false'):this.options.sortable)){
+				
+			if((elem.attributes.sortable?(elem.attributes.sortable.value === 'true'):this.options.sortable)){
 				headerTag='ContainerHeaderCell';
 				headerSufix='</division><div class="i-ui-sort-icon-container"><i class="sort-arrow-desc fa fa-arrow-up"></i><i class="sort-arrow-asc fa fa-arrow-down"></div></i>'
 				headerPrefix='<division>'
@@ -50,20 +53,22 @@
 		onDataFetch: function(dataObject){
 			var _length=dataObject.data.length;
 				items=[];
-			this._header=IUI.makeUI(this.headerTemplate,this.options.model);
+			this._header=this._header || IUI.makeUI(this.headerTemplate,this.options.model);
 			this.$element.append(this._header.$element);
 			for(var i=0;i<_length;++i){
-				var _item=IUI.makeUI(this.rowTemplate,dataObject.data[i]);
+				var _item=dataObject.data[i].__items || IUI.makeUI(this.rowTemplate,dataObject.data[i]);
+				dataObject.data[i].__items = _item;
 				this.$element.append(_item.$element);
 				items.push(_item);
 			}
 			this.items=items;
 		},
 		onDataChange: function(dataObject){
-			debugger;
+			
 			if(dataObject.type==="add"){
-				var _item=IUI.makeUI(this.rowTemplate,dataObject.item);
+				var _item=dataObject.item.__items || IUI.makeUI(this.rowTemplate,dataObject.item);
 				if(typeof dataObject.index ==='undefined'){
+					dataObject.item.__items = _item;
 					this.$element.append(_item.$element);
 					this.items.push(_item);
 				}else{
@@ -73,7 +78,7 @@
 			}else if(dataObject.type==="remove"){
 				this.$element.children().eq(dataObject.index).remove();				
 			}else{
-				this.$element.children().remove();
+				this.$element.children().detach();
 				this.onDataFetch(dataObject);
 			}
 		},
@@ -88,7 +93,8 @@
 			}
 		},
 		_handleSortClick: function(e){
-			debugger;
+			
+				this._sortObject=this._sortObject || [];
 			var sortDesc;
 			
 			if($(e.target).hasClass('sort-arrow-desc')){
@@ -96,11 +102,20 @@
 			}else if($(e.target).hasClass('sort-arrow-asc')){
 				sortDesc=false;
 			}
-			
-			var _field=$(e.currentTarget).closest('th').data('field');
-			e.currentTarget.sortDesc=sortDesc;
 
-			this.sort({field:_field, desc:sortDesc});			
+			var _field=$(e.currentTarget).closest('th').data('field');
+
+			if(e.currentTarget.sortDesc==sortDesc){	
+				this._sortObject.splice(this._sortObject.indexOf(e.currentTarget.sortObject),1);
+				e.currentTarget.sortObject=null;
+				e.currentTarget.sortDesc=null;	
+			}else{
+				e.currentTarget.sortDesc=sortDesc;
+				e.currentTarget.sortObject = e.currentTarget.sortObject || this._sortObject[this._sortObject.push({field:_field}) - 1];
+				e.currentTarget.sortObject.desc=sortDesc;
+			}
+			
+			this.sort(this._sortObject.slice());			
 			
 			
 		},

@@ -33,7 +33,7 @@
 		_attachEvents: function(){
 			var that=this;
 			IUI.uiContainers.PopOver.prototype._attachEvents.apply(this,arguments);	
-			debugger;
+			
 			$(this.options.container).on('mousedown',function(e){
 				
 				that.popup.closeImmediate(e);

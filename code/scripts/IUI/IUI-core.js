@@ -155,7 +155,6 @@
 	IUIClass.prototype.initialize=function(options){
 		this.load(options);
 		this.options=_extendObject((this.options) || ({}),options);	
-		
 		this._handlers={};		
 		this._bind(this.options);
 		if(this.options.eventgroup){

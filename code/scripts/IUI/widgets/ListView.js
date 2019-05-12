@@ -24,7 +24,7 @@
 		},
 		
 		onDataChange: function(dataObject){
-			debugger;
+			
 			if(dataObject.type==="add"){
 				var _item=IUI.makeUI(this.options.template,dataObject.item);
 				if(typeof dataObject.index ==='undefined'){
@@ -37,7 +37,7 @@
 			}else if(dataObject.type==="remove"){
 				this.$element.children().eq(dataObject.index).remove();				
 			}else{
-				this.$element.children().remove();
+				this.$element.children().detach();
 				this.onDataFetch(dataObject);
 			}
 		},
