@@ -47,7 +47,7 @@
 		initialize: function(options){
 			IUI.Class.prototype.initialize.apply(this,arguments);		
 			this.persist=this.options.persist;
-			this.name=this.options.name;
+			this.name=this.options.name || IUI.getUID();
 			this._validateSchema();
 			if(this.options.autofetch){
 				this.fetch();
@@ -166,12 +166,20 @@
 			
 			return _data;
 		},
+		setData: function(data){
+			if(this.state.fetched){
+				var _data =this._processData(data);
+				this.trigger('change',{data:_data});
+				this.data=_data;							
+			}else{
+				this.data=data;
+			}
+		},
 		fetch: function(data){
 			this.data=this._processData(data || this.data || this.options.data);				
 			this.state.fetched=true;
 			this.trigger('fetch',{data:this.data});
-		}
-		
+		}		
 		
 	});
 	

@@ -39,9 +39,32 @@
 			this.makeUI();	
 			if(this.options.datamart){
 				IUI.DataMart.bindWidget(this.options.datamart,this);
+			}else if(this.options.data){
+				this._processModelData();
 			}
 			this.bindModels(this.boundModelOptions);
 			this.onInitialize();	
+		},
+		_handledataChange: function(){
+				this._processModelData();
+		},
+		_processModelData: function(){
+			if(typeof this.options.data === 'string'){
+				return;
+			}else 
+				if(typeof this.options.data === 'object'){
+					if(!this.dataMart){
+						var dataMart = new IUI.DataMart({
+							idField : this.options.idField,
+							textField : this.options.textField,
+							data : this.options.data,
+							autofetch: true
+						});
+						IUI.DataMart.bindWidget(dataMart.name,this);
+					}else{
+						this.dataMart.setData(this.options.data);
+					}
+				}			
 		},
 		_handleOptionChange:function(key,value){
 			if(key in this.element.style){
