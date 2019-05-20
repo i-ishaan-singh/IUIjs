@@ -58,7 +58,11 @@
 		},
 		bindModels: function(){
 			IUI.ContainerUI.prototype.bindModels.apply(this,arguments);
-			if(typeof this.options.viewmodel == 'string'){
+			if(typeof this.options.viewmodel === 'undefined'){
+				this.options.viewmodel = this.options.model.model;
+				this._modelReady = true;
+				this._honorViewPromise();
+			}if(typeof this.options.viewmodel == 'string'){
 				if(this.options.viewmodel.match(IUI._observableRegex)){
 					return;
 				}else if(!this.bound){
@@ -145,10 +149,12 @@
 			if(!_view.$el){
 				_view.render();
 			}
-			if(_viewport)
-			_viewport.$element.append(_view.$el);
-			_viewport._currentView=_view;
-			_view.trigger('append');
+			if(_viewport){
+				_viewport.$element.children().detach();
+				_viewport.$element.append(_view.$el);
+				_viewport._currentView=_view;
+				_view.trigger('append');
+			}
 		}else if(_view){
 			viewPromiseMap[IUI.View.getName(_view)] = viewport;
 		}else{

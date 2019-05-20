@@ -61,6 +61,14 @@
 * ADDED - Multi-group sorting in IUI Grid
 * OPTIMIZED - Quick Sort Logic
 * CHANGED - Layouts now position using absolute positioning
+* FIXED - Radio does not handle value attribute model binding
+* FIXED - FormLabel creation logic of radio Widget
+* CHANGED - Combobox dropdown now renders ListView Widget
+* FIXED - Button does not handle value attribute model binding
+* ADDED- Views can be created before and after viewports
+* FIXED - Overlay contents was not rendering with IUI
+* FIXED - Optimized model rendering logic
+* FIXED - CSS
 
 
 ---------Version 1.0.1

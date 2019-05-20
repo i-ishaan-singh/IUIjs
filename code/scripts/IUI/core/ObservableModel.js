@@ -63,7 +63,10 @@
 		},
 		
 		_handleChange: function(key,value,sender){
-			(this.handler) && (this.handler(key,value,sender));
+			var that=this;
+			setTimeout(function(){
+				(that.handler) && (that.handler(key,value,sender));
+			})
 		}
 	});
 	

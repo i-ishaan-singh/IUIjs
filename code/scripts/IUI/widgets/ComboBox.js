@@ -17,76 +17,55 @@
 			
 			classList: IUI.Widget.prototype.classList.concat(['i-ui-combobox']),
 			initialize: function(options){
-				var textAttribute=this.options.textAttribute, idAttribute=this.options.idAttribute;
-				if(options.element && !options.data){
-					var _data=[];
-					$(options.element).find('option').each(function(idx,elem){
-						var obj={}
-							obj[textAttribute]=elem.innerHTML;
-							obj[idAttribute]=elem.id;
-						_data.push(obj);
-					});
-					options.data=_data;
+				var _templateExtras='';
+				if(options.datamart){
+					$(options.element).removeAttr('datamart');
+					_templateExtras=_templateExtras+' datamart="'+options.datamart+'" ';
+					delete options.datamart;
 				}
+				if(options.data){
+					$(options.element).removeAttr('data');
+					_templateExtras=_templateExtras+' data="'+options.data+'" ';
+					delete options.data;
+				}
+				this.tagTemplate ='<listview class="i-ui-dropdown-list" '+_templateExtras+'><division class="i-ui-option-item" ii-id="::'+(options.idfield||this.options.idfield)+'::">::'+(options.textfield||this.options.textfield)+'::</division></listview>'
 				InputBox.prototype.initialize.apply(this,arguments);		
 			},
-			_createPopup:function(data){
-					var textAttribute=this.options.textAttribute, 
-						idAttribute=this.options.idAttribute,
-						_elem=this.$element;
-					
-					var dataMapper=function(_data,idx){
-						var elem=document.createElement('div');
-						$(elem).addClass('i-ui-option-item');
-						if(_data[idAttribute]){
-							elem.id=_data[idAttribute];
-						}
-						elem.innerHTML=_data[textAttribute];
-						elem._uiDataIndex=idx;
-						return elem;
-					}
-					
-					if(this.popup){
-						this.popup.setContents(data.map(dataMapper))
-						this.popup.options.animateObjectOpen.height=2*data.length+'em'
-					}else{
-						this.popup=IUI.createOverlay({
-							anchor: this.element,
-							contents: data.map(dataMapper),
-							button: this.element.querySelector('.i-ui-dropbutton-container'),
-							maxHeight: '15em',
-							height: (2*this.options.data.length)+'em',
-							opening: function(){
-								_elem.addClass('i-ui-active');
-							},
-							close: function(){
-								_elem.removeClass('i-ui-active');
-							}
-							
-						});
-					}
+			_createPopup:function(){
+				var _elem=this.$element;
+				this.popup=IUI.createOverlay({
+					anchor: this.element,
+					contents: this.tagTemplate,
+					model: this.options.model,
+					button: this.element.querySelector('.i-ui-dropbutton-container'),
+					maxHeight: '15em',
+					height: '15em',
+					opening: function(){
+						_elem.addClass('i-ui-active');
+					},
+					close: function(){
+						_elem.removeClass('i-ui-active');
+					}							
+				});
+				debugger;
+				this.dataMart = this.popup.contents.widgets[0].dataMart;
 			},
-			onDataFetch: function(e){
-				var data=e.data;
-				this._createPopup(data);
-				this.options.data=data;
+			onRender: function(){	
+				this._createPopup();
 			},
-			onRender: function(){
-				this._createPopup(this.options.data);
-			},
-			options: {			
-				textAttribute: 'text',
-				idAttribute: 'id'
+			options:{
+				idfield: 'id',
+				textfield: 'text',
 			},
 			_attachEvents: function(){
 				var that=this;
 				InputBox.prototype._attachEvents.apply(this,arguments);
-				$(this.popup.element).on('click','.i-ui-option-item',function(e){
-					var index=e.currentTarget._uiDataIndex;
-					if(typeof index !== "undefined"){
-						that.value(that.options.data[index][that.options.textAttribute]);
-						that.trigger('change',{value:that.options.data[index] });
-					}
+				$(this.popup.element).on('click','.i-ui-list-item',function(e){
+					debugger;
+					var index=$(e.currentTarget).index();
+					that.value(that.dataMart.data[index][that.options.textfield]);
+					that.trigger('change',{value:that.dataMart.data[index]});
+					
 				}.bind(this));
 			},
 		});

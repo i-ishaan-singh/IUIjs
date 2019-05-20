@@ -16,17 +16,19 @@
 			checked:false
 		},
 		initialize: function(){
-			
 			this.options.checked=(this.options.checked===true || this.options.checked==="true" || this.options.checked==="checked");			
 			IUI.Widget.prototype.initialize.apply(this,arguments);		
+		},
+		_handlevalueChange: function(val){
+			this.input.value=val;
 		},
 		onTemplateAttach:function(wrapper){
 			this.input=wrapper.children[0];
 		},
 		_processOptions: function(wrapper){
 			IUI.Widget.prototype._processOptions.apply(this,arguments);
-			this.label=new IUI.uiWidgets.FormLabel({text: this.options.text});
-			$(wrapper).append(this.label.$element);
+			this.labelcontainer=IUI.makeUI('<div><FormLabel text="'+this.options.text+'"></FormLabel></div>', this.options.model);
+			$(wrapper).append(this.labelcontainer.widgets[0].$element);
 			this.input.value=this.options.value;
 			if(this.options.group){
 				this.input.name=this.options.group
@@ -48,6 +50,7 @@
 	});
 	
 	IUI.WidgetBuilder.plugin(Radio);
+
 
 
 });

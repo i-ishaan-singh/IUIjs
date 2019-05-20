@@ -183,6 +183,7 @@
 				$(this.contents).before($('<span class="ghost-span">'));
 				var _element=$(this.contents).detach();
 				_element.appendTo(this.element);
+				this.contents = IUI.makeUI(this.element, this.options.model);
 			}
 			$(this.element).addClass(this.classList.concat(this.options.classlist));
 			this.element.uiOverlay=this;
