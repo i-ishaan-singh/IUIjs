@@ -50,6 +50,7 @@
 			if(IUI.domAccessibility){
 				this.element.uiContainer=this;
 			}
+			this.element.onDOMAppend = this.onDOMAppend;
 		},
 		_appendSubContainer: function(){
 			this.$element.after(this.subcontainer);

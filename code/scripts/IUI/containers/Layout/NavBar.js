@@ -21,6 +21,6 @@
 	});
 	
 	IUI.WidgetBuilder.plugin(Navbar);
-
+	IUI.WidgetBuilder.alias('Navbar','Header')
 
 });

@@ -63,7 +63,20 @@
 		}
 	}
 	
+	WidgetBuilder.alias=function xalias(existingWidget, newName){
+		existingWidget = String(existingWidget).toUpperCase();
+		newName = String(newName).toUpperCase();
 		
+		if(WidgetBuilder.containerList[existingWidget]){
+			WidgetBuilder.containerList[newName]=WidgetBuilder.containerList[existingWidget]
+		}else if(WidgetBuilder.widgetList[existingWidget]){
+			WidgetBuilder.widgetList[newName]=WidgetBuilder.widgetList[existingWidget]
+		}else{
+			throw new Error(existingWidget+' Not Found');
+		}
+	}
+
+	
 	IUI.WidgetBuilder=WidgetBuilder;
 	
 /* ------- END : IUI.WidgetBuilder.js -----------*/

@@ -39,6 +39,10 @@
 			this.widgets=[];
 			this.containers=[];			
 			IUI.Class.prototype.initialize.apply(this,arguments);
+			if(this.options.renderif && Object.keys(this.options.model.model).indexOf(this.options.renderif) === -1){
+				$(this.options.element).replaceWith('<span class="ghost-span">');
+				return;
+			}
 			if(this.options.async){
 				this._create=this._createAsync;
 			}			
@@ -186,6 +190,7 @@
 			if(IUI.domAccessibility){
 				this.element.uiContainer=this;
 			}
+			this.element.onDOMAppend = this.onDOMAppend;
 		},
 		_findAndMakeWidgets:function(){
 			this.widgets=[];

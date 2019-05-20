@@ -30,7 +30,10 @@
 		},
 		initialize: function(options){
 			IUI.Class.prototype.initialize.apply(this,arguments);	
-			
+			if(this.options.renderif && Object.keys(this.options.model).indexOf(this.options.renderif) === -1){
+				$(this.options.element).replaceWith('<span class="ghost-span">');
+				return;
+			}
 			this.$element=$(this.options.element)
 			this.element=this.$element[0];
 			this.makeUI();	
@@ -132,6 +135,7 @@
 			if(IUI.domAccessibility){
 				this.element.iuiWidget=this;
 			}
+			this.element.onDOMAppend = this.onDOMAppend;
 			this.$element=$(wrapper);
 			this.onRender();
 		},

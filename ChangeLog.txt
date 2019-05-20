@@ -69,7 +69,10 @@
 * FIXED - Overlay contents was not rendering with IUI
 * FIXED - Optimized model rendering logic
 * FIXED - CSS
-
+* ADDED - Alias can be set for pre exting widgets
+* ADDED - Dom Append API to elements
+* ADDED - Widgets won't render if attribute is not present in model
+* ADDED - DataMart will automatically get UID as name if not given
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
