@@ -10,7 +10,7 @@
 
 	var Viewport = IUI.uiContainers.Exhibit.extend({
 		name: 'Viewport',
-		classList: IUI.uiContainers.Exhibit.prototype.events.concat(['i-ui-Viewport']),
+		classList: IUI.uiContainers.Exhibit.prototype.classList.concat(['i-ui-Viewport']),
 		options:{
 			context : 'default',
 			destroyViews : false

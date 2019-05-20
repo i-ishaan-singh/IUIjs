@@ -60,7 +60,7 @@
 * OPTIMIZED - Rerendering logic of grid rows
 * ADDED - Multi-group sorting in IUI Grid
 * OPTIMIZED - Quick Sort Logic
-
+* CHANGED - Layouts now position using absolute positioning
 
 
 ---------Version 1.0.1

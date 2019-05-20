@@ -9,16 +9,14 @@
 
 	var Navbar=IUI.uiContainers.Layout.extend({
 		name:'Navbar',
-		classList: IUI.uiContainers.Container.prototype.classList.concat(['i-ui-navbar']),
+		classList: IUI.uiContainers.Layout.prototype.classList.concat(['i-ui-navbar']),
 		subContainerClassList: IUI.uiContainers.Layout.prototype.subContainerClassList.concat(['i-ui-navbar-subcontainer']),
-		_observedOptions:['height'],
-		options: {
-		},
+		_observedOptions: ['height'],
 		_handleheightChange:function(value){
-			this.subcontainer.style.height='calc( 100% - '+value+')';
+			$(this.subcontainer).css('padding-top',value);
 		},
 		processSubcontainer:function(subcontainer){
-			subcontainer.style.height='calc( 100% - '+(this.options.height || '0px')+')';
+			$(subcontainer).css('padding-top',this.options.height);
 		}
 	});
 	

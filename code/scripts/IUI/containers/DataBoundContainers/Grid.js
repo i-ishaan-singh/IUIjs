@@ -1,6 +1,6 @@
 (function (factory) {
    if(typeof define === "function" && define.amd) {    
-	define(['IUI-core','Container'],factory);
+	define(['IUI-core','DataBoundContainer'],factory);
 	
   } else {
     factory(window.IUI);
