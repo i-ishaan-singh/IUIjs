@@ -75,6 +75,11 @@
 		optionsModel.bindConainerModel(containerModel,mappingArray);
 		containerModel.bindOptionModel(optionsModel,mappingArray);
 	}
+		
+	ObservableModel.unbindModels=function bindModels(optionsModel, containerModel,mappingArray){
+		optionsModel.unbindConainerModel(containerModel,mappingArray);
+		containerModel.unbindOptionModel(optionsModel,mappingArray);
+	}
 	
 	
 	IUI.ObservableModel=ObservableModel;

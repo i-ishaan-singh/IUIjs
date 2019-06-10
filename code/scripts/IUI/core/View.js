@@ -6,6 +6,7 @@
   }
 })(function(IUI){
 
+	
 	var viewPromiseMap = {
 		
 	}
@@ -22,24 +23,38 @@
 		events: IUI.ContainerUI.prototype.events.concat(['render','append']),
 		initialize: function(options){
 			this._uid=IUI.getUID();
-			$(options.element).removeAttr('viewmodel').removeAttr('name');
-			this.template = '<container'+options.element.outerHTML.slice(5,-5)+'container>';
+			$(options.element).removeAttr('viewmodel').removeAttr('name').removeAttr('datamart').removeAttr('eventgroup')
+				.addClass('i-ui-exhibit');
 			if(options.name){
 				viewContexts[options.context || this.options.context].view[options.name]=this;
-			}			
+			}	
 			this.name = options.name;
-			IUI.ContainerUI.prototype.initialize.apply(this,arguments);	
-			this.makeUI();
-			this.bindModels();
+			if(options.templateurl){
+				var that=this, _arguments=arguments;
+				var _clone = $(options.element).clone().empty();
+				_clone.load(options.templateurl, function(){
+					that.template = '<container'+_clone[0].outerHTML.slice(5,-5)+'container>'
+					IUI.ContainerUI.prototype.initialize.apply(that,_arguments);	
+					that.makeUI();
+					that.bindModels();
+				});
+			}else{
+				this.template = '<container'+options.element.outerHTML.slice(5,-5)+'container>';
+				IUI.ContainerUI.prototype.initialize.apply(this,arguments);	
+				this.makeUI();
+				this.bindModels();
+			}
 		},	
 		options:{
 			context: 'default'
 		},
 		_honorViewPromise: function(){
-			var _name = IUI.View.getName(this);
-			if(viewPromiseMap[_name]){
-				IUI.View.renderViewInViewport(this, viewPromiseMap[_name]);
+			var _name = IUI.View.getName(this),
+				viewPromise = viewPromiseMap[_name] || viewPromiseMap[this._uid];
+			if( viewPromise ){
+				IUI.View.renderViewInViewport(this, viewPromise);
 				delete viewPromiseMap[_name];
+				delete viewPromiseMap[this._uid];
 			}
 		},
 		_handleviewmodelChange:function(value){
@@ -59,7 +74,7 @@
 		bindModels: function(){
 			IUI.ContainerUI.prototype.bindModels.apply(this,arguments);
 			if(typeof this.options.viewmodel === 'undefined'){
-				this.options.viewmodel = this.options.model.model;
+				this.options.viewmodel = this.options.model;
 				this._modelReady = true;
 				this._honorViewPromise();
 			}if(typeof this.options.viewmodel == 'string'){
@@ -74,16 +89,24 @@
 				this._honorViewPromise();
 			}
 		},
-		_bindViewModel: function(model){
-			
-			this.options.viewmodel = model;
+		_bindViewModel: function(viewModel){
+			viewModel.boundViews.push(this);
+			this.options.viewmodel = viewModel.model;
 			this._modelReady = true;
 			this._honorViewPromise();
 		},
 		makeUI: function(){
-			this.element.outerHTML='<span class="ghost-span"></span>';
+			if($(this.element).parent().length)
+				this.element.outerHTML='<span class="ghost-span"></span>';
 			this.element=null;
 		},
+		destroy: function(){
+			this.container.destroy();
+			this.container.$element.remove();
+			this.container=null;
+			this.$el=null;
+			this.bound=false;
+		}
 		
 	});
 	
@@ -137,7 +160,7 @@
 		if(view.options.name){
 			return view.options.name + ':' +view.options.context;
 		}else{
-			return _view._uid;
+			return view._uid;
 		}
 	}
 	
