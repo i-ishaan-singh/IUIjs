@@ -27,7 +27,7 @@
 			$(this.subcontainer).css('padding-'+this.options.position,value);
 		},
 		_appendSubContainer: function(){
-			this.$element.after(this.subcontainer);
+			this.$element.before(this.subcontainer);
 			this.$element.addClass('i-ui-'+this.options.position+'-sidebar')
 		},
 		processSubcontainer:function(subcontainer){

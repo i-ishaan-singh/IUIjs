@@ -53,7 +53,7 @@
 			this.element.onDOMAppend = this.onDOMAppend;
 		},
 		_appendSubContainer: function(){
-			this.$element.after(this.subcontainer);
+			this.$element.before(this.subcontainer);
 		},
 		getContainerById: function(id){
 			var container=IUI.ContainerUI.prototype.getContainerById.apply(this,arguments);	

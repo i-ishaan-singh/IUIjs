@@ -27,6 +27,7 @@
 		},
 		_processOptions: function(wrapper){
 			IUI.Widget.prototype._processOptions.apply(this,arguments);
+			this.options.text= this.options.text ||(this.element && this.element.innerHTML);
 			this.labelcontainer=IUI.makeUI('<div><FormLabel text="'+this.options.text+'"></FormLabel></div>', this.options.model);
 			$(wrapper).append(this.labelcontainer.widgets[0].$element);
 			this.input.value=this.options.value;

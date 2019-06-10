@@ -10,8 +10,12 @@
 	var ContextMenu=IUI.uiContainers.PopOver.extend({
 		name:'ContextMenu',
 		initialize: function(options){
+			var that=this;
 			options.button=null;
-			IUI.uiContainers.PopOver.prototype.initialize.apply(this,arguments);	
+			this.element=options.element;
+			setTimeout(function(){
+				IUI.uiContainers.PopOver.prototype.initialize.call(that,options);	
+			});
 			
 		},
 		options:{

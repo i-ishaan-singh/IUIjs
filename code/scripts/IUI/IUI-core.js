@@ -68,6 +68,7 @@
 			for(var a in _bindings){
 				_bindings[a](eventGroup.events);
 			}
+			delete EventGroup._classBindings[name];
 			if(eventGroup.persist){
 				EventGroup._eventBindings[name]=eventGroup;
 			}

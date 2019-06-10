@@ -76,7 +76,18 @@
 * ADDED - data attribute on widget, model can be bound with it
 * ADDED - setData() API on dataMart
 * Added widgets in build.js
-
+* FIXED - Layout containers not responding to clicks
+* FIXED -  Creating context menu cause Stack Overflow error
+* ADDED - Template object now carries uid
+* FIXED - undefined calls on widgets and containers if API is not present.
+* REVERTED - Double quote issue in template
+* FIXED - Eventgroup retains in memory after binding
+* ADDED - getDataMart API in Combobox
+* FIXED - removed unused _handlevalueChange API
+* ADDED - NumericInputBox honor step value binding
+* FIXED - Radio showing undefined when text placed inside tag
+* FIXED - Switch not binding to value change
+* FIXED - Switch Changing ToggleButton value doesn't change model value
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

@@ -148,11 +148,11 @@
 			var args=Array.prototype.slice.call(arguments,1);
 			for(var c in this.containers){
 				var container=this.containers[c];
-				container[command].apply(container,args);
+				(container[command]) && (container[command].apply(container,args));
 			}
 			for(var w in this.widgets){
 				var widget=this.widgets[w];
-				widget[command].apply(widget,args);
+				(widget[command]) && (widget[command].apply(widget,args));
 			}
 		},
 		enable: function(val){

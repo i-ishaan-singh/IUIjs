@@ -47,8 +47,6 @@
 						_elem.removeClass('i-ui-active');
 					}							
 				});
-				debugger;
-				this.dataMart = this.popup.contents.widgets[0].dataMart;
 			},
 			onRender: function(){	
 				this._createPopup();
@@ -57,15 +55,19 @@
 				idfield: 'id',
 				textfield: 'text',
 			},
+			_getDataMart: function(){
+				return this.popup.contents.widgets[0].dataMart;
+			},
 			_attachEvents: function(){
 				var that=this;
 				InputBox.prototype._attachEvents.apply(this,arguments);
 				$(this.popup.element).on('click','.i-ui-list-item',function(e){
-					debugger;
-					var index=$(e.currentTarget).index();
-					that.value(that.dataMart.data[index][that.options.textfield]);
-					that.trigger('change',{value:that.dataMart.data[index]});
-					
+					var index=$(e.currentTarget).index(),
+						dataMart=that._getDataMart();
+					if(dataMart){
+						that.value(dataMart.data[index][that.options.textfield]);
+						that.trigger('change',{value:dataMart.data[index]});
+					}
 				}.bind(this));
 			},
 		});

@@ -54,12 +54,12 @@
 		'Form':'./containers/Form',
 		'RadioGroup':'./containers/RadioGroup'
 	},	
-	optimize: 'uglify2',
+	optimize: 'none',
 	shim:{
 		"IUI": {
 			exports: "IUI" 
 		}
 	},
 	name: "IUI",
-    out: "./build/IUI.min.js"
+    out: "./build/IUI.js"
 })
