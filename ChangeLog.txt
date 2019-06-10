@@ -92,7 +92,9 @@
 * ADDED - unbindModels API in ObservableModel
 * ADDED - destroy API in View
 * ADDED - Destroy API in IUIClass
-
+* ADDED - Views can get template from templateURL
+* ADDED - __update API for ObservableModels
+* ADDED - update API for ViewModel
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

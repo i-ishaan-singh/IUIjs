@@ -29,37 +29,53 @@
 			this._data=_data;
 			this.handler=handler;
 			
-			
+			var that=this, _modelUpdating=false;
 			this.model=model || {};
-			for(var key in model){
+			
+			Object.defineProperty(this.model,'__update',{
+				value: function(_newModel){
+					_modelUpdating=true;
+					var _keys=[], that=this;
+					Object.keys(_newModel).forEach(function(key){
+						that[key]=_newModel[key];				
+						_keys.push(key);
+					});
+					_keys.forEach(function(key){
+						_handleChange(key,_newModel[key]);
+					});
+					
+					_modelUpdating=false;
+				},
+				enumerable: false
+    		});
+				
+			
+			Object.keys(model).forEach(function(key){
 				if(list && (list.indexOf(key)===-1)){
-					continue;
-				}else if(typeof this.model[key] === 'function'){
-					continue;
+					return;
+				}else if(typeof that.model[key] === 'function'){
+					return;
 				}
 				
-				Object.defineProperty(this._data,key,{
-					value: this.model[key],
+				Object.defineProperty(that._data,key,{
+					value: that.model[key],
 					writable: true
     			});
 				
-				Object.defineProperty(this.model,key,{	
-					set: (function(key){
-						return function(value){
+				Object.defineProperty(that.model,key,{	
+					set: function(value){
 							var valid=validator(value);
 							if(_data[key]!==value && valid.valid){
 								_data[key]=value;
-								_handleChange(key,value);
+								(_modelUpdating) || (_handleChange(key,value));
 							}
-						}
-					})(key),
-					get: (function(key){
-						return function(){
+						},
+					get: function(){
 							return _data[key];
 						}
-					})(key)
 				});
-			}
+			});
+	
 		},
 		
 		_handleChange: function(key,value,sender){

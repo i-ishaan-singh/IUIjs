@@ -31,17 +31,28 @@
 			persist: true
 		},
 		initialize: function(options){
+			this.boundViews=[];
 			this.persist=options.persist;
 			this.name=options.name;
 			this.model=options.model;
 			bindViewModel(this);
+		},
+		updateModel: function(_newModel){
+			if(this.model.__update){
+				this.model.__update(_newModel);
+			}else{
+				this.model=_newModel;
+				this.boundViews.forEach(function(view){
+						view.options.viewmodel=_newModel;
+				});
+			}
 		}
 	});
 	
 	ViewModel.bindView=function(name,view){
 		
 		if(ViewModel._modelBindings[name]){
-			view._bindViewModel(ViewModel._modelBindings[name].model);
+			view._bindViewModel(ViewModel._modelBindings[name]);
 			if(!ViewModel._modelBindings[name].persist){
 				delete ViewModel._modelBindings[name];
 			}
