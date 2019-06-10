@@ -88,6 +88,11 @@
 * FIXED - Radio showing undefined when text placed inside tag
 * FIXED - Switch not binding to value change
 * FIXED - Switch Changing ToggleButton value doesn't change model value
+* ADDED - Destroy API in ContainerUI
+* ADDED - unbindModels API in ObservableModel
+* ADDED - destroy API in View
+* ADDED - Destroy API in IUIClass
+
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

@@ -26,6 +26,19 @@
 				}			
 			}
 		},
+		unbindOptionModel: function(optionModel,mappingArray){
+			var length = mappingArray.length;
+			var uids=[];
+			for(var i=0;i<length;++i){
+				uids.push( mappingArray[i]._uid);
+			}
+			this.boundModels=this.boundModels.filter(function(elem){
+				if(uids.indexOf(elem._uid) !== -1){
+					return false;
+				}
+				return true;
+			});		
+		},
 		bindOptionModel: function(optionModel,mappingArray){
 			var mapping,options,length=mappingArray.length;
 			(this.boundModels) || (this.boundModels=[]);
@@ -33,7 +46,8 @@
 				var obj={
 					model: optionModel,
 					optionAttribute:mappingArray[i].optionAttribute,
-					template:mappingArray[i].template
+					template:mappingArray[i].template,
+					_uid: mappingArray[i]._uid
 				}
 				mapping=mappingArray[i].mappings;
 				this.boundModels.push(obj);		

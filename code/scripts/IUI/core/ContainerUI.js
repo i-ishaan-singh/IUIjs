@@ -155,6 +155,9 @@
 				(widget[command]) && (widget[command].apply(widget,args));
 			}
 		},
+		destroy: function(val){
+			this._itterateCommandToAllComponents('destroy');
+		},
 		enable: function(val){
 			this._itterateCommandToAllComponents('enable',val);
 		},

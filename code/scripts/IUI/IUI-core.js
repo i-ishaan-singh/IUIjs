@@ -305,6 +305,12 @@
 		}
 	}
 	
+	IUIClass.prototype.destroy=function(boundOptions){
+		if(this.options.model){
+				IUI.ObservableModel.unbindModels(this.optionsModel,this.options.model,this._optionModelMapping);
+		}
+	}
+	
 	IUIClass.prototype.__processOptionMapping=function(){
 		var _mappings=IUI.behaviors.getObservableMapping(this.options),
 			length=_mappings.length;
