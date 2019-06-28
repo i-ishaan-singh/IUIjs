@@ -34,6 +34,7 @@
 		'ContainerCell',
 		'ContainerHeaderCell',
 		'ListView',
+		'PageListView',
 		'Switch',
 		'Slider',
 		'ToggleButton',

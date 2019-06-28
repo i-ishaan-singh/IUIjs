@@ -43,6 +43,7 @@
 		'HeaderCell':'./widgets/HeaderCell',
 		'Cell':'./widgets/Cell',
 		'ListView':'./widgets/ListView',
+		'PageListView':'./widgets/PageListView',
 		'ToggleButton':'./widgets/ToggleButton',
 		'SubmitButton':'./widgets/SubmitButton',
 		'FormLabel':'./widgets/FormLabel',

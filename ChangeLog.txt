@@ -99,6 +99,7 @@
 * CHANGE - Model Data and Template render during extraction
 * CHANGE - Value change not triggered on option container binding
 * ADDED- List class can be passed to List View
+* ADDED - PageListView
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

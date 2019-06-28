@@ -2,7 +2,7 @@ html, body{
 	font-size: 16px;
 }
 .i-ui-widget, .i-ui-container{
-	font-size: 1rem;
+	font-size: 1em;
 	display: inline-block;
 	box-sizing: border-box;
     vertical-align: top;
@@ -41,7 +41,6 @@ html, body{
 .i-ui-sidebar{
 	height: 100%;
 }
-
 
 .i-ui-widget-icon{
 	pointer-events: none;
@@ -97,8 +96,12 @@ html, body{
     line-height: 2em;
     padding: 0 0.25em;
 }
+.i-ui-button:active{
+	transform: translateX(1px) translateY(1px);	
+}
 .i-ui-button{
 	text-align: center;
+	cursor: pointer;
 }
 .i-ui-radio {
     padding-left: 2rem;
@@ -117,6 +120,9 @@ position: absolute;
     height: 100%;
     width: 1em;
     margin: 0 0.5em;	
+}
+.i-ui-list-item .i-ui-dropdown-list{
+	cursor: pointer;
 }
 .i-ui-dropbutton {
     height: 100%;
@@ -192,7 +198,12 @@ br {
 	width: 100%;
 	overflow: auto;
 }
-
+.i-ui-footer {
+    bottom: 0;
+}
+.i-ui-sidebar-subcontainer{
+		width: 100%;
+}
 /******************************************/
 
 .i-ui-subcontainer{
@@ -203,6 +214,7 @@ br {
 .i-ui-footer, .i-ui-footer-subcontainer {
     width: 100%;
 	height: 100%;
+	left: 0;
 }
 .i-ui-sidebar,  .i-ui-sidebar-subcontainer{
     height: 100%;
@@ -270,4 +282,33 @@ br {
     text-align: center;
     line-height: 1em;
     height: 1em;
+}
+
+
+.i-ui-page-listview .scroll-left, .i-ui-page-listview .scroll-right {
+    position: absolute;
+    top: calc(50% - 0.5em);
+    width: 2rem;
+    text-align: center;
+	cursor: pointer;
+}
+
+.i-ui-page-listview {
+    padding: 0 2rem;
+    width: 100%;
+}
+
+.i-ui-page-container {
+    overflow: hidden;
+}
+.i-ui-page-list-item{
+    border-right: 1px solid #808080;
+}
+
+.i-ui-page-listview .scroll-left {
+	left: 0;
+}
+
+.i-ui-page-listview .scroll-right {
+    right: 0;
 }
