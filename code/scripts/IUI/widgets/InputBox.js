@@ -15,7 +15,8 @@
 		options:{
 			validateoninput: true,
 			validateonblur: true,
-			value:''
+			value:'',
+			type: 'text'
 		},
 		_handlevalueChange: function(value){
 			this.value(value);
@@ -36,6 +37,7 @@
 		},
 		onTemplateAttach:function(wrapper){
 			this.input=$(wrapper.children[0]);
+			this.input.attr('type',this.options.type);
 		},
 		_attachEvents: function(){
 			var that=this;

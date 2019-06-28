@@ -43,6 +43,7 @@ require.config({
 		'HeaderCell':'./widgets/HeaderCell',
 		'Cell':'./widgets/Cell',
 		'ListView':'./widgets/ListView',
+		'PageListView':'./widgets/PageListView',
 		'ToggleButton':'./widgets/ToggleButton',
 		'SubmitButton':'./widgets/SubmitButton',
 		'FormLabel':'./widgets/FormLabel',
@@ -115,7 +116,8 @@ require(['jquery'],function(){
 			mycolor: 'red',
 			theme: '#7c9a70 wheat',
 			formColor: 'lightblue',
-			sliderValue: 0
+			sliderValue: 0,
+			dropDownData: season
 		};
 		new IUI.EventGroup({
 			name :"form-events",
@@ -127,9 +129,7 @@ require(['jquery'],function(){
 		
 	
 		
-		var containerUI=IUI.makeUI({
-			a:'ishaan-model'
-		});
+		var containerUI=IUI.makeUI(obj);
 			new IUI.ViewModel({
 			name: 'ishaan-model',
 			model: window.obj

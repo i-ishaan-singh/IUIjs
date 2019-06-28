@@ -29,6 +29,7 @@
 			}
 		},
 		initialize: function(options){
+			this._initPromise = $.Deferred();
 			IUI.Class.prototype.initialize.apply(this,arguments);	
 			if(this.options.renderif && Object.keys(this.options.model).indexOf(this.options.renderif) === -1){
 				$(this.options.element).replaceWith('<span class="ghost-span">');
@@ -36,14 +37,16 @@
 			}
 			this.$element=$(this.options.element)
 			this.element=this.$element[0];
-			this.makeUI();	
 			if(this.options.datamart){
 				IUI.DataMart.bindWidget(this.options.datamart,this);
 			}else if(this.options.data){
 				this._processModelData();
 			}
 			this.bindModels(this.boundModelOptions);
-			this.onInitialize();	
+			this.makeUI();	
+			this.onInitialize();
+			this._initPromise.resolve();
+			delete this._initPromise;			
 		},
 		_handledataChange: function(){
 				this._processModelData();
@@ -97,10 +100,27 @@
 			
 		},
 		_bindDataMart: function(dataMart){
-			this.dataMart=dataMart;
+			this.dataMart=dataMart, that=this;
+			
 			dataMart._bind({
-				fetch:this.onDataFetch.bind(this),
-				change:this.onDataChange.bind(this)
+				fetch: function(dataObject){
+					if(that._initPromise){
+						that._initPromise.done(function(){
+							that.onDataFetch(dataObject)
+						});
+					}else{
+						that.onDataFetch(dataObject)
+					}
+				},
+				change: function(dataObject){
+					if(that._initPromise){
+						that._initPromise.done(function(){
+							that.onDataChange(dataObject)
+						});
+					}else{
+						that.onDataChange(dataObject)
+					}
+				}
 			});			
 		},
 		_preprocessElement: function(wrapper){
@@ -217,7 +237,8 @@
 		},
 		options:{
 			enable: true,
-			isattached: true,			
+			isattached: true,
+			escapehtml: false			
 		}
 		
 	});

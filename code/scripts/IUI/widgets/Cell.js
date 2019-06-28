@@ -11,8 +11,11 @@
 		name:'Cell',
 		tagName: 'TD',
 		classList: ['i-ui-cell'],
+		load: function(options){
+			IUI.Widget.prototype.load.apply(this,arguments);		
+			options.value=(options.element && options.element.innerHTML) || options.template || (options.field?'::'+options.field+'::':(new Error('No Field Value to bind with')));			
+		},
 		_processOptions: function(wrapper){
-			this.options.value=(this.element && this.element.innerHTML) || this.options.template || (this.options.field?'::'+this.options.field+'::':(new Error('No Field Value to bind with')));
 			wrapper.innerHTML=this.options.value;
 			delete this.options.text;
 			IUI.Widget.prototype._processOptions.apply(this,arguments);		

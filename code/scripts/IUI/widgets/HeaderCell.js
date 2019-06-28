@@ -11,8 +11,11 @@
 		name:'HeaderCell',
 		tagName: 'Th',
 		classList: IUI.uiWidgets.Cell.prototype.classList.concat(['i-ui-header-cell']),
+		load: function(options){
+			options.value=(options.element && options.element.innerHTML) || options.template || options.field || '';
+			IUI.Widget.prototype.load.apply(this,arguments);		
+		},
 		_processOptions: function(wrapper){
-			this.options.value=(this.element && this.element.innerHTML) || this.options.template || this.options.field || '';
 			wrapper.innerHTML=this.options.value;
 			IUI.Widget.prototype._processOptions.apply(this,arguments);		
 		}

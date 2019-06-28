@@ -15,6 +15,10 @@
 			value: 'radio',
 			checked:false
 		},
+		load: function(options){
+			IUI.Widget.prototype.load.apply(this,arguments);
+			options.text=options.text ||(options.element && options.element.innerHTML);
+		},
 		initialize: function(){
 			this.options.checked=(this.options.checked===true || this.options.checked==="true" || this.options.checked==="checked");			
 			IUI.Widget.prototype.initialize.apply(this,arguments);		
@@ -27,7 +31,6 @@
 		},
 		_processOptions: function(wrapper){
 			IUI.Widget.prototype._processOptions.apply(this,arguments);
-			this.options.text= this.options.text ||(this.element && this.element.innerHTML);
 			this.labelcontainer=IUI.makeUI('<div><FormLabel text="'+this.options.text+'"></FormLabel></div>', this.options.model);
 			$(wrapper).append(this.labelcontainer.widgets[0].$element);
 			this.input.value=this.options.value;

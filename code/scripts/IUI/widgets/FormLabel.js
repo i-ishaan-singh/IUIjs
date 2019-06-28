@@ -10,8 +10,11 @@
 	var FormLabel=IUI.Widget.extend({
 		name:'FormLabel',
 		classList: IUI.Widget.prototype.classList.concat(['i-ui-formlabel']),
+		load: function(options){
+			options.value=(options.element && options.element.innerHTML) || options.text;
+			IUI.Widget.prototype.load.apply(this,arguments);		
+		},
 		_processOptions: function(wrapper){
-			this.options.value=(this.element && this.element.innerHTML) || this.options.text;
 			wrapper.innerText=this.options.value;
 			delete this.options.text;
 			IUI.Widget.prototype._processOptions.apply(this,arguments);		

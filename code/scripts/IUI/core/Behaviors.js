@@ -64,6 +64,9 @@
 			if(typeof object[attr] === "string"){	
 					var templateObject=IUI.Template.extractTemplateObject(object[attr]);
 					if(templateObject.mappings){
+						if(object.model && object.model.model){
+							object[attr]=IUI.Template.render(templateObject.template, object.model.model);
+						}
 						templateObject._uid=IUI.getUID();
 						templateObject.optionAttribute=attr;
 						//console.log(templateObject)

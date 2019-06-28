@@ -67,7 +67,6 @@
 					}
 				}
 				options=mappingArray[i].optionAttribute;
-				this.model[options]=IUI.Template.render(mappingArray[i].template,containerModel.model);
 				(this.boundModels[options]) || (this.boundModels[options]=[]);
 				this.boundModels[options].push(obj);				
 			}

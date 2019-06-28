@@ -10,8 +10,14 @@
 	var Division=IUI.Widget.extend({
 		name:'Division',
 		classList: ['i-ui-div'],
+		load: function(options){
+			if(options.tagname){
+				this.tagName=options.tagname;
+			}
+			options.value=(options.element && options.element.innerHTML);
+			IUI.Widget.prototype.load.apply(this,arguments);
+		},
 		_processOptions: function(wrapper){
-			this.options.value=(this.element && this.element.innerHTML);
 			wrapper.innerHTML=this.options.value;
 			IUI.Widget.prototype._processOptions.apply(this,arguments);		
 		},
