@@ -12,17 +12,18 @@
 		classList: IUI.Widget.prototype.classList.concat(['i-ui-listview']),
 		ignoredAttributes: ['template'],
 		onDataFetch:function(dataObject){
-			var _length=dataObject.data.length;
+			var _length=dataObject.data.length, options=this.options, container= this.container;
 				items=[];
-			for(var i=0;i<_length;++i){
-				var _item=IUI.makeUI(this.options.template,dataObject.data[i]);
-				this.container.append(_item.$element);
-				items.push(_item);
-			}
+			requestAnimationFrame(function(){
+				for(var i=0;i<_length;++i){
+					var _item=IUI.makeUI(options.template,dataObject.data[i]);
+					container.append(_item.$element);
+					items.push(_item);
+				}				
+			});
 			
 			this.items=items;
-		},
-		
+		},		
 		onDataChange: function(dataObject){
 			if(dataObject.type==="add"){
 				var _item=IUI.makeUI(this.options.template,dataObject.item);

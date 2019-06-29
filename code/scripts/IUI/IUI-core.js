@@ -146,10 +146,14 @@
 
 	function IUIClass(){	
 		this.initialize.apply(this,arguments);
+		this.onInitialize.apply(this,arguments);
 	}
 
 	
 	IUIClass.prototype.load=function(){
+		
+	}
+	IUIClass.prototype.onInitialize=function(){
 		
 	}
 	
@@ -260,6 +264,7 @@
 		
 		var IUIClass=function(){
 			this.initialize.apply(this,arguments);
+			this.onInitialize.apply(this,arguments);
 		};
 		
 		_getKeys(this.prototype).forEach(function(key){

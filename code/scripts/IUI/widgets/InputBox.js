@@ -32,6 +32,7 @@
 			}
 		},
 		onInitialize: function(){		
+			IUI.Widget.prototype.onInitialize.apply(this,arguments);
 			this._attachEvents();
 			this.value(this.options.value);
 		},

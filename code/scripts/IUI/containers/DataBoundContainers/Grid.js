@@ -9,10 +9,11 @@
 
 	var Grid=IUI.uiContainers.DataBoundContainer.extend({
 		name:'Grid',
-		tagName: 'table',		
+		tagName: 'div',		
 		classList: ['i-ui-grid'],
 		options:{
-			sortable: false
+			sortable: false,
+			scrollable: false
 		},
 		load: function(options){
 			options.sortable=options.sortable === 'true';
@@ -35,30 +36,37 @@
 			var columns=this.element.getElementsByTagName('column'),
 				headerTemplate = '<row class="i-ui-grid-thead">',
 				rowTemplate = '<row class="i-ui-grid-tbody">',
+				cols='',
 				that=this;
 
 			Array.prototype.slice.call(columns).forEach(function(elem){
+				var col=$('<col></col>');
+				if($(elem).attr('width')){
+					col.css('width',$(elem).attr('width'));
+					$(elem).attr('width',null);
+				}
 				headerTemplate = headerTemplate+that._getHeaderTemplate(elem);
 				if(elem.innerHTML.indexOf('<')!==0){
 					rowTemplate = rowTemplate+elem.outerHTML.replace(/title="(.*?)"/g,'').replace(/column/g,'Cell');
 				}else{
 					rowTemplate = rowTemplate+elem.outerHTML.replace(/title="(.*?)"/g,'').replace(/column/g,'ContainerCell');
 				}
+				cols=cols+col[0].outerHTML;
 				elem.outerHTML='';
+				that.hasConfig = true;
 			});
 			this.headerTemplate = headerTemplate + '</row>'
 			this.rowTemplate = rowTemplate + '</row>'
+			this.cols=$('<colgroup>'+cols+'</colgroup>');
 			
 		},
 		onDataFetch: function(dataObject){
 			var _length=dataObject.data.length;
 				items=[];
-			this._header=this._header || IUI.makeUI(this.headerTemplate,this.options.model);
-			this.$element.append(this._header.$element);
 			for(var i=0;i<_length;++i){
 				var _item=dataObject.data[i].__items || IUI.makeUI(this.rowTemplate,dataObject.data[i]);
 				dataObject.data[i].__items = _item;
-				this.$element.append(_item.$element);
+				this.tbody.append(_item.$element);
 				items.push(_item);
 			}
 			this.items=items;
@@ -69,26 +77,39 @@
 				var _item=dataObject.item.__items || IUI.makeUI(this.rowTemplate,dataObject.item);
 				if(typeof dataObject.index ==='undefined'){
 					dataObject.item.__items = _item;
-					this.$element.append(_item.$element);
+					this.tbody.append(_item.$element);
 					this.items.push(_item);
 				}else{
-					this.$element.children().eq(dataObject.index).after(_item.$element);
+					this.tbody.children().eq(dataObject.index).after(_item.$element);
 					this.items.splice(dataObject.index,0,_item);	
 				}
 			}else if(dataObject.type==="remove"){
-				this.$element.children().eq(dataObject.index).remove();				
+				this.tbody.children().eq(dataObject.index).remove();				
 			}else{
-				this.$element.children().detach();
+				this.tbody.children().detach();
 				this.onDataFetch(dataObject);
 			}
 		},
 		makeUI: function(){
 			this._extractRowTemplate();
 			IUI.uiContainers.DataBoundContainer.prototype.makeUI.apply(this,arguments);
+			if(this.hasConfig){
+				this.$element.children().remove();
+				if(this.options.scrollable == 'true'){
+					this.element.innerHTML='<div class="i-ui-grid-thead-container"><table>'+this.cols[0].outerHTML+'<thead></thead></table></div><div class="i-ui-grid-tbody-container"><table>'+this.cols[0].outerHTML+'<tbody></tbody></table></div>'
+				}else{
+					this.element.innerHTML='<table>'+this.cols[0].outerHTML+'<thead></thead><tbody></tbody></table></div>'
+				}
+				this._header=IUI.makeUI(this.headerTemplate,this.options.model);
+				this.$element.find('thead').append(this._header.$element);
+				this.tbody=this.$element.find('tbody');
+			}
 		},
 		sort: function(sortObject){
 			if(this.dataMart){
+				console.time('sort');
 				this.dataMart.sort(sortObject);
+				console.timeEnd('sort');
 				this._sortObject=sortObject;
 			}
 		},

@@ -44,7 +44,6 @@
 			}
 			this.bindModels(this.boundModelOptions);
 			this.makeUI();	
-			this.onInitialize();
 			this._initPromise.resolve();
 			delete this._initPromise;			
 		},
@@ -88,9 +87,6 @@
 			}else{
 				this.detach();
 			}
-		},
-		onInitialize: function(){
-			
 		},
 		onDataFetch:function(dataObject){
 			

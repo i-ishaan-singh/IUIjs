@@ -100,6 +100,12 @@
 * CHANGE - Value change not triggered on option container binding
 * ADDED- List class can be passed to List View
 * ADDED - PageListView
+* CHANGED - if grid has configuration, the div renderes a div as wrapper for table.
+* ADDED - Scrollable option to grid.
+* FIXED - Data bounding before initializion
+* REMOVED - On initialize call from Widget.
+* CHANGED - onInitialize API handle by IUI Class
+* CHANGED - made ListView rendering async
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
