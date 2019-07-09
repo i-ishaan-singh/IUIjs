@@ -17,6 +17,8 @@
 		classType: 'Overlay',
 		classList: ['i-ui-overlay','i-ui-hidden'],
 		initialize: function(options){
+			var that=this;
+			that._initPromise = $.Deferred
 			IUI.Class.prototype.initialize.apply(this,arguments);		
 			this._uid='_uid'+(overlayUid++);
 			this.hide=this.hide.bind(this);
@@ -33,8 +35,12 @@
 			}
 			this.clientRectSet=!!this.options.clientrectangle;
 			
-			this.createOverlay();	
-			this._attachEvents();			
+			setTimeout(function(){
+				that.createOverlay();
+				that._attachEvents();
+				that._initPromise.resolve();
+				delete that._initPromise;
+			});	
 		},
 		events: ['opening','open','close','closing'],
 		options:{
@@ -62,11 +68,8 @@
 				_rect=this.options.clientrectangle;
 			}else{
 				var $anchor=$(this.options.anchor);
-			
 				if($anchor.length===0) $anchor=$('body');
-			
 				var _anchor=$anchor[0], _rect=_anchor.getClientRects();
-				
 			}
 			
 			var direction=this.options.direction;
@@ -74,28 +77,40 @@
 			if(_rect.length){
 				var rect=_rect[0];
 				var placements=this.options.placement.split(' ');
-				for(var placement in placements){
-					var place=placements[placement];
-					if(place==="top"){
+				var _placeVertical = placements[0] || 'center'
+				var _placeHorizontal = placements[1] || 'center'
+					if(_placeVertical==="top"){
 						if(direction==='down'){
 							this._initialPopupStyle.top=rect.top;
 						}else{
-							this._initialPopupStyle.bottom=rect.bottom-rect.height;
+							this._initialPopupStyle.bottom=$(window).innerHeight()	-  rect.top;
 						}
-					}else{
+					}else if(_placeVertical==="bottom"){
 						if(direction==='down'){
-							this._initialPopupStyle.top=rect.top+rect.height;
+							this._initialPopupStyle.top=rect.bottom;
 						}else{
-							this._initialPopupStyle.bottom=rect.bottom;
+							this._initialPopupStyle.bottom=$(window).innerHeight()	 - rect.bottom;
 						}						
+					}else if(_placeVertical==="center"){
+						if(direction==='down'){
+							this._initialPopupStyle.top=rect.top - rect.width/2;
+						}else{
+							this._initialPopupStyle.bottom=rect.top - rect.width/2;
+						}						
+					}else{
+						this._initialPopupStyle.left=_placeVertical;
 					}
 					
-					if(place==="right"){
-						this._initialPopupStyle.left=rect.left+rect.width+1;
+					if(_placeHorizontal === "right"){
+						this._initialPopupStyle.left=rect.right;
+					}else if(_placeHorizontal === "left"){
+						this._initialPopupStyle.right=$(window).innerWidth() - rect.left;
+					}else if(_placeHorizontal === "center"){
+						this._initialPopupStyle.left=rect.left + rect.width/2;
 					}else{
-						this._initialPopupStyle.left=rect.left+1;
+						this._initialPopupStyle.left=_placeHorizontal;
 					}
-				}
+				
 				if(!this.options.width){
 					this._initialPopupStyle.width=rect.width-2;
 				}
@@ -118,7 +133,7 @@
 				return;
 			}
 			this._processInitialPopupStyle();
-			IUI.behaviors.extractStyleFromObject(this.element,this._initialPopupStyle);
+			$(this.element).css(this._initialPopupStyle);
 			if(!this._isAttached){
 				$(overlayContainer).append(this.element);
 				this._isAttached=true;

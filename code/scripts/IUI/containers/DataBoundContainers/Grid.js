@@ -86,9 +86,12 @@
 			}else if(dataObject.type==="remove"){
 				this.tbody.children().eq(dataObject.index).remove();				
 			}else{
-				this.tbody.children().detach();
+				this._cleanUp();
 				this.onDataFetch(dataObject);
 			}
+		},
+		_cleanUp: function(){
+			this.tbody.children().detach();
 		},
 		makeUI: function(){
 			this._extractRowTemplate();

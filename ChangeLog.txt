@@ -106,6 +106,12 @@
 * REMOVED - On initialize call from Widget.
 * CHANGED - onInitialize API handle by IUI Class
 * CHANGED - made ListView rendering async
+* FIXED - PopOver positioning
+* ADDED - CORE - Pluggable Interface
+* ADDED - getWidgetById() API to ContainerUI
+* ADDED - CleanUp API to clean the dataBound widgets/containers
+* ADDED - Functionality for Widgets to sustain persistantAttributes
+
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

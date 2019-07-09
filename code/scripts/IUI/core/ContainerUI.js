@@ -72,6 +72,18 @@
 				}
 			}
 		},
+		getWidgetById: function(id){
+			if(typeof this.widgets[id] !== "undefined"){
+				return this.widgets[id];
+			}
+			var length=this.containers.length;
+			for(var i=0;i<length;++i){
+				var widget=this.containers[i].getWidgetById(id)
+				if(widget){
+					return widget;
+				}
+			}
+		},
 		_handleOptionChange:function(key,value){
 			if(this.element && key in this.element.style){
 				this.element.style[key]=value;

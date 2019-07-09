@@ -37,7 +37,7 @@
 			}else if(dataObject.type==="remove"){
 				this.container.children().eq(dataObject.index).remove();				
 			}else{
-				this.container.children().detach();
+				this._cleanUp();
 				this.onDataFetch(dataObject);
 			}
 		},
@@ -52,6 +52,9 @@
 			}
 			
 			IUI.Widget.prototype._processOptions.apply(this,arguments);		
+		},
+		_cleanUp: function(){
+			this.container.children().detach();
 		},
 		options:{
 			text: '',

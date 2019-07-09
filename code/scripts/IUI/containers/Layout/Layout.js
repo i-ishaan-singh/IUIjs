@@ -60,6 +60,7 @@
 			if(!container){
 				return this._subcontainer.getContainerById(id);
 			}
+			return container;
 		},
 		_beforeRender:function(){
 			

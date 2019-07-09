@@ -1,12 +1,13 @@
 (function (factory) {
    if(typeof define === "function" && define.amd) {    
-	define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors'],factory);
+	define(['IUI-core','WidgetBuilder','DataMart','Validator','Behaviors','Plugable'],factory);
 	
   } else {
     factory(window.IUI);
   }
 })(function(IUI){
 	
+	IUI.persistantAttributes=['src'];
 	/**
 	*	The base Framework Class for all the Widgets which are created by WidgetBuilder.
 	*/
@@ -23,6 +24,9 @@
 		load: function(options){
 			if(typeof options.validations === "string"){
 				options.validations=options.validations.split(',').map(function(elem){return elem.trim()})
+			}
+			if(typeof options.escapehtml === "string"){
+				options.escapehtml=JSON.parse(options.escapehtml);
 			}
 			this.boundModelOptions={
 				validator: this._validate.bind(this)
@@ -45,7 +49,10 @@
 			this.bindModels(this.boundModelOptions);
 			this.makeUI();	
 			this._initPromise.resolve();
-			delete this._initPromise;			
+			delete this._initPromise;
+			if(this.options.plug){
+				IUI.Plugable.registerPlug(this.options.plug, this);
+			}			
 		},
 		_handledataChange: function(){
 				this._processModelData();
@@ -73,6 +80,8 @@
 				this.element.style[key]=value;
 			}else if(key.match(IUI.iiAttributeRegex)){
 				this.$element.attr(key,value);
+			}else if(IUI.persistantAttributes.indexOf(key) !== -1){
+				this.$element.attr(key, value)
 			}
 			IUI.Class.prototype._handleOptionChange.apply(this,arguments);
 			
@@ -88,6 +97,9 @@
 				this.detach();
 			}
 		},
+		_cleanUp: function(){
+			
+		},
 		onDataFetch:function(dataObject){
 			
 		},
@@ -96,19 +108,23 @@
 			
 		},
 		_bindDataMart: function(dataMart){
-			this.dataMart=dataMart, that=this;
+			this.dataMart=dataMart;
 			
 			dataMart._bind({
 				fetch: function(dataObject){
+					var that=this;
 					if(that._initPromise){
 						that._initPromise.done(function(){
+							that._cleanUp();
 							that.onDataFetch(dataObject)
 						});
 					}else{
+							that._cleanUp();
 						that.onDataFetch(dataObject)
 					}
-				},
+				}.bind(this),
 				change: function(dataObject){
+					var that=this;
 					if(that._initPromise){
 						that._initPromise.done(function(){
 							that.onDataChange(dataObject)
@@ -116,7 +132,7 @@
 					}else{
 						that.onDataChange(dataObject)
 					}
-				}
+				}.bind(this)
 			});			
 		},
 		_preprocessElement: function(wrapper){
@@ -139,10 +155,17 @@
 			}
 		},
 		_processOptions: function(wrapper){
+			var options=this.options;
 			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
 			if(typeof this.options.class === "string"){
 				$(wrapper).addClass(this.options.class.split(' '));	
 			}
+			IUI.persistantAttributes.forEach(function(_attr){
+				if(options[_attr] && !options[_attr].match(IUI._observableRegex)){
+					$(wrapper).attr(_attr,options[_attr])
+				}
+			});
+			
 			if(this.options.id){
 				wrapper.id=this.options.id;
 			}

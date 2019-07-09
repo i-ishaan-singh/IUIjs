@@ -25,19 +25,23 @@
 			this._attachEvents();
 		},
 		_bindDataMart: function(dataMart){
-			this.dataMart=dataMart, that=this;
+			this.dataMart=dataMart;
 			
 			dataMart._bind({
 				fetch: function(dataObject){
+					var that=this;
 					if(that._initPromise){
 						that._initPromise.done(function(){
+							that._cleanUp();
 							that.onDataFetch(dataObject)
 						});
 					}else{
+						that._cleanUp();
 						that.onDataFetch(dataObject)
 					}
-				},
+				}.bind(this),
 				change: function(dataObject){
+					var that=this;
 					if(that._initPromise){
 						that._initPromise.done(function(){
 							that.onDataChange(dataObject)
@@ -45,10 +49,13 @@
 					}else{
 						that.onDataChange(dataObject)
 					}
-				}
+				}.bind(this)
 			});			
 		},
 		onDataFetch:function(dataObject){
+			
+		},
+		_cleanUp: function(){
 			
 		},
 		onDataChange: function(dataObject){

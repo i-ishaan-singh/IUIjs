@@ -9,6 +9,7 @@
 		'WidgetBuilder':'./core/WidgetBuilder',
 		'View':'./core/View',
 		'Template':'./core/Template',
+		'Plugable':'./core/Plugable',
 		'ObservableModel':'./core/ObservableModel',
 		'DataBoundContainer':'./core/DataBoundContainer',
 		'OptionModel':'./models/OptionModel',
