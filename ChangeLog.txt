@@ -114,6 +114,8 @@
 * ADDED - pointeropening option to Overlay
 * FIXED - Data binding when options processed before
 * FIXED - Combobox popup opening placement
+* ADDED - [TEST ENGINE] - Basic Test Suit
+* ADDED - [TEST ENGINE] - Core Test Cases
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
