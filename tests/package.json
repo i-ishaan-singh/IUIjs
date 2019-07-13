@@ -1,0 +1,14 @@
+{
+  "name": "iuitest",
+  "version": "1.0.0",
+  "description": "Testing for IUIjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ishaan Singh",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^3.4.0"
+  }
+}
