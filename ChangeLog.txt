@@ -111,7 +111,9 @@
 * ADDED - getWidgetById() API to ContainerUI
 * ADDED - CleanUp API to clean the dataBound widgets/containers
 * ADDED - Functionality for Widgets to sustain persistantAttributes
-
+* ADDED - pointeropening option to Overlay
+* FIXED - Data binding when options processed before
+* FIXED - Combobox popup opening placement
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

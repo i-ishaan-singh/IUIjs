@@ -28,6 +28,7 @@
 					_templateExtras=_templateExtras+' data="'+options.data+'" ';
 					delete options.data;
 				}
+				
 				this.tagTemplate ='<listview class="i-ui-dropdown-list" '+_templateExtras+'><division class="i-ui-option-item" ii-id="::'+(options.idfield||this.options.idfield)+'::">::'+(options.textfield||this.options.textfield)+'::</division></listview>'
 				InputBox.prototype.initialize.apply(this,arguments);		
 			},
@@ -40,6 +41,7 @@
 					button: this.element.querySelector('.i-ui-dropbutton-container'),
 					maxHeight: '15em',
 					height: '15em',
+					pointeropening: 'center',
 					opening: function(){
 						_elem.addClass('i-ui-active');
 					},
@@ -61,14 +63,17 @@
 			_attachEvents: function(){
 				var that=this;
 				InputBox.prototype._attachEvents.apply(this,arguments);
-				$(this.popup.element).on('click','.i-ui-list-item',function(e){
-					var index=$(e.currentTarget).index(),
-						dataMart=that._getDataMart();
-					if(dataMart){
-						that.value(dataMart.data[index][that.options.textfield]);
-						that.trigger('change',{value:dataMart.data[index]});
-					}
-				}.bind(this));
+				this.popup._initPromise.then(function(){
+					
+					$(that.popup.element).on('click','.i-ui-list-item',function(e){
+						var index=$(e.currentTarget).index(),
+							dataMart=that._getDataMart();
+						if(dataMart){
+							that.value(dataMart.data[index][that.options.textfield]);
+							that.trigger('change',{value:dataMart.data[index]});
+						}
+					});
+				});
 			},
 		});
 	

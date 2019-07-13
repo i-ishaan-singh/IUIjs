@@ -41,12 +41,12 @@
 			}
 			this.$element=$(this.options.element)
 			this.element=this.$element[0];
+			this.bindModels(this.boundModelOptions);
 			if(this.options.datamart){
 				IUI.DataMart.bindWidget(this.options.datamart,this);
 			}else if(this.options.data){
 				this._processModelData();
 			}
-			this.bindModels(this.boundModelOptions);
 			this.makeUI();	
 			this._initPromise.resolve();
 			delete this._initPromise;
@@ -55,7 +55,7 @@
 			}			
 		},
 		_handledataChange: function(){
-				this._processModelData();
+			this._processModelData();
 		},
 		_processModelData: function(){
 			if(typeof this.options.data === 'string'){

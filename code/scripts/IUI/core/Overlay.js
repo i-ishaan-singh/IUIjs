@@ -18,7 +18,7 @@
 		classList: ['i-ui-overlay','i-ui-hidden'],
 		initialize: function(options){
 			var that=this;
-			that._initPromise = $.Deferred
+			that._initPromise = $.Deferred();
 			IUI.Class.prototype.initialize.apply(this,arguments);		
 			this._uid='_uid'+(overlayUid++);
 			this.hide=this.hide.bind(this);
@@ -55,7 +55,8 @@
 			animateObjectClose:{},
 			animateObjectOpen:{},
 			autoclose: true,
-			clientrectangle: null
+			clientrectangle: null,
+			pointeropening: null
 		},
 		setClientRectangle: function(clientrectangle){
 			this.options.clientrectangle=clientrectangle
@@ -77,8 +78,8 @@
 			if(_rect.length){
 				var rect=_rect[0];
 				var placements=this.options.placement.split(' ');
-				var _placeVertical = placements[0] || 'center'
-				var _placeHorizontal = placements[1] || 'center'
+				var _placeVertical = placements[0] || 'center';
+				var _placeHorizontal = placements[1] || 'center';
 					if(_placeVertical==="top"){
 						if(direction==='down'){
 							this._initialPopupStyle.top=rect.top;
@@ -101,6 +102,11 @@
 						this._initialPopupStyle.left=_placeVertical;
 					}
 					
+					if(!this.options.width){
+						this._initialPopupStyle.width=rect.width-2;
+					}
+
+					
 					if(_placeHorizontal === "right"){
 						this._initialPopupStyle.left=rect.right;
 					}else if(_placeHorizontal === "left"){
@@ -110,10 +116,28 @@
 					}else{
 						this._initialPopupStyle.left=_placeHorizontal;
 					}
-				
-				if(!this.options.width){
-					this._initialPopupStyle.width=rect.width-2;
-				}
+					
+					if(this.options.pointeropening){
+						if(this.options.pointeropening === "flip"){
+							
+								if(_placeHorizontal === "left"){
+								this._initialPopupStyle.right = this._initialPopupStyle.right - this._initialPopupStyle.width;
+							}else if(_placeHorizontal === "center"){
+								this._initialPopupStyle.left = this._initialPopupStyle.left - this._initialPopupStyle.width;
+							}
+							
+						}else if(this.options.pointeropening === "center"){
+							
+							if(_placeHorizontal === "left"){
+								this._initialPopupStyle.right = this._initialPopupStyle.right - this._initialPopupStyle.width/2;
+							}else if(_placeHorizontal === "center"){
+								this._initialPopupStyle.left = this._initialPopupStyle.left - this._initialPopupStyle.width/2;
+							}
+							
+						}
+					
+						
+					}
 			}	
 		},
 		bindButton: function(button,behavior){

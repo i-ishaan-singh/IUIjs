@@ -1,13 +1,13 @@
 (function (factory) {
    if(typeof define === "function" && define.amd) {    
-	define(['IUI-core','Container','ContainerUI'],factory);
+	define(['IUI-core','Container','Plugable'],factory);
 	
   } else {
     factory(window.IUI);
   }
 })(function(IUI){
 
-	var PopOver=Plugable.extend({
+	var PopOver=IUI.Plugable.extend({
 		name:'PopOver',
 		initialize: function(){
 			var that=this;

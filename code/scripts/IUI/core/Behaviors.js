@@ -42,7 +42,6 @@
 			(object.subcontainerOptions) || (object.subcontainerOptions={});
 			if(attr.match(IUI.subcontainerRegex)){
 				object.subcontainerOptions[attr.slice(13)]=value;
-				//delete object[attr];
 			}
 		},
 		

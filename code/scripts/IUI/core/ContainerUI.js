@@ -1,6 +1,6 @@
 (function (factory) {
    if(typeof define === "function" && define.amd) {    
-	define(['IUI-core','Widget'],factory);
+	define(['IUI-core'],factory);
 	
   } else {
     factory(window.IUI);
@@ -28,7 +28,7 @@
 		classType:'ContainerUI',
 		classList:['i-ui-container'],
 		tagName: 'DIV',
-		events:IUI.Widget.prototype.events.concat(['create']),
+		events:IUI.Class.prototype.events.concat(['create']),
 		options:{
 			async: false
 		},
