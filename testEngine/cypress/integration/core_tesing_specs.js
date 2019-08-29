@@ -142,6 +142,20 @@ describe('IUI Core Testing', function() {
 /******************************************************************************/
 /******************************************************************************/
 	
+	describe('IUI Template Testing', function(){
+		
+		it('Template String Extraction', function(){
+			var _string ='::a::';
+			debugger;
+			var _templateObject = IUI.Template.extractTemplateObject(_string);
+			
+		
+		});
+		
+		
+	
+	});
+	
 	describe('IUI Behavior Testing', function(){
 	
 		it('Style Extraction (Object)', function(){
@@ -252,6 +266,43 @@ describe('IUI Core Testing', function() {
 /******************************************************************************/
 /******************************************************************************/
 	
+	describe('IUI Observable Model Testing', function(){
+		 var _observedSpy, obj;
+		it("Initialization Testing", function(){
+			
+			var _observed = {
+				observer: function(key,value,sender){
+				cy.log('value changed of '+key+' to '+value);
+				}
+			}
+			 _observedSpy = cy.spy(_observed, 'observer').as('ChangeObserver');
+				obj={
+					customKeyOne: 10,
+					customKeyTwo: 20,
+				}
+				var _model = new IUI.ObservableModel(obj,_observed.observer);
+				obj.customKeyOne=30;
+
+
+		});
+		
+		it("Handler Call Testing", function(){
+				expect(_observedSpy).to.be.called;
+				obj.customKeyOne=100;
+				obj.customKeyTwo=90;
+		});	
+		
+		it("Handler Call Testing - continuoued", function(){
+				expect(_observedSpy).to.be.calledWith('customKeyOne', 100, undefined);
+				expect(_observedSpy).to.be.calledWith('customKeyTwo', 90, undefined);
+
+		});
+		
+	});
+	
+/******************************************************************************/
+/******************************************************************************/
+	
 	describe('IUI Widget Testing', function(){
 		
 		var customWidget, container;
@@ -268,6 +319,31 @@ describe('IUI Core Testing', function() {
 			expect(widget).to.exist;
 			widget.destroy();
 			widget.$element.remove();
+			
+		});
+		
+		
+		it('Detached Testing', function(){
+			
+			_body.append($('<Widget id="customWidget_detached" isAttached="false" ></Widget>'));
+			var container = IUI.makeUI(_body);	
+			var _widget = container.getWidgetById('customWidget_detached'); 
+			expect(_widget).to.exist;
+			expect(_widget.$element).to.not.exist;
+			_widget.destroy();
+			_widget.$element.remove();
+			
+		});
+		
+		it('Disable Testing', function(){
+			
+			_body.append($('<Widget id="customWidget_detached" enable="false" ></Widget>'));
+			var container = IUI.makeUI(_body);	
+			var _widget = container.getWidgetById('customWidget_detached'); 
+			expect(_widget).to.exist;
+			expect(_widget.$element).to.have.class('i-ui-disabled');
+			_widget.destroy();
+			_widget.$element.remove();
 			
 		});
 
@@ -407,6 +483,85 @@ describe('IUI Core Testing', function() {
 					
 				});
 			
+				describe("Data Attribute - Multiple Widgets", function(){
+					var _widget, _widgetTwo;
+					it('Data Attribute Binding Testing (Multiple Widgets)', function(){
+						
+						_body.append($('<CustomWidget data="::customWidgetData::" id="customWidget_dataAttribute"></CustomWidget>'));
+						_body.append($('<CustomWidget data="::customWidgetData::" id="customWidget_dataAttribute2"></CustomWidget>'));
+						
+						var obj={
+							customWidgetData: ['Ishaan Singh','Lyra Singh','Naziyah Singh']
+						};
+						container = IUI.makeUI(obj);
+						
+						_widget = container.getWidgetById('customWidget_dataAttribute'); 
+						_widgetTwo = container.getWidgetById('customWidget_dataAttribute2'); 
+						expect(_widget).to.exist;
+						expect(_widgetTwo).to.exist;
+						expect(_widget.$element.text().trim()).to.equal(['Ishaan Singh','Lyra Singh','Naziyah Singh'].join('  -:- ').trim());
+						expect(_widgetTwo.$element.text().trim()).to.equal(['Ishaan Singh','Lyra Singh','Naziyah Singh'].join('  -:- ').trim());
+						
+						cy.log('Testing for Data Binding');
+						debugger;
+						obj.customWidgetData = ['Ravi More','Riya Varghese','Priyanka Gade'];
+						
+					});
+					
+					it('Data Attribute Binding Testing (Multiple Widgets) - cont', function(){
+							cy.get('#customWidget_dataAttribute').then(function(elem){
+								expect(elem	.text().trim()).to.equal(['Ravi More','Riya Varghese','Priyanka Gade'].join('  -:- ').trim());
+								expect(_widgetTwo.$element.text().trim()).to.equal(['Ravi More','Riya Varghese','Priyanka Gade'].join('  -:- ').trim());
+								_widgetTwo.destroy();
+								_widgetTwo.$element.remove();
+								_widget.destroy();
+								_widget.$element.remove();
+							});
+							
+
+					});
+					
+				});
+						
+				describe("Data Attribute - 100 Widgets", function(){
+					var container;
+					it('Data Attribute Binding Testing (100 Widgets)', function(){
+						
+						for(var i=0;i<100;++i){
+							_body.append($('<CustomWidget data="::customWidgetData::" id="customWidget_dataAttribute'+i+'"></CustomWidget>'));
+						}
+						
+						var obj={
+							customWidgetData: ['Ishaan Singh','Lyra Singh','Naziyah Singh']
+						};
+						container = IUI.makeUI(obj);
+						
+						
+						for(var i=0;i<100;++i){
+							var _widget = container.getWidgetById('customWidget_dataAttribute'+i); 
+							expect(_widget).to.exist;
+							expect(_widget.$element.text().trim()).to.equal(['Ishaan Singh','Lyra Singh','Naziyah Singh'].join('  -:- ').trim());
+						}
+						
+						obj.customWidgetData = ['Ravi More','Riya Varghese','Priyanka Gade'];
+						cy.clock();
+						cy.tick(10000);
+						cy.wait(2000);
+					});
+					
+					it('Data Attribute Binding Testing (100 Widgets) - cont', function(){
+			
+						for(var i=0;i<100;++i){
+							var _widget = container.getWidgetById('customWidget_dataAttribute'+i); 
+							expect(_widget).to.exist;
+							expect(_widget.$element.text().trim()).to.equal(['Ravi More','Riya Varghese','Priyanka Gade'].join('  -:- ').trim());
+							_widget.destroy();
+							_widget.$element.remove();
+						}
+					});
+					
+				});
+				
 				describe("Attribute", function(){
 					
 					var _widget;
@@ -462,6 +617,62 @@ describe('IUI Core Testing', function() {
 					
 				});		
 				
+				describe("Two Way - 100 Widgets", function(){
+					var obj, _widget, container;
+					it('Two Way Binding Testing', function(){
+						
+							
+						for(var i=0;i<100;++i){
+							_body.append($('<CustomWidget customattribute="::customAttributeValue::" id="customWidget_twoWay'+i+'"></CustomWidget>'));
+						}
+						obj={
+							customAttributeValue: 19
+						};
+						
+						container = IUI.makeUI(obj);
+						
+						_widget = container.getWidgetById('customWidget_twoWay'+Math.floor(Math.random()*100)); 
+						expect(_widget).to.exist;
+						_widget.options.customattribute = 32;
+		
+					});
+					
+					it('Two Way Binding Testing - cont', function(){
+						expect(obj.customAttributeValue).to.equal(32);
+						
+						_widget = container.getWidgetById('customWidget_twoWay'+Math.floor(Math.random()*100)); 
+						expect(_widget).to.exist;
+						setTimeout(function(){
+							_widget.options.customattribute = 15;
+						});
+						_widget = container.getWidgetById('customWidget_twoWay'+Math.floor(Math.random()*100)); 
+						expect(_widget).to.exist;
+						setTimeout(function(){
+							_widget.options.customattribute = 20;
+						});
+						cy.clock();
+						cy.tick(10000);
+						cy.wait(3000);
+					});
+					
+					it('Two Way Binding Testing - cont', function(){
+			
+						expect(obj.customAttributeValue).to.equal(20);
+
+					});
+					
+					it('Two Way Binding Testing - cont', function(){
+			
+						for(var i=0;i<100;++i){
+							_widget = container.getWidgetById('customWidget_twoWay'+i); 
+							_widget.destroy();
+							_widget.$element.remove();
+						}
+
+					});
+					
+				});		
+				
 				describe("ii-Attribute", function(){
 					var obj, _widget;
 					it('ii-Attribute Binding Testing', function(){
@@ -492,6 +703,123 @@ describe('IUI Core Testing', function() {
 					
 				});
 				
+			
+				describe("presistant Attributes", function(){
+					var obj, _widget;
+					it('Presistant Attributes Binding Testing', function(){
+						
+						_body.append($('<Division tagname="img" src="::customUrl::" id="division_presistant" ></Division>'));
+						
+						obj={
+							customUrl: '/images/test_img.jpg'
+						};
+						container = IUI.makeUI(obj);
+						
+						_widget = container.getWidgetById('division_presistant'); 
+						expect(_widget).to.exist;
+						expect(_widget.$element.attr('src')).to.equal('/images/test_img.jpg');
+						debugger;
+						obj.customUrl = '/images/test_img2.jpg';
+		
+					});
+					
+					it('Presistant Attributes Binding Testing - cont', function(){
+						
+						expect(_widget.$element.attr('src')).to.equal('/images/test_img2.jpg');
+						obj.customUrl = '/images/test_img3.jpg';
+
+					});
+					
+					it('Presistant Attributes Binding Testing - cont2', function(){
+						
+						
+						expect(_widget.$element.attr('src')).to.equal('/images/test_img3.jpg');
+						obj.customUrl = '/images/test_img.jpg';
+
+					});
+					
+					it('Presistant Attributes Binding Testing - cont3', function(){
+						
+						
+						expect(_widget.$element.attr('src')).to.equal('/images/test_img.jpg');
+						_widget.destroy();
+						_widget.$element.remove();
+
+					});
+					
+				});
+				
+				
+			
+				describe("Detach", function(){
+					var obj, _widget;
+					it('Detach Binding Testing', function(){
+						
+						_body.append($('<CustomWidget tagname="img" isattached="::_attached::" id="division_detach" ></CustomWidget>'));
+						
+						obj={
+							_attached: true
+						};
+						container = IUI.makeUI(obj);
+						
+						_widget = container.getWidgetById('division_detach'); 
+						expect(_widget).to.exist;
+						expect(_widget.$element).to.exist;
+						
+						obj._attached = false;
+		
+					});
+					
+					it('Detach Binding Testing - detach', function(){
+						expect(_widget.$element).to.not.exist;
+						debugger;
+						obj._attached = true;
+					});
+					
+					it('Detach Binding Testing - attach', function(){
+						expect(_widget.$element).to.exist;
+						_widget.destroy();
+						_widget.$element.remove();
+					});
+					
+				});
+				
+			
+			
+				describe("Disable", function(){
+					var obj, _widget;
+					it('Enable Binding Testing', function(){
+						
+						_body.append($('<CustomWidget tagname="img" enable="::_enabled::" id="division_detach" ></CustomWidget>'));
+						
+						obj={
+							_enabled: true
+						};
+						container = IUI.makeUI(obj);
+						
+						_widget = container.getWidgetById('division_detach'); 
+						expect(_widget).to.exist;
+						expect(_widget.$element).to.not.have.class('i-ui-disabled');
+						debugger;
+						obj._enabled = false;
+		
+					});
+					
+					it('Enable Binding Testing - disable', function(){
+						expect(_widget.$element).to.have.class('i-ui-disabled');
+						obj._enabled = true;
+					});
+
+					it('Enable Binding Testing - enable', function(){
+						expect(_widget.$element).to.not.have.class('i-ui-disabled');
+						_widget.destroy();
+						_widget.$element.remove();
+					});
+					
+				});
+				
+			
+			
 			});
 		
 		

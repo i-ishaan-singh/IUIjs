@@ -1185,6 +1185,12 @@
 			if(typeof options.escapehtml === "string"){
 				options.escapehtml=JSON.parse(options.escapehtml);
 			}
+			if(typeof options.isattached === "string"  && !options.isattached.match(IUI._observableRegex)){
+				options.isattached=JSON.parse(options.isattached);
+			}
+			if(typeof options.enable === "string"  && !options.enable.match(IUI._observableRegex)){
+				options.enable=JSON.parse(options.enable);
+			}
 			this.boundModelOptions={
 				validator: this._validate.bind(this)
 			}
@@ -1206,6 +1212,12 @@
 				this._processModelData();
 			}
 			this.makeUI();	
+			if(!this.options.isattached){
+				this.detach();
+			}
+			if(!this.options.enable){
+				this.enable(false);
+			}
 			this._initPromise.resolve();
 			delete this._initPromise;
 			if(this.options.plug){
@@ -1235,12 +1247,16 @@
 				}			
 		},
 		_handleOptionChange:function(key,value){
-			if(key in this.element.style){
+
+			if(IUI.persistantAttributes.indexOf(key) !== -1){
+				this.$element.attr(key, value);
+				
+			}else if(key in this.element.style){
 				this.element.style[key]=value;
+				
 			}else if(key.match(IUI.iiAttributeRegex)){
 				this.$element.attr(key,value);
-			}else if(IUI.persistantAttributes.indexOf(key) !== -1){
-				this.$element.attr(key, value)
+				
 			}
 			IUI.Class.prototype._handleOptionChange.apply(this,arguments);
 			
@@ -1304,6 +1320,7 @@
 			(this._detachedSpan) || (this._detachedSpan=$('<span>'));
 				this.$element.after(this._detachedSpan);
 				this.$element.detach();
+				this.options.isattached= false;
 				return this;
 			}
 		},
@@ -1311,6 +1328,7 @@
 			if(this._detachedSpan && this._detachedSpan.parent().length){
 				this._detachedSpan.after(this.$element);
 				this._detachedSpan.detach();
+				this.options.isattached = true;
 			}
 		},
 		_processOptions: function(wrapper){
@@ -1402,6 +1420,8 @@
 			if(typeof val !== 'undefined'){
 				val=JSON.parse(val);
 				this.$element.toggleClass('i-ui-disabled',!val);
+				//debugger;
+			//	this.options.enable = val;
 			}else{
 				return !this.$element.hasClass('i-ui-disabled');
 			}
@@ -1552,6 +1572,7 @@
 		
 		_handleChange: function(key,value,sender){
 			var that=this;
+
 			setTimeout(function(){
 				(that.handler) && (that.handler(key,value,sender));
 			})
@@ -1614,11 +1635,17 @@
 				var length=boundModels.length;
 				for(var i=0;i<length;++i){
 					var obj=boundModels[i];
+					(obj.model.modelLastUpdatedBy)||(obj.model.modelLastUpdatedBy = {});
+					(obj.model.modelLastUpdatedBy[obj._uid]) || (obj.model.modelLastUpdatedBy[obj._uid]={})
+					var _modelLastUpdated= obj.model.modelLastUpdatedBy[obj._uid];
 					for(var a in obj.mappedAttributes){
-						
 						if(obj.isExclusive){
-							obj.model.lastUpdatedBy=this._uid;
-							obj.model.model[obj.mappedAttributes[a]]=value;
+							(_modelLastUpdated[obj.mappedAttributes[a]]) || (_modelLastUpdated[obj.mappedAttributes[a]]=[]);
+							if(_modelLastUpdated[obj.mappedAttributes[a]].indexOf(this._uid)===-1){
+								_modelLastUpdated[obj.mappedAttributes[a]].push(this._uid);
+								if(obj.model.model[obj.mappedAttributes[a]]!==value)
+									obj.model.model[obj.mappedAttributes[a]]=value;
+							}
 						}
 					}
 				}			
@@ -1685,20 +1712,32 @@
 
 	var ContainerModel=IUI.ObservableModel.extend({
 		ModelType: 'ContainerModel',
+		
 		_handleChange: function(key,value,sender){
 			//console.log('in Container Model'+ this._uid);
 			IUI.ObservableModel.prototype._handleChange.apply(this,arguments);
-			var boundModels=this.boundModels,length;
+			var boundModels=this.boundModels,length, that=this;
 			if(boundModels.length){
 				var length=boundModels.length;				
 				for(var i=0;i<length;++i){
 					var obj=boundModels[i];
-					if(obj.model._uid===this.lastUpdatedBy){
-						delete this.lastUpdatedBy;
-						continue;
-					}
-					var result=IUI.Template.render(obj.template,this.model);			
-					obj.model.model[obj.optionAttribute]=result;
+					
+					/*(this.lastUpdatedBy) || (this.lastUpdatedBy={});
+					(this.modelLastUpdatedBy) || (this.modelLastUpdatedBy={});
+					(this.modelLastUpdatedBy[obj._uid]) || (this.modelLastUpdatedBy[obj._uid]={});
+					
+					(this.modelLastUpdatedBy[obj._uid][obj.optionAttribute]) || (this.modelLastUpdatedBy[obj._uid][obj.optionAttribute]=[])
+					if(this.modelLastUpdatedBy[obj._uid][obj.optionAttribute].indexOf(this.uid)===-1){
+						this.modelLastUpdatedBy[obj._uid][obj.optionAttribute].push(this.uid);*/
+						var result=IUI.Template.render(obj.template,this.model);	
+						obj.model.model[obj.optionAttribute]=result;
+/*					}
+					
+					clearTimeout(this.lastUpdateClearTimeout);
+					this.lastUpdateClearTimeout=setTimeout(function(){
+						delete that.lastUpdatedBy;
+						delete that.modelLastUpdatedBy;
+					});*/
 				}			
 			}
 		},
@@ -4368,7 +4407,7 @@
 	IUI.makeUI=function makeUI(elem,model){
 		var uiContainer;
 		
-		if(elem && (typeof elem === 'object' || elem.classType==="ObservableModel")){
+		if(elem && (elem.constructor.toString() === ({}).constructor.toString() || elem.classType==="ObservableModel")){
 			model=elem;
 			elem=null;
 		}
