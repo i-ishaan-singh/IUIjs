@@ -1,0 +1,131 @@
+---------Version 1.0.2
+* FIXED - Template RegExp
+* Added IUI-rounded theme file,
+* Moved themes to /css/themes folder
+* Convention to create theme IUI-<themename>-.theme.cee
+* [ADDED] Added VerticalScrollable
+* Brightened Up Example.js
+* Renamed jquery library
+* FIXED - options getting re-extended
+* ADDED - Basic Popover
+* ADDED - ContextMenu
+* ADDED - Base Theme
+* ADDED - Rounded Theme
+* ADDED - closeImmediate API to overlay
+* ADDED - functionality to set ClientBounds to Overlay
+* ADDED - ['opening','open','close','closing'] events for Overlays
+* CHANGED - moved rendering logic of containerUI to _render API
+* ADDED - DOM traversal stops if element is already a widgett or container
+* ADDED- IUI.DataItem
+* ADDED- IUI.DataMart now supports array of raw dataType(string, int).
+* IUI.DataMart converts rawData to IUI.DataItem.
+* ADDED - 'Add' API to IUI.DataMart
+* [FIXED] - Overlay not rendering elements after it.
+* IUI.Widget extension allows setting tagname of element.
+* CHANGED - IUI.DataMart now triggers only fetch and change event.
+* CHANGED - Event handling of IUI.DataMart in IUI.Widget
+* CHANGED - TagNames of created containers are modifiable
+* ADDED -  Widget: Cell
+* ADDED -  Container: Row
+* ADDED -  Core : DataBoundContainer
+* ADDED -  DataBoundContainer : Grid
+* FIXED - Element passed to IUI.makeUI can now be IUI Container Itsef.
+* FIXED - Invalid elements outline is not curved in round theme.
+* FIXED - SubContainers are now instance of IUI Container.
+* FIXED - Widgets cannot be found inside subcaontainers
+* PERFORMANCE - Removed functions from observation in Observable Model
+* FIXED - Exception while rendering double quotes through template
+* ADDED - Widget - ListView 
+* CHANGED - Class of dropdown/combobox list option to i-ui-option-item from i-ui-list-item
+* ADDED - add/remove/addAt/get API to DataMart
+* ADDED - attributes can now be ignored for model mapping
+* ADDED - listView updates on DataMart add/remove actions
+* FIXED - TD tag for listView
+* ADDED - Widget - ContainerCell
+* ADDED - Widget - Division
+* ADDED - Widget - HeaderCell
+* FEATURE - Grid can now be bound to dataMart (dataFetch)
+* CHANGED - Form Label values will not be parsed if HTML.
+* REMOVED - Widget css class from grid cell and division widget
+* FIXED - Deep extend does not retain extended widget object properties.
+* FIXED - DataMart change event does nothing if type undefined.
+* ADDED - added DataChange event handler for DataMart in Grid
+* ADDED - model attribute to schema of options of DataMart
+* ADDED - IUI Util module. 
+* ADDED - QuickSort util
+* ADDED - Sort API to DataMart
+* ADDED - Container - ContainerHeaderCell
+* FIXED - DataMart sorting considers type from schema model
+* ADDED - Grid Now supports Sortable option
+* OPTIMIZED - Rerendering logic of grid rows
+* ADDED - Multi-group sorting in IUI Grid
+* OPTIMIZED - Quick Sort Logic
+* CHANGED - Layouts now position using absolute positioning
+* FIXED - Radio does not handle value attribute model binding
+* FIXED - FormLabel creation logic of radio Widget
+* CHANGED - Combobox dropdown now renders ListView Widget
+* FIXED - Button does not handle value attribute model binding
+* ADDED- Views can be created before and after viewports
+* FIXED - Overlay contents was not rendering with IUI
+* FIXED - Optimized model rendering logic
+* FIXED - CSS
+* ADDED - Alias can be set for pre exting widgets
+* ADDED - Dom Append API to elements
+* ADDED - Widgets won't render if attribute is not present in model
+* ADDED - DataMart will automatically get UID as name if not given
+* ADDED - data attribute on widget, model can be bound with it
+* ADDED - setData() API on dataMart
+* Added widgets in build.js
+* FIXED - Layout containers not responding to clicks
+* FIXED -  Creating context menu cause Stack Overflow error
+* ADDED - Template object now carries uid
+* FIXED - undefined calls on widgets and containers if API is not present.
+* REVERTED - Double quote issue in template
+* FIXED - Eventgroup retains in memory after binding
+* ADDED - getDataMart API in Combobox
+* FIXED - removed unused _handlevalueChange API
+* ADDED - NumericInputBox honor step value binding
+* FIXED - Radio showing undefined when text placed inside tag
+* FIXED - Switch not binding to value change
+* FIXED - Switch Changing ToggleButton value doesn't change model value
+* ADDED - Destroy API in ContainerUI
+* ADDED - unbindModels API in ObservableModel
+* ADDED - destroy API in View
+* ADDED - Destroy API in IUIClass
+* ADDED - Views can get template from templateURL
+* ADDED - __update API for ObservableModels
+* ADDED - update API for ViewModel
+* CHANGE - All option processing moved to load API
+* CHANGE - Model Data and Template render during extraction
+* CHANGE - Value change not triggered on option container binding
+* ADDED- List class can be passed to List View
+* ADDED - PageListView
+* CHANGED - if grid has configuration, the div renderes a div as wrapper for table.
+* ADDED - Scrollable option to grid.
+* FIXED - Data bounding before initializion
+* REMOVED - On initialize call from Widget.
+* CHANGED - onInitialize API handle by IUI Class
+* CHANGED - made ListView rendering async
+* FIXED - PopOver positioning
+* ADDED - CORE - Pluggable Interface
+* ADDED - getWidgetById() API to ContainerUI
+* ADDED - CleanUp API to clean the dataBound widgets/containers
+* ADDED - Functionality for Widgets to sustain persistantAttributes
+* ADDED - pointeropening option to Overlay
+* FIXED - Data binding when options processed before
+* FIXED - Combobox popup opening placement
+* ADDED - [TEST ENGINE] - Basic Test Suit
+* ADDED - [TEST ENGINE] - Core Test Cases
+# CHANGED - PopOver height can be autocalculated according to element size
+# ADDED - Max height attribute can be set to PopOver
+# ADDED - Tagname can now be set to containers
+# ADDED - Persistant Attributes to Container
+# FIXED - QuickSort comparator can now besent
+# FIXED - QuickSort comparator can now besent
+# FIXED- Object not recognizable in IUI.makeUI without element
+# FIXED - isAttached and enable attribute working in Widget
+# ADDED - PersistantAttributes
+# FIXED - async append triggering on View
+# ADDED - Placeholder can be added to IUI InputBox
+# CHANGED - TwoWay binding behavior of ContainerModel and OptionsModel
+# CHANGED - A bit of layout.html

@@ -2,7 +2,7 @@ html, body{
 	font-size: 16px;
 }
 .i-ui-widget, .i-ui-container{
-	font-size: 1em;
+	font-size: 1rem;
 	display: inline-block;
 	box-sizing: border-box;
     vertical-align: top;
@@ -19,27 +19,6 @@ html, body{
 .i-ui-container{
 	box-sizing: border-box; 
 	position: relative;
-}
-
-
-
-.i-ui-left-sidebar{
-	left: 0;
-	top: 0;
-}
-
-.i-ui-right-sidebar{
-	right: 0;
-	top: 0;
-}
-
-.i-ui-layout{
-	position: absolute;
-}
-
-
-.i-ui-sidebar{
-	height: 100%;
 }
 
 .i-ui-widget-icon{
@@ -96,12 +75,8 @@ html, body{
     line-height: 2em;
     padding: 0 0.25em;
 }
-.i-ui-button:active{
-	transform: translateX(1px) translateY(1px);	
-}
 .i-ui-button{
 	text-align: center;
-	cursor: pointer;
 }
 .i-ui-radio {
     padding-left: 2rem;
@@ -120,9 +95,6 @@ position: absolute;
     height: 100%;
     width: 1em;
     margin: 0 0.5em;	
-}
-.i-ui-list-item .i-ui-dropdown-list{
-	cursor: pointer;
 }
 .i-ui-dropbutton {
     height: 100%;
@@ -174,13 +146,7 @@ position: absolute;
 .i-ui-hidden{
 	display:none!important;
 }
-
-.i-ui-dropdown-list,
-.i-ui-dropdown-list > .i-ui-list-item,
-.i-ui-option-item {
-    display: block;
-}
-.i-ui-option-item {
+.i-ui-list-item {
     box-sizing: border-box;
     height: 2em;
     line-height: 1.45em;
@@ -197,12 +163,7 @@ br {
 	height: 100%;
 	width: 100%;
 }
-.i-ui-footer {
-    bottom: 0;
-}
-.i-ui-sidebar-subcontainer{
-		width: 100%;
-}
+
 /******************************************/
 
 .i-ui-subcontainer{
@@ -212,8 +173,6 @@ br {
 .i-ui-navbar, .i-ui-navbar-subcontainer,
 .i-ui-footer, .i-ui-footer-subcontainer {
     width: 100%;
-	height: 100%;
-	left: 0;
 }
 .i-ui-sidebar,  .i-ui-sidebar-subcontainer{
     height: 100%;
@@ -259,60 +218,4 @@ br {
 }
 .i-ui-slider-button {
     top: 0.25em;
-}
-
-.i-ui-verticalscroller {
-	width: 100%;
-    overflow: hidden;
-}
-.i-ui-scroller-wrapper {
-    display: inline-block;
-    position: relative;
-}
-.i-ui-scroller-up-arrow{
-	top: -1em;
-}
-.i-ui-scroller-down-arrow{
-	bottom: -1em;
-}
-.i-ui-scroller-up-arrow, .i-ui-scroller-down-arrow {
-	z-index: 10000;
-	width: 100%;
-    text-align: center;
-    line-height: 1em;
-    height: 1em;
-}
-
-
-.i-ui-page-listview .scroll-left, .i-ui-page-listview .scroll-right {
-    position: absolute;
-    top: calc(50% - 0.5em);
-    width: 2rem;
-    text-align: center;
-	cursor: pointer;
-}
-
-.i-ui-page-listview {
-    padding: 0 2rem;
-    width: 100%;
-    height: 100%;
-    white-space: nowrap;
-}
-
-.i-ui-page-container {
-    overflow: hidden;
-}
-.i-ui-page-list-item{
-    border-right: 1px solid #808080;
-}
-
-.i-ui-page-listview .scroll-left {
-	left: 0;
-}
-
-.i-ui-page-listview .scroll-right {
-    right: 0;
-}
-.i-ui-grid-tbody-container table{
-	width: 100%;
 }

@@ -1,5 +1,5 @@
 /*!
- * IUI JavaScript Web Framework Library v1.0.1
+ * IUI JavaScript Web Framework Library v1.0.2
  *
  * Copyright (c) 2018 Ishaan Singh
  * Released under the MIT license
