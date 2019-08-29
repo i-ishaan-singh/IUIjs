@@ -17,11 +17,18 @@
 				var length=boundModels.length;
 				for(var i=0;i<length;++i){
 					var obj=boundModels[i];
+					(obj.model.modelLastUpdatedBy)||(obj.model.modelLastUpdatedBy = {});
+					(obj.model.modelLastUpdatedBy[obj._uid]) || (obj.model.modelLastUpdatedBy[obj._uid]={})
+					var _modelLastUpdated= obj.model.modelLastUpdatedBy[obj._uid];
 					for(var a in obj.mappedAttributes){
 						
 						if(obj.isExclusive){
-							obj.model.lastUpdatedBy=this._uid;
-							obj.model.model[obj.mappedAttributes[a]]=value;
+							(_modelLastUpdated[obj.mappedAttributes[a]]) || (_modelLastUpdated[obj.mappedAttributes[a]]=[]);
+							if(_modelLastUpdated[obj.mappedAttributes[a]].indexOf(this._uid)===-1){
+								_modelLastUpdated[obj.mappedAttributes[a]].push(this._uid);
+								if(obj.model.model[obj.mappedAttributes[a]]!==value)
+									obj.model.model[obj.mappedAttributes[a]]=value;
+							}
 						}
 					}
 				}			

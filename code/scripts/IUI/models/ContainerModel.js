@@ -17,12 +17,22 @@
 				var length=boundModels.length;				
 				for(var i=0;i<length;++i){
 					var obj=boundModels[i];
-					if(obj.model._uid===this.lastUpdatedBy){
-						delete this.lastUpdatedBy;
-						continue;
+					(this.lastUpdatedBy) || (this.lastUpdatedBy={});
+					(this.modelLastUpdatedBy) || (this.modelLastUpdatedBy={});
+					(this.modelLastUpdatedBy[obj._uid]) || (this.modelLastUpdatedBy[obj._uid]={});
+					
+					(this.modelLastUpdatedBy[obj._uid][obj.optionAttribute]) || (this.modelLastUpdatedBy[obj._uid][obj.optionAttribute]=[])
+					if(this.modelLastUpdatedBy[obj._uid][obj.optionAttribute].indexOf(this.uid)===-1){
+						this.modelLastUpdatedBy[obj._uid][obj.optionAttribute].push(this.uid);
+						var result=IUI.Template.render(obj.template,this.model);	
+						obj.model.model[obj.optionAttribute]=result;
 					}
-					var result=IUI.Template.render(obj.template,this.model);			
-					obj.model.model[obj.optionAttribute]=result;
+					
+					clearTimeout(this.lastUpdateClearTimeout);
+					this.lastUpdateClearTimeout=setTimeout(function(){
+						delete that.lastUpdatedBy;
+						delete that.modelLastUpdatedBy;
+					});
 				}			
 			}
 		},

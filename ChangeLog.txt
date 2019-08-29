@@ -120,7 +120,15 @@
 # ADDED - Max height attribute can be set to PopOver
 # ADDED - Tagname can now be set to containers
 # ADDED - Persistant Attributes to Container
-# 
+# FIXED - QuickSort comparator can now besent
+# FIXED - QuickSort comparator can now besent
+# FIXED- Object not recognizable in IUI.makeUI without element
+# FIXED - isAttached and enable attribute working in Widget
+# ADDED - PersistantAttributes
+# FIXED - async append triggering on View
+# ADDED - Placeholder can be added to IUI InputBox
+# CHANGED - TwoWay binding behavior of ContainerModel and OptionsModel
+# CHANGED - A bit of layout.html
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
