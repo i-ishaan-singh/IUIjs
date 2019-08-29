@@ -1,5 +1,5 @@
 (function (factory) {
-   if(typeof define === "function" && define.amd) {    
+  if(typeof define === "function" && define.amd) {    
 	define(['IUI-core'],factory);
 	
   } else {
@@ -36,6 +36,9 @@
 			(options.async) && (options.async=JSON.parse(options.async));
 		},
 		initialize: function(options){
+			if(options.tagname){
+				this.tagName=options.tagname;
+			}
 			this.widgets=[];
 			this.containers=[];			
 			IUI.Class.prototype.initialize.apply(this,arguments);
@@ -55,6 +58,12 @@
 				this.$element=$(this.element);
 				this.$element.append(_elem);
 			}
+			
+			IUI.persistantAttributes.forEach(function(_attr){
+				if(options[_attr] && !options[_attr].match(IUI._observableRegex)){
+					$(this.$element).attr(_attr,options[_attr])
+				}
+			});
 			
 		},
 		_onCreateWidget: function(widget){
@@ -85,7 +94,9 @@
 			}
 		},
 		_handleOptionChange:function(key,value){
-			if(this.element && key in this.element.style){
+			if(IUI.persistantAttributes.indexOf(key) !== -1){
+				this.$element.attr(key, value);
+			}else if(this.element && key in this.element.style){
 				this.element.style[key]=value;
 			}else if(key.match(IUI.iiAttributeRegex)){
 				this.$element.attr(key,value);
@@ -174,10 +185,20 @@
 			this._itterateCommandToAllComponents('enable',val);
 		},
 		_processOptions: function(wrapper){
+			var options= this.options;
+			
 			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
 			if(typeof this.options.class === "string"){
 				$(wrapper).addClass(this.options.class.split(' '));	
 			}
+			
+			IUI.persistantAttributes.forEach(function(_attr){
+				if(options[_attr] && !options[_attr].match(IUI._observableRegex)){
+					$(wrapper).attr(_attr,options[_attr])
+				}
+			});
+			
+			
 			if(this.options.id){
 				wrapper.id=this.options.id;
 			}

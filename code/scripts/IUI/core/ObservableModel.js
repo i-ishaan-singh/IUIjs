@@ -67,7 +67,9 @@
 							var valid=validator(value);
 							if(_data[key]!==value && valid.valid){
 								_data[key]=value;
-								(_modelUpdating) || (_handleChange(key,value));
+								setTimeout(function(){
+									(_modelUpdating) || (_handleChange(key,value));
+								});
 							}
 						},
 					get: function(){
