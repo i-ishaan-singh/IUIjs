@@ -71,7 +71,7 @@
 	IUI.makeUI=function makeUI(elem,model){
 		var uiContainer;
 		
-		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
+		if(elem && (elem.constructor.toString() === ({}).constructor.toString() || elem.classType==="ObservableModel")){
 			model=elem;
 			elem=null;
 		}
@@ -99,7 +99,7 @@
 	}
 	
 	IUI.makeUIAsync=function makeUI(elem,model){
-		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
+		if(elem && (elem.constructor.toString() === ({}).constructor.toString() || elem.classType==="ObservableModel")){
 			model=elem;
 			elem=null;
 		}

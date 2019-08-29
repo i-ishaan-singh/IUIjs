@@ -7,7 +7,7 @@
   }
 })(function(IUI){
 	
-	IUI.persistantAttributes=['src'];
+	IUI.persistantAttributes=['src', 'onabort','onautocomplete','onautocompleteerror','onblur','oncancel','oncanplay','oncanplaythrough','onchange','onclick','onclose','oncontextmenu','oncuechange','ondblclick','ondrag','ondragend','ondragenter','ondragexit','ondragleave','ondragover','ondragstart','ondrop','ondurationchange','onemptied','onended','onerror','onfocus','oninput','oninvalid','onkeydown','onkeypress','onkeyup','onload','onloadeddata','onloadedmetadata','onloadstart','onmousedown','onmouseenter','onmouseleave','onmousemove','onmouseout','onmouseover','onmouseup','onmousewheel','onpause','onplay','onplaying','onprogress','onratechange','onreset','onresize','onscroll','onseeked','onseeking','onselect','onshow','onsort','onstalled','onsubmit','onsuspend','ontimeupdate','ontoggle','onvolumechange','onwaiting','accesskey','accesskey' , 'autocapitalize' , 'contenteditable' ,  'dir' , 'draggable' , 'hidden' , 'inputmode' , 'is','itemid' , 'itemprop' , 'itemref' , 'itemscope' , 'itemtype' , 'lang' , 'slot' , 'spellcheck  ' , 'style' , 'tabindex' , 'title','target'];
 	/**
 	*	The base Framework Class for all the Widgets which are created by WidgetBuilder.
 	*/
@@ -27,6 +27,12 @@
 			}
 			if(typeof options.escapehtml === "string"){
 				options.escapehtml=JSON.parse(options.escapehtml);
+			}
+			if(typeof options.isattached === "string"  && !options.isattached.match(IUI._observableRegex)){
+				options.isattached=JSON.parse(options.isattached);
+			}
+			if(typeof options.enable === "string"  && !options.enable.match(IUI._observableRegex)){
+				options.enable=JSON.parse(options.enable);
 			}
 			this.boundModelOptions={
 				validator: this._validate.bind(this)
@@ -48,6 +54,12 @@
 				this._processModelData();
 			}
 			this.makeUI();	
+			if(!this.options.isattached){
+				this.detach();
+			}
+			if(!this.options.enable){
+				this.enable(false);
+			}
 			this._initPromise.resolve();
 			delete this._initPromise;
 			if(this.options.plug){
@@ -76,12 +88,12 @@
 				}			
 		},
 		_handleOptionChange:function(key,value){
-			if(key in this.element.style){
+			if(IUI.persistantAttributes.indexOf(key) !== -1){
+				this.$element.attr(key, value);
+			}else if(key in this.element.style){
 				this.element.style[key]=value;
 			}else if(key.match(IUI.iiAttributeRegex)){
 				this.$element.attr(key,value);
-			}else if(IUI.persistantAttributes.indexOf(key) !== -1){
-				this.$element.attr(key, value)
 			}
 			IUI.Class.prototype._handleOptionChange.apply(this,arguments);
 			
@@ -145,6 +157,7 @@
 			(this._detachedSpan) || (this._detachedSpan=$('<span>'));
 				this.$element.after(this._detachedSpan);
 				this.$element.detach();
+				this.options.isattached= false;
 				return this;
 			}
 		},
@@ -152,6 +165,7 @@
 			if(this._detachedSpan && this._detachedSpan.parent().length){
 				this._detachedSpan.after(this.$element);
 				this._detachedSpan.detach();
+				this.options.isattached = true;
 			}
 		},
 		_processOptions: function(wrapper){

@@ -162,7 +162,7 @@
 			return array;
 		}
 		
-		comparator = getComparator(options);
+		comparator = comparator || getComparator(options);
 		
 		return _sort(array, (options.startIndex || 0), (options.endIndex || array.length-1), comparator);
 		

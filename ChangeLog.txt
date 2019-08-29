@@ -116,6 +116,11 @@
 * FIXED - Combobox popup opening placement
 * ADDED - [TEST ENGINE] - Basic Test Suit
 * ADDED - [TEST ENGINE] - Core Test Cases
+# CHANGED - PopOver height can be autocalculated according to element size
+# ADDED - Max height attribute can be set to PopOver
+# ADDED - Tagname can now be set to containers
+# ADDED - Persistant Attributes to Container
+# 
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.

@@ -29,6 +29,7 @@
 				viewContexts[options.context || this.options.context].view[options.name]=this;
 			}	
 			this.name = options.name;
+			this._initPromise=$.Deferred();
 			if(options.templateurl){
 				var that=this, _arguments=arguments;
 				var _clone = $(options.element).clone().empty();
@@ -37,12 +38,14 @@
 					IUI.ContainerUI.prototype.initialize.apply(that,_arguments);	
 					that.makeUI();
 					that.bindModels();
+					that._initPromise.resolve();
 				});
 			}else{
 				this.template = '<container'+options.element.outerHTML.slice(5,-5)+'container>';
 				IUI.ContainerUI.prototype.initialize.apply(this,arguments);	
 				this.makeUI();
 				this.bindModels();
+				this._initPromise.resolve();
 			}
 		},	
 		options:{
@@ -176,7 +179,9 @@
 				_viewport.$element.children().detach();
 				_viewport.$element.append(_view.$el);
 				_viewport._currentView=_view;
-				_view.trigger('append');
+				_view._initPromise.then(function(){
+					_view.trigger('append');					
+				});
 			}
 		}else if(_view){
 			viewPromiseMap[IUI.View.getName(_view)] = viewport;
