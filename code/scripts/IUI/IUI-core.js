@@ -68,6 +68,7 @@
 			for(var a in _bindings){
 				_bindings[a](eventGroup.events);
 			}
+			delete EventGroup._classBindings[name];
 			if(eventGroup.persist){
 				EventGroup._eventBindings[name]=eventGroup;
 			}
@@ -106,15 +107,21 @@
 		return keys;
 	};
 
+	var _isObject = function(_obj){
+		return _obj && typeof _obj === "object" && _obj.constructor===Object
+	}
+	
 	var _extendObject=function(obj) {
 		var length = arguments.length;
 		if ( obj == null) return obj;
+		
 		var keys=_getKeys(obj), l=keys.length, newObj={};
+		
 		for (var i = 0; i < l; i++) {
 			var _obj=obj[keys[i]];
 			if(typeof _obj === "object" && Array.isArray(_obj)){
 				_obj=Array.prototype.slice.call(_obj);
-			}else if(_obj && typeof _obj === "object" && _obj.constructor===Object){
+			}else if(_isObject(_obj)){
 				_obj=_extendObject(_obj);
 			}
 			newObj[keys[i]] =_obj ;
@@ -126,7 +133,11 @@
 				l = keys.length;
 			for (var i = 0; i < l; i++) {
 				var key = keys[i];
-				newObj[key] = source[key];
+				if(newObj[key] && (_isObject(source[key]) && _isObject(newObj[key]))){
+					newObj[key]=_extendObject(newObj[key],source[key]);
+				}else{
+					newObj[key] = source[key];
+				}
 			}
 		}
 		return newObj;
@@ -135,17 +146,20 @@
 
 	function IUIClass(){	
 		this.initialize.apply(this,arguments);
+		this.onInitialize.apply(this,arguments);
 	}
 
 	
 	IUIClass.prototype.load=function(){
 		
 	}
+	IUIClass.prototype.onInitialize=function(){
+		
+	}
 	
 	IUIClass.prototype.initialize=function(options){
 		this.load(options);
 		this.options=_extendObject((this.options) || ({}),options);	
-		
 		this._handlers={};		
 		this._bind(this.options);
 		if(this.options.eventgroup){
@@ -153,7 +167,7 @@
 		}
 		for(var attr in this){
 			var attribute=this[attr];
-			if(typeof attribute === "object" && attribute!=="options"){
+			if(typeof attribute === "object" && attr!=="options"){
 				if(Array.isArray(attribute)){
 					this[attr]=Array.prototype.slice.call(attribute);
 				}else{
@@ -250,6 +264,7 @@
 		
 		var IUIClass=function(){
 			this.initialize.apply(this,arguments);
+			this.onInitialize.apply(this,arguments);
 		};
 		
 		_getKeys(this.prototype).forEach(function(key){
@@ -283,6 +298,7 @@
 	_extend=IUIClass.extend;
 	
 	IUIClass.prototype._optionModelMapping= [];
+	IUIClass.prototype.ignoredAttributes= [];
 	
 	IUIClass.prototype._observedOptions=['enable','isattached'];
 	
@@ -294,11 +310,20 @@
 		}
 	}
 	
+	IUIClass.prototype.destroy=function(boundOptions){
+		if(this.options.model){
+				IUI.ObservableModel.unbindModels(this.optionsModel,this.options.model,this._optionModelMapping);
+		}
+	}
+	
 	IUIClass.prototype.__processOptionMapping=function(){
 		var _mappings=IUI.behaviors.getObservableMapping(this.options),
 			length=_mappings.length;
 		if(length){
 			for(var i=0;i<length;++i){
+				if(this.ignoredAttributes.indexOf(_mappings[i].optionAttribute) !== -1){
+					continue;
+				}
 				this._optionModelMapping.push(_mappings[i]);
 				if(this._observedOptions.indexOf(_mappings[i].optionAttribute)===-1){
 					this._observedOptions.push(_mappings[i].optionAttribute);
@@ -329,7 +354,7 @@
 	
 	IUI.deepExtend=_extendObject;
 	
-	IUI._observableRegex=/::.+::/g;
+	IUI._observableRegex=/::.*?::/g;
 	
 	IUI.subcontainerRegex=/subcontainer-\S+/g;
 	

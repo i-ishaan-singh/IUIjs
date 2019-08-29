@@ -1,17 +1,6 @@
-
-	* EventGroup
-	* DataMart
-	- Widgets
-		* Popup
-		* Dropdown							//- DataWidgets
-		* ComboBox							//- DataWidgets
-		* Menu (Vertical/Horizontal);		//- DataWidgets
-		* ListView							//- DataWidgets
-		* Context Menu					
-		
-	- ContainerUI
-		* Form
-		* Window
-		* Frame
-		* Popup
-		
+* Change View to Widget
+* Change ViewPort to Widget
+* Issue with template not rendering between words
+* Issue with view name getting uid when name provided in options
+* Exception while rendering double quotes through templates
+* Slider resists to slide

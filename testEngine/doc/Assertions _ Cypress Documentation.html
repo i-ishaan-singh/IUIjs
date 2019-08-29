@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)https://docs.cypress.io/guides/references/assertions.html#BDD-Assertions -->
+<html lang="en"><head prefix="og: http://ogp.me/ns#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="generator" content="Hexo 3.9.0">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Assertions | Cypress Documentation</title>
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://docs.cypress.io/guides/references/assertions.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://docs.cypress.io/guides/references/assertions.html">
+    
+      <link rel="alternative" hreflang="ja" href="https://docs.cypress.io/ja/guides/references/assertions.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://docs.cypress.io/zh-cn/guides/references/assertions.html">
+    
+  
+  <script type="text/javascript" async="" src="./Assertions _ Cypress Documentation_files/hotjar-658450.js.download"></script><script type="text/javascript" async="" src="./Assertions _ Cypress Documentation_files/analytics.js.download"></script><script async="" src="./Assertions _ Cypress Documentation_files/gtm.js.download"></script><script type="text/javascript">
+    window.env = window.Cypress ? 'test' : 'production'
+  </script>
+
+  <!-- Icon -->
+  <link rel="icon" type="image/x-icon" href="https://docs.cypress.io/img/favicon.ico" sizes="16x16">
+
+  <link rel="stylesheet" href="./Assertions _ Cypress Documentation_files/roboto-fontface.b52ab7e9.css">
+  <link rel="stylesheet" href="./Assertions _ Cypress Documentation_files/font-awesome.0df28c06.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./Assertions _ Cypress Documentation_files/style.4cd7ac3a.css">
+
+  
+ <script src="./Assertions _ Cypress Documentation_files/bundle.min.js.download" crossorigin="anonymous"></script>
+ <script>
+  if (window.env === 'production') {
+    Sentry.init({
+      dsn: 'https://b3169c504f3840d397b4987b3fd68697@sentry.io/1387466', 
+      environment: window.env,
+      // ignore ResizeObserver loop limit exceeded errors
+      // https://github.com/cypress-io/cypress-documentation/issues/1426
+      ignoreErrors: ['ResizeObserver']  
+    })
+  }
+ </script>
+
+
+
+  <!-- Open Graph http://ogp.me/ -->
+  <meta name="description" content="Cypress bundles the popular Chai assertion library, as well as helpful extensions for Sinon and jQuery, bringing you dozens of powerful assertions for free.               New to Cypress?      This doc">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Assertions">
+<meta property="og:url" content="https://docs.cypress.io/guides/references/assertions.html">
+<meta property="og:site_name" content="Cypress Documentation">
+<meta property="og:description" content="Cypress bundles the popular Chai assertion library, as well as helpful extensions for Sinon and jQuery, bringing you dozens of powerful assertions for free.               New to Cypress?      This doc">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-11T06:54:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Assertions">
+<meta name="twitter:description" content="Cypress bundles the popular Chai assertion library, as well as helpful extensions for Sinon and jQuery, bringing you dozens of powerful assertions for free.               New to Cypress?      This doc">
+<meta name="twitter:creator" content="@Cypress_io">
+<meta name="twitter:site" content="Cypress_io">
+<meta property="fb:admins" content="22600147">
+<meta property="fb:app_id" content="446223215719535">
+
+  <!-- Google Analytics, Tag Manager, and Optimize -->
+  
+  <script type="text/javascript">
+    if (window.env === 'production') {
+      // Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KNKBWLD');
+      // End Google Tag Manager
+    }
+  </script>
+
+
+<link rel="stylesheet" href="./Assertions _ Cypress Documentation_files/prism-coy.1679812f.css" type="text/css"><script async="" type="text/javascript" src="./Assertions _ Cypress Documentation_files/visit"></script><script type="text/javascript" charset="utf-8" src="./Assertions _ Cypress Documentation_files/serialize.min.js.download"></script><script async="" src="./Assertions _ Cypress Documentation_files/modules.c010790154f05f423d8c.js.download"></script><style type="text/css">iframe#_hjRemoteVarsFrame {display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;}</style></head>
+
+<body>
+  <noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNKBWLD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://www.cypress.io/" id="logo">
+        <img src="./Assertions _ Cypress Documentation_files/logo.png" alt="Cypress">
+      </a>
+    </h1>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="https://docs.cypress.io/guides/overview/why-cypress.html" class="main-nav-link active"> Guides</a></li><li><a href="https://docs.cypress.io/api/api/table-of-contents.html" class="main-nav-link "> API</a></li><li><a href="https://docs.cypress.io/plugins/" class="main-nav-link "> Plugins</a></li><li><a href="https://docs.cypress.io/examples/examples/recipes.html" class="main-nav-link "> Examples</a></li><li><a href="https://docs.cypress.io/faq/questions/using-cypress-faq.html" class="main-nav-link "> FAQ</a></li>
+        <li>
+          <a href="https://github.com/cypress-io/cypress" aria-label="GitHub repo" class="main-nav-link"><i class="fa fa-github"></i></a>
+        </li>
+      </ul>
+      <div class="main-nav-right">
+        <div id="search-container">
+          <div id="search-input-wrap" class="on">
+            <div id="search-input-icon">
+              <i class="fa fa-search"></i>
+            </div>
+            <label for="search-input">Search</label>
+            <span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;"><input type="search" aria-label="Search" class="ds-hint" readonly="" aria-hidden="true" autocomplete="off" spellcheck="false" tabindex="-1" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0px 0px / auto repeat scroll padding-box border-box rgb(23, 36, 50);"><input type="search" id="search-input" aria-label="Search" placeholder="Search..." class="ds-input" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 16.15px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="ds-dropdown-menu" role="listbox" id="algolia-autocomplete-listbox-0" style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;"><div class="ds-dataset-1"></div></span></span>
+          </div>
+        </div>
+        
+          <div id="lang-select-wrap">
+            <label aria-label="Select language" id="lang-select-label"><i class="fa fa-globe"></i><span>English</span><i class="fa fa-caret-down"></i></label>
+            <select aria-label="Select language" id="lang-select" data-canonical="guides/references/assertions.html">
+              
+                <option value="en" selected="">English</option>
+              
+                <option value="ja">日本語</option>
+              
+                <option value="zh-cn">简体中文</option>
+              
+            </select>
+          </div>
+        
+      </div>
+    </nav>
+
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap" class=" ">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <aside id="sidebar" role="navigation">
+  <div class="toggle-sidebar-btns">
+    <a id="expand-sidebar" href="https://docs.cypress.io/guides/references/assertions.html#">Expand all</a> 
+    <span>/</span>
+    <a id="collapse-sidebar" href="https://docs.cypress.io/guides/references/assertions.html#">Collapse all</a>
+  </div>
+  <ul>
+    <li class="sidebar-title " data-target="sidebar-li-overview" data-toggle="collapse"><strong>Overview</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-overview"><a href="https://docs.cypress.io/guides/overview/why-cypress.html" class="sidebar-link">
+        Why Cypress?</a></li><li class="sidebar-li sidebar-li-overview"><a href="https://docs.cypress.io/guides/overview/key-differences.html" class="sidebar-link">
+        Key Differences</a></li></ul></li><li class="sidebar-title " data-target="sidebar-li-getting-started" data-toggle="collapse"><strong>Getting Started</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-getting-started"><a href="https://docs.cypress.io/guides/getting-started/installing-cypress.html" class="sidebar-link">
+        Installing Cypress</a></li><li class="sidebar-li sidebar-li-getting-started"><a href="https://docs.cypress.io/guides/getting-started/writing-your-first-test.html" class="sidebar-link">
+        Writing Your First Test</a></li><li class="sidebar-li sidebar-li-getting-started"><a href="https://docs.cypress.io/guides/getting-started/testing-your-app.html" class="sidebar-link">
+        Testing Your App</a></li></ul></li><li class="sidebar-title " data-target="sidebar-li-core-concepts" data-toggle="collapse"><strong>Core Concepts</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html" class="sidebar-link">
+        Introduction to Cypress</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html" class="sidebar-link">
+        Writing and Organizing Tests</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/retry-ability.html" class="sidebar-link">
+        Retry-ability</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/interacting-with-elements.html" class="sidebar-link">
+        Interacting with Elements</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/variables-and-aliases.html" class="sidebar-link">
+        Variables and Aliases</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/conditional-testing.html" class="sidebar-link">
+        Conditional Testing</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/test-runner.html" class="sidebar-link">
+        The Test Runner</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/dashboard-service.html" class="sidebar-link">
+        Dashboard Service</a></li></ul></li><li class="sidebar-title " data-target="sidebar-li-guides" data-toggle="collapse"><strong>Guides</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/command-line.html" class="sidebar-link">
+        Command Line</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/module-api.html" class="sidebar-link">
+        Module API</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/debugging.html" class="sidebar-link">
+        Debugging</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/network-requests.html" class="sidebar-link">
+        Network Requests</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/continuous-integration.html" class="sidebar-link">
+        Continuous Integration</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/parallelization.html" class="sidebar-link">
+        Parallelization</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/environment-variables.html" class="sidebar-link">
+        Environment Variables</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/stubs-spies-and-clocks.html" class="sidebar-link">
+        Stubs, Spies, and Clocks</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/screenshots-and-videos.html" class="sidebar-link">
+        Screenshots and Videos</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/launching-browsers.html" class="sidebar-link">
+        Launching Browsers</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/web-security.html" class="sidebar-link">
+        Web Security</a></li></ul></li><li class="sidebar-title " data-target="sidebar-li-tooling" data-toggle="collapse"><strong>Tooling</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/intelligent-code-completion.html" class="sidebar-link">
+        Intelligent Code Completion</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/plugins-guide.html" class="sidebar-link">
+        Plugins</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/reporters.html" class="sidebar-link">
+        Reporters</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/typescript-support.html" class="sidebar-link">
+        TypeScript</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/visual-testing.html" class="sidebar-link">
+        Visual Testing</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/code-coverage.html" class="sidebar-link">
+        Code Coverage</a></li></ul></li><li class="sidebar-title current" data-target="sidebar-li-references" data-toggle="collapse"><strong>References</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/assertions.html" class="sidebar-link current">
+        Assertions</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/configuration.html" class="sidebar-link">
+        Configuration</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/proxy-configuration.html" class="sidebar-link">
+        Proxy Configuration</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/best-practices.html" class="sidebar-link">
+        Best Practices</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/error-messages.html" class="sidebar-link">
+        Error Messages</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/bundled-tools.html" class="sidebar-link">
+        Bundled Tools</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/trade-offs.html" class="sidebar-link">
+        Trade-offs</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/changelog.html" class="sidebar-link">
+        Changelog</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/roadmap.html" class="sidebar-link">
+        Roadmap</a></li></ul></li>
+  </ul>
+</aside>
+
+      <article class="article-wrapper">
+        <div id="article">
+          <div class="article" itemscope="" itemtype="http://schema.org/Article">
+            <header class="article-header">
+              <h1 class="article-title" itemprop="name">Assertions</h1>
+              <a href="https://github.com/cypress-io/cypress-documentation/edit/develop/source/guides/references/assertions.md" class="article-edit-link"><i class="fa fa-pencil"></i> Improve this doc</a>
+            </header>
+            <div class="article-content" itemprop="articleBody">
+              <p>Cypress bundles the popular <a href="https://docs.cypress.io/guides/references/assertions.html#Chai">Chai</a> assertion library, as well as helpful extensions for <a href="https://docs.cypress.io/guides/references/assertions.html#Sinon-Chai">Sinon</a> and <a href="https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery">jQuery</a>, bringing you dozens of powerful assertions for free.</p>
+<blockquote class="note info"><strong class="note-title foo">
+      <i class="fa fa-info-circle"></i>
+      New to Cypress?<p></p>
+
+    </strong><p>This document is only a reference to every assertion Cypress supports.</p>
+<p>If you’re looking to understand <strong>how</strong> to use these assertions please read about assertions in our <a href="https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Assertions" target="_blank">Introduction to Cypress</a>.</p>
+</blockquote>
+<h1 id="Chai" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Chai" class="headerlink" title="Chai"></a>Chai<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Chai" aria-hidden="true"></a></h1><i class="fa fa-github"></i> <a href="https://github.com/chaijs/chai" target="_blank" rel="noopener">https://github.com/chaijs/chai</a>
+<h2 id="BDD-Assertions" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#BDD-Assertions" class="headerlink" title="BDD Assertions"></a>BDD Assertions<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#BDD-Assertions" aria-hidden="true"></a></h2><p>These chainers are available for BDD assertions (<code>expect</code>/<code>should</code>). Aliases listed can be used interchangeably with their original chainer. You can see the entire list of available BDD Chai assertions <a href="http://chaijs.com/api/bdd/" target="_blank" rel="noopener">here</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Chainer</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>not</td>
+<td><code>expect(name).to.not.equal('Jane')</code></td>
+</tr>
+<tr>
+<td>deep</td>
+<td><code>expect(obj).to.deep.equal({ name: 'Jane' })</code></td>
+</tr>
+<tr>
+<td>nested</td>
+<td><code>expect({a: {b: ['x', 'y']}}).to.have.nested.property('a.b[1]')</code><br><code>expect({a: {b: ['x', 'y']}}).to.nested.include({'a.b[1]': 'y'})</code></td>
+</tr>
+<tr>
+<td>ordered</td>
+<td><code>expect([1, 2]).to.have.ordered.members([1, 2]).but.not.have.ordered.members([2, 1])</code></td>
+</tr>
+<tr>
+<td>any</td>
+<td><code>expect(arr).to.have.any.keys('name', 'age')</code></td>
+</tr>
+<tr>
+<td>all</td>
+<td><code>expect(arr).to.have.all.keys('name', 'age')</code></td>
+</tr>
+<tr>
+<td>a(<em>type</em>) <br><small class="aliases"><strong>Aliases: </strong>an</small></td>
+<td><code>expect('test').to.be.a('string')</code></td>
+</tr>
+<tr>
+<td>include(<em>value</em>) <br><small class="aliases"><strong>Aliases: </strong>contain, includes, contains</small></td>
+<td><code>expect([1,2,3]).to.include(2)</code></td>
+</tr>
+<tr>
+<td>ok</td>
+<td><code>expect(undefined).to.not.be.ok</code></td>
+</tr>
+<tr>
+<td>true</td>
+<td><code>expect(true).to.be.true</code></td>
+</tr>
+<tr>
+<td>false</td>
+<td><code>expect(false).to.be.false</code></td>
+</tr>
+<tr>
+<td>null</td>
+<td><code>expect(null).to.be.null</code></td>
+</tr>
+<tr>
+<td>undefined</td>
+<td><code>expect(undefined).to.be.undefined</code></td>
+</tr>
+<tr>
+<td>exist</td>
+<td><code>expect(myVar).to.exist</code></td>
+</tr>
+<tr>
+<td>empty</td>
+<td><code>expect([]).to.be.empty</code></td>
+</tr>
+<tr>
+<td>arguments <br><small class="aliases"><strong>Aliases: </strong>Arguments</small></td>
+<td><code>expect(arguments).to.be.arguments</code></td>
+</tr>
+<tr>
+<td>equal(<em>value</em>) <br><small class="aliases"><strong>Aliases: </strong>equals, eq</small></td>
+<td><code>expect(42).to.equal(42)</code></td>
+</tr>
+<tr>
+<td>deep.equal(<em>value</em>)</td>
+<td><code>expect({ name: 'Jane' }).to.deep.equal({ name: 'Jane' })</code></td>
+</tr>
+<tr>
+<td>eql(<em>value</em>) <br><small class="aliases"><strong>Aliases: </strong>eqls</small></td>
+<td><code>expect({ name: 'Jane' }).to.eql({ name: 'Jane' })</code></td>
+</tr>
+<tr>
+<td>greaterThan(<em>value</em>) <br><small class="aliases"><strong>Aliases: </strong>gt, above</small></td>
+<td><code>expect(10).to.be.greaterThan(5)</code></td>
+</tr>
+<tr>
+<td>least(<em>value</em>)<br><small class="aliases"><strong>Aliases: </strong>gte</small></td>
+<td><code>expect(10).to.be.at.least(10)</code></td>
+</tr>
+<tr>
+<td>lessThan(<em>value</em>) <br><small class="aliases"><strong>Aliases: </strong>lt, below</small></td>
+<td><code>expect(5).to.be.lessThan(10)</code></td>
+</tr>
+<tr>
+<td>most(<em>value</em>) <br><small class="aliases"><strong>Aliases: </strong>lte</small></td>
+<td><code>expect('test').to.have.length.of.at.most(4)</code></td>
+</tr>
+<tr>
+<td>within(<em>start</em>, <em>finish</em>)</td>
+<td><code>expect(7).to.be.within(5,10)</code></td>
+</tr>
+<tr>
+<td>instanceOf(<em>constructor</em>) <br><small class="aliases"><strong>Aliases: </strong>instanceof</small></td>
+<td><code>expect([1, 2, 3]).to.be.instanceOf(Array)</code></td>
+</tr>
+<tr>
+<td>property(<em>name</em>, <em>[value]</em>)</td>
+<td><code>expect(obj).to.have.property('name')</code></td>
+</tr>
+<tr>
+<td>deep.property(<em>name</em>, <em>[value]</em>)</td>
+<td><code>expect(deepObj).to.have.deep.property('tests[1]', 'e2e')</code></td>
+</tr>
+<tr>
+<td>ownProperty(<em>name</em>) <br><small class="aliases"><strong>Aliases: </strong>haveOwnProperty, own.property</small></td>
+<td><code>expect('test').to.have.ownProperty('length')</code></td>
+</tr>
+<tr>
+<td>ownPropertyDescriptor(<em>name</em>) <br><small class="aliases"><strong>Aliases: </strong>haveOwnPropertyDescriptor</small></td>
+<td><code>expect({a: 1}).to.have.ownPropertyDescriptor('a')</code></td>
+</tr>
+<tr>
+<td>lengthOf(<em>value</em>)</td>
+<td><code>expect('test').to.have.lengthOf(3)</code></td>
+</tr>
+<tr>
+<td>match(<em>RegExp</em>) <br><small class="aliases"><strong>Aliases: </strong>matches</small></td>
+<td><code>expect('testing').to.match(/^test/)</code></td>
+</tr>
+<tr>
+<td>string(<em>string</em>)</td>
+<td><code>expect('testing').to.have.string('test')</code></td>
+</tr>
+<tr>
+<td>key(<em>key1</em>, <em>[key2]</em>, <em>[…]</em>) <br><small class="aliases"><strong>Aliases: </strong>keys</small></td>
+<td><code>expect({ pass: 1, fail: 2 }).to.have.key('pass')</code></td>
+</tr>
+<tr>
+<td>throw(<em>constructor</em>) <br><small class="aliases"><strong>Aliases: </strong>throws, Throw</small></td>
+<td><code>expect(fn).to.throw(Error)</code></td>
+</tr>
+<tr>
+<td>respondTo(<em>method</em>) <br><small class="aliases"><strong>Aliases: </strong>respondsTo</small></td>
+<td><code>expect(obj).to.respondTo('getName')</code></td>
+</tr>
+<tr>
+<td>itself</td>
+<td><code>expect(Foo).itself.to.respondTo('bar')</code></td>
+</tr>
+<tr>
+<td>satisfy(<em>method</em>) <br><small class="aliases"><strong>Aliases: </strong>satisfies</small></td>
+<td><code>expect(1).to.satisfy((num) =&gt; { return num &gt; 0 })</code></td>
+</tr>
+<tr>
+<td>closeTo(<em>expected</em>, <em>delta</em>) <br><small class="aliases"><strong>Aliases: </strong>approximately</small></td>
+<td><code>expect(1.5).to.be.closeTo(1, 0.5)</code></td>
+</tr>
+<tr>
+<td>members(<em>set</em>)</td>
+<td><code>expect([1, 2, 3]).to.include.members([3, 2])</code></td>
+</tr>
+<tr>
+<td>oneOf(<em>values</em>)</td>
+<td><code>expect(2).to.be.oneOf([1,2,3])</code></td>
+</tr>
+<tr>
+<td>change(<em>function</em>) <br><small class="aliases"><strong>Aliases: </strong>changes</small></td>
+<td><code>expect(fn).to.change(obj, 'val')</code></td>
+</tr>
+<tr>
+<td>increase(<em>function</em>) <br><small class="aliases"><strong>Aliases: </strong>increases</small></td>
+<td><code>expect(fn).to.increase(obj, 'val')</code></td>
+</tr>
+<tr>
+<td>decrease(<em>function</em>) <br><small class="aliases"><strong>Aliases: </strong>decreases</small></td>
+<td><code>expect(fn).to.decrease(obj, 'val')</code></td>
+</tr>
+</tbody>
+</table>
+<p>These getters are also available for BDD assertions. They don’t actually do anything, but they enable you to write simple, english sentences.</p>
+<table>
+<thead>
+<tr>
+<th>Chainable getters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>to</code>, <code>be</code>, <code>been</code>, <code>is</code>, <code>that</code>, <code>which</code>, <code>and</code>, <code>has</code>, <code>have</code>, <code>with</code>, <code>at</code>, <code>of</code>, <code>same</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="TDD-Assertions" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#TDD-Assertions" class="headerlink" title="TDD Assertions"></a>TDD Assertions<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#TDD-Assertions" aria-hidden="true"></a></h2><p>These assertions are available for TDD assertions (<code>assert</code>). You can see the entire list of available Chai assertions <a href="http://chaijs.com/api/assert/" target="_blank" rel="noopener">here</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Assertion</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.isOk(<em>object</em>, <em>[message]</em>)</td>
+<td><code>assert.isOk('everything', 'everything is ok')</code></td>
+</tr>
+<tr>
+<td>.isNotOk(<em>object</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotOk(false, 'this will pass')</code></td>
+</tr>
+<tr>
+<td>.equal(<em>actual</em>, <em>expected</em>, <em>[message]</em>)</td>
+<td><code>assert.equal(3, 3, 'vals equal')</code></td>
+</tr>
+<tr>
+<td>.notEqual(<em>actual</em>, <em>expected</em>, <em>[message]</em>)</td>
+<td><code>assert.notEqual(3, 4, 'vals not equal')</code></td>
+</tr>
+<tr>
+<td>.strictEqual(<em>actual</em>, <em>expected</em>, <em>[message]</em>)</td>
+<td><code>assert.strictEqual(true, true, 'bools strict eq')</code></td>
+</tr>
+<tr>
+<td>.notStrictEqual(<em>actual</em>, <em>expected</em>, <em>[message]</em>)</td>
+<td><code>assert.notStrictEqual(5, '5', 'not strict eq')</code></td>
+</tr>
+<tr>
+<td>.deepEqual(<em>actual</em>, <em>expected</em>, <em>[message]</em>)</td>
+<td><code>assert.deepEqual({ id: '1' }, { id: '1' })</code></td>
+</tr>
+<tr>
+<td>.notDeepEqual(<em>actual</em>, <em>expected</em>, <em>[message]</em>)</td>
+<td><code>assert.notDeepEqual({ id: '1' }, { id: '2' })</code></td>
+</tr>
+<tr>
+<td>.isAbove(<em>valueToCheck</em>, <em>valueToBeAbove</em>, <em>[message]</em>)</td>
+<td><code>assert.isAbove(6, 1, '6 greater than 1')</code></td>
+</tr>
+<tr>
+<td>.isAtLeast(<em>valueToCheck</em>, <em>valueToBeAtLeast</em>, <em>[message]</em>)</td>
+<td><code>assert.isAtLeast(5, 2, '5 gt or eq to 2')</code></td>
+</tr>
+<tr>
+<td>.isBelow(<em>valueToCheck</em>, <em>valueToBeBelow</em>, <em>[message]</em>)</td>
+<td><code>assert.isBelow(3, 6, '3 strict lt 6')</code></td>
+</tr>
+<tr>
+<td>.isAtMost(<em>valueToCheck</em>, <em>valueToBeAtMost</em>, <em>[message]</em>)</td>
+<td><code>assert.isAtMost(4, 4, '4 lt or eq to 4')</code></td>
+</tr>
+<tr>
+<td>.isTrue(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isTrue(true, 'this val is true')</code></td>
+</tr>
+<tr>
+<td>.isNotTrue(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotTrue('tests are no fun', 'val not true')</code></td>
+</tr>
+<tr>
+<td>.isFalse(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isFalse(false, 'val is false')</code></td>
+</tr>
+<tr>
+<td>.isNotFalse(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotFalse('tests are fun', 'val not false')</code></td>
+</tr>
+<tr>
+<td>.isNull(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNull(err, 'there was no error')</code></td>
+</tr>
+<tr>
+<td>.isNotNull(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotNull('hello', 'is not null')</code></td>
+</tr>
+<tr>
+<td>.isNaN(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNaN(NaN, 'NaN is NaN')</code></td>
+</tr>
+<tr>
+<td>.isNotNaN(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotNaN(5, '5 is not NaN')</code></td>
+</tr>
+<tr>
+<td>.exists(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.exists(5, '5 is not null or undefined')</code></td>
+</tr>
+<tr>
+<td>.notExists(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.notExists(null, 'val is null or undefined')</code></td>
+</tr>
+<tr>
+<td>.isUndefined(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isUndefined(undefined, 'val is undefined')</code></td>
+</tr>
+<tr>
+<td>.isDefined(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isDefined('hello', 'val has been defined')</code></td>
+</tr>
+<tr>
+<td>.isFunction(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isFunction(x =&gt; x * x, 'val is func')</code></td>
+</tr>
+<tr>
+<td>.isNotFunction(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotFunction(5, 'val not funct')</code></td>
+</tr>
+<tr>
+<td>.isObject(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isObject({num: 5}, 'val is object')</code></td>
+</tr>
+<tr>
+<td>.isNotObject(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotObject(3, 'val not object')</code></td>
+</tr>
+<tr>
+<td>.isArray(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isArray(['unit', 'e2e'], 'val is array')</code></td>
+</tr>
+<tr>
+<td>.isNotArray(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotArray('e2e', 'val not array')</code></td>
+</tr>
+<tr>
+<td>.isString(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isString('e2e', 'val is string')</code></td>
+</tr>
+<tr>
+<td>.isNotString(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotString(2, 'val not string')</code></td>
+</tr>
+<tr>
+<td>.isNumber(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNumber(2, 'val is number')</code></td>
+</tr>
+<tr>
+<td>.isNotNumber(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotNumber('e2e', 'val not number')</code></td>
+</tr>
+<tr>
+<td>.isFinite(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isFinite('e2e', 'val is finite')</code></td>
+</tr>
+<tr>
+<td>.isBoolean(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isBoolean(true, 'val is bool')</code></td>
+</tr>
+<tr>
+<td>.isNotBoolean(<em>value</em>, <em>[message]</em>)</td>
+<td><code>assert.isNotBoolean('true', 'val not bool')</code></td>
+</tr>
+<tr>
+<td>.typeOf(<em>value</em>, <em>name</em>, <em>[message]</em>)</td>
+<td><code>assert.typeOf('e2e', 'string', 'val is string')</code></td>
+</tr>
+<tr>
+<td>.notTypeOf(<em>value</em>, <em>name</em>, <em>[message]</em>)</td>
+<td><code>assert.notTypeOf('e2e', 'number', 'val not number')</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="Chai-jQuery" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery" class="headerlink" title="Chai-jQuery"></a>Chai-jQuery<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery" aria-hidden="true"></a></h1><i class="fa fa-github"></i> <a href="https://github.com/chaijs/chai-jquery" target="_blank" rel="noopener">https://github.com/chaijs/chai-jquery</a>
+<p>These chainers are available when asserting about a DOM object.</p>
+<p>You will commonly use these chainers after using DOM commands like: <a href="https://docs.cypress.io/api/commands/get.html"><code>cy.get()</code></a>, <a href="https://docs.cypress.io/api/commands/contains.html"><code>cy.contains()</code></a>, etc.</p>
+<!-- textlint-disable -->
+<table>
+<thead>
+<tr>
+<th>Chainers</th>
+<th>Assertion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>attr(<em>name</em>, <em>[value]</em>)</td>
+<td><code>expect($el).to.have.attr('foo', 'bar')</code></td>
+</tr>
+<tr>
+<td>prop(<em>name</em>, <em>[value]</em>)</td>
+<td><code>expect($el).to.have.prop('disabled', false)</code></td>
+</tr>
+<tr>
+<td>css(<em>name</em>, <em>[value]</em>)</td>
+<td><code>expect($el).to.have.css('background-color', 'rgb(0, 0, 0)')</code></td>
+</tr>
+<tr>
+<td>data(<em>name</em>, <em>[value]</em>)</td>
+<td><code>expect($el).to.have.data('foo', 'bar')</code></td>
+</tr>
+<tr>
+<td>class(<em>className</em>)</td>
+<td><code>expect($el).to.have.class('foo')</code></td>
+</tr>
+<tr>
+<td>id(<em>id</em>)</td>
+<td><code>expect($el).to.have.id('foo')</code></td>
+</tr>
+<tr>
+<td>html(<em>html</em>)</td>
+<td><code>expect($el).to.have.html('I love testing')</code></td>
+</tr>
+<tr>
+<td>text(<em>text</em>)</td>
+<td><code>expect($el).to.have.text('I love testing')</code></td>
+</tr>
+<tr>
+<td>value(<em>value</em>)</td>
+<td><code>expect($el).to.have.value('test@dev.com')</code></td>
+</tr>
+<tr>
+<td>visible</td>
+<td><code>expect($el).to.be.visible</code></td>
+</tr>
+<tr>
+<td>hidden</td>
+<td><code>expect($el).to.be.hidden</code></td>
+</tr>
+<tr>
+<td>selected</td>
+<td><code>expect($option).not.to.be.selected</code></td>
+</tr>
+<tr>
+<td>checked</td>
+<td><code>expect($input).not.to.be.checked</code></td>
+</tr>
+<tr>
+<td>focus[ed]</td>
+<td><code>expect($input).not.to.be.focused</code><br><code>expect($input).to.have.focus</code></td>
+</tr>
+<tr>
+<td>enabled</td>
+<td><code>expect($input).to.be.enabled</code></td>
+</tr>
+<tr>
+<td>disabled</td>
+<td><code>expect($input).to.be.disabled</code></td>
+</tr>
+<tr>
+<td>empty</td>
+<td><code>expect($el).not.to.be.empty</code></td>
+</tr>
+<tr>
+<td>exist</td>
+<td><code>expect($nonexistent).not.to.exist</code></td>
+</tr>
+<tr>
+<td>match(<em>selector</em>)</td>
+<td><code>expect($emptyEl).to.match(':empty')</code></td>
+</tr>
+<tr>
+<td>contain(<em>text</em>)</td>
+<td><code>expect($el).to.contain('text')</code></td>
+</tr>
+<tr>
+<td>descendants(<em>selector</em>)</td>
+<td><code>expect($el).to.have.descendants('div')</code></td>
+</tr>
+</tbody>
+</table>
+<!-- textlint-enable -->
+<h1 id="Sinon-Chai" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Sinon-Chai" class="headerlink" title="Sinon-Chai"></a>Sinon-Chai<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Sinon-Chai" aria-hidden="true"></a></h1><i class="fa fa-github"></i> <a href="https://github.com/domenic/sinon-chai" target="_blank" rel="noopener">https://github.com/domenic/sinon-chai</a>
+<p>These chainers are used on assertions with <a href="https://docs.cypress.io/api/commands/stub.html"><code>cy.stub()</code></a> and <a href="https://docs.cypress.io/api/commands/spy.html"><code>cy.spy()</code></a>.</p>
+<table>
+<thead>
+<tr>
+<th>Sinon.JS property/method</th>
+<th>Assertion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>called</td>
+<td><code>expect(spy).to.be.called</code></td>
+</tr>
+<tr>
+<td>callCount</td>
+<td><code>expect(spy).to.have.callCount(n)</code></td>
+</tr>
+<tr>
+<td>calledOnce</td>
+<td><code>expect(spy).to.be.calledOnce</code></td>
+</tr>
+<tr>
+<td>calledTwice</td>
+<td><code>expect(spy).to.be.calledTwice</code></td>
+</tr>
+<tr>
+<td>calledThrice</td>
+<td><code>expect(spy).to.be.calledThrice</code></td>
+</tr>
+<tr>
+<td>calledBefore</td>
+<td><code>expect(spy1).to.be.calledBefore(spy2)</code></td>
+</tr>
+<tr>
+<td>calledAfter</td>
+<td><code>expect(spy1).to.be.calledAfter(spy2)</code></td>
+</tr>
+<tr>
+<td>calledWithNew</td>
+<td><code>expect(spy).to.be.calledWithNew</code></td>
+</tr>
+<tr>
+<td>alwaysCalledWithNew</td>
+<td><code>expect(spy).to.always.be.calledWithNew</code></td>
+</tr>
+<tr>
+<td>calledOn</td>
+<td><code>expect(spy).to.be.calledOn(context)</code></td>
+</tr>
+<tr>
+<td>alwaysCalledOn</td>
+<td><code>expect(spy).to.always.be.calledOn(context)</code></td>
+</tr>
+<tr>
+<td>calledWith</td>
+<td><code>expect(spy).to.be.calledWith(...args)</code></td>
+</tr>
+<tr>
+<td>alwaysCalledWith</td>
+<td><code>expect(spy).to.always.be.calledWith(...args)</code></td>
+</tr>
+<tr>
+<td>calledWithExactly</td>
+<td><code>expect(spy).to.be.calledWithExactly(...args)</code></td>
+</tr>
+<tr>
+<td>alwaysCalledWithExactly</td>
+<td><code>expect(spy).to.always.be.calledWithExactly(...args)</code></td>
+</tr>
+<tr>
+<td>calledWithMatch</td>
+<td><code>expect(spy).to.be.calledWithMatch(...args)</code></td>
+</tr>
+<tr>
+<td>alwaysCalledWithMatch</td>
+<td><code>expect(spy).to.always.be.calledWithMatch(...args)</code></td>
+</tr>
+<tr>
+<td>returned</td>
+<td><code>expect(spy).to.have.returned(returnVal)</code></td>
+</tr>
+<tr>
+<td>alwaysReturned</td>
+<td><code>expect(spy).to.have.always.returned(returnVal)</code></td>
+</tr>
+<tr>
+<td>threw</td>
+<td><code>expect(spy).to.have.thrown(errorObjOrErrorTypeStringOrNothing)</code></td>
+</tr>
+<tr>
+<td>alwaysThrew</td>
+<td><code>expect(spy).to.have.always.thrown(errorObjOrErrorTypeStringOrNothing)</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="Adding-New-Assertions" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Adding-New-Assertions" class="headerlink" title="Adding New Assertions"></a>Adding New Assertions<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Adding-New-Assertions" aria-hidden="true"></a></h1><p>Because we are using <code>chai</code>, that means you can extend it however you’d like. Cypress will “just work” with new assertions added to <code>chai</code>. You can:</p>
+<ul>
+<li>Write your own <code>chai</code> assertions as <a href="http://chaijs.com/api/plugins/" target="_blank" rel="noopener">documented here</a>.</li>
+<li>npm install any existing <code>chai</code> library and import into your test file or support file.</li>
+</ul>
+<blockquote class="note info"><p><a href="https://docs.cypress.io/examples/examples/recipes.html#Fundamentals">Check out our example recipe extending chai with new assertions.</a></p>
+</blockquote>
+<h1 id="Common-Assertions" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Common-Assertions" class="headerlink" title="Common Assertions"></a>Common Assertions<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Common-Assertions" aria-hidden="true"></a></h1><p>Here is a list of common element assertions. Notice how we use these assertions (listed above) with <a href="https://docs.cypress.io/api/commands/should.html"><code>.should()</code></a>. You may also want to read about how Cypress <a href="https://docs.cypress.io/guides/core-concepts/retry-ability.html">retries</a> assertions.</p>
+<h2 id="Length" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Length" class="headerlink" title="Length"></a>Length<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Length" aria-hidden="true"></a></h2><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until we find 3 matching &lt;li.selected&gt;</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'li.selected'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'have.length'</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="Class" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Class" class="headerlink" title="Class"></a>Class<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Class" aria-hidden="true"></a></h2><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until this input does not have class disabled</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'form'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'not.have.class'</span><span class="token punctuation">,</span> <span class="token string">'disabled'</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="Value" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Value" class="headerlink" title="Value"></a>Value<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Value" aria-hidden="true"></a></h2><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until this textarea has the correct value</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'textarea'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'have.value'</span><span class="token punctuation">,</span> <span class="token string">'foo bar baz'</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="Text-Content" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Text-Content" class="headerlink" title="Text Content"></a>Text Content<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Text-Content" aria-hidden="true"></a></h2><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until this span does not contain 'click me'</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">parent</span><span class="token punctuation">(</span><span class="token string">'span.help'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'not.contain'</span><span class="token punctuation">,</span> <span class="token string">'click me'</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="Visibility" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Visibility" class="headerlink" title="Visibility"></a>Visibility<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Visibility" aria-hidden="true"></a></h2><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until this button is visible</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'be.visible'</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="Existence" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Existence" class="headerlink" title="Existence"></a>Existence<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Existence" aria-hidden="true"></a></h2><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until loading spinner no longer exists</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'#loading'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'not.exist'</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="State" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#State" class="headerlink" title="State"></a>State<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#State" aria-hidden="true"></a></h2><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until our radio is checked</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">':radio'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'be.checked'</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="CSS" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#CSS" class="headerlink" title="CSS"></a>CSS<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#CSS" aria-hidden="true"></a></h2><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until .completed has matching css</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'.completed'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'have.css'</span><span class="token punctuation">,</span> <span class="token string">'text-decoration'</span><span class="token punctuation">,</span> <span class="token string">'line-through'</span><span class="token punctuation">)</span>
+</code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// retry until .accordion css have display: none</span>
+cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'#accordion'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token string">'not.have.css'</span><span class="token punctuation">,</span> <span class="token string">'display'</span><span class="token punctuation">,</span> <span class="token string">'none'</span><span class="token punctuation">)</span>
+</code></pre>
+<h1 id="Should-callback" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#Should-callback" class="headerlink" title="Should callback"></a>Should callback<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#Should-callback" aria-hidden="true"></a></h1><p>If built-in assertions are not enough, you can easily write your own assertion function and pass it as a callback to the <code>.should()</code> command. Cypress will automatically <a href="https://docs.cypress.io/guides/core-concepts/retry-ability.html">retry</a> the callback function until it passes or the command times out. See the <a href="https://docs.cypress.io/api/commands/should.html#Function"><code>.should()</code></a> documentation.</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>main-abc123 heading-xyz987<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Introduction<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<pre class=" language-javascript"><code class="language-javascript">cy<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">should</span><span class="token punctuation">(</span><span class="token punctuation">(</span>$div<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span>$div<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span>have<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">const</span> className <span class="token operator">=</span> $div<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>className
+
+    <span class="token comment" spellcheck="true">// className will be a string like "main-abc123 heading-xyz987"</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span>className<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex">/heading-/</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h1 id="See-also" class="article-heading"><a href="https://docs.cypress.io/guides/references/assertions.html#See-also" class="headerlink" title="See also"></a>See also<a class="article-anchor" href="https://docs.cypress.io/guides/references/assertions.html#See-also" aria-hidden="true"></a></h1><ul>
+<li><a href="https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Assertions">Guide: Introduction to Cypress</a></li>
+<li><a href="https://example.cypress.io/commands/assertions" target="_blank" rel="noopener">cypress-example-kitchensink Assertions</a></li>
+<li><a href="https://glebbahmutov.com/blog/cypress-should-callback/" target="_blank" rel="noopener">Cypress should callback</a> blog post</li>
+</ul>
+
+            </div>
+            <footer class="article-footer">
+              <a href="https://docs.cypress.io/guides/tooling/code-coverage.html" title="Prev Article" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>Code Coverage</span></a><a href="https://docs.cypress.io/guides/references/configuration.html" title="Next Article" class="article-footer-next"><span>Configuration</span><i class="fa fa-chevron-right"></i></a>
+            </footer>
+            <div class="article-footer-updated">
+              <time datetime="2019-07-11T06:54:28.000Z" itemprop="dateModified">Last updated: 07-11-2019</time>
+            </div>
+          </div>
+        </div>
+      </article>
+      <aside id="article-toc" role="navigation">
+        <div id="article-toc-inner">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Chai"><span class="toc-text">Chai</span></a><ol class="toc-child"><li class="toc-item toc-level-2 active"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#BDD-Assertions"><span class="toc-text">BDD Assertions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#TDD-Assertions"><span class="toc-text">TDD Assertions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery"><span class="toc-text">Chai-jQuery</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Sinon-Chai"><span class="toc-text">Sinon-Chai</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Adding-New-Assertions"><span class="toc-text">Adding New Assertions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Common-Assertions"><span class="toc-text">Common Assertions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Length"><span class="toc-text">Length</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Class"><span class="toc-text">Class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Value"><span class="toc-text">Value</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Text-Content"><span class="toc-text">Text Content</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Visibility"><span class="toc-text">Visibility</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Existence"><span class="toc-text">Existence</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#State"><span class="toc-text">State</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#CSS"><span class="toc-text">CSS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#Should-callback"><span class="toc-text">Should callback</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="https://docs.cypress.io/guides/references/assertions.html#See-also"><span class="toc-text">See also</span></a></li></ol>
+          <a href="https://docs.cypress.io/guides/references/assertions.html#" id="article-toc-top"><i class="fa fa-long-arrow-up"></i> Back to Top</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <li><a href="https://docs.cypress.io/guides/overview/why-cypress.html" class="main-nav-link active"> Guides</a></li><li><a href="https://docs.cypress.io/api/api/table-of-contents.html" class="main-nav-link "> API</a></li><li><a href="https://docs.cypress.io/plugins/" class="main-nav-link "> Plugins</a></li><li><a href="https://docs.cypress.io/examples/examples/recipes.html" class="main-nav-link "> Examples</a></li><li><a href="https://docs.cypress.io/faq/questions/using-cypress-faq.html" class="main-nav-link "> FAQ</a></li>
+      <li>
+        <a href="https://github.com/cypress-io/cypress" class="main-nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </li>
+    </ul>
+    
+      <ul>
+        <li class="mobile-nav-title " data-target="sidebar-li-overview" data-toggle="collapse"><strong>Overview</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-overview"><a href="https://docs.cypress.io/guides/overview/why-cypress.html" class="mobile-nav-link">
+        Why Cypress?</a></li><li class="sidebar-li sidebar-li-overview"><a href="https://docs.cypress.io/guides/overview/key-differences.html" class="mobile-nav-link">
+        Key Differences</a></li></ul></li><li class="mobile-nav-title " data-target="sidebar-li-getting-started" data-toggle="collapse"><strong>Getting Started</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-getting-started"><a href="https://docs.cypress.io/guides/getting-started/installing-cypress.html" class="mobile-nav-link">
+        Installing Cypress</a></li><li class="sidebar-li sidebar-li-getting-started"><a href="https://docs.cypress.io/guides/getting-started/writing-your-first-test.html" class="mobile-nav-link">
+        Writing Your First Test</a></li><li class="sidebar-li sidebar-li-getting-started"><a href="https://docs.cypress.io/guides/getting-started/testing-your-app.html" class="mobile-nav-link">
+        Testing Your App</a></li></ul></li><li class="mobile-nav-title " data-target="sidebar-li-core-concepts" data-toggle="collapse"><strong>Core Concepts</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html" class="mobile-nav-link">
+        Introduction to Cypress</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html" class="mobile-nav-link">
+        Writing and Organizing Tests</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/retry-ability.html" class="mobile-nav-link">
+        Retry-ability</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/interacting-with-elements.html" class="mobile-nav-link">
+        Interacting with Elements</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/variables-and-aliases.html" class="mobile-nav-link">
+        Variables and Aliases</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/conditional-testing.html" class="mobile-nav-link">
+        Conditional Testing</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/test-runner.html" class="mobile-nav-link">
+        The Test Runner</a></li><li class="sidebar-li sidebar-li-core-concepts"><a href="https://docs.cypress.io/guides/core-concepts/dashboard-service.html" class="mobile-nav-link">
+        Dashboard Service</a></li></ul></li><li class="mobile-nav-title " data-target="sidebar-li-guides" data-toggle="collapse"><strong>Guides</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/command-line.html" class="mobile-nav-link">
+        Command Line</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/module-api.html" class="mobile-nav-link">
+        Module API</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/debugging.html" class="mobile-nav-link">
+        Debugging</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/network-requests.html" class="mobile-nav-link">
+        Network Requests</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/continuous-integration.html" class="mobile-nav-link">
+        Continuous Integration</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/parallelization.html" class="mobile-nav-link">
+        Parallelization</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/environment-variables.html" class="mobile-nav-link">
+        Environment Variables</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/stubs-spies-and-clocks.html" class="mobile-nav-link">
+        Stubs, Spies, and Clocks</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/screenshots-and-videos.html" class="mobile-nav-link">
+        Screenshots and Videos</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/launching-browsers.html" class="mobile-nav-link">
+        Launching Browsers</a></li><li class="sidebar-li sidebar-li-guides"><a href="https://docs.cypress.io/guides/guides/web-security.html" class="mobile-nav-link">
+        Web Security</a></li></ul></li><li class="mobile-nav-title " data-target="sidebar-li-tooling" data-toggle="collapse"><strong>Tooling</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/intelligent-code-completion.html" class="mobile-nav-link">
+        Intelligent Code Completion</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/plugins-guide.html" class="mobile-nav-link">
+        Plugins</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/reporters.html" class="mobile-nav-link">
+        Reporters</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/typescript-support.html" class="mobile-nav-link">
+        TypeScript</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/visual-testing.html" class="mobile-nav-link">
+        Visual Testing</a></li><li class="sidebar-li sidebar-li-tooling"><a href="https://docs.cypress.io/guides/tooling/code-coverage.html" class="mobile-nav-link">
+        Code Coverage</a></li></ul></li><li class="mobile-nav-title current" data-target="sidebar-li-references" data-toggle="collapse"><strong>References</strong><ul class="sidebar-links"><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/assertions.html" class="mobile-nav-link current">
+        Assertions</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/configuration.html" class="mobile-nav-link">
+        Configuration</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/proxy-configuration.html" class="mobile-nav-link">
+        Proxy Configuration</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/best-practices.html" class="mobile-nav-link">
+        Best Practices</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/error-messages.html" class="mobile-nav-link">
+        Error Messages</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/bundled-tools.html" class="mobile-nav-link">
+        Bundled Tools</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/trade-offs.html" class="mobile-nav-link">
+        Trade-offs</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/changelog.html" class="mobile-nav-link">
+        Changelog</a></li><li class="sidebar-li sidebar-li-references"><a href="https://docs.cypress.io/guides/references/roadmap.html" class="mobile-nav-link">
+        Roadmap</a></li></ul></li>
+      </ul>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select aria-label="Select language" id="mobile-lang-select" data-canonical="guides/references/assertions.html">
+      
+        <option value="en" selected="">English</option>
+      
+        <option value="ja">日本語</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+
+  <!-- Scripts -->
+<script src="./Assertions _ Cypress Documentation_files/application.b41644fd.js.download"></script>
+
+<script type="text/javascript">
+  document.getElementById('search-input-wrap').classList.add('on');
+  docsearch({
+    appId: 'R9KDA5FMJB',
+    apiKey: '8e6c3119ee78db1ad10cd7bfb439d726',
+    indexName: 'cypress',
+    inputSelector: '#search-input',
+    algoliaOptions: {
+      // See https://www.algolia.com/doc/api-client/javascript/parameters/#overview
+      // For full list of options
+    },
+    autocompleteOptions: {
+      // See https://github.com/algolia/autocomplete.js#options
+      // For full list of options
+    }
+  });
+</script>
+
+
+
+
+<iframe name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" src="./Assertions _ Cypress Documentation_files/box-90f3a29ef7448451db5af955688970d7.html" style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"></iframe><div id="ads"></div></body></html>

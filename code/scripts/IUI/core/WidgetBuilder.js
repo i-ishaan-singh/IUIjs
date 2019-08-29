@@ -32,14 +32,18 @@
 	* @param {Element} container - the container in which the widget is contained.
 	*/
 	var _buildWidget=function(element,container,model){
+		
 		if( container && container.classType==='ObservableModel'){
 			model=container;
 			container=undefined;
 		}
-		var options=Array.prototype.slice.call(element.attributes).reduce(_extractAttribute,{});
-		options.element=element;	
-		options.container=container;
-		options.model=model;		
+		
+		var options=Array.prototype.slice.call(element.attributes).reduce(_extractAttribute,{
+			element : element,
+			container : container,
+			model : model 
+		});
+		
 		return new this(options);
 	}
 	
@@ -59,7 +63,20 @@
 		}
 	}
 	
+	WidgetBuilder.alias=function xalias(existingWidget, newName){
+		existingWidget = String(existingWidget).toUpperCase();
+		newName = String(newName).toUpperCase();
 		
+		if(WidgetBuilder.containerList[existingWidget]){
+			WidgetBuilder.containerList[newName]=WidgetBuilder.containerList[existingWidget]
+		}else if(WidgetBuilder.widgetList[existingWidget]){
+			WidgetBuilder.widgetList[newName]=WidgetBuilder.widgetList[existingWidget]
+		}else{
+			throw new Error(existingWidget+' Not Found');
+		}
+	}
+
+	
 	IUI.WidgetBuilder=WidgetBuilder;
 	
 /* ------- END : IUI.WidgetBuilder.js -----------*/

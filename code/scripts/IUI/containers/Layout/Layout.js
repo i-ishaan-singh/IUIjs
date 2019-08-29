@@ -23,13 +23,13 @@
 			if(tagName!=='BODY' && tagName!=='DIV'){
 				var layout=document.createElement('div'),
 				subcontainer=document.createElement('div');
+				$($(this.element).siblings()).appendTo(subcontainer);
 				IUI.behaviors.extractFromObject(subcontainer,this.options,['subconatiner-attribute']);	
 				this.options.subcontainerOptions.element=subcontainer;
 				this.options.subcontainerOptions.model=this.options.model;
-				this.subcontainer=new IUI.ContainerUI(this.options.subcontainerOptions);
-				this.subcontainer.makeUI();
-				this.subcontainer.bindModels();
-				$($(this.element).siblings()).appendTo(subcontainer);
+				this._subcontainer=new IUI.ContainerUI(this.options.subcontainerOptions);
+				this._subcontainer.makeUI();
+				this._subcontainer.bindModels();
 				$($(this.element).children()).appendTo(layout);
 				
 				$(this.element).replaceWith($(layout));
@@ -50,9 +50,17 @@
 			if(IUI.domAccessibility){
 				this.element.uiContainer=this;
 			}
+			this.element.onDOMAppend = this.onDOMAppend;
 		},
 		_appendSubContainer: function(){
-			this.$element.after(this.subcontainer);
+			this.$element.before(this.subcontainer);
+		},
+		getContainerById: function(id){
+			var container=IUI.ContainerUI.prototype.getContainerById.apply(this,arguments);	
+			if(!container){
+				return this._subcontainer.getContainerById(id);
+			}
+			return container;
 		},
 		_beforeRender:function(){
 			

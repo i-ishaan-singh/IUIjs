@@ -22,8 +22,7 @@
 			initialize: function(){
 				this._handleSpinStart=this._handleSpinStart.bind(this);	
 				this._handleSpinEnd=this._handleSpinEnd.bind(this);		
-				InputBox.prototype.initialize.apply(this,arguments);
-				this.step=Number(this.options.step);				
+				InputBox.prototype.initialize.apply(this,arguments);		
 			},
 			
 			events: InputBox.prototype.events.concat(['spin']),
@@ -35,7 +34,7 @@
 				precision:2
 			},			
 			_handleSpinStart: function(e){
-				var that=this, step=this.step;
+				var that=this, step=Number(this.options.step);
 				
 				if($(e.currentTarget).hasClass('i-ui-spinner-down')){
 					step=-step;

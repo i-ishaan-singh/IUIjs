@@ -15,7 +15,8 @@
 		options:{
 			validateoninput: true,
 			validateonblur: true,
-			value:''
+			value:'',
+			type: 'text'
 		},
 		_handlevalueChange: function(value){
 			this.value(value);
@@ -31,11 +32,16 @@
 			}
 		},
 		onInitialize: function(){		
+			IUI.Widget.prototype.onInitialize.apply(this,arguments);
 			this._attachEvents();
 			this.value(this.options.value);
 		},
 		onTemplateAttach:function(wrapper){
 			this.input=$(wrapper.children[0]);
+			this.input.attr('type',this.options.type);
+			if(this.options.placeholder){
+				this.input.attr('placeholder',this.options.placeholder);
+			}
 		},
 		_attachEvents: function(){
 			var that=this;

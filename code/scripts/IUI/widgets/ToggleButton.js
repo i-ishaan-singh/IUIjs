@@ -16,7 +16,11 @@
 		},
 		toggle: function(value){
 			this.$element.toggleClass('i-ui-active',value);
+			this.options.value = this.$element.hasClass('i-ui-active');
 			this.trigger('toggle',{value:this.value()});
+		},
+		_handlevalueChange: function(value){
+			this.value(value);
 		},
 		_attachEvents: function(){
 			var that=this;

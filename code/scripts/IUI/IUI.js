@@ -2,14 +2,25 @@
    if(typeof define === "function" && define.amd) {    
 	define(['IUI-core',
 		'Behaviors',
-		'WidgetBuilder',		
+		'WidgetBuilder',	
 		'Validator',
 		'ObservableModel',
+		'Utils',
 		'OptionModel',
 		'ContainerModel',
+		'DataBoundContainer',
 		'Container',
+		'VerticalScroller',
+		'QuickSort',
+		'Row',
+		'Popover',
+		'ContextMenu',
 		'Layout',
+		'View',
+		'Viewport',
+		'ViewModel',
 		'Sidebar',
+		'Grid',
 		'Navbar',
 		'Footer',
 		'Widget',
@@ -17,6 +28,13 @@
 		'Overlay',
 		'InputBox',
 		'Button',
+		'Cell',
+		'Division',
+		'HeaderCell',
+		'ContainerCell',
+		'ContainerHeaderCell',
+		'ListView',
+		'PageListView',
 		'Switch',
 		'Slider',
 		'ToggleButton',
@@ -51,7 +69,9 @@
 	});	
 		
 	IUI.makeUI=function makeUI(elem,model){
-		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
+		var uiContainer;
+		
+		if(elem && (elem.constructor.toString() === ({}).constructor.toString() || elem.classType==="ObservableModel")){
 			model=elem;
 			elem=null;
 		}
@@ -64,10 +84,12 @@
 			element: element,
 			model: model
 		})
-		
-		var uiContainer= new IUI.ContainerUI(options);
-	
-		uiContainer.makeUI();
+		if(typeof IUI.WidgetBuilder.containerList[element.tagName] !== "undefined"){		
+			uiContainer=IUI.WidgetBuilder.containerList[element.tagName](element,null,options.model);
+		}else{
+			uiContainer= new IUI.ContainerUI(options);
+			uiContainer.makeUI();	
+		}
 		return uiContainer;
 	}
 	
@@ -77,7 +99,7 @@
 	}
 	
 	IUI.makeUIAsync=function makeUI(elem,model){
-		if(elem && (elem.constructor === Object || elem.classType==="ObservableModel")){
+		if(elem && (elem.constructor.toString() === ({}).constructor.toString() || elem.classType==="ObservableModel")){
 			model=elem;
 			elem=null;
 		}

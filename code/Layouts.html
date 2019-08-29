@@ -10,31 +10,31 @@
 			width: 100%;
 			margin: 0;
 		}
-		.i-ui-container {
+		/*.i-ui-container {
 			border: 0.02px dashed black;
-		}
+		}*/
 		</style>
 	</head>
 	<body>	
 	<Exhibit>
-	<Navbar  background="hsl(::sliderValue::, 100%, 79%)" height="6rem" background="grey">
+	<Navbar  background="linear-gradient(-90deg, hsl(::sliderValue::, 100%, 79%), hsl(::(sliderValue+15)::, 100%, 79%))" height="6rem" background="grey">
 		</Navbar>
-			<sidebar  id="form-sidebar" width="6rem" background="hsl(::(sliderValue+15)%360::, 100%, 79%)" background="lightgrey">
+			<sidebar  id="form-sidebar" width="6rem" background="linear-gradient( hsl(::(sliderValue+15)::, 100%, 79%), hsl(::(sliderValue+30)%360::, 100%, 79%))" background="lightgrey">
 			</sidebar>
 			<Exhibit>
 					<!-- First till here -->
 				<Exhibit>
-					<Navbar background="hsl(::(sliderValue+60)%360::, 100%, 79%)" height="5.5rem" background="lightgrey">
+					<Navbar background="linear-gradient(-90deg, hsl(::(sliderValue+60)::, 100%, 79%),  hsl(::(sliderValue+75)%360::, 100%, 79%))" height="5.5rem" background="lightgrey">
 					</Navbar>
-						<sidebar  id="form-sidebar" background="hsl(::(sliderValue+75)%360::, 100%, 79%)" width="5.5rem"   background="darkgrey">
+						<sidebar  id="form-sidebar" background="linear-gradient( hsl(::(sliderValue+75)::, 100%, 79%), hsl(::(sliderValue+90)%360::, 100%, 79%))" width="5.5rem"   background="darkgrey">
 						</sidebar>
 						<Exhibit>
 							<Exhibit>
 									<!-- 2 till here -->
 								<Exhibit>
-									<Navbar background="hsl(::(sliderValue+120)%360::, 100%, 79%)" height="5rem" background="darkgrey">
+									<Navbar background="linear-gradient(-90deg, hsl(::(sliderValue+120)::, 100%, 79%), hsl(::(sliderValue+135)%360::, 100%, 79%))" height="5rem" background="darkgrey">
 									</Navbar>
-										<sidebar background="hsl(::(sliderValue+135)%360::, 100%, 79%)" id="form-sidebar" width="5rem" >
+										<sidebar background="linear-gradient(hsl(::(sliderValue+135)::, 100%, 79%), hsl(::(sliderValue+150)%360::, 100%, 79%))" id="form-sidebar" width="5rem" >
 										</sidebar>
 										<Exhibit>
 											<Exhibit>
@@ -48,9 +48,9 @@
 															<Exhibit>
 																	<!-- 3 till here -->
 																<Exhibit>
-																	<Navbar background="hsl(::(sliderValue+220)%360::, 100%, 79%)" height="4rem" >
+																	<Navbar background="linear-gradient(-90deg, hsl(::(sliderValue+195)::, 100%, 79%), hsl(::(sliderValue+180)%360::, 100%, 79%)" height="4rem" >
 																	</Navbar>
-																		<sidebar background="hsl(::(sliderValue+235)%360::, 100%, 79%)" id="form-sidebar" width="4rem"  background="grey">
+																		<sidebar background="linear-gradient(-90deg, hsl(::(sliderValue+210)::, 100%, 79%),  hsl(::(sliderValue+195)%360::, 100%, 79%)" id="form-sidebar" width="4rem"  background="grey">
 																		</sidebar>
 																		<Exhibit>
 																			<Exhibit>
@@ -112,25 +112,25 @@
 												</Exhibit>
 														<!-- 3 till here -->
 											</Exhibit>
-											<sidebar position="right" background="hsl(::(sliderValue+145)%360::, 100%, 79%)" width="5rem" id="form-sidebar"  background="darkgrey">
+											<sidebar position="right" background="linear-gradient(0deg, hsl(::(sliderValue+165)::, 100%, 79%),hsl(::(sliderValue+180)%360::, 100%, 79%))" width="5rem" id="form-sidebar"  background="darkgrey">
 											</sidebar>
 										</Exhibit>
-									<Footer height="5rem" background="hsl(::(sliderValue+150)%360::, 100%, 79%)" background="darkgrey">
+									<Footer height="5rem" background="linear-gradient(90deg, hsl(::(sliderValue+150)::, 100%, 79%), hsl(::(sliderValue+165)%360::, 100%, 79%))" background="darkgrey">
 									</Footer >			
 								</Exhibit>
 										<!-- 2 till here -->
 							</Exhibit>
-							<sidebar position="right" background="hsl(::(sliderValue+105)%360::, 100%, 79%)" width="5.5rem" id="form-sidebar"   background="grey">
+							<sidebar position="right" background="linear-gradient(0deg, hsl(::(sliderValue+105)::, 100%, 79%), hsl(::(sliderValue+120)%360::, 100%, 79%)" width="5.5rem" id="form-sidebar"   background="grey">
 							</sidebar>
 						</Exhibit>
-					<Footer height="5.5rem" background="hsl(::(sliderValue+90)%360::, 100%, 79%)" background="lightgrey">
+					<Footer height="5.5rem" background="linear-gradient(90deg, hsl(::(sliderValue+90)::, 100%, 79%), hsl(::(sliderValue+105)%360::, 100%, 79%))" background="lightgrey">
 					</Footer >			
 				</Exhibit>
 						<!-- First till here -->
-				<sidebar position="right" background="hsl(::(sliderValue+45)%360::, 100%, 79%)" width="6rem" id="form-sidebar"  background="darkgrey">
+				<sidebar position="right" background="linear-gradient(0deg, hsl(::(sliderValue+45)::, 100%, 79%),  hsl(::(sliderValue+60)%360::, 100%, 79%))" width="6rem" id="form-sidebar"  background="darkgrey">
 				</sidebar>
 			</Exhibit>
-		<Footer height="6rem" padding-top="1rem" background="hsl(::(sliderValue+30)%360::, 100%, 79%)" background="grey">
+		<Footer height="6rem" padding-top="1rem" background="linear-gradient(90deg, hsl(::(sliderValue+30)::, 100%, 79%),  hsl(::(sliderValue+45)%360::, 100%, 79%))" background="grey">
 			<Slider width="100%" max="360" font-size="1.3rem" value="::sliderValue::"></slider>
 		</Footer >
 		</Exhibit>

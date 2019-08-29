@@ -15,13 +15,16 @@
 		options:{
 			text: 'Button',
 		},
-		initialize: function(){
+		initialize: function(options){
+			(options.text) || (options.text=(options.element && options.element.innerHTML) || this.options.text);
 			IUI.Widget.prototype.initialize.apply(this,arguments);			
 			this._attachEvents();
 		},
+		_handletextChange: function(value){
+			this.element.children[0].innerHTML=value;
+		},
 		_processOptions: function(wrapper){
 			IUI.Widget.prototype._processOptions.apply(this,arguments);		
-			this.options.text=(this.element && this.element.innerHTML) || this.options.text;
 			wrapper.children[0].innerHTML=this.options.text;
 		},
 		_attachEvents: function(){

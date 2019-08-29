@@ -9,27 +9,29 @@
 
 	var Sidebar=IUI.uiContainers.Layout.extend({
 		name:'Sidebar',
-		classList: IUI.uiContainers.Container.prototype.classList.concat(['i-ui-sidebar']),
+		classList: IUI.uiContainers.Layout.prototype.classList.concat(['i-ui-sidebar']),
 		subContainerClassList: IUI.uiContainers.Layout.prototype.subContainerClassList.concat(['i-ui-sidebar-subcontainer']),
 		_observedOptions:['width'],
+		initialize: function(options){
+			if($(options.element).index() === ($(options.container).children().length -1 ) ){
+				this.options.position = 'right';
+			}
+			IUI.uiContainers.Layout.prototype.initialize.apply(this, arguments);
+			
+		},
 		options: {
 			width: '10em',
 			position: 'left'
 		},
 		_handlewidthChange:function(value){
-			this.subcontainer.style.width='calc( 100% - '+value+')';
+			$(this.subcontainer).css('padding-'+this.options.position,value);
 		},
 		_appendSubContainer: function(){
-			if(this.options.position==="left"){			
-				this.$element.after(this.subcontainer);
-			}else if(this.options.position==="right"){
-				this.$element.before(this.subcontainer);
-			}else{
-				throw new Error('Wrongly positioned sidebar');
-			}
+			this.$element.before(this.subcontainer);
+			this.$element.addClass('i-ui-'+this.options.position+'-sidebar')
 		},
 		processSubcontainer:function(subcontainer){
-			subcontainer.style.width='calc( 100% - '+this.options.width+')';
+			$(subcontainer).css('padding-'+this.options.position,this.options.width);
 		}
 	});
 	
