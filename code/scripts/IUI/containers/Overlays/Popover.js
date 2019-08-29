@@ -11,18 +11,20 @@
 		name:'PopOver',
 		initialize: function(){
 			var that=this;
-			Plugable.prototype.initialize.apply(this,arguments);	
+			IUI.Plugable.prototype.initialize.apply(this,arguments);	
 			this.bindModels();
 			this._beforeRender();
 			this.$element.children().wrapAll('<div>');
 			this.popup = IUI.createOverlay({
+				class: this.options.class,
 				contents: this.$element.children(),
 				button: $(this.options.button),
 				height: this.options.height,
 				width: this.options.width,
 				direction: this.options.direction,
 				placement: this.options.placement,
-				autoclose: this.options.autoclose
+				autoclose: this.options.autoclose,
+				pointeropening: this.options.pointeropening
 			});
 			this.wrapper=this.popup.element;
 			this.$wrapper=this.popup.$element;
@@ -39,8 +41,7 @@
 			this.element=null;
 		},
 		options:{
-			height: '15em',
-			width: '50%',
+			'max-height': '15em',
 			direction: 'down',
 			placement: 'top',
 			autoclose: true,

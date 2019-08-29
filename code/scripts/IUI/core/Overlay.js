@@ -48,7 +48,6 @@
 			anchor:'body',
 			direction: 'down',
 			placement: 'bottom',
-			height: '2em',
 			classList:[],
 			button: null,
 			buttonBehavior: 'click',
@@ -172,6 +171,13 @@
 					$('html').one('mouseup.'+this._uid,this.close);
 				}
 			}.bind(this));
+			
+			if(!this.options.animateObjectOpen.height){
+				$(this.element).animate({
+					height: this.element.scrollHeight
+				},300)
+			}
+			
 		},
 		show: function(){
 			$(this.element).removeClass('i-ui-hidden');
