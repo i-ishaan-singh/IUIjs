@@ -1,0 +1,205 @@
+.i-ui-widget{
+	border: 1px solid #d0d0d0;
+}
+
+.i-ui-numericinputbox, .i-ui-dropdown, .i-ui-combobox {
+    padding-right: 3em;
+    background-color: white;
+}
+
+.i-ui-input:focus {
+	outline-color: lightblue;
+}
+
+.i-ui-spinner-down:hover {
+    background: linear-gradient(#c0c0c0,#f0f0f0);
+}
+
+.i-ui-verticalscroller {
+    border: 1px solid #f0f0f0;
+    box-shadow: -1px -1px 1px #969696 inset;
+}
+
+.i-ui-spinner-up:hover , .i-ui-dropbutton-container:hover{
+    background: linear-gradient(#f0f0f0,#c0c0c0);
+}	
+.i-ui-spinner:active, .i-ui-dropbutton-container:active{
+	background: #d0d0d0;
+}
+.i-ui-formlabel {
+	border: none;
+}
+
+.i-ui-input, .i-ui-radio{
+    border: none;
+	color: inherit;
+}
+
+.i-ui-spinner-container, .i-ui-dropbutton-container {
+    border-left: 1px solid #d0d0d0;
+	background: #f0f0f0;	
+}
+.i-ui-button{
+	background-color:#e0e0e0;
+	box-shadow: 1px 1px 1px #d0d0d0;
+}
+.i-ui-button.i-ui-active{
+	background-color: #c0c0c0;	
+}
+.i-ui-button:hover{
+	background-color: #d0d0d0;
+}
+.i-ui-button:active{
+	background-color: #e0e0e0;
+}
+
+.i-ui-overlay {
+    outline: 1px solid #d0d0d0;
+	background-color: white;
+}
+.i-ui-option-item:hover {
+    background-color: #e0e0e0;
+}
+
+.i-ui-option-item:active {
+    background-color: #c0c0c0;
+}
+.i-ui-dropdown .i-ui-display {
+    background-color: #f0f0f0;
+}
+.i-ui-dropdown .i-ui-dropbutton-container{
+	border-color: transparent;
+}
+
+.i-ui-dropdown .i-ui-dropbutton-container:hover{
+	border-color: #d0d0d0;
+}
+
+.i-ui-dropdown {
+    background-color: #f0f0f0;
+}
+
+.i-ui-inset-scrollable .i-ui-scroller-down-arrow {
+    background: linear-gradient(0deg, white, transparent);
+	border-bottom: 1px solid #f0f0f0;
+}
+.i-ui-inset-scrollable .i-ui-scroller-up-arrow {
+    background: linear-gradient(180deg, white, transparent);
+	border-top: 1px solid #f0f0f0;
+}
+
+.i-ui-invalid.i-ui-dropdown,
+.i-ui-invalid.i-ui-inputbox,
+.i-ui-invalid.i-ui-numericinputbox,
+.i-ui-invalid.i-ui-combobox{
+	box-shadow: 0 0 1px 1px red;
+	color: red;
+}
+
+.i-ui-active .i-ui-slider-button{
+	background-color: #c0c0c0;		
+}
+
+.i-ui-switch-button, .i-ui-slider-button {
+    border: 1px solid #d0d0d0;
+    background-color: #f0f0f0;
+}
+.i-ui-switch {
+    background-color: white;
+}
+.i-ui-switch-active{
+	background-color: #f0f0f0;	
+}
+.i-ui-switch-active .i-ui-switch-button{	
+    left: calc(100% - 1.75em);
+	 background-color: #c0c0c0;	
+}
+
+.i-ui-input:focus {
+    box-shadow: 2px -1px 2px -1px #c0c0c0 inset;
+}
+
+/*********************** Grid Styling *************************/
+
+
+.i-ui-cell {
+    display: table-cell;
+}
+
+table.i-ui-grid {
+    border-collapse: collapse;
+}
+.i-ui-row {
+    border-bottom: 1px solid #c9c9c9;
+}
+
+
+.i-ui-cell {
+    padding: 0.25rem 0.5rem; 
+	border-right: 1px solid #c9c9c9;
+}
+.i-ui-header-cell {
+    height: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    background: #c9c9c9;
+	border-right: 1px solid #e5e5e5;
+	position: relative;
+}
+
+.i-ui-listview{
+	border: none;
+}
+.i-ui-sortable.i-ui-header-cell {
+    padding-right: 3rem;
+}
+
+.i-ui-header-cell i.sort-arrow-desc {
+    font-size: 0.8rem;
+    font-weight: normal;
+    position: absolute;
+    right: 1rem;
+    top: calc(50% - 0.75rem);
+}
+
+.i-ui-header-cell i.sort-arrow-asc {
+    font-size: 0.8rem;
+    font-weight: normal;
+    position: absolute;
+    right: 0.6rem;
+    top: calc(50% - 0.1rem);
+}
+
+.i-ui-sort-icon-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 2rem;
+}
+.i-ui-sort-icon-container:hover .fa{
+	opacity: 0.5;
+}
+
+.i-ui-sort-icon-container .fa:hover{
+	opacity: 1;
+}
+/********** List View Styles ******************/
+
+	/**Item List**/
+.style-item-list .i-ui-list-item{
+    display: block;
+    padding: 0.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.style-item-list .i-ui-list-item:hover {
+    background: #e5e5e5;
+}
+.style-item-list .i-ui-list-item.i-ui-selected {
+    background: #c9c9c9;
+	font-weight: bold;
+    box-shadow: 0px 1px 3px -2px;
+}
+
+/********** END:List View Styles ******************/
