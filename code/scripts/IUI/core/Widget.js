@@ -53,7 +53,10 @@
 			}else if(this.options.data){
 				this._processModelData();
 			}
-			this.makeUI();	
+			this.makeUI();
+			if(this.options._viewbinder){
+				this._viewbinder();
+			}
 			if(!this.options.isattached){
 				this.detach();
 			}
@@ -65,6 +68,25 @@
 			if(this.options.plug){
 				IUI.Plugable.registerPlug(this.options.plug, this);
 			}			
+		},
+		_viewbinder: function(){
+			var options = this.options._viewbinder,
+				event = options.event || 'click',
+				viewport = options.viewport,
+				view = options.view,
+				filter = options.filter;
+				
+			if(filter){
+				this.$element.on(event,filter, function(){
+					IUI.View.renderViewInViewport(view, viewport);
+				});
+			}else{
+				this.$element.on(event, function(){
+					IUI.View.renderViewInViewport(view, viewport);
+				});
+			}
+			
+			
 		},
 		_handledataChange: function(){
 			this._processModelData();
@@ -170,7 +192,7 @@
 		},
 		_processOptions: function(wrapper){
 			var options=this.options;
-			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute']);			
+			IUI.behaviors.extractFromObject(wrapper,this.options,['style','ii-attibute','data-attibute','viewbinder-attibute']);			
 			if(typeof this.options.class === "string"){
 				$(wrapper).addClass(this.options.class.split(' '));	
 			}

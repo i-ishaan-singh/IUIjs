@@ -20,7 +20,7 @@
 			IUI.View.registerViewport(this);
 			this.oldViews={};
 			if(this.options.defaultview){
-				IUI.View.renderViewInViewport(this.options.defaultview, this);
+				IUI.View._renderViewInViewport.call({view:this.options.defaultview, viewport:this});
 			}
 		}
 

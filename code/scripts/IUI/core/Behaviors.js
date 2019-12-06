@@ -38,6 +38,17 @@
 				$(element).attr(attr,value);
 			}
 		},
+		'data-attibute': function(element,attr,value){
+			if(attr.match(IUI.dataAttributeRegex)){
+				$(element).attr(attr,value);
+			}
+		},
+		'viewbinder-attibute': function(element,attr,value, obj){
+			if(attr.match(IUI.viewbinderAttributeRegex)){
+				(obj._viewbinder) || (obj._viewbinder={});
+				obj._viewbinder[attr.slice(11)]=value;
+			}
+		},
 		'subconatiner-attribute': function(element,attr,value,object){
 			(object.subcontainerOptions) || (object.subcontainerOptions={});
 			if(attr.match(IUI.subcontainerRegex)){

@@ -360,6 +360,9 @@
 	
 	IUI.iiAttributeRegex=/ii-\S+/g;
 	
+	IUI.viewbinderAttributeRegex=/viewbinder-\S+/g;
+	IUI.dataAttributeRegex=/data-\S+/g;
+	
 	IUI.spaceRegex=/(\ )+/g;
 	return IUI;
 });

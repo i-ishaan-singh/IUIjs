@@ -55,7 +55,7 @@
 			var _name = IUI.View.getName(this),
 				viewPromise = viewPromiseMap[_name] || viewPromiseMap[this._uid];
 			if( viewPromise ){
-				IUI.View.renderViewInViewport(this, viewPromise);
+				IUI.View._renderViewInViewport.apply({view:this, viewport:viewPromise});
 				delete viewPromiseMap[_name];
 				delete viewPromiseMap[this._uid];
 			}
@@ -113,9 +113,18 @@
 		
 	});
 	
-
-	IUI.View = function(){
-		
+	
+	IUI.View = function(options){
+		this._initialize(options);
+	}
+	
+	IUI.View.prototype._initialize = function(options){
+		this.template = options.template;
+	}
+	
+	
+	IUI.View.prototype._initialize = function(options){
+		this.template = options.template;
 	}
 	
 	IUI.View.getView = function(viewName){
@@ -169,29 +178,33 @@
 	
 	
 	IUI.View.renderViewInViewport = function(view , viewport){
-		_view = IUI.View.getView(view);
-		_viewport = IUI.View.getViewport(viewport);
-		if(_view && _view._modelReady){
-			if(!_view.$el){
-				_view.render();
+		IUI.View._renderViewInViewport.apply({view:view, viewport: viewport});
+	}
+		
+	IUI.View._renderViewInViewport = function(){
+		this._view = IUI.View.getView(this.view);
+		this._viewport = IUI.View.getViewport(this.viewport);
+		if(this._view && this._view._modelReady){
+			if(!this._view.$el){
+				this._view.render();
 			}
-			if(_viewport){
-				_viewport.$element.children().detach();
-				_viewport.$element.append(_view.$el);
-				_viewport._currentView=_view;
-				_view._initPromise.then(function(){
-					_view.trigger('append');					
-				});
+			if(this._viewport){
+				this._viewport.$element.children().detach();
+				this._viewport.$element.append(this._view.$el);
+				this._viewport._currentView=this._view;
+				this._view._initPromise.then(function(){
+					this._view.trigger('append');					
+				}.bind(this));
 			}
-		}else if(_view){
-			viewPromiseMap[IUI.View.getName(_view)] = viewport;
+		}else if(this._view){
+			viewPromiseMap[IUI.View.getName(this._view)] = this.viewport;
 		}else{
-			if(typeof view === 'string'){
-				var _name=view.split(':'),
+			if(typeof this.view === 'string'){
+				var _name = this.view.split(':'),
 					name = _name[0],
 					context = _name[1] || 'default';
 				}
-			viewPromiseMap[name+':'+context] = viewport;
+			viewPromiseMap[name+':'+context] = this.viewport;
 		}
 		
 	}

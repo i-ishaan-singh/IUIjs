@@ -9,6 +9,7 @@
   "author": "Ishaan Singh",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^3.4.0"
+    "cypress": "^3.4.0",
+	"lodash": ">=4.17.13"
   }
 }
